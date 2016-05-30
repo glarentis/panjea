@@ -1,0 +1,57 @@
+
+<beans>
+    <import resource="panjea-context.xml" />
+    <!-- INIZIO DEFINIZIONE SECURITY CONTROLLER -->
+    <bean class="org.springframework.richclient.security.support.DefaultSecurityControllerManager" id="securityControllerManager">
+        <property name="securityControllerMap">
+            <map>
+                <entry key="tipoAreaOrdinePage.controller">
+                    <ref bean="tipoAreaOrdinePageController" />
+                </entry>
+                <entry key="areaOrdinePage.controller">
+                    <ref bean="gestioneDocOrdineController" />
+                </entry>
+                <entry key="righeOrdineTablePage.controller">
+                    <ref bean="gestioneDocOrdineController" />
+                </entry>
+                <entry key="rigaOrdineArticoloPage.controller">
+                    <ref bean="gestioneDocOrdineController" />
+                </entry>
+                <entry key="rigaOrdineNotaPage.controller">
+                    <ref bean="gestioneDocOrdineController" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="tipoAreaOrdinePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="modificaTipoAreaOrdine"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+    <bean id="visualizzaDocOrdineController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="visualizzaDocOrdine"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+    <bean id="gestioneDocOrdineController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="gestioneDocOrdine"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+    <bean id="gestioneBackOrderController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="gestioneBackOrder"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+    <bean id="missioniController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="missioni"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+    <bean id="evasioneController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="evasione"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+    <!-- FINE DEFINIZIONE SECURITY CONTROLLER -->
+</beans>

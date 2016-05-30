@@ -1,0 +1,49 @@
+ 
+<beans>
+    <import resource="panjea-context.xml" />
+    <import resource="panjea-menu-context.xml" />
+    <!-- EditorFactory -->
+    <bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="centriCostoEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.centricosto.domain.CentroCosto</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>        
+    
+    <!-- Definizione editor e page -->
+    <bean id="tabelleContabilitaEditor"
+        class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">        
+        <property name="editorProperties">
+            <map>                
+                <entry key="idPages">
+                    <list>                       
+                        <value>centriCostoTablePage</value>                        
+                    </list>
+                </entry>                
+            </map>
+        </property>
+    </bean>
+    
+    
+    
+    <bean id="centriCostoTablePage" class="it.eurotn.panjea.centricosto.rich.editors.CentriCostoTablePage" singleton="false">
+        <property name="centriCostoBD">
+            <ref bean="centriCostoBD"/>
+        </property>
+        <property name="editPage">
+            <ref bean="centroCostoPage" />
+        </property>
+    </bean>
+    
+    <bean id="centroCostoPage" class="it.eurotn.panjea.centricosto.rich.editors.CentroCostoPage"
+        singleton="false">
+        <property name="centriCostoBD">
+            <ref bean="centriCostoBD"/>
+        </property>
+    </bean>
+</beans>

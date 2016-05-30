@@ -1,0 +1,1111 @@
+
+<beans>
+	<import resource="panjea-context.xml" />
+
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="pagamentiMenu" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+
+	    <!-- searchFactory -->
+    <bean id="searchFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+        <property name="searchResultMap">
+            <map>
+                <entry value-ref="searchResultCalendariRate">
+                    <key>
+                        <value type="java.lang.String">it.eurotn.panjea.rate.domain.CalendarioRate</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="ricercaRateEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.partite.util.ParametriRicercaRate</value>
+					</key>
+				</entry>
+				<entry value="ricercaAreeTesoreriaEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.util.ParametriRicercaAreeTesoreria</value>
+					</key>
+				</entry>
+				<entry value="ricercaAreeTesoreriaEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.domain.AreaAcconto</value>
+					</key>
+				</entry>
+				<entry value="ricercaAreeTesoreriaEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.domain.AreaChiusure</value>
+					</key>
+				</entry>
+				<entry value="ricercaEffettiEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.util.ParametriRicercaEffetti</value>
+					</key>
+				</entry>
+				<entry value="tabellePartiteEditor">
+					<key>
+						<value type="java.lang.String">tabellePartiteEditor</value>
+					</key>
+				</entry>
+				<entry value="accontiEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.rich.editors.acconto.AreaAccontoWrapper</value>
+					</key>
+				</entry>
+				<entry value="accontiEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.domain.AreaAcconto</value>
+					</key>
+				</entry>
+				<entry value="accontiEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.util.parametriricerca.ParametriRicercaAcconti</value>
+					</key>
+				</entry>
+				<entry value="templateSollecitiEditor">
+					<key>
+						<value type="java.lang.String">templateSollecitiEditor</value>
+					</key>
+				</entry>
+				<entry value="calendarioRateEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.rate.domain.CalendarioRate</value>
+					</key>
+				</entry>
+				<entry value="preferenzeTesoreriaEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.domain.TesoreriaSettings</value>
+					</key>
+				</entry>
+				<entry value="gestioneAssegniEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.util.ParametriRicercaAssegni</value>
+					</key>
+				</entry>
+				<entry value="situazioneSollecitiEditor">
+					<key>
+						<value type="java.lang.String">situazioneSollecitiEditor</value>
+					</key>
+				</entry>
+				<entry value="situazioneAnticipiFatturaEditor">
+					<key>
+						<value type="java.lang.String">situazioneAnticipiFatturaEditor</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="templateSollecitiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">templateSollecitoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>templateSollecitiTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">templateSollecitiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="tabellePartiteEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tabellePartiteEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Tabelle</value>
+						<value>tipiDocumentoBasePartiteTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">tabellePartiteEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="tipoDocumentoBasePartitaPage"
+		class="it.eurotn.panjea.partite.rich.editors.tabelle.TipoDocumentoBasePartitaPage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+	<bean id="tipiDocumentoBasePartiteTablePage"
+		class="it.eurotn.panjea.partite.rich.editors.tabelle.TipiDocumentoBasePartiteTablePage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="tipoDocumentoBasePartitaPage" />
+		</property>
+	</bean>
+
+	<bean id="ricercaRateEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ricercaRatePage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaRatePage</value>
+						<value>risultatiRicercaRatePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ricercaRateEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaRatePage"
+		class="it.eurotn.panjea.partite.rich.editors.ricercarate.ParametriRicercaRatePage"
+		singleton="false">
+		<property name="defaultController">
+			<ref bean="parametriRicercaRateController" />
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaRateController" class="it.eurotn.rich.editors.controllers.DefaultController"
+		singleton="false" lazy-init="true">
+		<property name="propertiesChange">
+			<map>
+				<entry key="tipoPartita">
+					<list>
+						<ref bean="tipoPartitaPropertyChange" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="tipoPartitaPropertyChange"
+		class="it.eurotn.panjea.partite.rich.editors.ricercarate.TipoPartitaPropertyChange"
+		singleton="false" lazy-init="true" />
+
+	<!-- inietto l'id del bean dato che non sono certo dell'esistenza del modulo
+		contabilita -->
+	<bean id="risultatiRicercaRatePage" class="it.eurotn.panjea.partite.rich.editors.ricercarate.RisultatiRicercaRatePage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="rateBD">
+			<ref bean="rateBD" />
+		</property>
+		<property name="carrelloPagamentiTablePage">
+			<ref bean="carrelloPagamentiTablePage" />
+		</property>
+		<property name="pagamentiSituazioneRataComponent">
+			<ref bean="pagamentiSituazioneRataComponent" />
+		</property>
+		<property name="sollecitiPagamentiRataComponent">
+			<ref bean="sollecitiPagamentiRataComponent" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+
+
+	<bean id="carrelloPagamentiTablePage" class="it.eurotn.panjea.partite.rich.editors.ricercarate.CarrelloPagamentiTablePage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="settingsManager" ref="settingManagerLocal">
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="pagamentiSituazioneRataComponent" class="it.eurotn.panjea.partite.rich.editors.ricercarate.PagamentiSituazioneRataComponent" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	<bean id="sollecitiPagamentiRataComponent" class="it.eurotn.panjea.partite.rich.editors.ricercarate.SollecitiPagamentiRataComponent" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="ricercaAreeTesoreriaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.tesoreria.rich.editors.areaTesoreria.AreaTesoreriaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ricercaAreeTesoreriaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>risultatiRicercaAreaTesoreriaPage</value>
+						<value>partiteAreaTesoreriaPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ricercaAreeTesoreriaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="areaTesoreriaPage" class="it.eurotn.panjea.tesoreria.rich.editors.areaTesoreria.AreaTesoreriaPage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+
+	<bean id="areaAssegnoPage" class="it.eurotn.panjea.tesoreria.rich.editors.areaTesoreria.AreaAssegnoPage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+
+	<bean id="areaAnticipoFatturePage" class="it.eurotn.panjea.tesoreria.rich.editors.areaTesoreria.AreaAnticipoFatturePage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+
+	<bean id="risultatiRicercaAreaTesoreriaPage"
+		class="it.eurotn.panjea.tesoreria.rich.editors.ricercaareetesoreria.RisultatiRicercaAreaTesoreriaPage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPages">
+			<map>
+				<entry key="it.eurotn.panjea.tesoreria.domain.AreaTesoreria">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaAcconto">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaChiusure">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaPagamenti">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaAnticipo">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaAnticipoFatture">
+                    <ref bean="areaAnticipoFatturePage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaEffetti">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaAccredito">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaDistintaBancaria">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaBonifico">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaInsoluti">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaAccreditoAssegno">
+                    <ref bean="areaTesoreriaPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.tesoreria.domain.AreaAssegno">
+					<ref bean="areaAssegnoPage" />
+				</entry>
+            </map>
+		</property>
+	</bean>
+
+	<bean id="ricercaSollecitiByEntitaPage"
+		class="it.eurotn.panjea.tesoreria.solleciti.editors.RicercaSollecitiByEntitaPage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+
+	<bean id="ricercaSollecitoByEntitaPage"
+		class="it.eurotn.panjea.tesoreria.solleciti.editors.RicercaSollecitiByEntitaPage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="partiteAreaTesoreriaPage"
+		class="it.eurotn.panjea.tesoreria.rich.editors.ricercaareetesoreria.partite.PartiteAreaTesoreriaPage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+	<bean id="ricercaEffettiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ricercaEffettiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>risultatiRicercaEffettiPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ricercaEffettiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaEffettiPage"
+		class="it.eurotn.panjea.tesoreria.rich.editors.ricercaeffetti.ParametriRicercaEffettiPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</constructor-arg>
+	</bean>
+	<bean id="risultatiRicercaEffettiPage"
+		class="it.eurotn.panjea.tesoreria.rich.editors.ricercaeffetti.RisultatiRicercaEffettiPage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="carrelloEffettiPage">
+			<ref bean="carrelloEffettiPage" />
+		</property>
+		<property name="parametriRicercaEffettiPage">
+			<ref bean="parametriRicercaEffettiPage" />
+		</property>
+	</bean>
+
+	<bean id="carrelloEffettiPage"
+		class="it.eurotn.panjea.tesoreria.rich.editors.ricercaeffetti.carrello.CarrelloEffettiPage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+
+	<bean id="datiCommercialiClienteSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="sedePagamentoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="datiCommercialiClientePotenzialeSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="sedePagamentoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="datiCommercialiFornitoreSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="sedePagamentoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="datiCommercialiVettoreSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="sedePagamentoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="codiciPagamentoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">codiciPagamentoPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:codiciPagamento</value>
+						<value>categoriaRateTablePage</value>
+						<value>strutturaPartitaTablePage</value>
+						<value>codicePagamentoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">codiciPagamentoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="categoriaRateTablePage"
+		class="it.eurotn.panjea.partite.rich.tabelle.CategorieRateTablePage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="categoriaRatePage" />
+		</property>
+	</bean>
+
+	<bean id="categoriaRatePage" class="it.eurotn.panjea.partite.rich.tabelle.CategorieRatePage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="categoriaRatePage"></constructor-arg>
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+	<bean id="strutturaPartitaTablePage"
+		class="it.eurotn.panjea.partite.rich.tabelle.StrutturaPartitaTablePage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+		<property name="strutturaPartitaCompositePage">
+			<ref bean="strutturaPartitaCompositePage" />
+		</property>
+	</bean>
+
+	<bean id="strutturaPartitaCompositePage"
+		class="it.eurotn.panjea.partite.rich.tabelle.StrutturaPartitaCompositePage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+		<property name="idPages">
+			<list>
+				<value>group:strutturaPartita</value>
+				<value>strutturaPartitaPage</value>
+				<value>righeStrutturaTablePage</value>
+				<value>strutturaPartitaStrategiaCalcoloPage</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="strutturaPartitaPage"
+		class="it.eurotn.panjea.partite.rich.tabelle.StrutturaPartitaPage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+	<bean id="righeStrutturaTablePage"
+		class="it.eurotn.panjea.partite.rich.tabelle.righestruttura.RigheStrutturaTablePage"
+		singleton="false">
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="rigaStrutturaPage" />
+		</property>
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+	<bean id="strutturaPartitaStrategiaCalcoloPage"
+		class="it.eurotn.panjea.partite.rich.tabelle.StrutturaPartitaStrategiaCalcoloPage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+
+	<bean id="rigaStrutturaPage"
+		class="it.eurotn.panjea.partite.rich.tabelle.righestruttura.RigaStrutturaPage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+
+	<bean id="codicePagamentoTablePage"
+		class="it.eurotn.panjea.pagamenti.rich.tabelle.CodicePagamentoTablePage"
+		singleton="false">
+		<property name="anagraficaPagamentiBD">
+			<ref bean="anagraficaPagamentiBD" />
+		</property>
+        <property name="rateBD">
+            <ref bean="rateBD" />
+        </property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="codicePagamentoPage" />
+		</property>
+	</bean>
+	<bean id="codicePagamentoPage"
+		class="it.eurotn.panjea.pagamenti.rich.tabelle.CodicePagamentoPage"
+		singleton="false">
+		<property name="anagraficaPagamentiBD">
+			<ref bean="anagraficaPagamentiBD" />
+		</property>
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+	<bean id="sedePagamentoPage"
+		class="it.eurotn.panjea.pagamenti.rich.editors.SedePagamentoPage"
+		singleton="false" lazy-init="true">
+		<property name="anagraficaPagamentiBD">
+			<ref bean="anagraficaPagamentiBD" />
+		</property>
+	</bean>
+
+	<bean id="areaContabileEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>rateContabilitaTablePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="areaMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>rateMagazzinoTablePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="rateContabilitaTablePage" class="it.eurotn.panjea.rate.rich.editors.rate.RateTablePage"
+		singleton="false" lazy-init="true">
+		<property name="areaRateModel">
+			<ref bean="areaRateContabilitaModel" />
+		</property>
+		<property name="rataPage">
+			<ref bean="rataPage" />
+		</property>
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="rateBD">
+			<ref bean="rateBD" />
+		</property>
+	</bean>
+
+	<bean id="rateMagazzinoTablePage" class="it.eurotn.panjea.rate.rich.editors.rate.RateTablePage"
+		singleton="false" lazy-init="true">
+		<property name="areaRateModel">
+			<ref bean="areaRateMagazzinoModel" />
+		</property>
+		<property name="rataPage">
+			<ref bean="rataPage" />
+		</property>
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="rateBD">
+			<ref bean="rateBD" />
+		</property>
+	</bean>
+
+	<bean id="rataPage" class="it.eurotn.panjea.rate.rich.editors.rate.RataPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</constructor-arg>
+	</bean>
+
+
+	<bean id="areaRateContabilitaModel"
+		class="it.eurotn.panjea.rate.rich.forms.AreaRateContabilitaModel"
+		lazy-init="true" singleton="false">
+		<property name="rateBD">
+			<ref bean="rateBD" />
+		</property>
+	</bean>
+
+	<bean id="areaRateMagazzinoModel" class="it.eurotn.panjea.rate.rich.forms.AreaRateMagazzinoModel"
+		lazy-init="true" singleton="false">
+		<property name="rateBD">
+			<ref bean="rateBD" />
+		</property>
+	</bean>
+
+	<!-- inizio template sollecito -->
+	<bean id="templateSollecitiTablePage"
+		class="it.eurotn.panjea.tesoreria.solleciti.editors.TemplateSollecitiTablePage"
+		singleton="false" lazy-init="true">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="templateSollecitoPage" />
+		</property>
+	</bean>
+	<bean id="templateSollecitoPage"
+		class="it.eurotn.panjea.tesoreria.solleciti.editors.TemplateSollecitoPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="templateSollecitoPage">
+		</constructor-arg>
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente"/>
+		</property>
+	</bean>
+
+
+	<!-- inizio Tipo Area Partita -->
+
+	<bean id="tipoAreaPartitaPage"
+		class="it.eurotn.panjea.partite.rich.tabelle.TipoAreaPartitaPage"
+		singleton="false">
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+	<!-- fine Tipo Area Partita -->
+
+	<bean id="tipoDocumentoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>tipoAreaPartitaPage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="accontiEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">accontiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>risultatiRicercaAreaAccontoTablePage</value>
+						<value>pagamentiAccontoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">accontiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="risultatiRicercaAreaAccontoTablePage"
+		class="it.eurotn.panjea.tesoreria.rich.editors.acconto.RisultatiRicercaAreaAccontoTablePage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="areaAccontoPage" />
+		</property>
+	</bean>
+
+	<bean id="areaAccontoPage" class="it.eurotn.panjea.tesoreria.rich.editors.acconto.AreaAccontoPage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="defaultController">
+			<ref bean="areaAccontoController" />
+		</property>
+	</bean>
+
+	<bean id="areaAccontoController" class="it.eurotn.rich.editors.controllers.DefaultController" singleton="false" lazy-init="true">
+		<property name="propertiesChange">
+			<map>
+				<entry key="documento.entita">
+					<list>
+						<ref bean="areaAccontoEntitaPropertyChange" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="areaAccontoEntitaPropertyChange" class="it.eurotn.panjea.tesoreria.rich.forms.acconto.EntitaPropertyChange" singleton="false" lazy-init="true">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="pagamentiAccontoPage" class="it.eurotn.panjea.tesoreria.rich.editors.acconto.PagamentiAccontoPage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="sollecitiForm"
+		class="org.springframework.richclient.dialog.FormBackedDialogPage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="clienteEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>ricercaSollecitiByEntitaPage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	    <bean id="searchResultCalendariRate" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rate.rich.search.SearchResultCalendariRate</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="calendariRateBD">
+                    <ref bean="calendariRateBD"></ref>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="calendarioRatePage"
+		class="it.eurotn.panjea.rate.rich.editors.calendarirate.CalendarioRatePage"
+		singleton="false">
+		<property name="calendariRateBD">
+			<ref bean="calendariRateBD"/>
+		</property>
+	</bean>
+
+	<bean id="righeCalendarioRateTablePage" class="it.eurotn.panjea.rate.rich.editors.calendarirate.RigheCalendarioRateTablePage" singleton="false">
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="rigaCalendarioRatePage" />
+		</property>
+		<property name="calendariRateBD">
+			<ref bean="calendariRateBD"/>
+		</property>
+	</bean>
+
+	<bean id="rigaCalendarioRatePage" class="it.eurotn.panjea.rate.rich.editors.calendarirate.RigaCalendarioRatePage" singleton="false">
+		<property name="calendariRateBD">
+			<ref bean="calendariRateBD"/>
+		</property>
+	</bean>
+
+	<bean id="calendarioRateEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">calendarioRateEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>calendarioRatePage</value>
+						<value>righeCalendarioRateTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">calendarioRateEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="altriDatiClientePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.AltriDatiEntitaPage"
+		singleton="false">
+		<property name="pagine">
+			<list>
+				<ref bean="RiepilogoCalendariRatePage" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="RiepilogoCalendariRatePage"
+		class="it.eurotn.panjea.rate.rich.editors.calendarirate.RiepilogoCalendariRatePage"
+		singleton="false">
+	</bean>
+
+	<bean id="repilogoCalendariRateAziendaForm"
+		class="it.eurotn.panjea.rate.rich.forms.calendarirate.RepilogoCalendariRateAziendaForm"
+		singleton="false">
+	</bean>
+
+	<bean id="stampaSollecitiDialog" class="it.eurotn.panjea.tesoreria.solleciti.editors.StampaSollecitiDialog" singleton="false">
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente"/>
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD"/>
+		</property>
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD"/>
+		</property>
+	</bean>
+
+	<bean id="creaEStampaSollecitiDialog" class="it.eurotn.panjea.tesoreria.solleciti.editors.CreaEStampaSollecitiDialog" singleton="false">
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente"/>
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD"/>
+		</property>
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD"/>
+		</property>
+	</bean>
+
+	<bean id="preferenzeTesoreriaEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">preferenzeTesoreriaEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:preference</value>
+                        <value>tesoreriaSettingsPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">preferenzeTesoreriaEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="tesoreriaSettingsPage" class="it.eurotn.panjea.tesoreria.rich.editors.preference.TesoreriaSettingsPage" singleton="false" lazy-init="true">
+    	<property name="lettoreAssegniManager">
+    		<ref bean="lettoreAssegniManager"/>
+    	</property>
+    	<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD"/>
+		</property>
+		<property name="documentiBD">
+			<ref bean="documentiBD"/>
+		</property>
+    </bean>
+
+    <bean id="gestioneAssegniEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.tesoreria.rich.editors.assegno.GestioneAssegniEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">gestioneAssegniEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaAssegniPage</value>
+						<value>risultatiRicercaAssegniTablePage</value>
+						<value>partiteAreaAssegnoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">gestioneAssegniEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="partiteAreaAssegnoPage" class="it.eurotn.panjea.tesoreria.rich.editors.ricercaareetesoreria.partite.PartiteAreaTesoreriaPage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaAssegniPage" class="it.eurotn.panjea.tesoreria.rich.editors.assegno.ParametriRicercaAssegniPage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD"/>
+		</property>
+	</bean>
+
+	<bean id="risultatiRicercaAssegniTablePage" class="it.eurotn.panjea.tesoreria.rich.editors.assegno.RisultatiRicercaAssegniTablePage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD"/>
+		</property>
+		<property name="carrelloAssegniTablePage">
+			<ref bean="carrelloAssegniTablePage"/>
+		</property>
+	</bean>
+
+	<bean id="carrelloAssegniTablePage" class="it.eurotn.panjea.tesoreria.rich.editors.assegno.CarrelloAssegniTablePage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD"/>
+		</property>
+	</bean>
+
+	<bean id="situazioneSollecitiEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">situazioneSollecitiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>ricercaSollecitoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">situazioneSollecitiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ricercaSollecitoPage"
+		class="it.eurotn.panjea.tesoreria.solleciti.editors.RicercaSollecitoPage"
+		singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+
+	<bean id="situazioneAnticipiFatturaEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">situazioneAnticipiFatturaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>anticipiFatturaTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">situazioneAnticipiFatturaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="anticipiFatturaTablePage" class="it.eurotn.panjea.tesoreria.rich.editors.anticipifattura.AnticipiFatturaTablePage" singleton="false">
+		<property name="tesoreriaBD">
+			<ref bean="tesoreriaBD" />
+		</property>
+	</bean>
+</beans>

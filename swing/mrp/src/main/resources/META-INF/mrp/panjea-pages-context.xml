@@ -1,0 +1,72 @@
+
+<beans>
+
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="mrpRisultatoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.mrp.util.ParametriMrpRisultato</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="mrpRisultatoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="enableCache">
+					<value type="java.lang.Boolean">1</value>
+				</entry>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">mrpRisultatoEditor</value>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">mrpRisultatoEditor</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>mrpRisultatoPage</value>
+						<value>parametriMrpRisultatoPage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="mrpRisultatoPage"
+		class="it.eurotn.panjea.mrp.rich.editors.risultato.RisultatoPage"
+		singleton="false">
+		<property name="mrpBD">
+			<ref bean="mrpBD" />
+		</property>
+		<property name="editPage">
+			<bean id="risultatoMrpFlatPage"
+				class="it.eurotn.panjea.mrp.rich.editors.risultato.RisultatoMrpFlatPage"
+				singleton="false" />
+		</property>
+	</bean>
+
+	<bean id="parametriMrpRisultatoPage"
+		class="it.eurotn.panjea.mrp.rich.editors.risultato.ParametriMrpRisultatoPage"
+		singleton="false" />
+
+
+	<bean id="openMrpFromOrderCommand" class="it.eurotn.panjea.mrp.rich.OpenMrpFromOrderCommand"
+		singleton="false" lazy-init="true" />
+
+	<bean id="areaOrdinePage"
+		class="it.eurotn.panjea.ordini.rich.editors.areaordine.AreaOrdinePage"
+		singleton="false" lazy-init="true">
+		<property name="externalCommandAppend">
+			<list>
+				<ref bean="openMrpFromOrderCommand" />
+			</list>
+		</property>
+	</bean>
+</beans>

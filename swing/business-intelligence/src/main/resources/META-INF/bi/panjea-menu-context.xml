@@ -1,0 +1,12 @@
+
+<beans>
+
+	<bean id="biMenu" class="it.eurotn.panjea.rich.AnalisiCommandPanelMenu">
+		<property name="id" value="biMenu"></property>
+		<property name="businessIntelligenceBD">
+			<ref bean="businessIntelligenceBD" />
+		</property>
+		<property name="idNewDashBoardEditorCommand" value="newDashBoardEditorCommand"/>
+		<property name="idNewAnalisiEditorCommand" value="openDatawareHouseCommand"/>
+	</bean>
+</beans>

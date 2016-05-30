@@ -1,0 +1,148 @@
+
+<beans>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/vega/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/vega/messages-commands
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vega/messages-editors-pages
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vega/messages-exceptions
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vega/messages-methods
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vega/messages-forms-model
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vega/messages-classes
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vega/messages-constraint
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="imageResourcesFactory"
+		class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/vega/images.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- inizio configurazione business delegate -->
+
+	<bean id="codiceEsternoEntitaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.CodiceEsternoEntitaManager" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+	<bean id="vegaBDImpl" class="it.eurotn.panjea.vega.rich.bd.VegaBD"
+		singleton="true" lazy-init="true">
+		<property name="codiceEsternoEntitaService" ref="codiceEsternoEntitaService" />
+	</bean>
+	
+	<bean id="vegaBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.vega.rich.bd.IVegaBD</value>
+		</property>
+		<property name="target">
+			<ref local="vegaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="vegaImportFattureBDImpl" class="it.eurotn.panjea.vega.rich.bd.importazione.VegaImportaFattureBD"
+        singleton="true" lazy-init="true">
+        <property name="restClient" ref="restClient" />
+    </bean>
+    
+    <bean id="vegaImportFattureBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+        singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.vega.rich.bd.importazione.IVegaImportaBD</value>
+        </property>
+        <property name="target">
+            <ref local="vegaImportFattureBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="vegaImportMovimentazioneBDImpl" class="it.eurotn.panjea.vega.rich.bd.importazione.VegaImportaMovimentazioneBD"
+        singleton="true" lazy-init="true">
+        <property name="restClient" ref="restClient" />
+    </bean>
+    
+    <bean id="vegaImportMovimentazioneBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+        singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.vega.rich.bd.importazione.IVegaImportaBD</value>
+        </property>
+        <property name="target">
+            <ref local="vegaImportMovimentazioneBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+	<!-- fine configurazione business delegate -->
+
+
+	<bean id="clientiVegaDaConfermareStatusBarItem"
+		class="it.eurotn.panjea.vega.rich.statusBarItem.ClientiVegaDaConfermareStatusBarItem">
+		<property name="vegaBD">
+			<ref bean="vegaBD" />
+		</property>
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.components.JecStatusBar"
+		depends-on="lookAndFeelConfigurer" id="statusBarId">
+		<property name="additionalStatusBarItems">
+			<list>
+				<ref bean="clientiVegaDaConfermareStatusBarItem" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager"
+		lazy-init="true" singleton="true">
+		<property name="plugins">
+			<list>
+				<ref bean="panjeaVega" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaVega">
+		<property name="versione" value="" />
+		<property name="nome" value="panjeaVega" />
+		<property name="descrizione" value="Modulo plugin per interfaccia software Vega" />
+		<property name="rulesSource"
+			value="it.eurotn.panjea.vega.rich.rules.VegaPluginRulesSource" />
+	</bean>
+
+	<bean id="restClient" class="it.eurotn.panjea.vega.rich.bd.importazione.RestClient">
+		<property name="baseClientUrl"
+			value="http://${java_naming_provider_url}:8080/panjea-vega-rest" />
+	</bean>
+
+
+</beans>

@@ -1,0 +1,26 @@
+
+<beans>
+	<!-- INIZIO DEFINIZIONE SECURITY CONTROLLER -->
+	 
+	<bean id="strumentiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="strumenti"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	
+	<bean id="aggiornamentoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="aggiornamento"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+    
+    <bean id="gestionePermessiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestionePermessi"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+        
+	<!-- FINE DEFINIZIONE SECURITY CONTROLLER -->
+
+    
+</beans>

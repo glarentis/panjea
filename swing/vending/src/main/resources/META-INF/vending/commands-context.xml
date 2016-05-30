@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beans>
+
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openTabelleGeneraliVendingCommand">
+		<property name="idCommand" value="openTabelleGeneraliVendingCommand"/>
+		<property name="openString" value="tabelleGeneraliVendingEditor"/>
+	</bean>
+
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openDistributoreEditorCommand">
+		<property name="idCommand" value="openDistributoreEditorCommand"/>
+		<property name="openClassName" value="it.eurotn.panjea.vending.rich.editors.distributore.DistributorePM"/>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.commands.OpenDistributoreCommand" id="openDistributoreCommand"/>
+
+	<bean class="it.eurotn.panjea.vending.rich.commands.OpenAreaRifornimentoCommand" id="openAreaRifornimentoCommand"/>
+
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openRicercaAreaRifornimentoCommand">
+		<property name="idCommand" value="openRicercaAreaRifornimentoCommand"/>
+		<property name="openClassName" value="it.eurotn.panjea.vending.manager.arearifornimento.ParametriRicercaAreeRifornimento"/>
+	</bean>
+
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openLettureSelezionatriceEditorCommand">
+		<property name="idCommand" value="openLettureSelezionatriceEditorCommand"/>
+		<property name="openString" value="lettureSelezionatriceEditor"/>
+	</bean>
+
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openRicercaRilevazioneEvaDtsEditorCommand">
+		<property name="idCommand" value="openRicercaRilevazioneEvaDtsEditorCommand"/>
+		<property name="openClassName" value="it.eurotn.panjea.vending.manager.evadts.rilevazioni.ParametriRicercaRilevazioniEvaDts"/>
+	</bean>
+	
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openCassaCommand">
+		<property name="idCommand" value="openCassaCommand"/>
+		<property name="openClassName" value="it.eurotn.panjea.vending.domain.Cassa"/>
+	</bean>
+    
+    <bean class="it.eurotn.rich.command.OpenEditorCommand" id="openMovimentoCassaCommand">
+		<property name="idCommand" value="openMovimentoCassaCommand"/>
+		<property name="openClassName" value="it.eurotn.panjea.vending.domain.MovimentoCassa"/>
+	</bean>
+	
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openPreferenzeVendingCommand">
+        <property name="idCommand" value="openPreferenzeVendingCommand"/>
+        <property name="openString" value="preferenzeVendingEditor"/>
+    </bean>
+    
+    <bean class="it.eurotn.rich.command.OpenEditorCommand" id="openImportazioneEvaDtsCommand">
+        <property name="idCommand" value="openImportazioneEvaDtsCommand"/>
+        <property name="openString" value="importazioneEvaDtsEditor"/>
+    </bean>
+    
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openAslCommand">
+		<property name="idCommand" value="openAslCommand" />
+		<property name="openString" value="aslEditor" />
+	</bean>
+</beans>

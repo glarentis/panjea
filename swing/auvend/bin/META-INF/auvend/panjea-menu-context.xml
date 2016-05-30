@@ -1,0 +1,19 @@
+
+<beans>	
+	
+	<bean id="auVendMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="auVendMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:auVend:gestioneAuVend</value>	
+				<value>openTabelleAuVendCommand</value>
+				<value>openRecuperoCarichiRifornimentiAuVendCommand</value>
+				<value>openRecuperoMovimentiAuVendCommand</value>
+				<value>openRecuperoFattureAuVendCommand</value>
+				<value>openRecuperoFatturazioneRifornimentiAuVendCommand</value>
+				<value>openRecuperoRiparazioniContoTerziAuVendCommand</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

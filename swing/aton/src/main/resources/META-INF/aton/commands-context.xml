@@ -1,0 +1,17 @@
+ 
+<beans>
+
+	<import resource="panjea-context.xml"/>
+
+	<bean id="atonExportCommand" class="it.eurotn.panjea.aton.rich.commands.ExportCommand">
+		<property name="idCommand" value="atonExportCommand"></property>
+        <property name="securityControllerId" value="atonEsportazioneController"></property>
+    	<property name="atonBD" ref="atonBD"></property>
+	</bean>	
+    
+    <bean id="atonImportCommand" class="it.eurotn.panjea.aton.rich.commands.ImportCommand">
+    	<property name="idCommand" value="atonImportCommand"></property>
+        <property name="securityControllerId" value="atonImportazioneController"></property>
+    	<property name="atonBD" ref="atonBD"></property>
+    </bean>		
+</beans>

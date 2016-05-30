@@ -1,0 +1,332 @@
+
+<beans>
+    <bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+        <property name="viewProperties">
+            <map>
+                <entry key="tabPanel">
+                    <list>
+                        <ref bean="intraMenu" />
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="searchFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+        <property name="searchResultMap">
+            <map>
+                <entry value-ref="searchResultDichiarazioniIntra">
+                    <key>
+                        <value type="java.lang.String">it.eurotn.panjea.intra.domain.DichiarazioneIntra</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="presentazioneDichiarazioniEditor">
+                    <key>
+                        <value type="java.lang.String">dichiarazioniDaPresentare</value>
+                    </key>
+                </entry>
+                <entry value="fileDichiarazioneIntraEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.intra.domain.dichiarazione.FileDichiarazione</value>
+                    </key>
+                </entry>
+                <entry value="dichiarazioneIntraEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.intra.domain.DichiarazioneIntraVendite</value>
+                    </key>
+                </entry>
+                <entry value="areaIntraEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.intra.manager.ParametriRicercaAreaIntra</value>
+                    </key>
+                </entry>
+                <entry value="tabelleIntraEditor">
+                    <key>
+                        <value type="java.lang.String">tabelleIntraEditor</value>
+                    </key>
+                </entry>
+                <entry value="dichiarazioneIntraEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.intra.domain.DichiarazioneIntraAcquisti</value>
+                    </key>
+                </entry>
+                <entry value="tabelleIntraEditor">
+                    <key>
+                        <value type="java.lang.String">tabelleIntraEditor</value>
+                    </key>
+                </entry>
+                <entry value="preferenzeIntraEditor">
+                    <key>
+                        <value type="java.lang.String">preferenzeIntraEditor</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="areaIntraEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">areaIntraEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>areaIntraPage</value>
+                        <value>risultatiRicercaAreeIntraTablePage</value>
+                        <value>risultatiRicercaDocumentiSenzaIntraTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">areaIntraEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="areaIntraPage" class="it.eurotn.panjea.intra.rich.pages.AreaIntraPage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="risultatiRicercaAreeIntraTablePage" class="it.eurotn.panjea.intra.rich.pages.RisultatiRicercaAreeIntraTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="risultatiRicercaDocumentiSenzaIntraTablePage" class="it.eurotn.panjea.intra.rich.pages.RisultatiRicercaDocumentiSenzaIntraTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+
+    <bean id="searchResultDichiarazioniIntra" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.magazzino.rich.search.SearchResultDichiarazioniIntra</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="intraBD">
+                    <ref bean="intraBD"></ref>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="fileDichiarazioneIntraEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">fileDichiarazioneIntraEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>                        
+                        <value>fileDichiarazioneTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">fileDichiarazioneIntraEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="fileDichiarazioneTablePage" class="it.eurotn.panjea.intra.rich.editors.fileDichiarazione.FileDichiarazioneTablePage" lazy-init="true" singleton="false">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="tabelleIntraEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">tabelleIntraEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:Tabelle</value>
+                        <value>nomenclaturaTablePage</value>
+                        <value>servizioTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">tabelleIntraEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="presentazioneDichiarazioniEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">presentazioneDichiarazioniEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>presentazioneDichiarazioniTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">presentazioneDichiarazioniEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="presentazioneDichiarazioniTablePage" class="it.eurotn.panjea.intra.rich.editors.presentazione.PresentazioneDichiarazioniTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+
+    <bean id="dichiarazioneIntraEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">dichiarazioneIntraEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:Intestazione</value>
+                        <value>intestazioneDichiarazionePage</value>
+                        <value>sezione1BeniTablePage</value>
+                        <value>sezione2BeniTablePage</value>
+                        <value>sezione3ServiziTablePage</value>
+                        <value>sezione4ServiziTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">dichiarazioneIntraEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="intestazioneDichiarazionePage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.IntestazionePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="sezione1BeniTablePage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.sezione1.Sezione1BeniTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+        <property name="editPage">
+            <ref bean="sezione1BeniPage" />
+        </property>
+    </bean>
+    <bean id="sezione1BeniPage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.sezione1.Sezione1BeniPage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="sezione2BeniTablePage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.sezione2.Sezione2BeniTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+        <property name="editPage">
+            <ref bean="sezione2BeniPage" />
+        </property>
+    </bean>
+    <bean id="sezione2BeniPage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.sezione2.Sezione2BeniPage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="sezione3ServiziTablePage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.sezione3.Sezione3ServiziTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+        <property name="editPage">
+            <ref bean="sezione3ServiziPage" />
+        </property>
+    </bean>
+    <bean id="sezione3ServiziPage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.sezione3.Sezione3ServiziPage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="sezione4ServiziTablePage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.sezione4.Sezione4ServiziTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+        <property name="editPage">
+            <ref bean="sezione4ServiziPage" />
+        </property>
+    </bean>
+    <bean id="sezione4ServiziPage" class="it.eurotn.panjea.intra.rich.editors.dichiarazione.sezione4.Sezione4ServiziPage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="nomenclaturaTablePage" class="it.eurotn.panjea.intra.rich.editors.servizio.NomenclaturaTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+        <property name="editPageMode" value="DETAIL" />
+        <property name="editPage">
+            <ref bean="nomenclaturaPage" />
+        </property>
+    </bean>
+    <bean id="servizioTablePage" class="it.eurotn.panjea.intra.rich.editors.servizio.ServizioTablePage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+        <property name="editPageMode" value="DETAIL" />
+        <property name="editPage">
+            <ref bean="servizioPage" />
+        </property>
+    </bean>
+    <bean id="nomenclaturaPage" class="it.eurotn.panjea.intra.rich.editors.servizio.NomenclaturaPage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+    <bean id="servizioPage" class="it.eurotn.panjea.intra.rich.editors.servizio.ServizioPage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+
+    <bean id="preferenzeIntraEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">preferenzeIntraEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:preferenze</value>
+                        <value>intraSettingsPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">preferenzeIntraEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="intraSettingsPage" class="it.eurotn.panjea.intra.rich.editors.settings.IntraSettingsPage" singleton="false" lazy-init="true">
+        <property name="intraBD">
+            <ref bean="intraBD" />
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,30 @@
+
+<beans>
+
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+            <entry value="centroCostoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.centricosto.domain.CentroCosto</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+    
+    <bean id="centroCostoSearchObject" class="it.eurotn.panjea.centricosto.rich.search.CentroCostoSearchObject" singleton="false" lazy-init="true">
+        <property name="centriCostoBD">
+            <ref bean="centriCostoBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+        <property name="editObject" value="true"/>        
+    </bean>
+	
+</beans>

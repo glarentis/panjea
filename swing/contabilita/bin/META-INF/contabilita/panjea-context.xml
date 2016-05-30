@@ -1,0 +1,329 @@
+
+<beans>
+
+    <bean class="org.springframework.richclient.form.binding.swing.SwingBinderSelectionStrategy" id="binderSelectionStrategy">
+        <property name="bindersForPropertyTypes">
+            <map>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.contabilita.domain.SottoConto</value>
+                    </key>
+                    <bean class="it.eurotn.rich.binding.searchtext.SearchTextBinder">
+                        <property name="renderProperties" value="descrizione"></property>
+                        <property name="searchTextClass" value="it.eurotn.panjea.contabilita.rich.search.SottoContoSearchTextField"></property>
+                    </bean>
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.contabilita.domain.Conto</value>
+                    </key>
+                    <bean class="it.eurotn.rich.binding.searchtext.SearchTextBinder">
+                        <property name="renderProperties" value="contoCodice"></property>
+                        <property name="searchTextClass" value="it.eurotn.panjea.contabilita.rich.search.ContoSearchTextField"></property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="basenames">
+            <list>
+                <!-- File di configurazione dei messaggi di contabilita -->
+                <value>classpath:it/eurotn/panjea/messages/cont/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/cont/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/cont/messages-exceptions</value>
+                <value>classpath:it/eurotn/panjea/messages/cont/messages-methods</value>
+                <value>classpath:it/eurotn/panjea/messages/cont/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/cont/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/cont/messages-editors-pages</value>
+                <value>classpath:it/eurotn/panjea/messages/cont/messages-constraints</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+        <property name="locations">
+            <list>
+                <!-- File di configurazione delle immagini per la contabilita -->
+                <value>classpath:it/eurotn/panjea/messages/cont/images.properties</value>
+                <value>classpath:it/eurotn/panjea/messages/cont/reports/images.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="panjeaConversionService" class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+        <property name="converters">
+            <list>
+                <bean name="SottoContoConverter" class="it.eurotn.panjea.contabilita.rich.converter.SottoContoConverter"></bean>
+                <bean name="ContoConverter" class="it.eurotn.panjea.contabilita.rich.converter.ContoConverter"></bean>
+                <bean name="EntitaConverter" class="it.eurotn.panjea.anagrafica.rich.converter.EntitaConverter"></bean>
+                <bean name="CentroCostoConverter" class="it.eurotn.panjea.contabilita.rich.converter.CentroCostoConverter"></bean>
+                <bean name="AreaContabileFullDTOConverter" class="it.eurotn.panjea.contabilita.rich.converter.AreaContabileFullDTOConverter"></bean>
+                <bean name="RegistroIvaConverter" class="it.eurotn.panjea.contabilita.rich.converter.RegistroIvaConverter"></bean>
+            </list>
+        </property>
+    </bean>
+    <bean id="jideTableFactory" class="it.eurotn.rich.control.table.JideTableFactory">
+        <property name="renderers">
+            <list>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.contabilita.domain.Conto" />
+                </bean>
+                <bean class="it.eurotn.panjea.contabilita.rich.editors.renderers.StatoGiornaleCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.contabilita.rich.pm.LiquidazionePM$StatoGiornale" />
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.contabilita.domain.AreaContabile$StatoAreaContabile"></property>
+                </bean>
+                <bean class="it.eurotn.panjea.contabilita.rich.editors.renderers.SottoContoContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.contabilita.domain.SottoConto" />
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.centricosto.domain.CentroCosto" />
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.contabilita.domain.RegistroIva" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="it.eurotn.panjea.rich.factory.navigationloader.PanjeaNavigationLoaderFactory" id="panjeaNavigationLoaderFactory">
+    	<property name="loaderCommands">
+			<list>
+				<ref bean="entitaEstrattoContoLoaderActionCommand"/>
+            </list>
+		</property>
+    </bean>
+
+    <!-- Loader action commands -->
+    <bean id="entitaEstrattoContoLoaderActionCommand" class="it.eurotn.panjea.contabilita.rich.commands.navigationloaders.EntitaEstrattoContoLoaderActionCommand" singleton="true" lazy-init="true">
+        <property name="contabilitaAnagraficaBD">
+            <ref bean="contabilitaAnagraficaBD"/>
+        </property>
+    </bean>
+
+    <bean id="ritenutaAccontoService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.RitenutaAccontoService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean id="ritenutaAccontoBDimpl" class="it.eurotn.panjea.contabilita.rich.bd.RitenutaAccontoBD" singleton="true" lazy-init="true">
+        <property name="ritenutaAccontoService" ref="ritenutaAccontoService" />
+    </bean>
+     <bean id="ritenutaAccontoBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.contabilita.rich.bd.IRitenutaAccontoBD</value>
+        </property>
+        <property name="target">
+            <ref local="ritenutaAccontoBDimpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+				<value>SwingBDInterceptor</value>
+                <value>AsyncAsyncBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="contabilitaAnagraficaService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.ContabilitaAnagraficaService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean id="contabilitaAnagraficaBDimpl" class="it.eurotn.panjea.contabilita.rich.bd.ContabilitaAnagraficaBD" singleton="true" lazy-init="true">
+        <property name="contabilitaAnagraficaService" ref="contabilitaAnagraficaService" />
+    </bean>
+    <bean id="contabilitaAnagraficaBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.contabilita.rich.bd.IContabilitaAnagraficaBD</value>
+        </property>
+        <property name="target">
+            <ref local="contabilitaAnagraficaBDimpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+				<value>SwingBDInterceptor</value>
+                <value>AsyncAsyncBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="contabilitaService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.ContabilitaService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean id="ivaService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.IvaService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean id="contabilitaBDimpl" class="it.eurotn.panjea.contabilita.rich.bd.ContabilitaBD" singleton="true" lazy-init="true">
+        <property name="contabilitaService" ref="contabilitaService" />
+        <property name="ivaService" ref="ivaService" />
+    </bean>
+    <bean id="contabilitaBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.contabilita.rich.bd.IContabilitaBD</value>
+        </property>
+        <property name="target">
+            <ref local="contabilitaBDimpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+				<value>SwingBDInterceptor</value>
+                <value>AsyncAsyncBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="aziendaCorrente" class="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente" singleton="true" lazy-init="true">
+        <property name="annoCompetenzaContabileLocator">
+            <ref bean="annoCompetenzaContabileLocator" />
+        </property>
+    </bean>
+    <bean id="annoCompetenzaContabileLocator" class="it.eurotn.panjea.contabilita.rich.pm.AnnoCompetenzaContabileLocator" singleton="true" lazy-init="true">
+        <property name="contabilitaAnagraficaBD">
+            <ref bean="contabilitaAnagraficaBD" />
+        </property>
+    </bean>
+    <!-- Inizio gestione delle eccezioni -->
+    <!-- Handler che si occupa della gestione delle eccezioni. Contiene una lista che si comporta come un try cacth. Attenzione all'ordine in cui i delegate vengono inseriti nella lista -->
+    <bean id="exceptionHandler" class="org.springframework.richclient.exceptionhandling.delegation.DelegatingExceptionHandler">
+        <property name="delegateList">
+            <list>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.contabilita.service.exception.ContoEntitaAssenteException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.contabilita.exceptionhandler.ContoEntitaAssenteExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.contabilita.service.exception.TipoAreaContabileAssenteException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.contabilita.exceptionhandler.TipoAreaContabileAssenteExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    <!-- INIZIO DEFINIZIONE BEAN JMS -->
+    <bean id="contoEntitaAssociatiContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="topicConnectionFactory" />
+        <property name="destination" ref="panjeaDestination" />
+        <property name="messageListener" ref="contoEntitaAssociatiMessageListener" />
+        <property name="messageSelector" value="messageSelector='contoEntitaAssociati'"></property>
+        <property name="autoStartup" value="true"></property>
+    </bean>
+    <bean id="contoEntitaAssociatiMessageListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="contoEntitaAssociatiMessageDelegate" />
+        <!-- we don't want automatic message context extraction -->
+        <property name="messageConverter">
+            <null />
+        </property>
+    </bean>
+    <bean id="contoEntitaAssociatiMessageDelegate" class="it.eurotn.panjea.contabilita.rich.jms.ContoEntitaAssociatiMessageDelegate" singleton="false" lazy-init="true">
+    </bean>
+    <bean id="contoEntitaNonAssociatiContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="topicConnectionFactory" />
+        <property name="destination" ref="panjeaDestination" />
+        <property name="messageListener" ref="contoEntitaNonAssociatiMessageListener" />
+        <property name="messageSelector" value="messageSelector='contoEntitaNonAssociati'"></property>
+        <property name="autoStartup" value="true"></property>
+    </bean>
+    <bean id="contoEntitaNonAssociatiMessageListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="contoEntitaNonAssociatiMessageDelegate" />
+        <!-- we don't want automatic message context extraction -->
+        <property name="messageConverter">
+            <null />
+        </property>
+    </bean>
+    <bean id="contoEntitaNonAssociatiMessageDelegate" class="it.eurotn.panjea.contabilita.rich.jms.ContoEntitaNonAssociatiMessageDelegate" singleton="false" lazy-init="true">
+    </bean>
+    <bean id="contoEntitaAssociatiExceptionContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="topicConnectionFactory" />
+        <property name="destination" ref="panjeaDestination" />
+        <property name="messageListener" ref="contoEntitaAssociatiExceptionMessageListener" />
+        <property name="messageSelector" value="messageSelector='contoEntitaAssociatiException'"></property>
+        <property name="autoStartup" value="true"></property>
+    </bean>
+    <bean id="contoEntitaAssociatiExceptionMessageListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="contoEntitaAssociatiExceptionMessageDelegate" />
+        <!-- we don't want automatic message context extraction -->
+        <property name="messageConverter">
+            <null />
+        </property>
+    </bean>
+    <bean id="contoEntitaAssociatiExceptionMessageDelegate" class="it.eurotn.panjea.contabilita.rich.jms.ContoEntitaAssociatiExceptionMessageDelegate" singleton="false" lazy-init="true">
+    </bean>
+    <bean id="libroGiornaleInvalidatoContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="topicConnectionFactory" />
+        <property name="destination" ref="panjeaDestination" />
+        <property name="messageListener" ref="libroGiornaleInvalidatoMessageListener" />
+        <property name="messageSelector" value="messageSelector='libroGiornaleInvalidato'"></property>
+        <property name="autoStartup" value="true"></property>
+    </bean>
+    <bean id="libroGiornaleInvalidatoMessageListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="libroGiornaleInvalidatoMessageDelegate" />
+        <!-- we don't want automatic message context extraction -->
+        <property name="messageConverter">
+            <null />
+        </property>
+    </bean>
+    <bean id="libroGiornaleInvalidatoMessageDelegate" class="it.eurotn.panjea.contabilita.rich.jms.LibroGiornaleInvalidatoMessageDelegate" singleton="false" lazy-init="true">
+    </bean>
+    <bean id="registroIvaInvalidatoContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="topicConnectionFactory" />
+        <property name="destination" ref="panjeaDestination" />
+        <property name="messageListener" ref="registroIvaInvalidatoMessageListener" />
+        <property name="messageSelector" value="messageSelector='registroIvaInvalidato'"></property>
+        <property name="autoStartup" value="true"></property>
+    </bean>
+    <bean id="registroIvaInvalidatoMessageListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="registroIvaInvalidatoMessageDelegate" />
+        <!-- we don't want automatic message context extraction -->
+        <property name="messageConverter">
+            <null />
+        </property>
+    </bean>
+    <bean id="registroIvaInvalidatoMessageDelegate" class="it.eurotn.panjea.contabilita.rich.jms.RegistroIvaInvalidatoMessageDelegate" singleton="false" lazy-init="true">
+    </bean>
+    <bean class="it.eurotn.panjea.rich.factory.table.JXTableFactory" id="jXTableFactory">
+        <property name="cellRenderers">
+            <map>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.contabilita.domain.SottoConto</value>
+                    </key>
+                    <bean class="it.eurotn.panjea.contabilita.rich.factory.table.CustomSottoContoCellRenderer"></bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaContabilita"/>
+           	</list>
+        </property>
+    </bean>
+
+    <bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaContabilita">
+	    <property name="versione" value=""/>
+	    <property name="nome" value="panjeaContabilita"/>
+	    <property name="descrizione" value="Modulo panjea contabilità"/>
+	    <property name="rulesSource" value="it.eurotn.panjea.contabilita.rich.rules.ContabilitaPluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+
+</beans>

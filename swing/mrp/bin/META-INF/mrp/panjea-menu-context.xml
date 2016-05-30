@@ -1,0 +1,12 @@
+
+<beans>
+	    <bean id="ordiniMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="ordiniMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:gestionemrp</value>
+				<value>openMrpResultCommand</value>
+			</list>
+		</property>
+	</bean>
+</beans>

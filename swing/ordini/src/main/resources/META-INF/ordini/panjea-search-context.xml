@@ -1,0 +1,50 @@
+
+ <!DOCTYPE beans SYSTEM "spring-beans.dtd">
+<beans>
+
+	<bean id="searchObjectFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+				 <entry value="tipoAreaOrdineSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.ordini.domain.documento.TipoAreaOrdine</value>
+                	</key>
+                </entry>
+                <entry value="areaOrdineRicercaSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.ordini.util.AreaOrdineRicerca</value>
+                	</key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="tipoAreaOrdineSearchObject" class="it.eurotn.panjea.ordini.rich.search.TipoAreaOrdineSearchObject" singleton="false" lazy-init="true">
+    	<property name="ordiniDocumentoBD">
+    		<ref bean="ordiniDocumentoBD"/>
+    	</property>
+    	<property name="editObject" value="true"/>
+    	<property name="columns">
+    		<list>
+    			<value>tipoDocumento.codice</value>
+    			<value>tipoDocumento.descrizione</value>
+    		</list>
+    	</property>
+    </bean>
+    
+    	<bean id="areaOrdineRicercaSearchObject" class="it.eurotn.panjea.ordini.rich.search.AreaOrdineRicercaSearchObject" singleton="false" lazy-init="true">
+    	<property name="ordiniDocumentoBD">
+    		<ref bean="ordiniDocumentoBD"/>
+    	</property>
+    	<property name="editObject" value="true"/>
+    	<property name="columns">
+    		<list>
+    			<value>documento.codice.codice</value>
+    			<value>documento.tipoDocumento.codice</value>
+    			<value>documento.dataDocumento</value>
+    		</list>
+    	</property>
+    </bean>
+</beans>

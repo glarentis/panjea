@@ -1,0 +1,7 @@
+ 
+<beans>
+	<bean id="openProtocolliCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openProtocolliCommand"></property>
+		<property name="openString" value="protocolliEditor"></property>
+	</bean>
+</beans>

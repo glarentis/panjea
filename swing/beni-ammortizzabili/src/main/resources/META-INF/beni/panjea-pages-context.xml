@@ -1,0 +1,356 @@
+
+<beans>
+    <bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+        <property name="viewProperties">
+            <map>
+                <entry key="tabPanel">
+                    <list>
+                        <ref bean="beniAmmortizzabiliMenu"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="tabelleBeniEditor">
+                    <key>
+                        <value type="java.lang.String">tabelleBeniEditor</value>
+                    </key>
+                </entry>
+                
+                <entry value="simulazioneEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.Simulazione</value>
+                    </key>
+                </entry>
+                
+                <!-- Editor per il bene ammortamento -->
+                <entry value="beneAmmortamentoEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.BeneAmmortizzabile</value>
+                    </key>
+                </entry>
+                
+                <entry value="preferenzeBeniEditor">
+					<key>
+						<value type="java.lang.String">preferenzeBeniEditor</value>
+					</key>
+				</entry>                
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="searchFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+        <property name="searchResultMap">
+            <map>
+                <!-- Ricerca per i beni ammortamento -->
+                <entry value-ref="searchResultBeniAmmortizzabili">
+                    <key>
+                        <value type="java.lang.String">it.eurotn.panjea.beniammortizzabili2.domain.BeneAmmortizzabile</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- Pagina dell'azienda per la gestione delle tabelle ministeriali -->
+    <bean id="tabelleMinisterialiPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.tabelleministeriali.TabelleMinisterialiPage" singleton="false">
+        <constructor-arg index="0" type="java.lang.String" value="tabelleMinisterialiPage">
+        </constructor-arg>
+        <constructor-arg index="1" type="it.eurotn.panjea.beniammortizzabili.rich.bd.IBeniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="tipologieEliminazioneTablePage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.tabelle.TipologieEliminazioneTablePage" singleton="false">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+            <ref bean="tipologiaEliminazionePage"/>
+        </property>
+    </bean>
+    
+    <bean id="tipologiaEliminazionePage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.tabelle.TipologiaEliminazionePage" singleton="false">
+        <constructor-arg index="0" type="java.lang.String" value="tipologiaEliminazionePage" />
+        <constructor-arg index="1" type="it.eurotn.panjea.beniammortizzabili.rich.bd.IBeniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </constructor-arg>		
+    </bean>	
+    
+    <bean id="tabelleBeniEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">tabelleBeniEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:tabelleBeni</value>
+                        <value>ubicazioniTablePage</value>	
+                        <value>tipologieEliminazioneTablePage</value>
+                        <value>tabelleMinisterialiPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">tabelleBeniEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="simulazioneEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.beniammortizzabili.rich.editors.simulazioni.SimulazioneEditor</value>
+		</property>
+	</bean>
+    
+    
+    <!-- Editor per il bene ammortizzabile -->
+    <bean id="beneAmmortamentoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">beneAmmortamentoEditorPage</value>
+                </entry>	
+                <entry key="idPages">
+                    <list>
+                        <value>group:beneAmmortamento</value>
+                        <value>datiBeneAmmortamentoPage</value>	
+                        <value>quoteFiscaliCompositePage</value>
+                        <value>valutazioniBeneTablePage</value>
+                        <value>venditeBeneTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">beneAmmortamentoEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="datiBeneAmmortamentoPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.DatiBeneAmmortamentoPage" singleton="false">
+        <property name="idNuovoBeneCommand" value="newBeneAmmortizzabileCommand"></property>
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="showTitlePane">
+			<value>false</value>
+		</property>
+    </bean>
+    
+    <bean id="figliBeneAmmortizzabileTablePage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.FigliBeneAmmortizzabileTablePage" singleton="false">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+    </bean>
+    
+    <bean id="quoteFiscaliCompositePage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.QuoteFiscaliCompositePage" singleton="false">
+    	<property name="dialogPages">
+    		<list>
+    			<value>quoteFiscaliTablePage</value>
+    			<value>quoteFiscaliNonConsolidateTablePage</value>
+    		</list>
+    	</property>
+    </bean>
+    
+    <bean id="quoteFiscaliTablePage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.QuoteFiscaliTablePage" singleton="false">
+    	 <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+    </bean>
+    
+    <bean id="quoteFiscaliNonConsolidateTablePage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.QuoteFiscaliNonConsolidateTablePage" singleton="false">
+    	 <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.ValutazioniBeneTablePage" id="valutazioniBeneTablePage" singleton="false">
+        <constructor-arg index="0" type="it.eurotn.panjea.beniammortizzabili.rich.bd.IBeniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </constructor-arg>
+        <property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+            <ref bean="valutazioneBenePage"/>
+        </property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.ValutazioneBenePage" id="valutazioneBenePage" singleton="false">
+        <constructor-arg index="0" type="it.eurotn.panjea.beniammortizzabili.rich.bd.IBeniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.VenditeBeneTablePage" id="venditeBeneTablePage" singleton="false">
+        <property name="beniAmmortizzabiliBD">
+        	<ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="editPage">
+            <ref bean="venditaBenePage"/>
+        </property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.VenditaBenePage" id="venditaBenePage" singleton="false">
+        <constructor-arg index="0" type="it.eurotn.panjea.beniammortizzabili2.domain.BeneAmmortizzabile">
+            <bean class="it.eurotn.panjea.beniammortizzabili2.domain.BeneAmmortizzabile" singleton="false"/>
+        </constructor-arg>
+        <constructor-arg index="1" type="it.eurotn.panjea.beniammortizzabili.rich.bd.IBeniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </constructor-arg>		
+    </bean>
+    
+    <bean id="ubicazioniTablePage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.tabelle.UbicazioniTablePage" singleton="false">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+            <ref bean="ubicazionePage"/>
+        </property>
+    </bean>
+    
+    <bean id="ubicazionePage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.tabelle.UbicazionePage" singleton="false">
+        <constructor-arg index="0" type="java.lang.String" value="ubicazionePage"/>
+        <constructor-arg index="1" type="it.eurotn.panjea.beniammortizzabili.rich.bd.IBeniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="searchResultBeniAmmortizzabili" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.beniammortizzabili.rich.search.SearchResultBeneAmmortizzabile</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="beniAmmortizzabiliBD">
+                    <ref bean="beniAmmortizzabiliBD"/>
+                </entry>
+                <entry key="idNewBeneAmmortizzabileCommand" value="newBeneAmmortizzabileCommand"/>
+                <entry key="id">
+                    <value>searchResultBeniAmmortizzabili</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="reportVenditaBeniDialogPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.ReportVenditaBeniDialogPage" singleton="false">
+        <property name="reportId">
+            <value>reportVenditaBeni</value>
+        </property>
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente"/>
+        </property>
+    </bean>
+    
+    <bean id="reportBeniAcquistatiDialogPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.ReportBeniAcquistatiDialogPage" singleton="false">
+        <property name="reportId">
+            <value>reportBeniAnnuali</value>
+        </property>
+        <property name="reportBeniAmmortizzabiliBD">
+            <ref bean="reportBeniAmmortizzabiliBD"/>
+        </property>
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente"/>
+        </property>
+    </bean>
+    
+    <bean id="reportQuoteAnnoDialogPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.ReportQuoteAnnoDialogPage" singleton="false">
+    	<property name="aziendaCorrente">
+            <ref bean="aziendaCorrente"/>
+        </property>
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+    </bean>
+    
+    
+    <bean id="reportAmmortamentiDialogPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.ReportAmmortamentiDialogPage" singleton="false">
+        <property name="reportId">
+            <value>reportAmmortamenti</value>
+        </property>
+        <property name="reportBeniAmmortizzabiliBD">
+            <ref bean="reportBeniAmmortizzabiliBD"/>
+        </property>
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente"/>
+        </property>
+    </bean>
+    
+    <bean id="reportRubricaBeniDialogPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.ReportRubricaBeniDialogPage" singleton="false">
+        <property name="reportBeniAmmortizzabiliBD">
+            <ref bean="reportBeniAmmortizzabiliBD"/>
+        </property>
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="reportId">
+            <value>reportRubricaBeni</value>
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente"/>
+        </property>
+    </bean>
+    
+    <bean id="reportRegistroBeniDialogPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.ReportRegistroBeniDialogPage" singleton="false">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="reportId">
+            <value>reportRegistroBeni</value>
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente"/>
+        </property>
+    </bean>
+    
+    <bean id="preferenzeBeniEditor"	class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">preferenzeBeniEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Preferences</value>
+						<value>beniAmmortizzabiliSettingsPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">preferenzeBeniEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="beniAmmortizzabiliSettingsPage" class="it.eurotn.panjea.beniammortizzabili.rich.editors.settings.BeniAmmortizzabiliSettingsPage" singleton="false">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+    </bean>
+</beans>

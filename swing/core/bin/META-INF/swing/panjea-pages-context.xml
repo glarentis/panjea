@@ -1,0 +1,137 @@
+
+<beans>
+
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="amministrazioneMenu" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="preferencesEditor">
+					<key>
+						<value type="java.lang.String">preferencesEditor</value>
+					</key>
+				</entry>
+				<entry value="backupEditor">
+					<key>
+						<value type="java.lang.String">backupEditor</value>
+					</key>
+				</entry>
+				<entry value="panjeaRssEditor">
+					<key>
+						<value type="java.lang.String">panjeaRssEditor</value>
+					</key>
+				</entry>
+				<entry value="preferenceDMSEditor">
+					<key>
+						<value type="java.lang.String">preferenceDMSEditor</value>
+					</key>
+				</entry>
+				<entry value="queryEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.querybuilder.domain.EntitaQuerableMetaData</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="preferencesEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">preferencesEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>preferencesTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">preferencesEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="preferencesTablePage"
+		class="it.eurotn.panjea.rich.editors.preference.PreferencesTablePage"
+		singleton="false">
+		<property name="preferenceBD">
+			<ref bean="preferenceBD" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="preferencePage" />
+		</property>
+	</bean>
+
+	<bean id="preferencePage" class="it.eurotn.panjea.rich.editors.preference.PreferencePage"
+		singleton="false">
+		<property name="preferenceBD">
+			<ref bean="preferenceBD" />
+		</property>
+	</bean>
+	
+	<bean id="backupEditor"
+        class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.backup.BackupEditor</value>
+        </property>        
+    </bean>
+    
+    <bean id="panjeaRssEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.rss.PanjeaRssEditor</value>
+        </property>        
+    </bean>
+    
+    <bean id="queryEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.query.QueryEditor</value>
+        </property>        
+    </bean>
+    
+    <bean id="preferenceDMSEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">preferenceDMSEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>dmsSettingsPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">preferenceDMSEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+    <bean id="dmsSettingsPage" class="it.eurotn.panjea.rich.editors.dms.DmsSettingsPage"
+		singleton="false">
+		<property name="dmsBD">
+			<ref bean="dmsBD" />
+		</property>
+	</bean>
+	
+</beans>

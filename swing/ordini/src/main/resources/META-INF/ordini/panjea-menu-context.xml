@@ -1,0 +1,28 @@
+
+ <!DOCTYPE beans SYSTEM "spring-beans.dtd">
+<beans>
+
+	<bean id="ordiniMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="ordiniMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:ordini:documento</value>
+				<value>newAreaOrdiniCommand</value>
+				<value>openRicercaAreaOrdineCommand</value>
+                <value>openOrdiniImportatiCommand</value>
+                <value>openRicercaProduzioneCommand</value>
+
+                <value>group:ordini:distintaCarico</value>
+				<value>openEvasioneOrdineCommand</value>
+                <value>openDistinteCaricoCommand</value>
+
+				<value>group:ordini:statistiche</value>
+				<value>openMovimentazioneMagazzinoOrdiniCommand</value>				
+
+				<value>group:ordini:tabelleOrdini</value>
+				<value>openPreferenzeOrdiniCommand</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

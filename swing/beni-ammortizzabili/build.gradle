@@ -1,0 +1,6 @@
+dependencies {
+    provided	(project(':ear:ejb')){ transitive=false}
+    provided	(project(':ear:beni-ammortizzabili')){ transitive=false}
+    provided	project(':swing:core')
+    provided	project(':swing:contabilita')
+}

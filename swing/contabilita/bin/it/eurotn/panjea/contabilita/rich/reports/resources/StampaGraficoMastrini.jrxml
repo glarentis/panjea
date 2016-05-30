@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="StampaGraficoMastrini"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="842"
+		 pageHeight="595"
+		 columnWidth="782"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<subDataset name="prova" >
+
+
+		<field name="importoDare" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[importoDare]]></fieldDescription>
+		</field>
+		<field name="importoAvere" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[importoAvere]]></fieldDescription>
+		</field>
+		<field name="dataRegistrazione" class="java.util.Date">
+			<fieldDescription><![CDATA[dataRegistrazione]]></fieldDescription>
+		</field>
+
+	</subDataset>
+
+	<parameter name="employeeChart" isForPrompting="false" class="java.awt.Image"/>
+
+	<field name="dataRegistrazione" class="java.util.Date">
+		<fieldDescription><![CDATA[dataRegistrazione]]></fieldDescription>
+	</field>
+	<field name="importoAvere" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[importoAvere]]></fieldDescription>
+	</field>
+	<field name="importoDare" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[importoDare]]></fieldDescription>
+	</field>
+
+	<variable name="totDare" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoData" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoDare}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totAvere" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoData" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoAvere}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+
+		<group  name="gruppoData" >
+			<groupExpression><![CDATA[$F{dataRegistrazione}]]></groupExpression>
+			<groupHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="284"  isSplitAllowed="true" >
+				<bar3DChart>
+					<chart evaluationTime="Report"  hyperlinkTarget="Self" >
+					<reportElement
+						x="24"
+						y="15"
+						width="746"
+						height="264"
+						key="element-1"
+						isRemoveLineWhenBlank="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+						<chartLegend textColor="#000000" backgroundColor="#FFFFFF" >
+					</chartLegend>
+					</chart>
+					<categoryDataset>
+						<dataset >
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA["Dare"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{dataRegistrazione}]]></categoryExpression>
+							<valueExpression><![CDATA[$V{totDare}]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+						<categorySeries>
+							<seriesExpression><![CDATA["Avere"]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{dataRegistrazione}]]></categoryExpression>
+							<valueExpression><![CDATA[$V{totAvere}]]></valueExpression>
+				<itemHyperlink >
+				</itemHyperlink>
+						</categorySeries>
+					</categoryDataset>
+					<bar3DPlot isShowLabels="true" >
+						<plot >
+							<seriesColor seriesOrder="0" color="#00CC33"/>
+							<seriesColor seriesOrder="1" color="#00CCCC"/>
+</plot>
+					<categoryAxisLabelExpression><![CDATA["Data"]]></categoryAxisLabelExpression>
+						<categoryAxisFormat>
+							<axisFormat >
+							</axisFormat>
+						</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA["Euri"]]></valueAxisLabelExpression>
+						<valueAxisFormat>
+							<axisFormat >
+							</axisFormat>
+						</valueAxisFormat>
+					</bar3DPlot>
+				</bar3DChart>
+			</band>
+		</summary>
+</jasperReport>

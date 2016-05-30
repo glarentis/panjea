@@ -1,0 +1,276 @@
+
+<beans>    
+    
+      <bean id="securityControllerManager" class="org.springframework.richclient.security.support.DefaultSecurityControllerManager">
+        <property name="securityControllerMap">
+            <map>
+            	<entry key="depositiSedeAziendaTablePage.controller"><ref bean="modificaDepositiSedeAziendaTablePageController"/></entry>
+            	<entry key="sediAziendaTablePage.controller"><ref bean="modificaSediAziendaController"/></entry>
+            	<entry key="datiAziendaPage.controller"><ref bean="modificaDatiAziendaPageController"/></entry>
+            	<entry key="rapportoAziendaPage.controller"><ref bean="modificaRapportoAziendaPageController"/></entry>
+            	<entry key="rapportiAziendaTablePage.controller"><ref bean="modificaRapportoAziendaPageController"/></entry>
+            	<entry key="nazionePage.controller"><ref bean="modificaDatiGeograficiController"/></entry>
+        		<entry key="livelloAmministrativo1Page.controller"><ref bean="modificaDatiGeograficiController"/></entry>
+        		<entry key="livelloAmministrativo2Page.controller"><ref bean="modificaDatiGeograficiController"/></entry>
+        		<entry key="livelloAmministrativo3Page.controller"><ref bean="modificaDatiGeograficiController"/></entry>
+        		<entry key="livelloAmministrativo4Page.controller"><ref bean="modificaDatiGeograficiController"/></entry>
+        		<entry key="localitaPage.controller"><ref bean="modificaDatiGeograficiController"/></entry>
+        		<entry key="capPage.controller"><ref bean="modificaDatiGeograficiController"/></entry>
+        		<entry key="zonaGeograficaPage.controller"><ref bean="modificaDatiGeograficiController"/></entry>
+        		
+        		<entry key="mansionePage.controller"><ref bean="modificaTipologieController"/></entry>
+        		<entry key="caricaPage.controller"><ref bean="modificaTipologieController"/></entry>
+        		<entry key="tipoSedeEntitaPage.controller"><ref bean="modificaTipologieController"/></entry>
+        		<entry key="formaGiuridicaPage.controller"><ref bean="modificaTipologieController"/></entry>
+        		<entry key="linguaPage.controller"><ref bean="modificaTipologieController"/></entry>
+        		<entry key="unitaMisuraPage.controller"><ref bean="modificaTipologieController"/></entry>
+        		
+        		<entry key="codiceIvaPage.controller"><ref bean="modificaCodiciIvaController"/></entry>
+
+        		<entry key="bancaPage.controller"><ref bean="modificaDatiBancariController"/></entry>
+        		<entry key="filialePage.controller"><ref bean="modificaDatiBancariController"/></entry>
+        		<entry key="valutaPage.controller"><ref bean="modificaDatiBancariController"/></entry>
+        		<entry key="cambioValutaPage.controller"><ref bean="modificaDatiBancariController"/></entry>
+        		<entry key="cambiValutaStoricoTablePage.controller"><ref bean="modificaDatiBancariController"/></entry>
+        		
+        		<entry key="categoriaRatePage.controller"><ref bean="modificaCodiciPagamentiController"/></entry>
+        		
+        		<entry key="strutturaPartitePage.controller"><ref bean="modificaCodiciPagamentiController"/></entry>
+        		
+        		<entry key="rigaStrutturaPage.controller"><ref bean="modificaCodiciPagamentiController"/></entry>
+        		<entry key="tipoDocumentoPage.controller"><ref bean="modificaTipoDocumentoController"/></entry>
+        		<entry key="searchResultTipiDocumento.controller"><ref bean="modificaSearchResultTipiDocumentoController"/></entry>
+        		
+        		<!-- Gestione clienti-->
+        		<entry key="anagraficaPageCliente.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="clienteEditorPage.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="searchResultClienti.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="altriDatiClientePage.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="noteClientePage.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="contattiSedeEntitaClienteTablePage.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="sediEntitaTablePageCliente.controller"><ref bean="modificaSedeClienteController"/></entry>
+        		<entry key="sedeEntitaClientePage.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="rapportiBancariClienteSedeEntitaTablePage.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="noteSedeClienteEntitaPage.controller"><ref bean="modificaClientiController"/></entry>
+        		<entry key="datiCommercialiClienteSedeEntitaPage.controller"><ref bean="modificaDatiCommercialiClienteController"/></entry>
+        		<entry key="rapportoBancarioClienteSedeEntitaPage.controller"><ref bean="modificaSedeClienteController"/></entry>
+        		
+        		
+        		<!-- Gestione clienti potenziale-->
+        		<entry key="clientePotenzialeEditorPage.controller"><ref bean="modificaClientiPotenzialeController"/></entry>
+        		<entry key="searchResultClientiPotenziali.controller"><ref bean="modificaClientiPotenzialeController"/></entry>
+        		<entry key="anagraficaPageClientePotenziale.controller"><ref bean="modificaClientiPotenzialeController"/></entry>
+        		<entry key="contattiSedeEntitaClientePotenzialeTablePage.controller"><ref bean="modificaClientiPotenzialeController"/></entry>
+        		<entry key="sediEntitaClientePotenzialeTablePage.controller"><ref bean="modificaSedeClientePotenzialeController"/></entry>
+        		<entry key="sedeEntitaClientePotenzialePage.controller"><ref bean="modificaClientiPotenzialeController"/></entry>
+        		<entry key="rapportiBancariClientePotenzialeSedeEntitaTablePage.controller"><ref bean="modificaClientiPotenzialeController"/></entry>
+        		<entry key="noteSedeClientePotenzialeEntitaPage.controller"><ref bean="modificaClientiPotenzialeController"/></entry>
+        		<entry key="datiCommercialiClientiPotenzialeSedeEntitaPage.controller"><ref bean="modificaDatiCommercialiClientePotenzialeController"/></entry>
+        		<entry key="sediEntitaClientePotenzialeCompositePage.controller"><ref bean="modificaSedeClientePotenzialeController"/></entry>
+        		<entry key="rapportoBancarioClientePotenzialeSedeEntitaPage.controller"><ref bean="modificaSedeClientePotenzialeController"/></entry>
+        		
+        		
+        		
+        		
+        		
+        		<!-- Gestione fornitore-->
+        		<entry key="anagraficaPageFornitore.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="fornitoreEditorPage.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="altriDatiFornitorePage.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="noteFornitorePage.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="contattiSedeFornitoreEntitaTablePage.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="sediEntitaFornitoreTablePage.controller"><ref bean="modificaSedeFornitoreController"/></entry>
+        		<entry key="sedeEntitaFornitorePage.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="rapportiBancariFornitoreSedeEntitaTablePage.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="noteSedeFornitoreEntitaPage.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="datiCommercialiFornitoreSedeEntitaPage.controller"><ref bean="modificaDatiCommercialiFornitoreController"/></entry>
+        		<entry key="searchResultFornitori.controller"><ref bean="modificaFornitoreController"/></entry>
+        		<entry key="sediEntitaFornitoreCompositePage.controller"><ref bean="modificaSedeFornitoreController"/></entry>
+        		<entry key="rapportoBancarioFornitoreSedeEntitaPage.controller"><ref bean="modificaSedeFornitoreController"/></entry>
+				
+        		<!-- Gestione vettore-->
+        		<entry key="searchResultVettori.controller"><ref bean="modificaVettoreController"/></entry>
+        		<entry key="vettoreEditorPage.controller"><ref bean="modificaVettoreController"/></entry>
+        		<entry key="anagraficaPageVettore.controller"><ref bean="modificaVettoreController"/></entry>
+        		<entry key="contattiSedeVettoreEntitaTablePage.controller"><ref bean="modificaVettoreController"/></entry>
+        		<entry key="sediEntitaVettoreTablePage.controller"><ref bean="modificaSedeVettoreController"/></entry>
+        		<entry key="sedeEntitaVettorePage.controller"><ref bean="modificaVettoreController"/></entry>
+        		<entry key="rapportiBancariVettoreSedeEntitaTablePage.controller"><ref bean="modificaVettoreController"/></entry>
+        		<entry key="noteSedeVettoreEntitaPage.controller"><ref bean="modificaVettoreController"/></entry>
+        		<entry key="datiCommercialiVettoreSedeEntitaPage.controller"><ref bean="modificaDatiCommercialiVettoreController"/></entry>
+        		<entry key="sediEntitaVettoreCompositePage.controller"><ref bean="modificaSedeVettoreController"/></entry>
+        		<entry key="rapportoBancarioVettoreSedeEntitaPage.controller"><ref bean="modificaSedeVettoreController"/></entry>
+        		
+        		
+<!--        		 Gestione sede-->
+<!--        		<entry key="sediEntitaTablePage.controller"><ref bean="modificaSedeEntitaPageController"/></entry>-->
+<!--        		<entry key="noteSedeEntitaPage.controller"><ref bean="modificaSedeEntitaPageController"/></entry>-->
+<!--        		<entry key="rapportiBancariSedeEntitaTablePage.controller"><ref bean="modificaSedeEntitaPageController"/></entry>-->
+<!--        		<entry key="rapportoBancarioSedeEntitaPage.controller"><ref bean="modificaSedeEntitaPageController"/></entry> -->
+<!--        		<entry key="sedeEntitaPage.controller"><ref bean="modificaSedeEntitaPageController"/></entry>-->
+<!--        		-->
+	        	 
+            </map>
+        </property>
+     </bean>
+      <bean id="visualizzaDatiCommercialiVettoreController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaDatiCommercialiVettore"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+		
+	</bean> <bean id="visualizzaDatiCommercialiFornitoreController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaDatiCommercialiFornittore"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+		
+	</bean> <bean id="visualizzaDatiCommercialiClientePotenzialeController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaDatiCommercialiClientePotenziale"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+     
+     
+     
+     <bean id="visualizzaDatiCommercialiClienteController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaDatiCommercialiCliente"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+    <bean id="modificaDatiCommercialiVettoreController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDatiCommercialiVettore"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+     <bean id="modificaSedeVettoreController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSedeVettore"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+     <bean id="modificaVettoreController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaVettore"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+     <bean id="modificaDatiCommercialiFornitoreController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDatiCommercialiFornittore"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+     <bean id="modificaSedeFornitoreController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSedeFornittore"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+     <bean id="modificaFornitoreController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaFornittore"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaDatiCommercialiClientePotenzialeController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDatiCommercialiClientePotenziale"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaSedeClientePotenzialeController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSedeClientePotenziale"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaClientiPotenzialeController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaClientePotenziale"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaDatiCommercialiClienteController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDatiCommercialiCliente"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaSedeClienteController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSedeCliente"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaDatiCommercialiSedeEntitaPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDatiCommerciali"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaSedeEntitaPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSedeEntitaPage"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="visualizzaDaticommercialiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaDaticommerciali"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaClientiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaClienti"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaDepositiSedeAziendaTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDepositiAzienda"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaSediAziendaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSediAzienda"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaRapportoAziendaPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaRapportoAzienda"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaDatiAziendaPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDatiAzienda"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaSearchResultTipiDocumentoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSearchResultTipiDocumento"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+    <bean id="modificaCodiciIvaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCodiciIva"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+    <bean id="modificaDatiGeograficiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDatiGeografici"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+    <bean id="modificaTipologieController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipologie"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaDatiBancariController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaDatiBancari"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="modificaCodiciPagamentiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCodiciPagamenti"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="modificaTipoDocumentoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipoDocumento"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+    <bean id="modificaCambiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCambi"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+    
+    
+</beans>

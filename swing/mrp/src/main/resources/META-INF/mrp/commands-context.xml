@@ -1,0 +1,11 @@
+ 
+<beans>
+
+	<bean id="openMrpResultCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openMrpResultCommand" />
+		<property name="openClassName"
+			value="it.eurotn.panjea.mrp.util.ParametriMrpRisultato" />
+	</bean>
+
+
+</beans>

@@ -1,0 +1,14 @@
+
+<beans>	
+	
+	<bean id="anagraficaMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">		
+		<property name="commands">
+			<list>				
+				<value>group:anagrafica:agente</value>
+				<value>newAgenteCommand</value>
+				<value>searchAgentiCommand</value>
+           </list>
+		</property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,2997 @@
+
+ <!DOCTYPE beans SYSTEM "spring-beans.dtd">
+<beans>
+	<import resource="panjea-context.xml" />
+	<import resource="panjea-menu-context.xml" />
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="magazzinoMenu" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- searchFactory -->
+	<bean id="searchFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+		<property name="searchResultMap">
+			<map>
+				<entry value-ref="searchResultListini">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.magazzino.domain.Listino</value>
+					</key>
+				</entry>
+				<entry value-ref="searchResultContratti">
+					<key>
+						<value type="java.lang.String">Contratto</value>
+					</key>
+				</entry>
+				<entry value-ref="searchResultInventariArticoli">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.magazzino.util.InventarioArticoloDTO</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="categorieEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.ArticoloCategoriaDTO</value>
+					</key>
+				</entry>
+				<entry value="listinoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.Listino</value>
+					</key>
+				</entry>
+				<entry value="manutenzioneListinoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaManutenzioneListino</value>
+					</key>
+				</entry>
+				<entry value="listinoTipoMezzoZonaGeograficaEditor">
+					<key>
+						<value type="java.lang.String">listinoTipoMezzoZonaGeograficaEditor</value>
+					</key>
+				</entry>
+				<entry value="categorieContabiliMagazzinoEditor">
+					<key>
+						<value type="java.lang.String">categorieContabiliMagazzinoEditor</value>
+					</key>
+				</entry>
+				<entry value="tabelleGeneraliMagazzinoEditor">
+					<key>
+						<value type="java.lang.String">tabelleGeneraliMagazzinoEditor</value>
+					</key>
+				</entry>
+				<entry value="contrattoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.Contratto</value>
+					</key>
+				</entry>
+				<entry value="areaMagazzinoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.AreaMagazzinoFullDTO</value>
+					</key>
+				</entry>
+				<entry value="areaMagazzinoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.documento.AreaMagazzino</value>
+					</key>
+				</entry>
+				<entry value="ricercaAreaMagazzinoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.ParametriRicercaAreaMagazzino</value>
+					</key>
+				</entry>
+				<entry value="valorizzazioneMagazzinoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.ParametriRicercaValorizzazione</value>
+					</key>
+				</entry>
+				<entry value="movimentazioneMagazzinoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.ParametriRicercaMovimentazione</value>
+					</key>
+				</entry>
+				<entry value="movimentazioneArticoloEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.ParametriRicercaMovimentazioneArticolo</value>
+					</key>
+				</entry>
+				<entry value="validazioneRigheEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRegoleValidazioneRighe</value>
+					</key>
+				</entry>
+				<entry value="verificaPrezzoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.rich.editors.verificaprezzo.ParametriCalcoloPrezziPM</value>
+					</key>
+				</entry>
+				<entry value="stampaEtichetteArticoloEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.etichetta.ParametriStampaEtichetteArticolo</value>
+					</key>
+				</entry>
+				<entry value="preferenzeMagazzinoEditor">
+					<key>
+						<value type="java.lang.String">preferenzeMagazzinoEditor</value>
+					</key>
+				</entry>
+				<entry value="fatturazioneEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaFatturazione</value>
+					</key>
+				</entry>
+				<entry value="fatturazioniEditor">
+					<key>
+						<value type="java.lang.String">fatturazioniEditor</value>
+					</key>
+				</entry>
+				<entry value="fatturazioniEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.DatiGenerazione</value>
+					</key>
+				</entry>
+				<entry value="gestioneRifatturazioneEditor">
+					<key>
+						<value type="java.lang.String">gestioneRifatturazioneEditor</value>
+					</key>
+				</entry>
+				<entry value="sincronizzazioneDatawarehouseEditor">
+					<key>
+						<value type="java.lang.String">sincronizzazioneDatawarehouse</value>
+					</key>
+				</entry>
+				<entry value="contabilizzazioneExceptionEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.service.exception.ContabilizzazioneException</value>
+					</key>
+				</entry>
+				<entry value="contabilizzazioneAreeMagazzinoEditor">
+					<key>
+						<value type="java.lang.String">contabilizzazioneAreeMagazzinoEditor</value>
+					</key>
+				</entry>
+				<entry value="rendicontazioneEditor">
+					<key>
+						<value type="java.lang.String">rendicontazioneEditor</value>
+					</key>
+				</entry>
+				<entry value="anagraficaRendicontazioneEditor">
+					<key>
+						<value type="java.lang.String">anagraficaRendicontazioneEditor</value>
+					</key>
+				</entry>
+				<entry value="inventarioArticoloEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.InventarioArticoloDTO</value>
+					</key>
+				</entry>
+				<entry value="raggrupamentoArticoliEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.RaggruppamentoArticoli</value>
+					</key>
+				</entry>
+				<entry value="prospettoContrattiEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.ContrattoProspettoDTO</value>
+					</key>
+				</entry>
+				<entry value="riepilogoArticoloEditor">
+					<key>
+						<value type="java.lang.String">riepilogoArticoloEditor</value>
+					</key>
+				</entry>
+				<entry value="omaggiEditor">
+					<key>
+						<value type="java.lang.String">omaggiEditor</value>
+					</key>
+				</entry>
+				<entry value="confrontoListinoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaConfrontoListino</value>
+					</key>
+				</entry>
+				<entry value="schedeArticoloEditor">
+					<key>
+						<value type="java.lang.String">schedeArticoloEditor</value>
+					</key>
+				</entry>
+				<entry value="creazioneSchedeArticoliEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriCreazioneSchedeArticoli</value>
+					</key>
+				</entry>
+				<entry value="elaborazioniSchedeArticoloEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaElaborazioni</value>
+					</key>
+				</entry>
+				<entry value="importazioniAreeMagazzinoEditor">
+					<key>
+						<value type="java.lang.String">importazioniAreeMagazzinoEditor</value>
+					</key>
+				</entry>
+				<entry value="stampaContrattiEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaStampaContratti</value>
+					</key>
+				</entry>
+				<entry value="valorizzazioneDistinteEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriValorizzazioneDistinte</value>
+					</key>
+				</entry>
+				<entry value="preFatturazioneEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.PreFatturazioneDTO</value>
+					</key>
+				</entry>
+				<entry value="indiceRotazioneEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.util.parametriricerca.ParametriCalcoloIndiciRotazioneGiacenza</value>
+					</key>
+				</entry>
+				<entry value="spedizioneMovimentiEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.rich.editors.documenti.spedizione.SpedizioneMovimenti</value>
+					</key>
+				</entry>
+				<entry value="listinoPrezziEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.manager.listinoprezzi.ParametriListinoPrezzi</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- begin editors -->
+	<bean id="categorieEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.CategoriaArticoloEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">categorieEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>categorieTreeTablePage</value>
+						<value>articoliTablePage</value>
+						<value>articoloPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">categorieEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="categorieTreeTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.CategorieTreeTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="categoriaPage">
+			<ref bean="categoriaPage" />
+		</property>
+	</bean>
+	<bean id="categoriaPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.CategoriaPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+	<bean id="articoliTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.GestioneArticoliTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="articoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoloPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="pagineCollegate">
+			<list>
+				<ref bean="allegatiArticoloPage" />
+				<ref bean="codiciArticoloEntitaTablePage" />
+				<ref bean="articoliDepositoTablePage" />
+				<ref bean="statisticheArticoloPage" />
+				<ref bean="righeListinoArticoloTablePage" />
+				<ref bean="articoliAlternativiPage" />
+				<ref bean="articoloComponentiPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="allegatiArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.allegati.AllegatiArticoloPage"
+		singleton="false" lazy-init="true">
+		<property name="dmsBD">
+			<ref bean="dmsBD" />
+		</property>
+	</bean>
+
+	<bean id="articoliDepositoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.articolodeposito.ArticoliDepositoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="articoloDepositoPage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="articoloDepositoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.articolodeposito.ArticoloDepositoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="statisticheArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.StatisticheArticoloPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+
+	<bean id="articoloComponentiPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.componenti.ArticoloComponentiPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="dialogPages">
+			<list>
+				<value>distintaGraphPage</value>
+				<value>distintaConfigurazionePage</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="distintaConfigurazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.componenti.configurazionedistinta.DistintaConfigurazionePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="distintaGraphPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.componenti.DistintaGraphPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="articoliAlternativiPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.alternativi.ArticoliAlternativiCompositePage"
+		singleton="false" lazy-init="true">
+		<property name="dialogPages">
+			<list>
+				<value>articoliAlternativiManualiPage</value>
+				<value>articoliAlternativiRicercaPage</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="articoliAlternativiManualiPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.alternativi.ArticoliAlternativiManualiPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="articoloAlternativoPage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="articoloAlternativoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.alternativi.ArticoloAlternativoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="articoliAlternativiRicercaPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.alternativi.ArticoliAlternativiRicercaPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="righeListinoArticoloTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.RigheListinoArticoloTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="rigaListinoPage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="gestioneRifatturazioneEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">gestioneRifatturazioneEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Rifatturazione</value>
+						<value>gestioneRifatturazionePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">gestioneRifatturazioneEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="gestioneRifatturazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.rifatturazione.GestioneRifatturazionePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="tabelleGeneraliMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tabelleGeneraliMagazzinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Tabelle</value>
+
+						<value>categoriaSedeMagazzinoTablePage</value>
+						<value>categoriaCommercialeArticoloTablePage</value>
+						<value>fasiLavorazioneTablePage</value>
+						<value>formuleTrasformazioneTablePage</value>
+						<value>scontiTablePage</value>
+						<value>tipiAttributoTablePage</value>
+						<value>tipiDocumentoBaseMagazzinoTablePage</value>
+
+						<value>group:trasporto</value>
+						<value>mezziTrasportoTablePage</value>
+						<value>tipiMezzoTrasportoTablePage</value>
+
+						<value>group:datiAccompagnatori</value>
+						<value>aspettiEsterioriTablePage</value>
+						<value>causaliTrasportoTablePage</value>
+						<value>tipiPortoTablePage</value>
+						<value>trasportiCuraTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">tabelleGeneraliMagazzinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="categorieContabiliMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">categorieContabiliMagazzinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:categorieContabili</value>
+						<value>categoriaContabileDepositoTablePage</value>
+						<value>categoriaContabileArticoloTablePage</value>
+						<value>categoriaContabileSedeMagazzinoTablePage</value>
+						<value>sottoContoContabilizzazioneCostiTablePage</value>
+						<value>sottoContoContabilizzazioneRicaviTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">categorieContabiliMagazzinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="tipiAttributoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.TipiAttributoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+	<bean id="categoriaCommercialeArticoloTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriacommerciale.CategoriaCommercialeArticoloTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="categoriaCommercialeArticoloPage" />
+		</property>
+	</bean>
+	<bean id="categoriaCommercialeArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriacommerciale.CategoriaCommercialePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="listinoSediCollegatePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listino.ListinoSediCollegatePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="listinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.editors.listino.ListinoEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">listinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>listinoPage</value>
+						<value>versioniListinoTablePage</value>
+						<value>righeListinoTablePage</value>
+						<value>listinoSediCollegatePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">listinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="listinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listino.ListinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="righeListinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listino.RigheListinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="rigaListinoPage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="rigaListinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listino.RigaListinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="versioniListinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listino.VersioniListinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="editPage">
+			<ref bean="versioneListinoPage" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="versioneListinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listino.VersioneListinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="manutenzioneListinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.editors.manutenzionelistino.ManutenzioneListinoEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">manutenzioneListinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaManutenzioneListinoPage</value>
+						<value>risultatiRicercaManutenzioneListinoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">manutenzioneListinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaManutenzioneListinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.manutenzionelistino.ParametriRicercaManutenzioneListinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="risultatiRicercaManutenzioneListinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.manutenzionelistino.RisultatiRicercaManutenzioneListinoTablePage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.magazzino.rich.bd.IMagazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</constructor-arg>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="fatturazioniEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.FatturazioniEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">fatturazioniEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>fatturazioniTablePage</value>
+						<value>movimentiFatturazioneTablePage</value>
+						<value>anteprimaDocumentoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">fatturazioniEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="fatturazioniTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.FatturazioniTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="anteprimaDocumentoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.AnteprimaDocumentoPage"
+		singleton="false" lazy-init="true">
+		<property name="reportManager">
+			<ref bean="reportManager" />
+		</property>
+	</bean>
+	<bean id="movimentiFatturazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.MovimentiFatturazioneTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="reportManager">
+			<ref bean="reportManager" />
+		</property>
+	</bean>
+	<bean id="fatturazioneEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.editors.fatturazione.FatturazioneEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">fatturazioneEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaFatturazionePage</value>
+						<value>risultatiRicercaFatturazionePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">fatturazioneEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaFatturazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.ParametriRicercaFatturazionePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+	<bean id="risultatiRicercaFatturazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.RisultatiRicercaFatturazioneTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="carrelloFatturazioneTablePage">
+			<ref bean="carrelloFatturazioneTablePage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="carrelloFatturazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.CarrelloFatturazioneTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<!-- page contratti -->
+	<bean id="contrattoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">contrattoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>contrattoPage</value>
+						<value>righeContrattoTablePage</value>
+						<value>contrattoSediPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">contrattoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="contrattoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.contratto.ContrattoPage"
+		singleton="false" lazy-init="true">
+		<property name="contrattoBD">
+			<ref bean="contrattoBD" />
+		</property>
+	</bean>
+	<bean id="righeContrattoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.contratto.RigheContrattoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="editPage">
+			<ref bean="rigaContrattoPage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+		<property name="contrattoBD">
+			<ref bean="contrattoBD" />
+		</property>
+	</bean>
+	<bean id="rigaContrattoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.contratto.RigaContrattoPage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.magazzino.rich.bd.IContrattoBD">
+			<ref bean="contrattoBD" />
+		</constructor-arg>
+		<property name="pluginManager">
+			<ref bean="pluginManager" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="contrattoSediPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.contratto.sedi.ContrattoSediPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="contrattoBD">
+			<ref bean="contrattoBD" />
+		</property>
+	</bean>
+	<!-- end editors -->
+	<bean id="searchResultContratti"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.search.SearchResultContratti</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="contrattoBD">
+					<ref bean="contrattoBD" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="searchResultListini"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.search.SearchResultListini</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="magazzinoAnagraficaBD">
+					<ref bean="magazzinoAnagraficaBD"></ref>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="searchResultInventariArticoli"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.search.SearchResultInventariArticoli</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="magazzinoDocumentoBD">
+					<ref bean="magazzinoDocumentoBD"></ref>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="tipoAreaMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.tipoareamagazzino.TipoAreaMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="defaultController">
+			<ref bean="tipoAreaMagazzinoController" />
+		</property>
+	</bean>
+	<bean id="areaMagazzinoFullDTOPropertyAccessStrategy"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.AreaMagazzinoFullDTOPropertyAccessStrategy"
+		singleton="false" lazy-init="true">
+		<property name="propertyAccessorMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	<!-- controller tipo area magazzino form -->
+	<bean id="tipoAreaMagazzinoController" class="it.eurotn.rich.editors.controllers.DefaultController">
+		<property name="propertiesChange">
+			<map>
+				<entry key="depositoOrigineBloccato">
+					<list>
+						<ref bean="depositoOrigineBloccatoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="depositoDestinazioneBloccato">
+					<list>
+						<ref bean="depositoDestinazioneBloccatoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="richiestaMezzoTrasporto">
+					<list>
+						<ref bean="richiestaMezzoTrasportoPropertyChange" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="richiestaMezzoTrasportoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.tipoareamagazzinoform.RichiestaMezzoTrasportoPropertyChange"
+		singleton="false" lazy-init="true" />
+	<bean id="depositoOrigineBloccatoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.tipoareamagazzinoform.DepositoOrigineBloccatoPropertyChange"
+		singleton="false" lazy-init="true" />
+	<bean id="depositoDestinazioneBloccatoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.tipoareamagazzinoform.DepositoDestinazioneBloccatoPropertyChange"
+		singleton="false" lazy-init="true" />
+	<bean id="tipoDocumentoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>tipoAreaMagazzinoPage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="scontiTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.sconto.ScontiTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="scontoPage" />
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.magazzino.rich.editors.sconto.ScontoPage"
+		id="scontoPage" singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<!-- inizio editors area magazzino -->
+	<bean id="areaMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor"
+		lazy-init="true" singleton="false">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.editors.areamagazzino.AreaMagazzinoEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">areaMagazzinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>areaMagazzinoPage</value>
+						<value>righeMagazzinoTablePage</value>
+						<value>areaMagazzinoIvaTablePage</value>
+						<value>areaMagazzinoAllegatiPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">areaMagazzinoEditor</value>
+				</entry>
+				<entry key="magazzinoDocumentoBD">
+					<ref bean="magazzinoDocumentoBD" />
+				</entry>
+				<entry key="settingsManager">
+					<ref bean="settingManagerLocal" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="areaMagazzinoAllegatiPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.areamagazzino.AreaMagazzinoAllegatiPage"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="areaMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.areamagazzino.AreaMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="defaultController">
+			<ref bean="areaMagazzinoController" />
+		</property>
+	</bean>
+	<bean id="areaMagazzinoRiepilogoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.areamagazzino.AreaMagazzinoRiepilogoPage"
+		singleton="false" lazy-init="true">
+	</bean>
+	<bean id="areaMagazzinoIvaTablePage"
+		class="it.eurotn.panjea.iva.rich.editors.righeiva.RigheIvaTablePage"
+		singleton="false" lazy-init="true">
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="areaMagazzinoRigaIvaPage" />
+		</property>
+		<property name="areaIvaModel">
+			<ref bean="magazzinoAreaIvaModel" />
+		</property>
+	</bean>
+	<bean id="areaMagazzinoRigaIvaPage" class="it.eurotn.panjea.iva.rich.editors.righeiva.RigaIvaPage"
+		singleton="false" lazy-init="true">
+	</bean>
+	<bean id="magazzinoAreaIvaModel"
+		class="it.eurotn.panjea.magazzino.rich.editors.areamagazzino.AreaIvaMagazzinoModel"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+	<bean id="righeMagazzinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.RigheMagazzinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPages">
+			<map>
+				<entry key="it.eurotn.panjea.magazzino.util.RigaArticoloDTO">
+					<ref bean="rigaArticoloPage" />
+				</entry>
+				<entry key="it.eurotn.panjea.magazzino.util.RigaNotaDTO">
+					<ref bean="rigaNotaPage" />
+				</entry>
+				<entry key="it.eurotn.panjea.magazzino.util.RigaTestataDTO">
+					<ref bean="rigaTestataPage" />
+				</entry>
+				<entry key="it.eurotn.panjea.magazzino.util.RigaArticoloDistintaDTO">
+					<ref bean="rigaArticoloPage" />
+				</entry>
+				<entry key="it.eurotn.panjea.magazzino.util.RigaArticoloPadreDTO">
+					<ref bean="rigaArticoloPage" />
+				</entry>
+			</map>
+		</property>
+		<property name="showTitlePane" value="false" />
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+	<bean id="rigaTestataPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.RigaTestataPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+
+	<bean id="righeArticoliComponentiDistintaTablePage"
+		class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.componenti.RigheArticoliComponentiDistintaTablePage"
+		singleton="false" lazy-init="true">
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="rigaArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.RigaArticoloPage"
+		singleton="false" lazy-init="true">
+		<property name="defaultController">
+			<ref bean="rigaArticoloController" />
+		</property>
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="moduloPrezzoBD">
+			<ref bean="moduloPrezzoBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="pluginManager">
+			<ref bean="pluginManager" />
+		</property>
+	</bean>
+
+	<bean id="rigaArticoloController" class="it.eurotn.rich.editors.controllers.DefaultController"
+		singleton="false" lazy-init="true">
+		<property name="propertiesChange">
+			<map>
+				<entry key="prezzoUnitarioReale">
+					<list>
+						<ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="qta">
+					<list>
+						<ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+						<ref bean="rigaArticoloQtaPropertyChange" />
+					</list>
+				</entry>
+				<entry key="variazione1">
+					<list>
+						<ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="variazione2">
+					<list>
+						<ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="variazione3">
+					<list>
+						<ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="variazione4">
+					<list>
+						<ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="agente">
+					<list>
+						<ref bean="rigaArticoloAgentePropertyChange" />
+					</list>
+				</entry>
+				<entry key="tipoOmaggio">
+					<list>
+						<ref bean="rigaArticoloOmaggioPropertyChange" />
+					</list>
+				</entry>
+				<entry key="sconto1Bloccato">
+					<list>
+						<ref bean="rigaArticoloSconto1BloccatoPropertyChange" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="rigaArticoloSconto1BloccatoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.RigaArticoloSconto1BloccatoPropertyChange"
+		singleton="false" lazy-init="true" />
+
+	<bean id="rigaArticoloOmaggioPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.RigaArticoloOmaggioPropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+
+	<bean id="rigaArticoloAgentePropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.RigaArticoloAgentePropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="moduloPrezzoBD">
+			<ref bean="moduloPrezzoBD" />
+		</property>
+	</bean>
+
+	<bean id="rigaArticoloAggiornaPrezzoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.RigaArticoloAggiornaPrezzoPropertyChange"
+		singleton="false" lazy-init="true" />
+
+	<bean id="rigaArticoloQtaPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.RigaArticoloQtaPropertyChange"
+		singleton="false" lazy-init="true" />
+
+	<bean id="rigaNotaPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.RigaNotaPage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+
+	<!-- controller area magazzino -->
+	<bean id="areaMagazzinoController" class="it.eurotn.rich.editors.controllers.DefaultController"
+		singleton="false" lazy-init="true">
+		<property name="propertiesChange">
+			<map>
+				<entry key="areaMagazzino.tipoAreaMagazzino">
+					<list>
+						<ref bean="addebitoSpesePropertyChange"></ref>
+					</list>
+				</entry>
+				<entry key="areaMagazzino.dataRegistrazione">
+					<list>
+						<ref bean="areaMagazzino.dataRegistrazione" />
+					</list>
+				</entry>
+				<entry key="areaMagazzino.tipoAreaMagazzino.tipoDocumento">
+					<list>
+						<ref bean="tipoDocumentoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="areaMagazzino.documento">
+					<list>
+						<ref bean="documentoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="areaContabileLite">
+					<list>
+						<ref bean="documentoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="areaMagazzino.documento.entita">
+					<list>
+						<ref bean="entitaPropertyChange" />
+					</list>
+				</entry>
+				<entry key="areaMagazzino.documento.sedeEntita">
+					<list>
+						<ref bean="sedeEntitaPropertyChange" />
+					</list>
+				</entry>
+				<entry key="areaMagazzino.addebitoSpeseIncasso">
+					<list>
+						<ref bean="speseIncassoPropertyChange" />
+						<!-- <ref bean="addebitoSpesePropertyChange" /> -->
+					</list>
+				</entry>
+				<entry key="areaMagazzino.raggruppamentoBolle">
+					<list>
+						<ref bean="speseIncassoPropertyChange" />
+						<!-- <ref bean="raggruppamentoBolleProperyChange" /> -->
+					</list>
+				</entry>
+				<entry key="areaRate.codicePagamento">
+					<list>
+						<ref bean="speseIncassoPropertyChange" />
+						<ref bean="codicePagamentoPropertyChange" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="areaMagazzino.dataRegistrazione"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.DataRegistrazionePropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="areaDocumentoPropertyPath" value="areaMagazzino"></property>
+		<property name="dataDocLikeDataRegPropertyPath"
+			value="areaMagazzino.tipoAreaMagazzino.dataDocLikeDataReg"></property>
+	</bean>
+	<bean id="documentoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.DocumentoPropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="areaDocumentoPropertyPath" value="areaMagazzino"></property>
+		<property name="tipoAreaDocumentoPropertyPath" value="areaMagazzino.tipoAreaMagazzino"></property>
+	</bean>
+	<!-- -->
+	<bean id="tipoDocumentoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.TipoDocumentoPropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD"></ref>
+		</property>
+		<property name="tipoDocumentoPropertyPath"
+			value="areaMagazzino.tipoAreaMagazzino.tipoDocumento"></property>
+	</bean>
+	<bean id="entitaPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.EntitaPropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="areaDocumentoPropertyPath" value="areaMagazzino"></property>
+	</bean>
+	<bean id="sedeEntitaPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.SedeEntitaPropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD"></ref>
+		</property>
+		<property name="areaDocumentoPropertyPath" value="areaMagazzino"></property>
+	</bean>
+	<bean id="raggruppamentoBolleProperyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.RaggruppamentoBolleProperyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+	<bean id="speseIncassoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.SpeseIncassoPropertyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+	<bean id="addebitoSpesePropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.AddebitoSpesePropertyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+	<bean id="codicePagamentoPropertyChange"
+		class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.CodicePagamentoPropertyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+	<!-- fine editors area magazzino -->
+	<bean id="ricercaAreaMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ricercaAreaMagazzinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaAreaMagazzinoPage</value>
+						<value>risultatiRicercaAreaMagazzinoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ricercaAreaMagazzinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaAreaMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.areamagazzino.ParametriRicercaAreaMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	<bean id="risultatiRicercaAreaMagazzinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.areamagazzino.RisultatiRicercaAreaMagazzinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="preferenzeMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">preferenzeMagazzinoPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:preferenze</value>
+						<value>magazzinoSettingsPage</value>
+						<value>posSettingsPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">preferenzeMagazzinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="listinoTipoMezzoZonaGeograficaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">listinoTipoMezzoZonaGeograficaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>listinoTipoMezzoZonaGeograficaTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">listinoTipoMezzoZonaGeograficaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="magazzinoSettingsPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.settings.MagazzinoSettingsPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="listinoTipoMezzoZonaGeograficaTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listinotipomezzozonageografica.ListinoTipoMezzoZonaGeograficaTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="listinoTipoMezzoZonaGeograficaPage" />
+		</property>
+	</bean>
+	<bean id="listinoTipoMezzoZonaGeograficaPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listinotipomezzozonageografica.ListinoTipoMezzoZonaGeograficaPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="tipiMezzoTrasportoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.tipomezzotrasporto.TipiMezzoTrasportoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="tipoMezzoTrasportoPage" />
+		</property>
+	</bean>
+	<bean id="tipoMezzoTrasportoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.tipomezzotrasporto.TipoMezzoTrasportoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="codiciArticoloEntitaTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.CodiciArticoloEntitaTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="codiceArticoloEntitaPage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="codiceArticoloEntitaPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.articolo.CodiceArticoloEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="mezziTrasportoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.mezzotrasporto.MezziTrasportoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="mezzoTrasportoPage" />
+		</property>
+	</bean>
+	<bean id="mezzoTrasportoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.mezzotrasporto.MezzoTrasportoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="sedeMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.sedimagazzino.SedeMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="datiCommercialiClienteSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="sedeMagazzinoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="datiCommercialiClientePotenzialeSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="sedeMagazzinoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="datiCommercialiFornitoreSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="sedeMagazzinoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="datiCommercialiVettoreSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="sedeMagazzinoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="depositoMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.depositomagazzino.DepositoMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="depositoCompositePage" class="it.eurotn.rich.dialog.TabbedCompositeDialogPage"
+		singleton="false" lazy-init="true">
+		<property name="idPages">
+			<list>
+				<value>datiCommercialiDepositoPage</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="datiCommercialiDepositoPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialideposito.DatiCommercialiDepositoPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+				<ref bean="depositoMagazzinoPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="formuleTrasformazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.formulatrasformazione.FormuleTrasformazioneTablePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="formulaTrasformazionePage" />
+		</property>
+	</bean>
+	<bean id="formulaTrasformazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.formulatrasformazione.FormulaTrasformazionePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="trasportiCuraTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.trasportocura.TrasportiCuraTablePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="trasportoCuraPage" />
+		</property>
+	</bean>
+	<bean id="trasportoCuraPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.trasportocura.TrasportoCuraPage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0" type="java.lang.String"
+			value="trasportoCuraPage">
+		</constructor-arg>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="tipiPortoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.tipoporto.TipiPortoTablePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="tipoPortoPage" />
+		</property>
+	</bean>
+	<bean id="tipoPortoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.tipoporto.TipoPortoPage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0" type="java.lang.String"
+			value="tipoPortoPage">
+		</constructor-arg>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="fasiLavorazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.faselavorazione.FasiLavorazioneTablePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="faseLavorazionePage" />
+		</property>
+	</bean>
+	<bean id="faseLavorazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.faselavorazione.FaseLavorazionePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="categoriaSedeMagazzinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriasede.CategoriaSedeMagazzinoTablePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="categoriaSedeMagazzinoPage" />
+		</property>
+	</bean>
+	<bean id="categoriaSedeMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriasede.CategoriaSedeMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0" type="java.lang.String"
+			value="categoriaSedeMagazzinoPage">
+		</constructor-arg>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="causaliTrasportoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.causaletrasporto.CausaliTrasportoTablePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="causaleTrasportoPage" />
+		</property>
+	</bean>
+	<bean id="causaleTrasportoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.causaletrasporto.CausaleTrasportoPage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0" type="java.lang.String"
+			value="causaleTrasportoPage">
+		</constructor-arg>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="aspettiEsterioriTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.aspettoesteriore.AspettiEsterioriTablePage"
+		lazy-init="true" singleton="false">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="aspettoEsteriorePage" />
+		</property>
+	</bean>
+	<bean id="aspettoEsteriorePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.aspettoesteriore.AspettoEsteriorePage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0" type="java.lang.String"
+			value="aspettoEsteriorePage">
+		</constructor-arg>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="valorizzazioneMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">valorizzazioneMagazzinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaValorizzazionePage</value>
+						<value>risultatiRicercaValorizzazioneMagazzinoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">valorizzazioneMagazzinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaValorizzazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.valorizzazione.ParametriRicercaValorizzazionePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	<bean id="risultatiRicercaValorizzazioneMagazzinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.valorizzazione.RisultatiRicercaValorizzazioneMagazzinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="movimentazioneArticoloEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">movimentazioneArticoloEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaMovimentazioneArticoloPage</value>
+						<value>risultatiRicercaMovimentazioneArticoloTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">movimentazioneArticoloEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="movimentazioneMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">movimentazioneMagazzinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaMovimentazioneMagazzinoPage</value>
+						<value>risultatiRicercaMovimentazioneMagazzinoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">movimentazioneMagazzinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaMovimentazioneArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.movimentazione.ParametriRicercaMovimentazioneArticoloPage"
+		singleton="false" lazy-init="true">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	<bean id="risultatiRicercaMovimentazioneArticoloTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.movimentazione.RisultatiRicercaMovimentazioneArticoloTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="parametriRicercaMovimentazioneMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.movimentazione.ParametriRicercaMovimentazioneMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+	<bean id="risultatiRicercaMovimentazioneMagazzinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.movimentazione.RisultatiRicercaMovimentazioneMagazzinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriacontabile.CategoriaContabileDepositoTablePage"
+		id="categoriaContabileDepositoTablePage" singleton="false" lazy-init="true">
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>true</value>
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="categoriaContabileDepositoPage" />
+		</property>
+	</bean>
+	<bean id="categoriaContabileDepositoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriacontabile.CategoriaContabileDepositoPage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0" type="java.lang.String"
+			value="categoriaContabileDepositoPage">
+		</constructor-arg>
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriacontabile.CategoriaContabileArticoloTablePage"
+		id="categoriaContabileArticoloTablePage" singleton="false" lazy-init="true">
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>true</value>
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="categoriaContabileArticoloPage" />
+		</property>
+	</bean>
+	<bean id="categoriaContabileArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriacontabile.CategoriaContabileArticoloPage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0" type="java.lang.String"
+			value="categoriaContabileArticoloPage">
+		</constructor-arg>
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriacontabile.CategoriaContabileSedeMagazzinoTablePage"
+		id="categoriaContabileSedeMagazzinoTablePage" singleton="false"
+		lazy-init="true">
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>true</value>
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="categoriaContabileSedeMagazzinoPage" />
+		</property>
+	</bean>
+	<bean id="categoriaContabileSedeMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.categoriacontabile.CategoriaContabileSedeMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<constructor-arg index="0" type="java.lang.String"
+			value="categoriaContabileSedeMagazzinoPage">
+		</constructor-arg>
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.magazzino.rich.editors.sottocontocontabilizzazione.SottoContoContabilizzazioneCostiTablePage"
+		id="sottoContoContabilizzazioneCostiTablePage" singleton="false"
+		lazy-init="true">
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>true</value>
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="sottoContoContabilizzazioneCostiPage" />
+		</property>
+	</bean>
+	<bean id="sottoContoContabilizzazioneCostiPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.sottocontocontabilizzazione.SottoContoContabilizzazioneCostiPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.magazzino.rich.editors.sottocontocontabilizzazione.SottoContoContabilizzazioneRicaviTablePage"
+		id="sottoContoContabilizzazioneRicaviTablePage" singleton="false"
+		lazy-init="true">
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>true</value>
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="sottoContoContabilizzazioneRicaviPage" />
+		</property>
+	</bean>
+	<bean id="sottoContoContabilizzazioneRicaviPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.sottocontocontabilizzazione.SottoContoContabilizzazioneRicaviPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+	</bean>
+	<bean id="sincronizzazioneDatawarehouseEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">sincronizzazioneDatawarehouseEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>sincronizzazioneDatawarehousePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">sincronizzazioneDatawarehouseEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="sincronizzazioneDatawarehousePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.datawarehouse.SincronizzazioneDatawarehousePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="validazioneRigheEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">validazioneRigheEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>validazioneRigheTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">validazioneRigheEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="validazioneRigheTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.validazionerighe.ValidazioneRigheTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+	<!-- EDITOR VERIFICA PREZZI -->
+	<bean id="verificaPrezzoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">verificaPrezzoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriVerificaPrezziPage</value>
+						<value>verificaPrezzoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">verificaPrezzoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriVerificaPrezziPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.verificaprezzo.ParametriVerificaPrezziPage"
+		singleton="false" lazy-init="true">
+		<property name="defaultController">
+			<ref bean="parametriVerificaPrezziPageController" />
+		</property>
+	</bean>
+	<bean id="parametriVerificaPrezziPageController" class="it.eurotn.rich.editors.controllers.DefaultController"
+		singleton="false" lazy-init="true">
+		<property name="propertiesChange">
+			<map>
+				<entry key="entita">
+					<list>
+						<bean id="verificaPrezzoentitaPropertyChange"
+							class="it.eurotn.panjea.magazzino.rich.forms.verificaprezzo.EntitaPropertyChange"
+							singleton="false" lazy-init="true">
+							<property name="anagraficaBD">
+								<ref bean="anagraficaBD" />
+							</property>
+						</bean>
+					</list>
+				</entry>
+				<entry key="sedeEntita">
+					<list>
+						<bean id="verificaPrezzoSedeEntitaPropertyChange"
+							class="it.eurotn.panjea.magazzino.rich.forms.verificaprezzo.SedeEntitaPropertyChange"
+							singleton="false" lazy-init="true">
+							<property name="magazzinoDocumentoBD">
+								<ref bean="magazzinoDocumentoBD" />
+							</property>
+						</bean>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="verificaPrezzoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.verificaprezzo.VerificaPrezzoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<!-- FINE EDITOR VERIFICA PREZZI -->
+
+
+	<bean id="listinoPrezziPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.listinoprezzi.ListinoPrezziPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+	<bean id="listinoPrezziEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="enableCache">
+					<value type="java.lang.Boolean">0</value>
+				</entry>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">listinoPrezziEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>listinoPrezziPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">listinoPrezziEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<!-- INIZIO EDITOR STAMPA ETICHETTE -->
+	<bean id="stampaEtichetteArticoloEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="enableCache">
+					<value type="java.lang.Boolean">0</value>
+				</entry>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">stampaEtichetteArticoloEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>stampaEtichetteArticoloTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">stampaEtichetteArticoloEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="stampaEtichetteArticoloTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.etichette.StampaEtichetteArticoloTablePage"
+		singleton="false" lazy-init="true">
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="stampaEtichetteArticoloPage" />
+		</property>
+		<property name="reportManager">
+			<ref bean="reportManager" />
+		</property>
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="layoutStampeManager">
+			<ref bean="layoutStampeManager" />
+		</property>
+		<property name="showTitlePane" value="false" />
+	</bean>
+	<bean id="stampaEtichetteArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.etichette.StampaEtichetteArticoloPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<!-- FINE EDITOR STAMPA ETICHETTE -->
+	<bean id="contabilizzazioneExceptionEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">contabilizzazioneExceptionEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>contabilizzazioneExceptionPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">contabilizzazioneExceptionEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="contabilizzazioneExceptionPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.contabilizzazione.ContabilizzazioneExceptionPage"
+		singleton="false" lazy-init="true">
+	</bean>
+	<bean id="contabilizzazioneAreeMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">contabilizzazioneAreeMagazzinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>contabilizzazioneAreeMagazzinoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">contabilizzazioneAreeMagazzinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="contabilizzazioneAreeMagazzinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.contabilizzazione.ContabilizzazioneAreeMagazzinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoContabilizzazioneBD">
+			<ref bean="magazzinoContabilizzazioneBD" />
+		</property>
+		<property name="reportManager">
+			<ref bean="reportManager" />
+		</property>
+	</bean>
+	<bean id="rendicontazioneEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">rendicontazioneEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaRendicontazionePage</value>
+						<value>risultatiRicercaRendicontazioneTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">rendicontazioneEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaRendicontazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.rendicontazione.ParametriRicercaRendicontazionePage"
+		singleton="false" lazy-init="true">
+	</bean>
+	<bean id="risultatiRicercaRendicontazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.rendicontazione.RisultatiRicercaRendicontazioneTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="anagraficaRendicontazioneEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">anagraficaRendicontazioneEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Tabelle</value>
+						<value>tipiEsportazioneTablePage</value>
+						<value>entitaTipiEsportazioneTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">anagraficaRendicontazioneEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="tipiEsportazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.rendicontazione.anagrafica.TipiEsportazioneTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="tipoEsportazionePage" />
+		</property>
+	</bean>
+	<bean id="tipoEsportazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.rendicontazione.anagrafica.TipoEsportazionePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="entitaTipiEsportazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.rendicontazione.entita.EntitaTipiEsportazioneTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="entitaTipoEsportazionePage" />
+		</property>
+	</bean>
+	<bean id="entitaTipoEsportazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.rendicontazione.entita.EntitaTipoEsportazionePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="inventarioArticoloEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">inventarioArticoloEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>inventarioArticoloTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">inventarioArticoloEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="inventarioArticoloTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.inventarioarticolo.InventarioArticoloTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	<bean id="tipoDocumentoBaseMagazzinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.tipodocumentobase.TipoDocumentoBaseMagazzinoPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="tipiDocumentoBaseMagazzinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.tipodocumentobase.TipiDocumentoBaseMagazzinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="tipoDocumentoBaseMagazzinoPage" />
+		</property>
+	</bean>
+	<bean id="articoliEntitaTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.entita.ArticoliEntitaTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="articoloEntitaPage" />
+		</property>
+	</bean>
+	<bean id="articoloEntitaPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.entita.ArticoloEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="fornitoreEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>articoliEntitaTablePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="clienteEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>articoliEntitaTablePage</value>
+						<value>risultatiRicercaStampaContrattiTablePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="raggrupamentoArticoliEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">raggrupamentoArticoliEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>raggruppamentiTablePage</value>
+						<value>righeRaggruppamentoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">raggrupamentoArticoliEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="raggruppamentiTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.raggruppamentoArticoli.RaggruppamentiTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="raggruppamentoArticoliPage" />
+		</property>
+	</bean>
+	<bean id="raggruppamentoArticoliPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.raggruppamentoArticoli.RaggruppamentoArticoliPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="righeRaggruppamentoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.raggruppamentoArticoli.RigheRaggruppamentoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="rigaRaggruppamentoArticoliPage" />
+		</property>
+	</bean>
+	<bean id="rigaRaggruppamentoArticoliPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.raggruppamentoArticoli.RigaRaggruppamentoArticoliPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="sediEntitaClienteCompositePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaCompositePage"
+		singleton="false" lazy-init="true">
+		<property name="idPages">
+			<list>
+				<value>contrattiSedeTablePage</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="prospettoContrattiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">prospettoContrattiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>prospettoContrattiTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">prospettoContrattiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="contrattiSedeTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.contrattisede.ContrattiSedeTablePage"
+		singleton="false" lazy-init="true">
+		<property name="contrattoBD">
+			<ref bean="contrattoBD" />
+		</property>
+	</bean>
+	<bean id="prospettoContrattiTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.prospettocontratti.ProspettoContrattiTablePage"
+		singleton="false" lazy-init="true">
+		<property name="contrattoBD">
+			<ref bean="contrattoBD" />
+		</property>
+	</bean>
+
+	<bean id="riepilogoArticoloEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">riepilogoArticoloEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>riepilogoArticoliTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">riepilogoArticoloEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="riepilogoArticoliTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.situazionearticoli.RiepilogoArticoliTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+
+	<bean id="omaggiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">omaggiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>omaggiTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">omaggiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="omaggiTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.omaggio.OmaggiTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="omaggioPage" />
+		</property>
+	</bean>
+	<bean id="omaggioPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.omaggio.OmaggioPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="confrontoListinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">confrontoListinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaConfrontoListinoPage</value>
+						<value>risultatiRicercaConfrontoListinoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">confrontoListinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaConfrontoListinoPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.confrontolistino.ParametriRicercaConfrontoListinoPage"
+		singleton="false" lazy-init="true">
+	</bean>
+	<bean id="risultatiRicercaConfrontoListinoTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.confrontolistino.RisultatiRicercaConfrontoListinoTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="schedeArticoloEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">schedeArticoloEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>schedeArticoloPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">schedeArticoloEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="schedeArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.schedearticolo.SchedeArticoloPage"
+		singleton="false" lazy-init="true">
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="magazzinoSchedeArticoloBD">
+			<ref bean="magazzinoSchedeArticoloBD" />
+		</property>
+	</bean>
+
+	<bean id="creazioneSchedeArticoliEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">creazioneSchedeArticoliEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>creazioneSchedeArticoloPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">creazioneSchedeArticoliEditorEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="creazioneSchedeArticoloPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.schedearticolo.CreazioneSchedeArticoloPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoSchedeArticoloBD">
+			<ref bean="magazzinoSchedeArticoloBD" />
+		</property>
+		<property name="preferenceBD">
+			<ref bean="preferenceBD" />
+		</property>
+	</bean>
+
+	<bean id="elaborazioniSchedeArticoloEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">elaborazioniSchedeArticoloEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaElaborazioniPage</value>
+						<value>risultatiRicercaElaborazioniTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">elaborazioniSchedeArticoloEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaElaborazioniPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.schedearticolo.elaborazioni.ParametriRicercaElaborazioniPage"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="risultatiRicercaElaborazioniTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.schedearticolo.elaborazioni.RisultatiRicercaElaborazioniTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoSchedeArticoloBD">
+			<ref bean="magazzinoSchedeArticoloBD" />
+		</property>
+	</bean>
+
+	<bean id="vettoreEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>trasportatoVettorePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="trasportatoVettorePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.entita.TrasportatoVettorePage"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="posSettingsPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.settings.PosSettingsPage"
+		singleton="false" lazy-init="true">
+		<property name="posSettingsBD">
+			<ref bean="posSettingsBD" />
+		</property>
+	</bean>
+
+	<bean id="importazioniAreeMagazzinoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">importazioniAreeMagazzinoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>importazioniAMTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">importazioniAreeMagazzinoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="importazioniAMTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.importazioni.ImportazioniAMTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+
+	<bean id="stampaContrattiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">stampaContrattiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>risultatiRicercaStampaContrattiTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">stampaContrattiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="risultatiRicercaStampaContrattiTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.contratto.stampa.RisultatiRicercaStampaContrattiTablePage"
+		singleton="false" lazy-init="true">
+		<property name="contrattoBD">
+			<ref bean="contrattoBD" />
+		</property>
+	</bean>
+
+	<bean id="valorizzazioneDistinteEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">valorizzazioneDistintePage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriValorizzazioneDistintePage</value>
+						<value>risultatiValorizzazioneDistintaPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">valorizzazioneDistinteEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriValorizzazioneDistintePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.valorizzazioneDistinte.ParametriValorizzazioneDistintePage"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="risultatiValorizzazioneDistintaPage"
+		class="it.eurotn.panjea.magazzino.rich.editors.valorizzazioneDistinte.RisultatiValorizzazioneDistintaPage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+
+	<bean id="preFatturazioneEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.magazzino.rich.editors.prefatturazione.PreFatturazioneEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">preFatturazioneEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>movimentiPreFatturazioneTablePage</value>
+						<value>movimentiInFatturaTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">preFatturazioneEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="movimentiPreFatturazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.prefatturazione.MovimentiPreFatturazioneTablePage"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="movimentiInFatturaTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.prefatturazione.MovimentiInFatturaTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+
+	<bean id="indiceRotazioneEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">indiceRotazioneEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaIndiceRotazionePage</value>
+						<value>risultatiIndiceRotazioneTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">indiceRotazioneEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaIndiceRotazionePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.indicerotazione.ParametriRicercaIndiceRotazionePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="risultatiIndiceRotazioneTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.statistiche.indicerotazione.RisultatiIndiceRotazioneTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+	</bean>
+
+	<bean id="spedizioneMovimentiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">spedizioneMovimentiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>spedizioneMovimentiTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">spedizioneMovimentiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="spedizioneMovimentiTablePage"
+		class="it.eurotn.panjea.magazzino.rich.editors.documenti.spedizione.SpedizioneMovimentiTablePage"
+		singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="settingsManager">
+			<ref bean="settingManagerLocal" />
+		</property>
+	</bean>
+
+</beans>

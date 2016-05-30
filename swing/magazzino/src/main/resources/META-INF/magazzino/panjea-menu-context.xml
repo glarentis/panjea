@@ -1,0 +1,81 @@
+
+ <!DOCTYPE beans SYSTEM "spring-beans.dtd">
+<beans>
+
+	<bean id="anagraficaMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="anagraficaMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:anagrafica:vettore</value>
+				<value>openTrasportatoVettoriCommand</value>
+
+				<value>group:anagrafica:tabelle</value>
+				<value>openOmaggiCommand</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="magazzinoMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="magazzinoMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:magazzino:documento</value>
+				<value>newAreaMagazzinoCommand</value>
+				<value>openRicercaAreaMagazzinoCommand</value>
+				<value>openContabilizzazioneAreeMagazzinoCommand</value>
+				<value>openImportazioneAreeMagazzinoCommand</value>
+				<value>group:magazzino:documento:fatturazione</value>
+				<value>openFatturazioneCommand</value>
+				<value>openFatturazioniCommand</value>
+				<value>group:magazzino:documento:gestioneInventari</value>
+				<value>openPreparaInventariArticoloCommand</value>
+				<value>searchInventariArticoliCommand</value>
+				<value>group:magazzino:documento:rendicontazione</value>
+				<value>openRendicontazioneCommand</value>
+				<value>openAnagraficaRendicontazioneCommand</value>
+
+				<value>group:magazzino:utilita</value>
+				<value>openStampaEtichetteCommand</value>
+				<value>openVerificaPrezzoCommand</value>
+				<value>parametriListinoPrezziCommand</value>
+
+				<value>group:magazzino:moduliprezzo</value>
+				<value>openListinoTipoMezzoZonaGeograficaCommand</value>
+				<value>group:magazzino:moduliprezzo:listino</value>
+				<value>newListinoCommand</value>
+				<value>searchListiniCommand</value>
+				<value>openManutenzioneListinoCommand</value>
+				<value>openConfrontoListiniCommand</value>
+				<value>group:magazzino:moduliprezzo:contratto</value>
+				<value>newContrattoCommand</value>
+				<value>searchContrattiCommand</value>
+                <value>openProspettoContrattiCommand</value>
+                <value>openStampaContrattiCommand</value>
+                <value>group:magazzino:moduliprezzo:distinte</value>
+                <value>valorizzaDistintaCommand</value>
+				<value>group:magazzino:statistiche</value>
+				<value>openMovimentazioneMagazzinoCommand</value>
+				<value>openMovimentazioneArticoloCommand</value>
+				<value>openValorizzazioneMagazzinoCommand</value>
+				<value>openIndiceRotazioneMagazzinoCommand</value>
+				<value>openSincronizzazioneDatawarehouseMagazzinoCommand</value>
+
+				<value>group:magazzino:tabelleMagazzino</value>
+				<value>openCategorieCommand</value>
+				<value>openRiepilogoArticoliEditorCommand</value>
+                <value>openRaggruppamentoArticoliCommand</value>
+				<value>openTabelleGeneraliMagazzinoCommand</value>
+				<value>openCategorieContabiliMagazzinoCommand</value>
+				<value>openGestioneRifatturazioneCommand</value>
+				<value>openPreferenzeMagazzinoCommand</value>
+
+				<value>group:magazzino:gestioneFiscale</value>
+				<value>group:magazzino:gestioneFiscale:schedeArticolo</value>
+				<value>openSchedeArticoloCommand</value>
+				<value>openCreazioneSchedeArticoloCommand</value>
+				<value>openElaborazioniSchedeArticoloCommand</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

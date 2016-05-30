@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beans>
+
+	<bean class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor" id="menuView">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="manutenzioniMenu"/>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry" id="searchFactory">
+		<property name="searchResultMap">
+			<map>
+				<entry value-ref="searchResultOperatori">
+					<key>
+						<value type="java.lang.String">searchResultOperatori</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry" id="editorFactory">
+		<property name="editorMap">
+			<map>
+				<entry value="operatoreEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.manutenzioni.domain.Operatore
+						</value>
+					</key>
+				</entry>
+				<entry value="tabelleGeneraliManutenzioneEditor">
+					<key>
+						<value type="java.lang.String">tabelleGeneraliManutenzioneEditor</value>
+					</key>
+				</entry>
+				<entry value="areaInstallazioneEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.manutenzioni.domain.documento.AreaInstallazione
+						</value>
+					</key>
+				</entry>
+				<entry value="ricercaAreaInstallazioneEditor">
+				<key>
+					<value type="java.lang.Class">it.eurotn.panjea.manutenzioni.manager.areeinstallazioni.ParametriRicercaAreeInstallazione</value>
+				</key>
+				</entry>
+				<entry value="preferenzeManutenzioniEditor">
+                    <key>
+                        <value type="java.lang.String">preferenzeManutenzioniEditor</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="searchResultOperatori">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.manutenzioni.rich.search.SearchResultOperatori
+			</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="manutenzioniBD">
+					<ref bean="manutenzioniBD"/>
+				</entry>
+				<entry key="id">
+					<value>searchResultOperatori</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="clienteEditor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>installazioniTablePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaCompositePage" id="sediEntitaClienteCompositePage" singleton="false">
+        <property name="idPages">
+            <list>
+                <value>installazioniTablePage</value>
+            </list>
+        </property>
+    </bean>
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="operatoreEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">operatoreEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>operatoreCompositePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">operatoreEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean class="it.eurotn.rich.editors.PagesTabbedDialogPageEditor"
+        id="operatoreCompositePage" singleton="false">
+        <constructor-arg index="0" type="java.lang.String"
+            value="operatoreCompositePage" />
+        <property name="idPages">
+            <list>
+                <value>operatorePage</value>
+                <value>installazioniOperatorePage</value>
+            </list>
+        </property>
+    </bean>
+
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.operatore.OperatorePage" id="operatorePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.operatore.InstallazioniOperatorePage" id="installazioniOperatorePage" lazy-init="true" singleton="false">
+	   <property name="manutenzioniBD">
+            <ref bean="manutenzioniBD"/>
+        </property>
+    </bean>
+
+	<bean class="it.eurotn.rich.editors.PagesTabbedDialogPageEditor" id="installazioniCompositePage" singleton="false">
+		<constructor-arg index="0" type="java.lang.String" value="installazioniCompositePage"/>
+		<property name="idPages">
+			<list>
+				<value>installazionePage</value>
+				<value>ricercaRigheInstallazioneInInstallazionePage</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.righeinstallazione.ricerca.RigheInstallazioneRicercaTablePage" id="ricercaRigheInstallazioneInInstallazionePage" lazy-init="true" singleton="false">
+		<constructor-arg index="0" value="ricercaRigheInstallazioneInInstallazioneTableWidget"/>
+		<constructor-arg index="1" value="areaInstallazione.documento.anno,areaInstallazione.documento.dataDocumento,tipoMovimento,articoloInstallazione,articoloRitiro,causaleInstallazione,causaleRitiro"/>		
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	
+
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.installazioni.InstallazionePage" id="installazionePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.installazioni.InstallazioniTablePage" id="installazioniTablePage" lazy-init="true" singleton="false">
+		<property name="editPage">
+			<ref bean="installazioniCompositePage"/>
+		</property>
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="tipoDocumentoEditor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>tipoAreaInstallazionePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.tipiareeinstallazione.TipoAreaInstallazionePage" id="tipoAreaInstallazionePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.areeinstallazioni.AreaInstallazionePage" id="areaInstallazionePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="areaInstallazioneEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.manutenzioni.rich.editors.areeinstallazioni.AreaInstallazioneEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>areaInstallazionePage</value>
+						<value>righeInstallazioneTablePage</value>
+					</list>
+				</entry>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">areaInstallazioneEditorPage</value>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">areaInstallazioneEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.righeinstallazione.RigaInstallazionePage" id="rigaInstallazionePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.righeinstallazione.RigheInstallazioneTablePage" id="righeInstallazioneTablePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="rigaInstallazionePage"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.causaliinstallazione.CausaleInstallazionePage" id="causaleInstallazionePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.causaliinstallazione.CausaliInstallazioneTablePage" id="causaliInstallazioneTablePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="causaleInstallazionePage"/>
+		</property>
+	</bean>
+	
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="tabelleGeneraliManutenzioneEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tabelleGeneraliManutenzioneEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Tabelle</value>
+						<value>causaliInstallazioneTablePage</value>
+					<value>ubicazioniInstallazioneTablePage</value></list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">tabelleGeneraliManutenzioneEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+		<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="ricercaAreaInstallazioneEditor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">ricercaAreaInstallazioneEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaAreaInstallazionePage</value>
+                        <value>risultatiRicercaAreaInstallazioneTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">ricercaAreaInstallazioneEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean class="it.eurotn.panjea.manutenzioni.rich.editors.areeinstallazioni.ricerca.ParametriRicercaAreaInstallazionePage" id="parametriRicercaAreaInstallazionePage" lazy-init="true" singleton="false"/>                    
+    <bean class="it.eurotn.panjea.manutenzioni.rich.editors.areeinstallazioni.ricerca.RisultatiRicercaAreaInstallazioneTablePage" id="risultatiRicercaAreaInstallazioneTablePage" lazy-init="true" singleton="false">
+        <property name="manutenzioniBD">
+            <ref bean="manutenzioniBD"/>
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+	
+    <bean
+	   class="it.eurotn.panjea.manutenzioni.rich.editors.ubicazioniinstallazione.UbicazioneInstallazionePage"
+	   id="ubicazioneInstallazionePage" lazy-init="true" singleton="false">
+    	<property name="manutenzioniBD">
+	   	   <ref bean="manutenzioniBD" />
+	   </property>
+    </bean>
+	<bean
+		class="it.eurotn.panjea.manutenzioni.rich.editors.ubicazioniinstallazione.UbicazioniInstallazioneTablePage"
+		id="ubicazioniInstallazioneTablePage" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="ubicazioneInstallazionePage" />
+		</property>
+	</bean>
+
+    <bean id="preferenzeManutenzioniEditor"
+        class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">preferenzeManutenzioniEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:preferenze</value>
+                        <value>manutenzioneSettingsPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">preferenzeManutenzioniEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="manutenzioneSettingsPage" class="it.eurotn.panjea.manutenzioni.rich.editors.manutenzionisettings.ManutenzioneSettingsPage" singleton="false" lazy-init="true">
+        <property name="manutenzioniBD">
+            <ref bean="manutenzioniBD" />
+        </property>
+    </bean>
+</beans>

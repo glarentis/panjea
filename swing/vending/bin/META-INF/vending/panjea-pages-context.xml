@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beans>
+
+	<bean class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor" id="menuView">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="vendingMenu"/>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry" id="editorFactory">
+		<property name="editorMap">
+			<map>
+				<entry value="tabelleGeneraliVendingEditor">
+					<key>
+						<value type="java.lang.String">tabelleGeneraliVendingEditor</value>
+					</key>
+				</entry>
+				<entry value="distributoriEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.rich.editors.distributore.DistributorePM
+						</value>
+					</key>
+				</entry>
+				<entry value="ricercaAreaRifornimentoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.manager.arearifornimento.ParametriRicercaAreeRifornimento</value>
+					</key>
+				</entry>
+				<entry value="lettureSelezionatriceEditor">
+					<key>
+						<value type="java.lang.String">lettureSelezionatriceEditor</value>
+					</key>
+				</entry>
+				<entry value="ricercaRilevazioneEvaDtsEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.manager.evadts.rilevazioni.ParametriRicercaRilevazioniEvaDts</value>
+					</key>
+				</entry>
+				<entry value="rilevazioneEvaDtsEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.domain.evadts.RilevazioneEvaDts
+						</value>
+					</key>
+				</entry>
+				<entry value="casseEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.domain.Cassa</value>
+					</key>
+				</entry>
+				<entry value="movimentiCassaEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.domain.MovimentoCassa
+						</value>
+					</key>
+				</entry>
+				<entry value="preferenzeVendingEditor">
+                    <key>
+                        <value type="java.lang.String">preferenzeVendingEditor</value>
+                    </key>
+                </entry>
+                <entry value="importazioneEvaDtsEditor">
+                    <key>
+                        <value type="java.lang.String">importazioneEvaDtsEditor</value>
+                    </key>
+                </entry>
+				<entry value="aslEditor">
+					<key>
+						<value type="java.lang.String">aslEditor</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="tabelleGeneraliVendingEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tabelleGeneraliVendingEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Tabelle</value>
+						<value>tipiComunicazioneTablePage</value>
+						<value>tipiModelloTablePage</value>
+						<value>modelliTablePage</value>
+						<value>sistemiElettronicoTablePage</value>
+						<value>gettoniTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">tabelleGeneraliVendingEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.tipicomunicazione.TipiComunicazioneTablePage" id="tipiComunicazioneTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="tipoComunicazionePage"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.tipicomunicazione.TipoComunicazionePage" id="tipoComunicazionePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.tipimodello.TipiModelloTablePage" id="tipiModelloTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="tipoModelloCompositePage"/>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.rich.editors.PagesTabbedDialogPageEditor" id="tipoModelloCompositePage" singleton="false">
+		<constructor-arg index="0" type="java.lang.String" value="tipoModelloCompositePage"/>
+		<property name="idPages">
+			<list>
+				<value>tipoModelloPage</value>
+				<value>prodottiTipoModelloPage</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.tipimodello.TipoModelloPage" id="tipoModelloPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.tipimodello.ProdottiTipoModelloPage" id="prodottiTipoModelloPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="distributoriEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.vending.rich.editors.distributore.DistributoreEditor
+			</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">distributoriEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>modelliTreeTablePage</value>
+						<value>distributoriPage</value>
+						<value>distributoreCompositePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">distributoriEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.distributore.modelli.ModelliTreeTablePage" id="modelliTreeTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="modelloPage">
+			<ref bean="modelloCompositePage"/>
+		</property>
+		<property name="tipoModelloPage">
+			<ref bean="tipoModelloCompositePage"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.modelli.ModelliTablePage" id="modelliTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="modelloCompositePage"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.rich.editors.PagesTabbedDialogPageEditor" id="modelloCompositePage" singleton="false">
+		<constructor-arg index="0" type="java.lang.String" value="modelloCompositePage"/>
+		<property name="idPages">
+			<list>
+				<value>modelloPage</value>
+				<value>prodottiModelloPage</value>
+			</list>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.modelli.ModelloPage" id="modelloPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.modelli.ProdottiModelloPage" id="prodottiModelloPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.rich.editors.PagesTabbedDialogPageEditor" id="distributoreCompositePage" singleton="false">
+		<constructor-arg index="0" type="java.lang.String" value="distributoreCompositePage"/>
+		<property name="idPages">
+			<list>
+				<value>distributorePage</value>
+				<value>ricercaRigheInstallazioneInDistributorePage</value>
+				<value>prodottiDistributorePage</value>
+			</list>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.manutenzioni.rich.editors.righeinstallazione.ricerca.RigheInstallazioneRicercaTablePage" id="ricercaRigheInstallazioneInDistributorePage" lazy-init="true" singleton="false">
+		<constructor-arg index="0" value="ricercaRigheInstallazioneInDistributoreTableWidget"/>
+		<constructor-arg index="1" value="areaInstallazione.documento.anno,areaInstallazione.documento.dataDocumento,areaInstallazione.documento.entita,areaInstallazione.documento.sedeEntita,areaInstallazione.depositoOrigine,tipoMovimento,installazione,articoloInstallazione,articoloRitiro,causaleInstallazione,causaleRitiro"/>
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.distributore.distributore.DistributorePage" id="distributorePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.distributore.distributore.prodotti.ProdottiDistributorePage" id="prodottiDistributorePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.distributore.distributorimodello.DistributoriTablePage" id="distributoriPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.prodottiinstallazione.ProdottiInstallazionePage" id="prodottiInstallazionePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.rich.editors.PagesTabbedDialogPageEditor" id="installazioniCompositePage" singleton="false">
+		<property name="idPages">
+			<list>
+				<value>prodottiInstallazionePage</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.sistemielettronici.SistemaElettronicoPage" id="sistemaElettronicoPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.sistemielettronici.SistemiElettronicoTablePage" id="sistemiElettronicoTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="sistemaElettronicoPage"/>
+		</property>
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="ricercaAreaRifornimentoEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ricercaAreaRifornimentoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaAreaRifornimentoPage</value>
+						<value>risultatiRicercaAreaRifornimentoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ricercaAreaRifornimentoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.rifornimento.ricerca.ParametriRicercaAreaRifornimentoPage" id="parametriRicercaAreaRifornimentoPage" lazy-init="true" singleton="false"/>
+	<bean class="it.eurotn.panjea.vending.rich.editors.rifornimento.ricerca.RisultatiRicercaAreaRifornimentoTablePage" id="risultatiRicercaAreaRifornimentoTablePage" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.AreaMagazzinoFullDTOPropertyAccessStrategy" id="areaMagazzinoFullDTOPropertyAccessStrategy" lazy-init="true" singleton="false">
+		<property name="propertyAccessorMap">
+			<map>
+				<entry key="areaRifornimento">
+					<value type="java.lang.Class">it.eurotn.panjea.vending.domain.documento.AreaRifornimento
+					</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.ordini.rich.forms.areaordine.AreaOrdineFullDTOPropertyAccessStrategy" id="areaOrdineFullDTOPropertyAccessStrategy" lazy-init="true" singleton="false">
+		<property name="propertyAccessorMap">
+			<map>
+				<entry key="areaRifornimento">
+					<value type="java.lang.Class">it.eurotn.panjea.vending.domain.documento.AreaRifornimento
+					</value>
+				</entry>
+			</map>
+		</property>
+		</bean>
+
+	<bean class="it.eurotn.rich.editors.controllers.DefaultController" id="areaMagazzinoController" lazy-init="true" singleton="false">
+		<property name="propertiesChange">
+			<map>
+				<entry key="areaMagazzino.documento.sedeEntita">
+					<list>
+						<ref bean="sedeEntitaAMVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+				<entry key="areaMagazzino.documento.entita">
+					<list>
+						<ref bean="entitaAMVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+				<entry key="areaRifornimento.installazione">
+					<list>
+						<ref bean="installazioneAMVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+				<entry key="areaRifornimento.distributore">
+					<list>
+						<ref bean="distributoreAMVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+				<entry key="areaRifornimento.operatore">
+					<list>
+						<ref bean="operatoreAMVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>		
+	
+	<bean class="it.eurotn.panjea.vending.rich.editors.areamagazzino.InstallazionePropertyChangeListener" id="installazioneAMVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.areamagazzino.SedeEntitaPropertyChangeListener" id="sedeEntitaAMVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.areamagazzino.EntitaPropertyChangeListener" id="entitaAMVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.areamagazzino.DistributorePropertyChangeListener" id="distributoreAMVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.areamagazzino.OperatorePropertyChangeListener" id="operatoreAMVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	
+	
+	<bean class="it.eurotn.rich.editors.controllers.DefaultController" id="areaOrdineController" lazy-init="true" singleton="false">
+		<property name="propertiesChange">
+			<map>
+				<entry key="areaOrdine.documento.sedeEntita">
+					<list>
+						<ref bean="sedeEntitaAOVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+				<entry key="areaOrdine.documento.entita">
+					<list>
+						<ref bean="entitaAOVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+				<entry key="areaRifornimento.installazione">
+					<list>
+						<ref bean="installazioneAOVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+				<entry key="areaRifornimento.distributore">
+					<list>
+						<ref bean="distributoreAOVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+				<entry key="areaRifornimento.operatore">
+					<list>
+						<ref bean="operatoreAOVendingPropertyChangeListener"/>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>		
+	
+	<bean class="it.eurotn.panjea.vending.rich.editors.areaordine.InstallazionePropertyChangeListener" id="installazioneAOVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.areaordine.SedeEntitaPropertyChangeListener" id="sedeEntitaAOVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.areaordine.EntitaPropertyChangeListener" id="entitaAOVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.areaordine.DistributorePropertyChangeListener" id="distributoreAOVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.areaordine.OperatorePropertyChangeListener" id="operatoreAOVendingPropertyChangeListener" lazy-init="true" singleton="false">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD"/>
+		</property>
+	</bean>
+	
+	
+	
+
+	<bean class="it.eurotn.panjea.magazzino.rich.editors.areamagazzino.AreaMagazzinoPage" id="areaMagazzinoPage" lazy-init="true" singleton="false">
+		<property name="vendingAreaRifornimentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	
+		<bean class="it.eurotn.panjea.ordini.rich.editors.areaordine.AreaOrdinePage" id="areaOrdinePage" lazy-init="true" singleton="false">
+		<property name="vendingAreaRifornimentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.gettoni.GettonePage" id="gettonePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.gettoni.GettoniTablePage" id="gettoniTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="gettonePage"/>
+		</property>
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="lettureSelezionatriceEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">lettureSelezionatriceEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>lettureSelezionatriceTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">lettureSelezionatriceEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.lettureselezionatrice.LettureSelezionatriceTablePage" id="lettureSelezionatriceTablePage" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="letturaSelezionatricePage"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.lettureselezionatrice.LetturaSelezionatricePage" id="letturaSelezionatricePage" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="ricercaRilevazioneEvaDtsEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ricercaRilevazioneEvaDtsEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaRilevazioneEvaDtsPage</value>
+						<value>risultatiRicercaRilevazioneEvaDtsTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ricercaRilevazioneEvaDtsEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.rilevazionievadts.ricerca.ParametriRicercaRilevazioneEvaDtsPage" id="parametriRicercaRilevazioneEvaDtsPage" lazy-init="true" singleton="false"/>
+	<bean class="it.eurotn.panjea.vending.rich.editors.rilevazionievadts.ricerca.RisultatiRicercaRilevazioneEvaDtsTablePage" id="risultatiRicercaRilevazioneEvaDtsTablePage" lazy-init="true" singleton="false">
+	   <property name="vendingDocumentoBD">
+            <ref bean="vendingDocumentoBD"/>
+        </property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.rilevazionievadts.RilevazioneEvaDtsPage" id="rilevazioneEvaDtsPage" lazy-init="true" singleton="false">
+		<property name="vendingDocumentoBD">
+			<ref bean="vendingDocumentoBD"/>
+		</property>
+	</bean>
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="rilevazioneEvaDtsEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>rilevazioneEvaDtsPage</value>
+					</list>
+				</entry>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">rilevazioneEvaDtsEditorPage</value>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">rilevazioneEvaDtsEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.areamagazzino.LettureVendingForm" id="lettureVendingForm" lazy-init="true" singleton="false">
+	</bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.casse.CassaPage" id="cassaPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.casse.CasseTablePage" id="casseTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="cassaPage"/>
+		</property>
+	</bean>
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="casseEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>casseTablePage</value>
+					</list>
+				</entry>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">cassaEditorPage</value>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">cassaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.movimenticassa.MovimentiCassaTablePage" id="movimentiCassaTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="movimentoCassaPage"/>
+		</property>
+	</bean>
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="movimentiCassaEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>movimentiCassaTablePage</value>
+					</list>
+				</entry>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">movimentiCassaEditorPage</value>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">movimentiCassaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.movimenticassa.MovimentoCassaPage" id="movimentoCassaPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="preferenzeVendingEditor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">preferenzeVendingEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:preferenze</value>
+                        <value>vendingSettingsPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">preferenzeVendingEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.vending.rich.editors.vendingsettings.VendingSettingsPage" id="vendingSettingsPage" lazy-init="true" singleton="false">
+        <property name="vendingAnagraficaBD">
+            <ref bean="vendingAnagraficaBD"/>
+        </property>
+    </bean>
+    
+    <bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="importazioneEvaDtsEditor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">importazioneEvaDtsEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:importazione</value>
+                        <value>importazioneEvaDtsPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">importazioneEvaDtsEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.vending.rich.editors.importazioneevadts.ImportazioneEvaDtsPage" id="importazioneEvaDtsPage" lazy-init="true" singleton="false">
+    </bean>
+
+	<bean class="it.eurotn.panjea.vending.rich.editors.anagraficheasl.AnagraficaAslPage" id="anagraficaAslPage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.vending.rich.editors.anagraficheasl.AnagraficheAslTablePage" id="anagraficheAslTablePage" lazy-init="true" singleton="false">
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD"/>
+		</property>
+		<property name="editPage">
+			<ref bean="anagraficaAslPage"/>
+		</property>
+	</bean>
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="aslEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>anagraficheAslTablePage</value>
+						<value>aslTablePage</value></list>
+				</entry>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">aslEditorPage</value>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">aslEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+<bean class="it.eurotn.panjea.vending.rich.editors.asl.AslPage" id="aslPage" lazy-init="true" singleton="false"><property name="vendingAnagraficaBD"><ref bean="vendingAnagraficaBD"/></property></bean><bean class="it.eurotn.panjea.vending.rich.editors.asl.AslTablePage" id="aslTablePage" lazy-init="true" singleton="false"><property name="vendingAnagraficaBD"><ref bean="vendingAnagraficaBD"/></property><property name="editPage"><ref bean="aslPage"/></property></bean></beans>

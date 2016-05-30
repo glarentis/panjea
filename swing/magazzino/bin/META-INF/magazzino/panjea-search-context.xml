@@ -1,0 +1,419 @@
+
+ <!DOCTYPE beans SYSTEM "spring-beans.dtd">
+<beans>
+
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+                <entry value="mezzoTrasportoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.MezzoTrasporto</value>
+                    </key>
+                </entry>
+                <entry value="tipoMezzoTrasportoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.TipoMezzoTrasporto</value>
+                    </key>
+                </entry>
+				<entry value="listinoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.Listino</value>
+                    </key>
+                </entry>
+                <entry value="versioneListinoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.VersioneListino</value>
+                    </key>
+                </entry>
+				<entry value="articoloSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.ArticoloLite</value>
+                    </key>
+                </entry>
+                <entry value="scontoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.Sconto</value>
+                    </key>
+                </entry>
+                <entry value="tipoAreaMagazzinoSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.documento.TipoAreaMagazzino</value>
+                	</key>
+                </entry>
+                <entry value="sedeMagazzinoSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.SedeMagazzino</value>
+                	</key>
+                </entry>
+                <entry value="sedeMagazzinoLiteSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.SedeMagazzinoLite</value>
+                	</key>
+                </entry>
+                <entry value="formulaTrasformazioneSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.FormulaTrasformazione</value>
+                	</key>
+                </entry>
+                <entry value="faseLavorazioneSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.FaseLavorazione</value>
+                	</key>
+                </entry>
+                <entry value="tipoPortoSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.TipoPorto</value>
+                	</key>
+                </entry>
+                <entry value="aspettoEsterioreSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.AspettoEsteriore</value>
+                	</key>
+                </entry>
+                <entry value="causaleTrasportoSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CausaleTrasporto</value>
+                	</key>
+                </entry>
+                <entry value="trasportoCuraSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.TrasportoCura</value>
+                	</key>
+                </entry>
+                <entry value="categoriaSedeMagazzinoSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CategoriaSedeMagazzino</value>
+                	</key>
+                </entry>
+                <entry value="categoriaContabileSedeMagazzinoSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CategoriaContabileSedeMagazzino</value>
+                	</key>
+                </entry>
+                <entry value="categoriaContabileArticoloSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CategoriaContabileArticolo</value>
+                	</key>
+                </entry>
+                <entry value="categoriaCommercialeArticoloSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CategoriaCommercialeArticolo</value>
+                    </key>
+                </entry>
+                <entry value="categoriaContabileDepositoSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CategoriaContabileDeposito</value>
+                	</key>
+                </entry>
+                <entry value="categoriaSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.Categoria</value>
+                	</key>
+                </entry>
+                <entry value="tipoEsportazioneSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.rendicontazione.TipoEsportazione</value>
+                	</key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+
+    <bean id="categoriaSearchObject" class="it.eurotn.panjea.magazzino.rich.search.CategoriaSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+        <property name="columns">
+           <list>
+               <value>codice</value>
+               <value>descrizione</value>
+           </list>
+      	</property>
+    </bean>
+
+	<bean id="listinoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.ListinoSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+        <property name="editObject">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <bean id="versioneListinoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.VersioneListinoSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>listino.codice</value>
+                <value>listino.descrizione</value>
+                <value>codice</value>
+                <value>dataVigore</value>
+            </list>
+        </property>
+        <property name="editObject">
+            <value>true</value>
+        </property>
+    </bean>
+
+    <bean id="categoriaContabileDepositoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.CategoriaContabileDepositoSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoContabilizzazioneBD">
+            <ref bean="magazzinoContabilizzazioneBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="categoriaContabileArticoloSearchObject" class="it.eurotn.panjea.magazzino.rich.search.CategoriaContabileArticoloSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoContabilizzazioneBD">
+            <ref bean="magazzinoContabilizzazioneBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="categoriaCommercialeArticoloSearchObject" class="it.eurotn.panjea.magazzino.rich.search.CategoriaCommercialeArticoloSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+            </list>
+        </property>
+    </bean>
+
+     <bean id="categoriaContabileSedeMagazzinoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.CategoriaContabileSedeMagazzinoSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoContabilizzazioneBD">
+            <ref bean="magazzinoContabilizzazioneBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="categoriaSedeMagazzinoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.CategoriaSedeMagazzinoSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="articoloSearchObject" class="it.eurotn.panjea.magazzino.rich.search.ArticoloSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+                <value>codiceEntita</value>
+                <value>barCode</value>
+                <value>codiceInterno</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="scontoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.ScontoSearchObject" singleton="false" lazy-init="true">
+        <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>sconto1</value>
+                <value>sconto2</value>
+                <value>sconto3</value>
+                <value>sconto4</value>
+            </list>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="scontoPage"/>
+    </bean>
+
+    <bean id="tipoAreaMagazzinoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.TipoAreaMagazzinoSearchObject" singleton="false" lazy-init="true">
+    	<property name="magazzinoDocumentoBD">
+    		<ref bean="magazzinoDocumentoBD"/>
+    	</property>
+    	<property name="editObject" value="true"/>
+    	<property name="columns">
+    		<list>
+    			<value>tipoDocumento.codice</value>
+    			<value>tipoDocumento.descrizione</value>
+    		</list>
+    	</property>
+    </bean>
+
+    <bean id="sedeMagazzinoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.SedeMagazzinoSearchObject" singleton="false" lazy-init="true">
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+    	<property name="columns">
+    		<list>
+    			<value>sedeEntita.sede.descrizione</value>
+    			<value>sedeEntita.sede.datiGeografici.descrizioneLocalita</value>
+    			<value>sedeEntita.sede.indirizzo</value>
+    			<value>sedeEntita.tipoSede.codice</value>
+    			<value>sedeEntita.sedeCollegata</value>
+    		</list>
+    	</property>
+    </bean>
+
+    <bean id="sedeMagazzinoLiteSearchObject" class="it.eurotn.panjea.magazzino.rich.search.SedeMagazzinoLiteSearchObject" singleton="false" lazy-init="true">
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+    	<property name="columns">
+    		<list>
+    			<value>sedeEntita.entita.anagrafica.denominazione</value>
+    			<value>sedeEntita.sede.descrizione</value>
+    			<value>sedeEntita.sede.localita</value>
+    			<value>sedeEntita.sede.indirizzo</value>
+    		</list>
+    	</property>
+    </bean>
+
+    <bean id="formulaTrasformazioneSearchObject" class="it.eurotn.panjea.magazzino.rich.search.FormulaTrasformazioneSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>codice</value>
+    			<value>formula</value>
+    		</list>
+    	</property>
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+    </bean>
+
+    <bean id="faseLavorazioneSearchObject" class="it.eurotn.panjea.magazzino.rich.search.FaseLavorazioneSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>codice</value>
+    			<value>descrizione</value>
+    			<value>ordinamento</value>
+    		</list>
+    	</property>
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+    	<property name="editObject" value="true"/>
+    	<property name="dialogPageId" value="faseLavorazionePage"></property>
+    </bean>
+
+
+    <bean id="tipoMezzoTrasportoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.TipoMezzoTrasportoSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>codice</value>
+    			<value>descrizione</value>
+    		</list>
+    	</property>
+    	<property name="dialogPageId" value="tipoMezzoTrasportoPage"/>
+    	<property name="editObject" value="true"/>
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+    </bean>
+
+    <bean id="mezzoTrasportoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.MezzoTrasportoSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>targa</value>
+    			<value>descrizione</value>
+    		</list>
+    	</property>
+    	<property name="dialogPageId" value="mezzoTrasportoPage"/>
+    	<property name="editObject" value="true"/>
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+    </bean>
+
+
+    <bean id="tipoPortoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.TipoPortoSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>descrizione</value>
+    		</list>
+    	</property>
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+        <property name="dialogPageId" value="tipoPortoPage"/>
+    	<property name="editObject" value="true"/>
+    </bean>
+
+    <bean id="aspettoEsterioreSearchObject" class="it.eurotn.panjea.magazzino.rich.search.AspettoEsterioreSearchObject" singleton="false" lazy-init="true">
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+    	<property name="columns">
+    		<list>
+    			<value>descrizione</value>
+    		</list>
+    	</property>
+        <property name="dialogPageId" value="aspettoEsteriorePage"/>
+    	<property name="editObject" value="true"/>
+    </bean>
+
+    <bean id="causaleTrasportoSearchObject" class="it.eurotn.panjea.magazzino.rich.search.CausaleTrasportoSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>descrizione</value>
+    		</list>
+    	</property>
+      <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+        <property name="dialogPageId" value="causaleTrasportoPage"/>
+    	<property name="editObject" value="true"/>
+    </bean>
+
+    <bean id="trasportoCuraSearchObject" class="it.eurotn.panjea.magazzino.rich.search.TrasportoCuraSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>descrizione</value>
+    		</list>
+    	</property>
+        <property name="magazzinoAnagraficaBD">
+            <ref bean="magazzinoAnagraficaBD"/>
+        </property>
+         <property name="dialogPageId" value="trasportoCuraPage"/>
+    	<property name="editObject" value="true"/>
+    </bean>
+
+    <bean id="tipoEsportazioneSearchObject" class="it.eurotn.panjea.magazzino.rich.search.TipoEsportazioneSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>nome</value>
+    		</list>
+    	</property>
+    	<property name="editObject" value="false"/>
+    	<property name="magazzinoAnagraficaBD">
+    		<ref bean="magazzinoAnagraficaBD"/>
+    	</property>
+    </bean>
+
+</beans>

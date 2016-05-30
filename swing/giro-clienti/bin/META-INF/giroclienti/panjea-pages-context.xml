@@ -1,0 +1,80 @@
+
+<beans>
+    
+    <!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="schedeGiroClientiEditor">
+					<key>
+						<value type="java.lang.String">schedeGiroClientiEditor</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+    
+    <bean id="clienteEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>giroClientiEntitaTablePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+    <bean id="giroClientiEntitaTablePage" class="it.eurotn.panjea.giroclienti.rich.editors.entita.GiroClientiEntitaTablePage" singleton="false" lazy-init="true">
+		<property name="giroClientiAnagraficaBD">
+			<ref bean="giroClientiAnagraficaBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	
+    <bean id="schedeGiroClientiEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">schedeGiroClientiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>schedeGiroClientiPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">schedeGiroClientiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+    <bean id="schedeGiroClientiPage" class="it.eurotn.panjea.giroclienti.rich.editors.scheda.SchedeGiroClientiPage" singleton="false" lazy-init="true">
+	</bean>
+	
+	<bean id="preferenzeOrdiniEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>giroClientiSettingsPage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="giroClientiSettingsPage" class="it.eurotn.panjea.giroclienti.rich.editors.settings.GiroClientiSettingsPage" singleton="false" lazy-init="true">
+        <property name="giroClientiAnagraficaBD">
+            <ref bean="giroClientiAnagraficaBD" />
+        </property>
+    </bean>
+	
+</beans>

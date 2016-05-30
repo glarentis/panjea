@@ -1,0 +1,121 @@
+ 
+<beans>
+    <import resource="panjea-context.xml" />
+    <import resource="panjea-menu-context.xml" />
+    <!-- EditorFactory -->
+    <bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="agenteEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.agenti.domain.Agente</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <!-- searchFactory -->
+    <bean id="searchFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+        <property name="searchResultMap">
+            <map>
+                <entry value-ref="searchResultAgenti">
+                    <key>
+                        <value type="java.lang.String">it.eurotn.panjea.agenti.domain.lite.AgenteLite</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="searchResultAgenti" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.anagrafica.rich.search.SearchResultEntita</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="anagraficaBD">
+                    <ref bean="anagraficaBD" />
+                </entry>
+                <entry key="id">
+                    <value>searchResultAgenti</value>
+                </entry>
+                <entry key="entita">
+                    <bean class="it.eurotn.panjea.agenti.domain.lite.AgenteLite" />
+                </entry>
+                <entry key="idNewEntitaCommand" value="newAgenteCommand" />
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="agenteEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.anagrafica.rich.editors.entita.EntitaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">agenteEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                    	<value>group:AnagraficaAgente</value>
+                        <value>anagraficaPageAgente</value>
+                        <value>noteAgentePage</value>
+                        <value>group:VociCorrelateAgente</value>
+                         <value>mailTablePage</value>
+                        <value>agenteSedeEntitaAssociatePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">agenteEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="noteAgentePage" class="it.eurotn.panjea.agenti.rich.editors.entita.NoteAgentePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+    
+    <bean id="agenteSedeEntitaAssociatePage" class="it.eurotn.panjea.agenti.rich.editors.sedeagente.AgenteSedeEntitaAssociatePage" singleton="false">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD" />
+        </property>
+    </bean>
+    
+    <bean id="anagraficaPageAgente" class="it.eurotn.panjea.anagrafica.rich.editors.entita.anagrafica.AnagraficaPage" singleton="false">
+        <property name="idNewCommand" value="newAgenteCommand" />
+        <property name="pageSecurityEditorId" value="anagraficaPageAgente" />        
+        <constructor-arg index="0" type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+            <ref bean="anagraficaBD" />
+        </constructor-arg>
+        <constructor-arg index="1" type="it.eurotn.panjea.anagrafica.rich.editors.entita.anagrafica.AnagraficaForm">
+            <ref bean="agenteForm" />
+        </constructor-arg>
+    </bean>
+    <bean id="agenteForm"  class="it.eurotn.panjea.agenti.rich.editors.entita.AgenteForm" singleton="false" lazy-init="true">
+        <constructor-arg index="0" type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+            <ref bean="anagraficaBD" />
+        </constructor-arg>
+    </bean>
+    
+    <bean id="preferenzeMagazzinoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>group:preferenze</value>
+                        <value>agentiSettingsPage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="agentiSettingsPage" class="it.eurotn.panjea.agenti.rich.editors.settings.AgentiSettingsPage" singleton="false" lazy-init="true">
+        <property name="agentiSettingsBD">
+            <ref bean="agentiSettingsBD" />
+        </property>
+    </bean>
+</beans>

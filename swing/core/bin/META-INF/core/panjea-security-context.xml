@@ -1,0 +1,58 @@
+<beans>
+	<import resource="panjea-context.xml" />
+	<bean id="applicationSecurityManager" class="org.springframework.richclient.security.support.DefaultApplicationSecurityManager">
+		<property name="authenticationManager" ref="authenticationManager"/>
+	</bean>
+
+	<bean id="securityAwareConfigurer" class="org.springframework.richclient.security.SecurityAwareConfigurer" lazy-init="false" />	
+	
+	<!--<bean id="userDetailsService" class="org.acegisecurity.userdetails.jdbc.JdbcDaoImpl">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+	</bean>
+	-->
+	<!-- =================== SECURITY BEANS YOU WILL RARELY (IF EVER) CHANGE ================== -->
+		
+	<bean id="jecAuthenticationProvider" class="it.eurotn.panjea.sicurezza.JecAuthenticationProvider">
+		<property name="loginConfig">
+			<value>classpath:it/eurotn/panjea/auth.conf</value>
+		</property>
+		<property name="loginContextName">
+			<value>client-login</value>
+		</property>
+		<property name="loginBD">
+			<ref bean="sicurezzaBD" />
+		</property>
+	</bean>
+	
+	<bean id="authenticationManager" class="org.springframework.security.providers.ProviderManager">
+		<property name="providers">
+		  <list>
+		    <ref bean="jecAuthenticationProvider"/>
+		  </list>
+		</property>
+	</bean>
+	
+	<bean id="roleVoter" class="org.springframework.security.vote.RoleVoter">
+		<property name="rolePrefix"><value></value></property>
+	</bean>
+	
+	<bean id="accessDecisionManager" class="org.springframework.security.vote.AffirmativeBased">
+   		<property name="allowIfAllAbstainDecisions">
+   			<value>false</value>
+   		</property>
+		<property name="decisionVoters">
+		  <list>
+		    <ref bean="roleVoter"/>
+		  </list>
+		</property>
+	</bean>
+	
+	
+	<bean id="securityControllerManager" class="org.springframework.richclient.security.support.DefaultSecurityControllerManager">
+    	<property name="securityControllerMap">
+        	<map>
+        	</map>
+    	</property>
+	</bean>	
+	
+</beans>

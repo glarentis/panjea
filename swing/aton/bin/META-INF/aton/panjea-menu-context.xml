@@ -1,0 +1,15 @@
+
+<beans>
+
+	<bean id="atonMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="atonMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:aton:onSale</value>
+                <value>atonExportCommand</value>
+                <value>atonImportCommand</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

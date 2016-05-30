@@ -1,0 +1,66 @@
+
+<beans>
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/compoli/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/compoli/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/compoli/messages-methods</value>
+                <value>classpath:it/eurotn/panjea/messages/compoli/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/compoli/messages-exceptions</value>
+                <value>classpath:it/eurotn/panjea/messages/compoli/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/compoli/messages-editors-pages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images  messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/compoli/images.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="comunicazionePolivalenteService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.ComunicazionePolivalenteService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean id="comunicazionePolivalenteBDimpl" class="it.eurotn.panjea.compoli.rich.bd.ComunicazionePolivalenteBD" singleton="true" lazy-init="true">
+        <property name="comunicazionePolivalenteService" ref="comunicazionePolivalenteService" />
+    </bean>
+    <bean id="comunicazionePolivalenteBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.compoli.rich.bd.IComunicazionePolivalenteBD</value>
+        </property>
+        <property name="target">
+            <ref local="comunicazionePolivalenteBDimpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+				<value>SwingBDInterceptor</value>
+                <value>AsyncAsyncBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+	<!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaComunicazionePolivalente"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaComunicazionePolivalente">
+	    <property name="versione" value=""/>
+	    <property name="nome" value="panjeaComunicazionePolivalente"/>
+	    <property name="descrizione" value="Modulo panjea per la comunicazione polivalente"/>
+	    <property name="rulesSource" value="it.eurotn.panjea.compoli.rich.rules.ComunicazionePolivalentePluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+
+</beans>

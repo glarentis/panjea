@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ContattoHub">
+        <s:complexType />
+      </s:element>
+      <s:element name="ContattoHubResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ContattoHubResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckClienteFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckClienteFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckClienteFatturaPAResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUrlLoginUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="urlClient" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUrlLoginUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUrlLoginUserResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIdUnivocoFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="codicePaese" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="identificativoTrasmittente" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIdUnivocoFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIdUnivocoFatturaPAResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNomeFileZipFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNomeFileZipFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNomeFileZipFatturaPAResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFileFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="buffer" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="offset" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadFileFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadFileFatturaPAResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InvioSdiFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codicePaese" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="identificativoTrasmittente" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="rinominaFile" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="firmaTerzoIntermediario" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InvioSdiFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InvioSdiFatturaPAResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="EsitoInvioSdiFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="identificativoSdi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFileFatturaPA" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EsitoInvioSdiFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EsitoInvioSdiFatturaPAResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportaFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFileZip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFileRiepilogo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportaFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ImportaFatturaPAResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransazioniSdiFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="identificativoSdi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFileZip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFileFatturaPA" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Data_Da" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="Data_A" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransazioniSdiFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransazioniSdiFatturaPAResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEsitiSdiFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="idTransazione" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="identificativoSdi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFileFatturaPA" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEsitiSdiFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEsitiSdiFatturaPAResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLogFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="identificativoSdi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeFileZip" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeServizio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="messaggio" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Data_Da" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="Data_A" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLogFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLogFatturaPAResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFileFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="idTransazione" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="estrazioneP7M" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFileFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFileFatturaPAResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFileEsitoFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="idEsito" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFileEsitoFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFileEsitoFatturaPAResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetFirmatarioFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="urlFirma" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usernameFirma" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordFirma" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nome" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cognome" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="societa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="note" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailPec" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="consenso" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="revoca" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="soggettoGiuridico" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="codiceFiscalePaese" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codiceFiscaleCodice" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partitaIvaPaese" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partitaIvaCodice" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="anagraficaTitolo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="anagraficaCodiceEORI" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetFirmatarioFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetFirmatarioFatturaPAResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPacchettoDiVersamentoFatturaPA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="isFattura" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="urlServizio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usernameServizio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizio" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="intervalloRdV" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="intervalloPdA" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="numPacchettiRdV" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="numPacchettiPdA" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="sendEmail" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="idCliente" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="numMaxFiles" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetPacchettoDiVersamentoFatturaPAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetPacchettoDiVersamentoFatturaPAResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatoProcessoConservazione">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="identificativoSdi" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStatoProcessoConservazioneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStatoProcessoConservazioneResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRapportoVersamento">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="listaIdRdV" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRapportoVersamentoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRapportoVersamentoResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPacchettoDistribuzione">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codiceCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passwordServizi" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="listaIdFattura" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="listaIdEsito" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="nomeUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cognomeUtente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codiceFiscalePaese" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codiceFiscale" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partitaIvaPaese" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partitaIva" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPacchettoDistribuzioneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPacchettoDistribuzioneResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ContattoHubSoapIn">
+    <wsdl:part name="parameters" element="tns:ContattoHub" />
+  </wsdl:message>
+  <wsdl:message name="ContattoHubSoapOut">
+    <wsdl:part name="parameters" element="tns:ContattoHubResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckClienteFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:CheckClienteFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="CheckClienteFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:CheckClienteFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUrlLoginUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUrlLoginUser" />
+  </wsdl:message>
+  <wsdl:message name="GetUrlLoginUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUrlLoginUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIdUnivocoFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:GetIdUnivocoFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="GetIdUnivocoFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:GetIdUnivocoFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNomeFileZipFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:GetNomeFileZipFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="GetNomeFileZipFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:GetNomeFileZipFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:UploadFileFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="UploadFileFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:UploadFileFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="InvioSdiFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:InvioSdiFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="InvioSdiFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:InvioSdiFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="EsitoInvioSdiFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:EsitoInvioSdiFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="EsitoInvioSdiFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:EsitoInvioSdiFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImportaFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:ImportaFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="ImportaFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:ImportaFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransazioniSdiFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransazioniSdiFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="GetTransazioniSdiFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransazioniSdiFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEsitiSdiFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:GetEsitiSdiFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="GetEsitiSdiFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:GetEsitiSdiFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLogFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:GetLogFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="GetLogFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:GetLogFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFileFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:GetFileFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="GetFileFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:GetFileFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFileEsitoFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:GetFileEsitoFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="GetFileEsitoFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:GetFileEsitoFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetFirmatarioFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:SetFirmatarioFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="SetFirmatarioFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:SetFirmatarioFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetPacchettoDiVersamentoFatturaPASoapIn">
+    <wsdl:part name="parameters" element="tns:SetPacchettoDiVersamentoFatturaPA" />
+  </wsdl:message>
+  <wsdl:message name="SetPacchettoDiVersamentoFatturaPASoapOut">
+    <wsdl:part name="parameters" element="tns:SetPacchettoDiVersamentoFatturaPAResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStatoProcessoConservazioneSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStatoProcessoConservazione" />
+  </wsdl:message>
+  <wsdl:message name="GetStatoProcessoConservazioneSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStatoProcessoConservazioneResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRapportoVersamentoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRapportoVersamento" />
+  </wsdl:message>
+  <wsdl:message name="GetRapportoVersamentoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRapportoVersamentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPacchettoDistribuzioneSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPacchettoDistribuzione" />
+  </wsdl:message>
+  <wsdl:message name="GetPacchettoDistribuzioneSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPacchettoDistribuzioneResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SolutionDOC_HubSoap">
+    <wsdl:operation name="ContattoHub">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Check Servizio Hub&lt;/b&gt;&lt;br&gt;Verifica servizio HUB raggiungibile.&lt;br&gt;Ritorna stringa '0' se attivo.</wsdl:documentation>
+      <wsdl:input message="tns:ContattoHubSoapIn" />
+      <wsdl:output message="tns:ContattoHubSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckClienteFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Check Servizio Hub&lt;/b&gt;&lt;br&gt;Verifica Autenticazione Cliente Servizio HUB.&lt;br&gt;Ritorna stringa '0' se attivo altrimenti una stringa errore 'Errore --&gt; ...'.</wsdl:documentation>
+      <wsdl:input message="tns:CheckClienteFatturaPASoapIn" />
+      <wsdl:output message="tns:CheckClienteFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUrlLoginUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Url Autenticazione Client SolutionDOC®&lt;/b&gt;&lt;br&gt;Creazione Url Query String per autenticazione Login Client SolutionDOC® es: https://legal.solutiondocondemand.com/SolutionDOC_client/login.aspx?auth=00CC5533BFB89201A6BE9D3F701ADAD048FA9D1529B3ECA6. &lt;br&gt;Il parametro UrlClient è opzionale se omesso viene ritornata la sola Query string es: ?auth=00CC5533BFB89201A6BE9D3F701ADAD048FA9D1529B3ECA6.&lt;br&gt;Ritorna stringa Autenticazione Login altrimenti una stringa errore 'Errore --&gt; ...'.</wsdl:documentation>
+      <wsdl:input message="tns:GetUrlLoginUserSoapIn" />
+      <wsdl:output message="tns:GetUrlLoginUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIdUnivocoFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Creazione nome file secondo nomenclatura richiesta per la trasmissione del File FatturaPA.&lt;br&gt;Ritorna la stringa come in esempio: 'ITRSSFNC78A01G224J_00001' altrimenti una stringa errore 'Errore --&gt; ...'.</wsdl:documentation>
+      <wsdl:input message="tns:GetIdUnivocoFatturaPASoapIn" />
+      <wsdl:output message="tns:GetIdUnivocoFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNomeFileZipFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Creazione nome file univoco da assegnare al file ZIP, contenente le fatture XML, per la successiva fase di caricamento.&lt;br&gt;Ritorna la stringa come in esempio: '20140514_113521_3376d9ca-7d06-4145-a757-b5f8bd2156fa.zip' altrimenti una stringa errore 'Errore --&gt; ...'.</wsdl:documentation>
+      <wsdl:input message="tns:GetNomeFileZipFatturaPASoapIn" />
+      <wsdl:output message="tns:GetNomeFileZipFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadFileFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Caricamento flusso dati file nel server per la successiva verifica e invio al servizio Sdi.&lt;br&gt;Il File da inviare allo Sdi deve avere una dimensione massima di di 5 Megabyte.&lt;br&gt;I file XML FatturaPA contenuti nello ZIP possono essere non firmati , nel caso in cui si richieda la loro firma successivamente, o file firmati del tipo CAdES-BES .xml.p7m.</wsdl:documentation>
+      <wsdl:input message="tns:UploadFileFatturaPASoapIn" />
+      <wsdl:output message="tns:UploadFileFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InvioSdiFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di invio file FatturaPA precedentemente caricato a sistema (ZIP), al Sistema di Interscambio (Sdi).&lt;br&gt;Vengono effettuati i controlli necessari alla validazione della firma e formattazione XML e inviati al Servizio di Interscambio.&lt;br&gt;(opzionale) I file FatturaPA possono essere rinominati in modo univoco secondo specifica prima dell'invio.&lt;br&gt;(opzionale) I file FatturaPA possono essere firmati con firma CAdES-BES (.p7m) prima dell'invio.&lt;br&gt;Viene ritornato l'esito di invio o una lista di errori.</wsdl:documentation>
+      <wsdl:input message="tns:InvioSdiFatturaPASoapIn" />
+      <wsdl:output message="tns:InvioSdiFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EsitoInvioSdiFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di Esito invio file FatturaPA precedentemente  caricato a sistema (ZIP), al Sistema di Interscambio (Sdi).&lt;br&gt;Viene ritornata una lista con l'esito di invio per ogni FatturaPA o una lista di errori.&lt;br&gt;Specificare identificativo Sdi e il nome univoco della FatturaPA se si vuole l'esito di una specifica fattura, altrimenti per tutte le FatturaPA inserire il solo identificativo Sdi.</wsdl:documentation>
+      <wsdl:input message="tns:EsitoInvioSdiFatturaPASoapIn" />
+      <wsdl:output message="tns:EsitoInvioSdiFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportaFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di importazione per la successiva Conservazione delle Fatture ed Esiti inviati alla PA.&lt;br&gt;I files da importare devono essere contenuti in un file ZIP, ogni fattura può avere uno o più esiti associati, inoltre va riportato un file XML di riepilogo dei documenti da importare con i dati di invio quali idSdi e dataSdi.&lt;br&gt;Viene ritornato l'esito di importazione o una lista di errori.</wsdl:documentation>
+      <wsdl:input message="tns:ImportaFatturaPASoapIn" />
+      <wsdl:output message="tns:ImportaFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransazioniSdiFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Riepilogo FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di riepilogo lista file FatturaPA inviate al Sistema di Interscambio (Sdi).&lt;br&gt;Se non vengono passati i parametri di filtro opzionali (identificativo Sdi, nome file ZIP, nome file FatturaPA, Data invio) la lista ritorna tutte le fatture inviate.</wsdl:documentation>
+      <wsdl:input message="tns:GetTransazioniSdiFatturaPASoapIn" />
+      <wsdl:output message="tns:GetTransazioniSdiFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEsitiSdiFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Riepilogo FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di Esito invio file FatturaPA precedentemente  caricato a sistema (ZIP), al Sistema di Interscambio (Sdi).&lt;br&gt;Viene ritornata una lista con l'esito di invio per ogni FatturaPA o una lista di errori.&lt;br&gt;Specificare identificativo Sdi e il nome univoco della FatturaPA se si vuole l'esito di una specifica fattura, altrimenti per tutte le FatturaPA inserire il solo identificativo Sdi.</wsdl:documentation>
+      <wsdl:input message="tns:GetEsitiSdiFatturaPASoapIn" />
+      <wsdl:output message="tns:GetEsitiSdiFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Riepilogo FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di riepilogo Log funzionalità FatturaPA.</wsdl:documentation>
+      <wsdl:input message="tns:GetLogFatturaPASoapIn" />
+      <wsdl:output message="tns:GetLogFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Riepilogo FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di Download File FatturaPA.&lt;br&gt;Ritorna un array con il nome file e il file FatturaPA altrimenti una stringa di Errore.</wsdl:documentation>
+      <wsdl:input message="tns:GetFileFatturaPASoapIn" />
+      <wsdl:output message="tns:GetFileFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileEsitoFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Riepilogo FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di Download File Esito FatturaPA.&lt;br&gt;Ritorna un array con il nome file e il file Esito altrimenti una stringa di Errore.</wsdl:documentation>
+      <wsdl:input message="tns:GetFileEsitoFatturaPASoapIn" />
+      <wsdl:output message="tns:GetFileEsitoFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetFirmatarioFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Conservazione FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Creazione di un nuovo Soggetto per la Firma Digitale Automatica.&lt;br&gt;Ritorna l'identificativo del Firmatario creato oppure una stringa di Errore.</wsdl:documentation>
+      <wsdl:input message="tns:SetFirmatarioFatturaPASoapIn" />
+      <wsdl:output message="tns:SetFirmatarioFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPacchettoDiVersamentoFatturaPA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Conservazione FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Creazione Pacchetti di Versamento per Conservazione FatturaPA</wsdl:documentation>
+      <wsdl:input message="tns:SetPacchettoDiVersamentoFatturaPASoapIn" />
+      <wsdl:output message="tns:SetPacchettoDiVersamentoFatturaPASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStatoProcessoConservazione">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Conservazione FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio di riepilogo lista Stato Processo di Conservazione relativo ad una Fattura e agli esiti ad essa associati.</wsdl:documentation>
+      <wsdl:input message="tns:GetStatoProcessoConservazioneSoapIn" />
+      <wsdl:output message="tns:GetStatoProcessoConservazioneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRapportoVersamento">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Conservazione FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio per la generazione del Rapporto di Versamento.&lt;br&gt;Documento informatico che attesta l'avvenuta presa in carico da parte del sistema di conservazione dei pacchetti di versamento inviati dal produttore.</wsdl:documentation>
+      <wsdl:input message="tns:GetRapportoVersamentoSoapIn" />
+      <wsdl:output message="tns:GetRapportoVersamentoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPacchettoDistribuzione">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Conservazione FatturaPA Servizio Hub&lt;/b&gt;&lt;br&gt;Servizio per la generazione del Pacchetto di Distribuzione.&lt;br&gt;La chiusura del processo di Conservazione avviene quando il sistema genera il Pacchetto di Archiviazione, nello specifico una volta al mese.&lt;br&gt;Per esibire a norma un documento è ncessario richiedere la generazione di un Pacchetto di Versamento.</wsdl:documentation>
+      <wsdl:input message="tns:GetPacchettoDistribuzioneSoapIn" />
+      <wsdl:output message="tns:GetPacchettoDistribuzioneSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SolutionDOC_HubSoap" type="tns:SolutionDOC_HubSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ContattoHub">
+      <soap:operation soapAction="http://tempuri.org/ContattoHub" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckClienteFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/CheckClienteFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUrlLoginUser">
+      <soap:operation soapAction="http://tempuri.org/GetUrlLoginUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdUnivocoFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/GetIdUnivocoFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNomeFileZipFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/GetNomeFileZipFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFileFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/UploadFileFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvioSdiFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/InvioSdiFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EsitoInvioSdiFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/EsitoInvioSdiFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportaFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/ImportaFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransazioniSdiFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/GetTransazioniSdiFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEsitiSdiFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/GetEsitiSdiFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/GetLogFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/GetFileFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileEsitoFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/GetFileEsitoFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFirmatarioFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/SetFirmatarioFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPacchettoDiVersamentoFatturaPA">
+      <soap:operation soapAction="http://tempuri.org/SetPacchettoDiVersamentoFatturaPA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatoProcessoConservazione">
+      <soap:operation soapAction="http://tempuri.org/GetStatoProcessoConservazione" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRapportoVersamento">
+      <soap:operation soapAction="http://tempuri.org/GetRapportoVersamento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPacchettoDistribuzione">
+      <soap:operation soapAction="http://tempuri.org/GetPacchettoDistribuzione" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SolutionDOC_HubSoap12" type="tns:SolutionDOC_HubSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ContattoHub">
+      <soap12:operation soapAction="http://tempuri.org/ContattoHub" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckClienteFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/CheckClienteFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUrlLoginUser">
+      <soap12:operation soapAction="http://tempuri.org/GetUrlLoginUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdUnivocoFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/GetIdUnivocoFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNomeFileZipFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/GetNomeFileZipFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadFileFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/UploadFileFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InvioSdiFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/InvioSdiFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EsitoInvioSdiFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/EsitoInvioSdiFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportaFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/ImportaFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransazioniSdiFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/GetTransazioniSdiFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEsitiSdiFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/GetEsitiSdiFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/GetLogFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/GetFileFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileEsitoFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/GetFileEsitoFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFirmatarioFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/SetFirmatarioFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPacchettoDiVersamentoFatturaPA">
+      <soap12:operation soapAction="http://tempuri.org/SetPacchettoDiVersamentoFatturaPA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStatoProcessoConservazione">
+      <soap12:operation soapAction="http://tempuri.org/GetStatoProcessoConservazione" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRapportoVersamento">
+      <soap12:operation soapAction="http://tempuri.org/GetRapportoVersamento" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPacchettoDistribuzione">
+      <soap12:operation soapAction="http://tempuri.org/GetPacchettoDistribuzione" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SolutionDOC_Hub">
+    <wsdl:port name="SolutionDOC_HubSoap" binding="tns:SolutionDOC_HubSoap">
+      <soap:address location="http://localhost/SolutionUpdate/SolutionDOC_Hub.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SolutionDOC_HubSoap12" binding="tns:SolutionDOC_HubSoap12">
+      <soap12:address location="http://localhost/SolutionUpdate/SolutionDOC_Hub.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

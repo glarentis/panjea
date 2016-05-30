@@ -1,0 +1,86 @@
+
+<beans>
+
+	<bean id="reportRubricaBeniAmmortizzabili" class="it.eurotn.rich.report.JecLocalReport" singleton="true" lazy-init="true">
+  		<property name="idReport">
+  			<value>Rubrica Beni Ammortizzabili</value>
+  		</property>
+  		<property name="xmlReportResource">
+  			<value>/it/eurotn/panjea/beniammortizzabili/rich/reports/resources/JecBAmmRubricaBeni.jasper</value>
+  		</property>
+  		<property name="reportParameters">
+  			<map>
+  				<entry key="ReportTitle">
+  					<value>Report Anagrafica</value>
+  				</entry>
+  			</map>
+ 		</property>
+ 		<property name="subReports">
+ 			<map>
+ 				<entry key="REPORT_SUBFIGLI">
+  					<ref bean="subreportRubricaBeniFigli"/>
+  				</entry>
+  			</map>
+ 		</property>
+ 		<property name="messages">
+ 			<value>it.eurotn.panjea.messages.bamm.reports.messages</value>
+ 		</property>
+  	</bean>
+
+  	<bean id="subreportRubricaBeniFigli" class="it.eurotn.rich.report.JecLocalReport" singleton="true" lazy-init="true">
+  		<property name="idReport">
+  			<value>RubricaBeniAmmortizzabiliFigli</value>
+  		</property>
+  		<property name="xmlReportResource">
+  			<value>/it/eurotn/panjea/beniammortizzabili/rich/reports/resources/JecBAmmSubRubricaBeni.jasper</value>
+  		</property>
+  	</bean>
+
+	<bean id="reportBeniAnnuali" class="it.eurotn.rich.report.JecLocalReport" singleton="true" lazy-init="true">
+  		<property name="idReport">
+  			<value>Beni Ammortizzabili Annuali</value>
+  		</property>
+  		<property name="xmlReportResource">
+  			<value>/it/eurotn/panjea/beniammortizzabili/rich/reports/resources/JecBAmmBeniAnnuali.jasper</value>
+  		</property>
+ 		<property name="subReports">
+ 			<map>
+ 				<entry key="REPORT_SUBFIGLI">
+  					<ref bean="subreportBeniAnnuali"/>
+  				</entry>
+  			</map>
+ 		</property>
+		<property name="reportParameters">
+  			<map>
+  				<entry key="ReportTitle">
+  					<value>Beni Acquistati</value>
+  				</entry>
+  			</map>
+ 		</property>
+ 		<property name="messages">
+ 			<value>it.eurotn.panjea.messages.bamm.reports.messages</value>
+ 		</property>
+  	</bean>
+
+  	<bean id="reportAmmortamenti" class="it.eurotn.rich.report.JecLocalReport" singleton="true" lazy-init="true">
+  		<property name="idReport">
+  			<value>Report Ammortamenti Annuali</value>
+  		</property>
+  		<property name="xmlReportResource">
+  			<value>/it/eurotn/panjea/beniammortizzabili/rich/reports/resources/JecBAmmAmmortamenti.jasper</value>
+  		</property>
+  		<property name="messages">
+ 			<value>it.eurotn.panjea.messages.bamm.reports.messages</value>
+ 		</property>
+  	</bean>
+
+  	<bean id="subreportBeniAnnuali" class="it.eurotn.rich.report.JecLocalReport" singleton="true" lazy-init="true">
+  		<property name="idReport">
+  			<value>Beni Annuali Figli</value>
+  		</property>
+  		<property name="xmlReportResource">
+  			<value>/it/eurotn/panjea/beniammortizzabili/rich/reports/resources/JecBAmmSubBeniAnnuali.jasper</value>
+  		</property>
+  	</bean>
+
+</beans>

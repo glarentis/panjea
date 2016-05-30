@@ -1,0 +1,137 @@
+
+<beans>
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="ricercaFatturePAEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.fatturepa.util.ParametriRicercaFatturePA</value>
+					</key>
+				</entry>
+				<entry value="fatturaElettronicaTypeEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.fatturepa.rich.editors.fatturaelettronicatype.AreaFatturaElettronicaType</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="aziendaEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>group:AnagraficaAzienda</value>
+						<value>aziendaPAPage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="aziendaPAPage" class="it.eurotn.panjea.fatturepa.rich.editors.aziendapa.AziendaPAPage" singleton="false">
+		<property name="fatturePAAnagraficaBD">
+			<ref bean="fatturePAAnagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	
+	<bean id="ricercaFatturePAEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ricercaFatturePAEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+					    <value>parametriRicercaFatturePAPage</value>
+						<value>risultatiRicercaFatturePATablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ricercaFatturePAEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="parametriRicercaFatturePAPage" class="it.eurotn.panjea.fatturepa.rich.editors.ricerca.ParametriRicercaFatturePAPage" singleton="false" lazy-init="true">
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	<bean id="risultatiRicercaFatturePATablePage" class="it.eurotn.panjea.fatturepa.rich.editors.ricerca.RisultatiRicercaFatturePATablePage" singleton="false" lazy-init="true">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="fatturePABD">
+			<ref bean="fatturePABD" />
+		</property>
+		<property name="reportManager">
+			<ref bean="reportManager" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="preferenzeMagazzinoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>group:preferenze</value>
+                        <value>fatturaPASettingsPage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="fatturaPASettingsPage" class="it.eurotn.panjea.fatturepa.rich.editors.settings.FatturaPASettingsPage" singleton="false" lazy-init="true">
+        <property name="fatturePAAnagraficaBD">
+            <ref bean="fatturePAAnagraficaBD" />
+        </property>
+    </bean>
+    
+    <bean id="fatturaElettronicaTypeEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.fatturepa.rich.editors.fatturaelettronicatype.AreaFatturaElettronicaTypeEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">fatturaElettronicaTypeEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+					    <!-- Vengono settate dinamicamente all'apertura dell'editor in base alla versione dell'XML -->
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">fatturaElettronicaTypeEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+    <bean id="areaFatturaElettronicaPageV1" class="it.eurotn.panjea.fatturepa.rich.editors.fatturaelettronicatype.v1.AreaFatturaElettronicaPage" singleton="false" lazy-init="true">
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	
+    <bean id="areaFatturaElettronicaPageV1_1" class="it.eurotn.panjea.fatturepa.rich.editors.fatturaelettronicatype.v1_1.AreaFatturaElettronicaPage" singleton="false" lazy-init="true">
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,244 @@
+
+<beans>
+
+	<bean id="openManutenzioneListinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openManutenzioneListinoCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaManutenzioneListino"></property>
+	</bean>
+
+	<bean id="openCategorieCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openCategorieCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.ArticoloCategoriaDTO"></property>
+	</bean>
+
+	<bean id="openOmaggiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openOmaggiCommand"></property>
+		<property name="openString" value="omaggiEditor"></property>
+	</bean>
+
+	<bean id="searchInventariArticoliCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.SearchInventariArticoliCommand">
+		<property name="idCommand" value="searchInventariArticoliCommand"></property>
+	</bean>
+
+	<bean id="openPreparaInventariArticoloCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.OpenPreparaInventariArticoloCommand">
+		<property name="idCommand" value="openPreparaInventariArticoloCommand"></property>
+	</bean>
+
+	<bean id="openRiepilogoArticoliEditorCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRiepilogoArticoliEditorCommand"></property>
+		<property name="openString" value="riepilogoArticoloEditor"></property>
+	</bean>
+
+	<bean id="openRendicontazioneCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRendicontazioneCommand"></property>
+		<property name="openString" value="rendicontazioneEditor"></property>
+	</bean>
+
+	<bean id="openAnagraficaRendicontazioneCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openAnagraficaRendicontazioneCommand"></property>
+		<property name="openString" value="anagraficaRendicontazioneEditor"></property>
+	</bean>
+
+	<bean id="openListinoTipoMezzoZonaGeograficaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openListinoTipoMezzoZonaGeograficaCommand"></property>
+		<property name="securityControllerId"
+			value="visualizzaListinoTipoMezzoZonaGeograficaController"></property>
+		<property name="openString" value="listinoTipoMezzoZonaGeograficaEditor"></property>
+	</bean>
+
+	<bean id="openTabelleGeneraliMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTabelleGeneraliMagazzinoCommand"></property>
+		<property name="openString" value="tabelleGeneraliMagazzinoEditor"></property>
+	</bean>
+
+	<bean id="openContabilizzazioneAreeMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openContabilizzazioneAreeMagazzinoCommand"></property>
+		<property name="openString" value="contabilizzazioneAreeMagazzinoEditor"></property>
+	</bean>
+
+	<bean id="openCategorieContabiliMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openCategorieContabiliMagazzinoCommand"></property>
+		<property name="openString" value="categorieContabiliMagazzinoEditor"></property>
+	</bean>
+
+	<bean id="openFatturazioniCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openFatturazioniCommand"></property>
+		<property name="securityControllerId" value="gestioneFatturazioneController"></property>
+		<property name="openString" value="fatturazioniEditor"></property>
+	</bean>
+
+	<bean id="openGestioneRifatturazioneCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openGestioneRifatturazioneCommand"></property>
+		<property name="securityControllerId" value="gestioneFatturazioneController"></property>
+		<property name="openString" value="gestioneRifatturazioneEditor"></property>
+	</bean>
+
+	<bean id="openFatturazioneCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.documento.OpenFatturazioneCommand">
+		<property name="securityControllerId" value="gestioneFatturazioneDiferitaController"></property>
+	</bean>
+
+	<bean id="searchListiniCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.SearchListiniCommand">
+		<property name="idCommand" value="searchListiniCommand"></property>
+		<property name="securityControllerId"
+			value="visualizzaListinoTipoMezzoZonaGeograficaController"></property>
+	</bean>
+
+	<bean id="newListinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="newListinoCommand"></property>
+		<property name="securityControllerId"
+			value="modificaListinoTipoMezzoZonaGeograficaController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.magazzino.domain.Listino"></property>
+	</bean>
+
+
+	<bean id="newContrattoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="newContrattoCommand"></property>
+		<property name="securityControllerId" value="modificaSearchResultContrattiController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.magazzino.domain.Contratto"></property>
+	</bean>
+
+	<bean id="valorizzaDistintaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="valorizzaDistintaCommand"></property>
+		<property name="securityControllerId" value="valorizzaDistintaCommandController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.parametriricerca.ParametriValorizzazioneDistinte"></property>
+	</bean>
+
+
+	<bean id="searchContrattiCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.SearchContrattiCommand">
+		<property name="idCommand" value="searchContrattiCommand"></property>
+		<property name="securityControllerId" value="visualizzaSearchResultContrattiController"></property>
+	</bean>
+
+	<!-- inizio commands documento -->
+
+	<bean id="newAreaMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="newAreaMagazzinoCommand"></property>
+		<property name="securityControllerId" value="gestioneDocMagazzinoController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.AreaMagazzinoFullDTO"></property>
+	</bean>
+
+	<bean id="openRicercaAreaMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRicercaAreaMagazzinoCommand"></property>
+		<property name="securityControllerId" value="visualizzaDocMagazzinoController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.ParametriRicercaAreaMagazzino"></property>
+	</bean>
+
+	<bean id="openValorizzazioneMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openValorizzazioneMagazzinoCommand"></property>
+		<property name="securityControllerId" value="visualizzaValorizzazioneController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.ParametriRicercaValorizzazione"></property>
+	</bean>
+
+	<bean id="openMovimentazioneArticoloCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openMovimentazioneArticoloCommand"></property>
+		<property name="securityControllerId" value="visualizzaMovimentazioneController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.ParametriRicercaMovimentazioneArticolo"></property>
+	</bean>
+
+	<bean id="openMovimentazioneMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openMovimentazioneMagazzinoCommand"></property>
+		<property name="securityControllerId" value="visualizzaAnalisiController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.ParametriRicercaMovimentazione"></property>
+	</bean>
+
+	<bean id="openPreferenzeMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openPreferenzeMagazzinoCommand"></property>
+		<property name="openString" value="preferenzeMagazzinoEditor"></property>
+	</bean>
+
+	<bean id="openSincronizzazioneDatawarehouseMagazzinoCommand"
+		class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand"
+			value="openSincronizzazioneDatawarehouseMagazzinoCommand"></property>
+		<property name="securityControllerId" value="visualizzaSincronizzazioneBIController"></property>
+		<property name="openString" value="sincronizzazioneDatawarehouse"></property>
+	</bean>
+
+	<bean id="openVerificaPrezzoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openVerificaPrezzoCommand"></property>
+		<property name="securityControllerId" value="visualizzaVerificaPrezzoController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.rich.editors.verificaprezzo.ParametriCalcoloPrezziPM"></property>
+	</bean>
+
+	<bean id="openStampaEtichetteCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openStampaEtichetteCommand"></property>
+		<property name="securityControllerId" value="visualizzaStampaEtichetteController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.domain.etichetta.ParametriStampaEtichetteArticolo"></property>
+	</bean>
+
+	<bean id="openRaggruppamentoArticoliCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRaggruppamentoArticoliCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.domain.RaggruppamentoArticoli"></property>
+	</bean>
+
+	<bean id="openProspettoContrattiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openProspettoContrattiCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.ContrattoProspettoDTO"></property>
+	</bean>
+
+	<bean id="openConfrontoListiniCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openConfrontoListiniCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaConfrontoListino"></property>
+	</bean>
+
+	<bean id="openSchedeArticoloCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openSchedeArticoloCommand"></property>
+		<property name="securityControllerId" value="gestioneSchedeArticoloController"></property>
+		<property name="openString" value="schedeArticoloEditor"></property>
+	</bean>
+
+	<bean id="openCreazioneSchedeArticoloCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openCreazioneSchedeArticoloCommand"></property>
+		<property name="securityControllerId" value="gestioneSchedeArticoloController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.parametriricerca.ParametriCreazioneSchedeArticoli"></property>
+	</bean>
+
+	<bean id="openElaborazioniSchedeArticoloCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openElaborazioniSchedeArticoloCommand"></property>
+		<property name="securityControllerId" value="gestioneSchedeArticoloController"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaElaborazioni"></property>
+	</bean>
+
+	<bean id="openTrasportatoVettoriCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.OpenTrasportatoVettoriCommand">
+		<property name="idCommand" value="openTrasportatoVettoriCommand"></property>
+	</bean>
+
+	<bean id="openImportazioneAreeMagazzinoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openImportazioneAreeMagazzinoCommand"></property>
+		<property name="securityControllerId" value="importazioneAreeMagazzinoController"></property>
+		<property name="openString" value="importazioniAreeMagazzinoEditor"></property>
+	</bean>
+
+	<bean id="openStampaContrattiCommand" class="it.eurotn.rich.command.OpenEditorCommand"
+		abstract="false" singleton="true">
+		<property name="idCommand" value="openStampaContrattiCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.magazzino.util.parametriricerca.ParametriRicercaStampaContratti"></property>
+	</bean>
+	
+	<bean id="openIndiceRotazioneMagazzinoCommand" class ="it.eurotn.rich.command.OpenEditorCommand">
+	<property name="idCommand" value="openIndiceRotazioneMagazzinoCommand"></property>
+		<property name="securityControllerId" value="openIndiceRotazioneMagazzinoController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.magazzino.util.parametriricerca.ParametriCalcoloIndiciRotazioneGiacenza"></property>
+	</bean>		<bean id="parametriListinoPrezziCommand" class ="it.eurotn.rich.command.OpenEditorCommand">	<property name="idCommand" value="parametriListinoPrezziCommand"></property>				<property name="openClassName" value="it.eurotn.panjea.magazzino.manager.listinoprezzi.ParametriListinoPrezzi"></property>	</bean>		</beans>

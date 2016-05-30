@@ -1,0 +1,5 @@
+dependencies {
+    provided	(project(':ear:ejb')){ transitive=false}
+    provided	project(':swing:core')
+    compile(group: 'bancor.K2s', name: 'K2sJ', version: '1.0')
+}

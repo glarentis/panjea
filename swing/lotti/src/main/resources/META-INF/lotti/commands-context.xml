@@ -1,0 +1,27 @@
+ 
+<beans>
+	<import resource="panjea-context.xml"/>
+	
+	<bean id="stampaEtichetteLottiDaAreaMagazzinoCommand" class="it.eurotn.panjea.lotti.rich.editors.righemagazzino.StampaEtichetteLottiDaAreaMagazzinoCommand">
+     	<property name="lottiBD">
+      		<ref bean="lottiBD"/>
+       	</property>
+       	<property name="settingsManager">
+       		<ref bean="settingManagerLocal"/>
+       	</property>
+    </bean>		
+
+    <bean id="openVerificheGiacenzaLottiCommand" class="it.eurotn.panjea.lotti.rich.commands.OpenVerificheGiacenzaLottiCommand">
+    </bean>
+    
+     <bean id="openRiepilogoLottoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+    	<property name="idCommand" value="openRiepilogoLottoCommand"></property>
+    	<property name="openClassName" value="it.eurotn.panjea.lotti.util.ParametriRicercaLotti"></property>
+    </bean>
+    
+     <bean id="openLottiInScadenzaEditorCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openLottiInScadenzaEditorCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.lotti.util.ParametriRicercaScadenzaLotti"></property>
+	</bean>
+    
+</beans>

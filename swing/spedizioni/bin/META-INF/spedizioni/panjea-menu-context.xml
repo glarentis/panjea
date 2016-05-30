@@ -1,0 +1,14 @@
+
+<beans>
+
+	<bean id="spedizioniMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="spedizioniMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:spedizioni:gestioneSpedizioni</value>
+				<value>openSelezioneMovimentiCommand</value>
+				<value>openRendicontazioneMovimentiCommand</value>	
+			</list>
+		</property>
+	</bean>
+</beans>

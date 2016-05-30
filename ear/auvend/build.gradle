@@ -1,0 +1,4 @@
+dependencies {
+    compile (project(':ear:ejb'))
+    compile 'jboss.jbossas.core-libs:jboss-jca:4.2.2.GA'
+}

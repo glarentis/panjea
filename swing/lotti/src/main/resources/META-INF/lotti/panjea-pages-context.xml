@@ -1,0 +1,118 @@
+ 
+<beans>
+    <import resource="panjea-context.xml" />
+    <import resource="panjea-menu-context.xml" />
+    <!-- EditorFactory -->
+    <bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="riepilogoLottoEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.lotti.util.ParametriRicercaLotti</value>
+                    </key>
+                </entry>
+                <entry value="lottiInScadenzaEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.lotti.util.ParametriRicercaScadenzaLotti</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <!-- searchFactory -->
+    <bean id="searchFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+        <property name="searchResultMap">
+            <map>
+                
+            </map>
+        </property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.RigaArticoloPage" id="rigaArticoloPage" lazy-init="true" singleton="false">
+    	<property name="righeLottiFormClass" value="it.eurotn.panjea.lotti.rich.forms.rigaLotto.RigheLottiForm">
+    	</property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.lotti.rich.editors.righemagazzino.RigheLottoComponentePage" id="righeLottoComponentePage" lazy-init="true" singleton="false">
+    </bean>
+    
+    <bean id="articoloPage" class="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoloPage" singleton="false" lazy-init="true">
+        <property name="pagineCollegate">
+            <list>
+                <ref bean="statisticheLottiArticoloPage" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.lotti.rich.editors.articolo.situazione.StatisticheLottiArticoloPage" id="statisticheLottiArticoloPage" lazy-init="true" singleton="false">
+    	<property name="lottiBD">
+    		<ref bean="lottiBD"/>
+    	</property>
+    </bean>
+    
+    <bean id="riepilogoLottoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">riepilogoLottoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>articoliLottoTablePage</value>
+						<value>statisticheLottiArticoloPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">riepilogoLottoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="articoliLottoTablePage" class="it.eurotn.panjea.lotti.rich.editors.riepilogolotto.ArticoliLottoTablePage" singleton="false" lazy-init="true">
+		<property name="lottiBD">
+    		<ref bean="lottiBD"/>
+    	</property>
+    </bean>
+    
+	<bean id="lottiInScadenzaEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">lottiInScadenzaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaLottiInScadenzaPage</value>
+						<value>risultatiRicercaLottiInScadenzaTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">lottiInScadenzaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="parametriRicercaLottiInScadenzaPage" class="it.eurotn.panjea.lotti.rich.editors.lottiinscadenza.ParametriRicercaLottiInScadenzaPage" singleton="false" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	
+	<bean id="risultatiRicercaLottiInScadenzaTablePage" class="it.eurotn.panjea.lotti.rich.editors.lottiinscadenza.RisultatiRicercaLottiInScadenzaTablePage" singleton="false" lazy-init="true">
+		<property name="lottiBD">
+			<ref bean="lottiBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+    
+</beans>

@@ -1,0 +1,806 @@
+
+ <!DOCTYPE beans SYSTEM "spring-beans.dtd">
+<beans>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/maga/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/maga/messages-commands</value>
+				<value>classpath:it/eurotn/panjea/messages/maga/messages-editors-pages</value>
+				<value>classpath:it/eurotn/panjea/messages/maga/messages-exceptions</value>
+				<value>classpath:it/eurotn/panjea/messages/maga/messages-methods</value>
+				<value>classpath:it/eurotn/panjea/messages/maga/messages-forms-model</value>
+				<value>classpath:it/eurotn/panjea/messages/maga/messages-classes</value>
+				<value>classpath:it/eurotn/panjea/messages/maga/messages-constraints</value>
+			</list>
+		</property>
+	</bean>
+	<!--Campi statici utilizzati nel factory della tabella -->
+	<bean id="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.LivelloRigaMagazzinoCellRenderer.LIVELLO_RIGA_MAGAZZINO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.editors.manutenzionelistino.NumeroManutenzioneCellRenderer.NUMERO_MANUTENZIONE_CELL_RENDERER_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.NumeroDocumentoNonAssegnatoCellRenderer.NUMERO_DOC_NON_ASSEGNATO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.editors.inventarioarticolo.GiacenzaRealeCellRenderer.GIACENZA_REALE_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.control.table.renderer.AggiornamentoAttributoCellRenderer.AGGIORNAMENTO_ATTRIBUTO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.control.table.renderer.AttributoMagazzinoValoreCellRenderer.ATTRIBUTO_MAGAZZINO_VALORE_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.editors.listino.VersioneListinoDataCellRenderer.VERSIONE_LISTINO_DATA_MAGAZZINO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.CodiceArticoloCellRenderer.CODICE_ARTICOLO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />	
+	<bean id="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.componenti.RigheArticoliFigliArticoloCellRenderer.RIGHE_ARTICOLI_FIGLI_ARTICOLO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.editors.schedearticolo.elaborazioni.ElaborazioneSchedeArticoloCellRenderer.ELABORAZIONE_SCHEDE_ARTICOLO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.magazzino.rich.control.table.renderer.QtaScaglioneCellRenderer.QTA_SCAGLIONE_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+
+	<bean id="jideTableFactory" class="it.eurotn.rich.control.table.JideTableFactory">
+		<property name="renderers">
+			<list>
+				<bean class="it.eurotn.panjea.magazzino.rich.renderer.ScontoContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.Sconto" />
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.editors.manutenzionelistino.NumeroManutenzioneCellRenderer">
+					<property name="type" value="com.jidesoft.grid.DefaultGroupRow"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.editors.manutenzionelistino.NumeroManutenzioneCellRenderer.NUMERO_MANUTENZIONE_CELL_RENDERER_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.LivelloRigaMagazzinoCellRenderer">
+					<property name="type" value="java.lang.String"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.LivelloRigaMagazzinoCellRenderer.LIVELLO_RIGA_MAGAZZINO_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.Articolo"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.ConfigurazioneDistinta"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.anagrafica.domain.FaseLavorazione"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.util.ArticoloRicerca"></property>
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.control.table.renderer.ArticoloLiteRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.ArticoloLite"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.Categoria"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.util.CategoriaLite"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.SedeMagazzinoLite"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.TipoMezzoTrasporto"></property>
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.control.table.renderer.StatoAreaMagazzinoCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.documento.AreaMagazzino$StatoAreaMagazzino"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.CategoriaContabileArticolo"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.CategoriaContabileDeposito"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.Listino$ETipoListino"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.CategoriaContabileSedeMagazzino"></property>
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.renderer.RulesValidationErrorsRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.RulesValidationErrors"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.util.parametriricerca.RigaManutenzioneListino$StatoRigaManutenzioneListino"></property>
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.renderer.DatiGenerazioneRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.DatiGenerazione"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.documento.TipoAreaMagazzino$TipoMovimento"></property>
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.NumeroDocumentoNonAssegnatoCellRenderer">
+					<property name="type" value="java.lang.Integer"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.NumeroDocumentoNonAssegnatoCellRenderer.NUMERO_DOC_NON_ASSEGNATO_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.editors.inventarioarticolo.GiacenzaRealeCellRenderer">
+					<property name="type" value="java.math.BigDecimal"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.editors.inventarioarticolo.GiacenzaRealeCellRenderer.GIACENZA_REALE_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.control.table.renderer.AggiornamentoAttributoCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.AttributoCategoria$TipoAggiornamento"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.control.table.renderer.AggiornamentoAttributoCellRenderer.AGGIORNAMENTO_ATTRIBUTO_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.control.table.renderer.AttributoMagazzinoValoreCellRenderer">
+					<property name="type" value="java.lang.String"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.control.table.renderer.AttributoMagazzinoValoreCellRenderer.ATTRIBUTO_MAGAZZINO_VALORE_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.editors.listino.VersioneListinoDataCellRenderer">
+					<property name="type" value="java.util.Date"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.editors.listino.VersioneListinoDataCellRenderer.VERSIONE_LISTINO_DATA_MAGAZZINO_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.CodiceArticoloCellRenderer">
+					<property name="type" value="java.lang.String"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.editors.categoriaarticolo.CodiceArticoloCellRenderer.CODICE_ARTICOLO_CONTEXT" />
+				</bean>				
+				<bean class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.componenti.RigheArticoliFigliArticoloCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.ArticoloLite"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.componenti.RigheArticoliFigliArticoloCellRenderer.RIGHE_ARTICOLI_FIGLI_ARTICOLO_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.editors.schedearticolo.elaborazioni.ElaborazioneSchedeArticoloCellRenderer">
+					<property name="type" value="java.lang.String"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.editors.schedearticolo.elaborazioni.ElaborazioneSchedeArticoloCellRenderer.ELABORAZIONE_SCHEDE_ARTICOLO_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.SchedaArticolo$StatoScheda"></property>
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.control.table.renderer.QtaScaglioneCellRenderer">
+					<property name="type" value="java.lang.Double"></property>
+					<property name="editorContext" ref="it.eurotn.panjea.magazzino.rich.control.table.renderer.QtaScaglioneCellRenderer.QTA_SCAGLIONE_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.magazzino.domain.Contratto"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.anagrafica.domain.FaseLavorazioneArticolo"></property>
+				</bean>
+				<bean class="it.eurotn.panjea.magazzino.rich.control.table.renderer.StatoSpedizioneRenderer">
+					<property name="type" value="it.eurotn.panjea.documenti.domain.StatoSpedizione"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="panjeaConversionService"
+		class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+		<property name="converters">
+			<list>
+				<bean name="ListinoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.TipoListinoConverter"></bean>
+				<bean name="ArticoloConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.ArticoloConverter"></bean>
+				<bean name="ConfigurazioneDistintaConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.ConfigurazioneDistintaConverter"></bean>
+				<bean name="ContrattoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.ContrattoConverter"></bean>
+				<bean name="CausaleTrasportoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.CausaleTrasportoConverter">
+					<property name="magazzinoAnagraficaBD">
+						<ref bean="magazzinoAnagraficaBD" />
+					</property>
+				</bean>
+				<bean name="TrasportoCuraConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.TrasportoCuraConverter">
+					<property name="magazzinoAnagraficaBD">
+						<ref bean="magazzinoAnagraficaBD" />
+					</property>
+				</bean>
+
+				<bean name="AspettoEsterioreConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.AspettoEsterioreConverter">
+					<property name="magazzinoAnagraficaBD">
+						<ref bean="magazzinoAnagraficaBD" />
+					</property>
+				</bean>
+				<bean name="TipoPortoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.TipoPortoConverter">
+					<property name="magazzinoAnagraficaBD">
+						<ref bean="magazzinoAnagraficaBD" />
+					</property>
+				</bean>
+				<bean name="CodiceValutaConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.ValutaAziendaConverter">
+					<property name="valutaBD">
+						<ref bean="valutaBD" />
+					</property>
+				</bean>
+				<bean name="ListinoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.ListinoConverter"></bean>
+				<bean name="CategoriaArticoloConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.CategoriaArticoloConverter"></bean>
+				<bean name="CategoriaCommercialeArticoloConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.CategoriaCommercialeArticoloConverter"></bean>
+				<bean name="CategoriaArticoloLiteConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.CategoriaArticoloLiteConverter"></bean>
+				<bean name="ArticoloLiteConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.ArticoloLiteConverter"></bean>
+				<bean name="SedeMagazzinoLiteConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.SedeMagazzinoLiteConverter"></bean>
+				<bean name="TipoMezzoTrasportoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.TipoMezzoTrasportoConverter"></bean>
+				<bean name="ScontoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.ScontoConverter"></bean>
+				<bean name="TipoAreaMagazzinoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.TipoAreaMagazzinoConverter"></bean>
+				<bean name="CategoriaContabileArticoloConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.CategoriaContabileArticoloConverter"></bean>
+				<bean name="CategoriaContabileDepositoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.CategoriaContabileDepositoConverter"></bean>
+				<bean name="CategoriaContabileSedeMagazzinoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.CategoriaContabileSedeMagazzinoConverter"></bean>
+				<bean name="RulesValidationErrorsConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.RulesValidationErrorsConverter"></bean>
+				<bean name="DatiGenerazioneConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.DatiGenerazioneConverter"></bean>
+				<bean name="TipoMovimentoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.TipoMovimentoConverter"></bean>
+				<bean name="FormulaTrasformazioneConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.FormulaTrasformazioneConverter"></bean>
+				<bean name="TipoAreaMagazzinoPMConverter"
+					class="it.eurotn.panjea.magazzino.rich.editors.rendicontazione.anagrafica.TipoAreaMagazzinoPMConverter"></bean>
+				<bean name="TipoEsportazioneConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.TipoEsportazioneConverter"></bean>
+				<bean name="VersioneListinoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.VersioneListinoConverter"></bean>
+				<bean name="AreaMagazzinoFullDTOConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.AreaMagazzinoFullDTOConverter"></bean>
+				<bean name="ArticoloRicercaConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.ArticoloRicercaConverter"></bean>
+				<bean name="FaseLavorazioneConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.FaseLavorazioneConverter"></bean>
+				<bean name="CategoriaSedeMagazzinoConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.CategoriaSedeMagazzinoConverter"></bean>
+				<bean name="FaseLavorazioneArticoloConverter"
+					class="it.eurotn.panjea.magazzino.rich.converter.FaseLavorazioneArticoloConverter"></bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" id="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoliRicercaTableModel.ARTICOLO_RICERCA_NAVIGATION_CONTEXT"/>
+	
+	<bean
+		class="it.eurotn.panjea.rich.factory.navigationloader.PanjeaNavigationLoaderFactory"
+		id="panjeaNavigationLoaderFactory" singleton="true" lazy-init="true"
+		depends-on="serviceLocator">
+		<property name="loaderCommands">
+			<list>
+				<ref bean="articoloLoaderCommand" />
+				<ref bean="articoloAnalisiLoaderCommand" />
+				<ref bean="articoloRicercaAnalisiLoaderCommand" />
+				<ref bean="articoloMovimentazioneLoaderCommand" />
+				<ref bean="articoloRicercaMovimentazioneLoaderCommand" />
+				<ref bean="apriStatArticoloCommand" />
+				<ref bean="apriStatArticoloRicercaCommand" />
+				<ref bean="depositoAnagraficaLoaderCommand" />
+				<ref bean="depositoValorizzazioneLoaderCommand" />
+				<ref bean="contrattoLoaderCommand" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Loader action command -->
+	<bean id="articoloLoaderCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.navigationloaders.ArticoloLoaderCommand">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean id="articoloAnalisiLoaderCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.navigationloaders.ArticoloAnalisiLoaderCommand">
+	</bean>
+	<bean id="articoloRicercaAnalisiLoaderCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.navigationloaders.ArticoloRicercaAnalisiLoaderCommand">
+		<property name="navigationLoaderContext" ref="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoliRicercaTableModel.ARTICOLO_RICERCA_NAVIGATION_CONTEXT"/>
+	</bean>
+	<bean id="articoloMovimentazioneLoaderCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.navigationloaders.ArticoloMovimentazioneLoaderCommand">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+	<bean id="articoloRicercaMovimentazioneLoaderCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.navigationloaders.ArticoloRicercaMovimentazioneLoaderCommand">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="navigationLoaderContext" ref="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoliRicercaTableModel.ARTICOLO_RICERCA_NAVIGATION_CONTEXT"/>
+	</bean>
+	<bean id="apriStatArticoloCommand"
+		class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.ApriStatisticaArticoloCommand">
+	</bean>
+	<bean id="apriStatArticoloRicercaCommand"
+		class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.ApriStatisticaArticoloRicercaCommand">
+		<property name="navigationLoaderContext" ref="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoliRicercaTableModel.ARTICOLO_RICERCA_NAVIGATION_CONTEXT"/>
+	</bean>
+	<bean id="depositoValorizzazioneLoaderCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.navigationloaders.DepositoValorizzazioneLoaderCommand">
+	</bean>
+	<bean id="depositoAnagraficaLoaderCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.navigationloaders.DepositoAnagraficaLoaderCommand">
+	</bean>
+	<bean id="contrattoLoaderCommand"
+		class="it.eurotn.panjea.magazzino.rich.commands.navigationloaders.ContrattoLoaderCommand">
+		<property name="contrattoBD">
+			<ref bean="contrattoBD" />
+		</property>
+	</bean>
+
+	<bean id="imageResourcesFactory"
+		class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/maga/images.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="documentiExporterService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.DocumentiExporterService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="documentiExporterBDImpl" class="it.eurotn.panjea.magazzino.rich.bd.DocumentiExporterBD"
+		singleton="true" lazy-init="true">
+		<property name="documentiExporterService" ref="documentiExporterService"></property>
+	</bean>
+	<bean id="documentiExporterBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.magazzino.rich.bd.IDocumentiExporterBD</value>
+		</property>
+		<property name="target">
+			<ref local="documentiExporterBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="posSettingsService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.PosSettingsService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="posSettingsBDImpl" class="it.eurotn.panjea.magazzino.rich.bd.PosSettingsBD"
+		singleton="true" lazy-init="true">
+		<property name="posSettingsService" ref="posSettingsService"></property>
+	</bean>
+	<bean id="posSettingsBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.magazzino.rich.bd.IPosSettingsBD</value>
+		</property>
+		<property name="target">
+			<ref local="posSettingsBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="magazzinoSchedeArticoloService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.MagazzinoSchedeArticoloService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="magazzinoSchedeArticoloBDImpl"
+		class="it.eurotn.panjea.magazzino.rich.bd.MagazzinoSchedeArticoloBD"
+		singleton="true" lazy-init="true">
+		<property name="magazzinoSchedeArticoloService" ref="magazzinoSchedeArticoloService"></property>
+	</bean>
+	<bean id="magazzinoSchedeArticoloBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.magazzino.rich.bd.IMagazzinoSchedeArticoloBD</value>
+		</property>
+		<property name="target">
+			<ref local="magazzinoSchedeArticoloBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- il service del datawarehouse lo definisco sia nel magazzino che nel
+		proprietario business intelligence dato hce qui nel magazzino ho bisogno
+		della sincronizzazione del datawarehouse -->
+	<bean id="dataWarehouseService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.DataWarehouseService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="partiteService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.PartiteService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="rateService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.RateService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="contabilitaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.ContabilitaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="ivaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.IvaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="magazzinoAnagraficaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.MagazzinoAnagraficaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="magazzinoAnagraficaBDImpl"
+		class="it.eurotn.panjea.magazzino.rich.bd.MagazzinoAnagraficaBD"
+		singleton="true" lazy-init="true">
+		<property name="magazzinoAnagraficaService" ref="magazzinoAnagraficaService" />
+		<property name="listinoService" ref="listinoService" />
+		<property name="listinoTipoMezzoZonaGeograficaService" ref="listinoTipoMezzoZonaGeograficaService" />
+		<property name="dataWarehouseService" ref="dataWarehouseService" />
+	</bean>
+	<bean id="magazzinoAnagraficaBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.magazzino.rich.bd.IMagazzinoAnagraficaBD</value>
+		</property>
+		<property name="target">
+			<ref local="magazzinoAnagraficaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="magazzinoDocumentoBDImpl" class="it.eurotn.panjea.magazzino.rich.bd.MagazzinoDocumentoBD"
+		singleton="true" lazy-init="true">
+		<property name="magazzinoDocumentoService" ref="magazzinoDocumentoService"></property>
+		<property name="magazzinoStatisticheService" ref="magazzinoStatisticheService"></property>
+		<property name="ivaService" ref="magazzinoIvaService"></property>
+		<property name="partiteService" ref="partiteService"></property>
+		<property name="rateService" ref="rateService"></property>
+		<property name="contabilitaService" ref="contabilitaService"></property>
+		<property name="gestioneInventarioArticoloService" ref="gestioneInventarioArticoloService"></property>
+		<property name="spedizioneDocumentiService" ref="spedizioneDocumentiService"></property>
+	</bean>
+	<bean id="magazzinoDocumentoBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.magazzino.rich.bd.IMagazzinoDocumentoBD</value>
+		</property>
+		<property name="target">
+			<ref local="magazzinoDocumentoBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="listinoService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.ListinoService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="listinoTipoMezzoZonaGeograficaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.ListinoTipoMezzoZonaGeograficaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="magazzinoDocumentoService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.MagazzinoDocumentoService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="spedizioneDocumentiService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.SpedizioneDocumentiService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="magazzinoStatisticheService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.MagazzinoStatisticheService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="magazzinoIvaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.IvaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+
+	<bean id="moduloPrezzoBDImpl" class="it.eurotn.panjea.magazzino.rich.bd.ModuloPrezzoBD"
+		singleton="true" lazy-init="true">
+		<property name="moduloPrezzoService" ref="moduloPrezzoService"></property>
+	</bean>
+	<bean id="moduloPrezzoBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.magazzino.rich.bd.IModuloPrezzoBD</value>
+		</property>
+		<property name="target">
+			<ref local="moduloPrezzoBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="contrattoBDImpl" class="it.eurotn.panjea.magazzino.rich.bd.ContrattoBD"
+		singleton="true" lazy-init="true">
+		<property name="contrattoService" ref="contrattoService"></property>
+	</bean>
+	<bean id="contrattoBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.magazzino.rich.bd.IContrattoBD</value>
+		</property>
+		<property name="target">
+			<ref local="contrattoBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="moduloPrezzoService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.ModuloPrezzoService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="contrattoService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.ContrattoService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="gestioneInventarioArticoloService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.GestioneInventarioArticoloService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="magazzinoContabilizzazioneBDImpl"
+		class="it.eurotn.panjea.magazzino.rich.bd.MagazzinoContabilizzazioneBD"
+		singleton="true" lazy-init="true">
+		<property name="magazzinoAnagraficaService" ref="magazzinoAnagraficaService"></property>
+		<property name="magazzinoDocumentoService" ref="magazzinoDocumentoService"></property>
+	</bean>
+	<bean id="magazzinoContabilizzazioneBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.magazzino.rich.bd.IMagazzinoContabilizzazioneBD</value>
+		</property>
+		<property name="target">
+			<ref local="magazzinoContabilizzazioneBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="aziendaCorrente" class="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente"
+		singleton="true" lazy-init="true">
+		<property name="annoCompetenzaMagazzinoLocator">
+			<ref bean="annoCompetenzaMagazzinoLocator" />
+		</property>
+	</bean>
+	<bean id="annoCompetenzaMagazzinoLocator"
+		class="it.eurotn.panjea.magazzino.rich.pm.AnnoCompetenzaMagazzinoLocator"
+		singleton="true" lazy-init="true">
+		<property name="magazzinoAnagraficaBD">
+			<ref bean="magazzinoAnagraficaBD" />
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.rich.factory.table.JXTableFactory"
+		id="jXTableFactory">
+		<property name="cellRenderers">
+			<map>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CategoriaContabileDeposito</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.magazzino.rich.factory.table.CategoriaContabileDepositoRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CategoriaContabileArticolo</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.magazzino.rich.factory.table.CategoriaContabileArticoloRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.CategoriaContabileSedeMagazzino</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.magazzino.rich.factory.table.CategoriaContabileSedeMagazzinoRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.Articolo</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.magazzino.rich.factory.table.CustomArticoloRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.magazzino.domain.ArticoloLite</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.magazzino.rich.factory.table.CustomArticoloRenderer"></bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="exceptionHandler"
+		class="org.springframework.richclient.exceptionhandling.delegation.DelegatingExceptionHandler">
+		<property name="delegateList">
+			<list>
+				<bean
+					class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.magazzino.exception.DistintaCircolareException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean
+							class="it.eurotn.panjea.magazzino.exceptionhandler.DistintaCircolareExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.magazzino.exception.ArticoliRigaMagazzinoCollegataException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean
+							class="it.eurotn.panjea.magazzino.exceptionhandler.ArticoliRigaMagazzinoCollegataExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.magazzino.rich.editors.areamagazzino.LayoutStampaPredefinitoNonPressenteException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean
+							class="it.eurotn.panjea.magazzino.exceptionhandler.LayoutStampaPredefinitoTipoDocumentoAssenteExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.magazzino.exception.FormuleTipoAttributoException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean
+							class="it.eurotn.panjea.magazzino.exceptionhandler.FormuleTipoAttributoExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="articoloMarchiCEDAO"
+		class="it.eurotn.panjea.magazzino.rich.articoli.marchice.ArticoloMarchiCEDAO">
+		<property name="reportManager">
+			<ref bean="reportManager" />
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		id="contabilizzazioneAreeMagazzinoContainer">
+		<property name="connectionFactory" ref="topicConnectionFactory" />
+		<property name="destination" ref="panjeaDestination" />
+		<property name="messageListener"
+			ref="contabilizzazioneAreeMagazzinoMessageListener" />
+		<property name="messageSelector"
+			value="messageSelector='contabilizzazioneMessageSelector'" />
+		<property name="autoStartup" value="true" />
+	</bean>
+	<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter"
+		id="contabilizzazioneAreeMagazzinoMessageListener">
+		<property name="delegate"
+			ref="contabilizzazioneAreeMagazzinoMessageDelegate" />
+		<!-- we don't want automatic message context extraction -->
+		<property name="messageConverter">
+			<null />
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.magazzino.rich.editors.contabilizzazione.ContabilizzazioneAreeMagazzinoMessageDelegate"
+		id="contabilizzazioneAreeMagazzinoMessageDelegate" lazy-init="true"
+		singleton="true">
+	</bean>
+
+	<bean
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		id="confermaMovimentiInFatturazioneContainer">
+		<property name="connectionFactory" ref="topicConnectionFactory" />
+		<property name="destination" ref="panjeaDestination" />
+		<property name="messageListener"
+			ref="confermaMovimentiInFatturazioneMessageListener" />
+		<property name="messageSelector"
+			value="messageSelector='fatturazioneConfermaMessageSelector'" />
+		<property name="autoStartup" value="true" />
+	</bean>
+	<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter"
+		id="confermaMovimentiInFatturazioneMessageListener">
+		<property name="delegate"
+			ref="confermaMovimentiInFatturazioneMessageDelegate" />
+		<!-- we don't want automatic message context extraction -->
+		<property name="messageConverter">
+			<null />
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.ConfermaMovimentiInFatturazioneMessageDelegate"
+		id="confermaMovimentiInFatturazioneMessageDelegate" lazy-init="true"
+		singleton="true">
+	</bean>
+
+	<bean
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		id="contabilizzazioneMovimentiInFatturazioneContainer">
+		<property name="connectionFactory" ref="topicConnectionFactory" />
+		<property name="destination" ref="panjeaDestination" />
+		<property name="messageListener"
+			ref="contabilizzazioneMovimentiInFatturazioneMessageListener" />
+		<property name="messageSelector"
+			value="messageSelector='fatturazioneContabilizzazioneMessageSelector'" />
+		<property name="autoStartup" value="true" />
+	</bean>
+	<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter"
+		id="contabilizzazioneMovimentiInFatturazioneMessageListener">
+		<property name="delegate"
+			ref="contabilizzazioneMovimentiInFatturazioneMessageDelegate" />
+		<!-- we don't want automatic message context extraction -->
+		<property name="messageConverter">
+			<null />
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.magazzino.rich.editors.fatturazione.consultazione.ContabilizzazioneMovimentiInFatturazioneMessageDelegate"
+		id="contabilizzazioneMovimentiInFatturazioneMessageDelegate"
+		lazy-init="true" singleton="true">
+	</bean>
+
+	<!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaMagazzino"/>
+           	</list>
+        </property>
+    </bean>
+
+    <bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaMagazzino">
+		<property name="versione" value=""/>
+		<property name="nome" value="panjeaMagazzino"/>
+		<property name="descrizione" value="Modulo panjea magazzino"/>
+		<property name="rulesSource" value="it.eurotn.panjea.magazzino.rich.rules.MagazzinoPluginRulesSource"/>
+	</bean>
+	<!-- fine plugins rules source -->
+</beans>

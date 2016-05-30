@@ -1,0 +1,199 @@
+  
+<beans>
+	<bean id="openDatiGeograficiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openDatiGeograficiCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.anagrafica.domain.datigeografici.DatiGeografici"></property>
+	</bean>
+	
+	<bean id="openTabelleDatiGeograficiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTabelleDatiGeograficiCommand"></property>
+		<property name="openString" value="tabelleDatiGeograficiEditor"></property>
+	</bean>
+	
+	<bean id="openTipologieCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTipologieCommand"></property>
+		<property name="openString" value="tipologieEditor"></property>
+	</bean>
+	
+	<bean id="openCodiciPagamentoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openCodiciPagamentoCommand"></property>
+		<property name="openString" value="codiciPagamentoEditor"></property>
+	</bean>
+	
+	<bean id="openCodiciIvaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openCodiciIvaCommand"></property>
+		<property name="openString" value="codiciIvaEditor"></property>
+	</bean>
+	
+	<bean id="openNoteAnagraficheEditorCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openNoteAnagraficheEditorCommand"></property>
+		<property name="openString" value="noteAnagraficaEditor"></property>
+	</bean>
+	
+	<bean id="openRiepilogoSedeEntitaEditorCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRiepilogoSedeEntitaEditorCommand"></property>
+		<property name="openString" value="riepilogoSedeEntitaEditor"></property>
+	</bean>
+    
+    <bean id="openRubricaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+    	<property name="idCommand" value="openRubricaCommand"></property>
+    	<property name="openString" value="rubricaEditor"></property>
+    </bean>
+	
+	<bean id="openDatiBancariCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openDatiBancariCommand"></property>
+		<property name="openString" value="datiBancariEditor"></property>
+	</bean>
+	
+	<bean id="openContrattiSpesometroCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openContrattiSpesometroCommand"></property>
+		<property name="openString" value="contrattiSpesometroEditor"></property>
+	</bean>
+	
+	
+	<bean id="searchClientiCommand" class="it.eurotn.panjea.anagrafica.rich.commands.SearchEntitaCommand">
+		<property name="idCommand" value="searchClientiCommand"></property>
+		<property name="entita" value="Clienti" />
+		<property name="searchViewClass" value="it.eurotn.panjea.anagrafica.domain.lite.ClienteLite" />
+	</bean>
+	
+	<bean id="searchClientiPotenzialiCommand" class="it.eurotn.panjea.anagrafica.rich.commands.SearchEntitaCommand">
+		<property name="idCommand" value="searchClientiPotenzialiCommand"></property>
+		<property name="entita" value="ClientiPotenziali" />
+		<property name="searchViewClass" value="it.eurotn.panjea.anagrafica.domain.lite.ClientePotenzialeLite" />
+	</bean>
+	
+	<bean id="searchVettoriCommand" class="it.eurotn.panjea.anagrafica.rich.commands.SearchEntitaCommand">
+		<property name="idCommand" value="searchVettoriCommand"></property>
+		<property name="entita" value="Vettori" />
+		<property name="searchViewClass" value="it.eurotn.panjea.anagrafica.domain.lite.VettoreLite"/>
+		<property name="securityControllerId" value="."></property>
+	</bean>
+	
+	<bean id="searchFornitoriCommand" class="it.eurotn.panjea.anagrafica.rich.commands.SearchEntitaCommand">
+		<property name="idCommand" value="searchFornitoriCommand"></property>
+		<property name="entita" value="Fornitori" />
+		<property name="searchViewClass" value="it.eurotn.panjea.anagrafica.domain.lite.FornitoreLite" />
+	</bean>
+	
+	<bean id="newClienteCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+		<property name="entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Cliente" />
+		</property>
+		<property name="idCommand" value="newClienteCommand" />
+		<property name="anagraficaBDId" value="anagraficaBD"></property>
+        <property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+        <property name="securityControllerId" value="modificaClientiController"></property>
+	</bean>
+	
+	<bean id="newClientePotenzialeCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+		<property name="entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.ClientePotenziale" />
+		</property>
+		<property name="idCommand" value="newClientePotenzialeCommand" />
+		<property name="anagraficaBDId" value="anagraficaBD"></property>
+		<property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+		 <property name="securityControllerId" value="modificaClientiPotenzialeController"></property>
+	</bean>
+			
+	<bean id="newFornitoreCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+		<property name="entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Fornitore" />
+		</property>
+		<property name="idCommand" value="newFornitoreCommand" />
+		<property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+		<property name="securityControllerId" value="modificaFornitoreController"></property>
+	</bean>
+	
+	<bean id="newVettoreCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+		<property name="entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Vettore" />
+		</property>
+		<property name="idCommand" value="newVettoreCommand" />
+		<property name="anagraficaBDId" value="anagraficaBD"></property>
+        <property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+        <property name="securityControllerId" value="modificaVettoreController"></property>
+	</bean>
+	
+	<!-- Mi creo i bean AnagraficaCommand per separare i command sui form ricercaAnagrafica e ricercacliente o fornitore -->
+	<bean id="newClienteAnagraficaCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+		<property name="entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Cliente" />
+		</property>
+		<property name="idCommand" value="newClienteAnagraficaCommand" />
+		<property name="anagraficaBDId" value="anagraficaBD"></property>
+        <property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+         <property name="securityControllerId" value="modificaClientiController"></property>
+	</bean>
+	
+	<bean id="newClientePotenzialeAnagraficaCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+		<property name="entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.ClientePotenziale" />
+		</property>
+		<property name="idCommand" value="newClientePotenzialeAnagraficaCommand" />
+		<property name="anagraficaBDId" value="anagraficaBD"></property>
+        <property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+         <property name="securityControllerId" value="modificaClientiPotenzialeController"></property>
+	</bean>
+	
+	<bean id="newFornitoreAnagraficaCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+		<property name="entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Fornitore" />
+		</property>
+		<property name="idCommand" value="newFornitoreAnagraficaCommand" />
+		<property name="anagraficaBDId" value="anagraficaBD"></property>
+		<property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+		 <property name="securityControllerId" value="modificaFornitoreController"></property>
+	</bean>
+	
+	<bean id="newVettoreAnagraficaCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+		<property name="entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Vettore" />
+		</property>
+		<property name="idCommand" value="newVettoreAnagraficaCommand" />
+		<property name="anagraficaBDId" value="anagraficaBD"></property>
+        <property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+        <property name="securityControllerId" value="modificaVettoreController"></property>
+	</bean>
+	<!-- Fine mappaggio AnagraficaCommand -->
+	
+	<bean id="newAziendaCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewAziendaCommand">
+	</bean>
+	
+	<bean id="newTipoDocumentoCommand" class="it.eurotn.panjea.anagrafica.rich.commands.documento.NewTipoDocumentoCommand">
+	<property name="securityControllerId" value="modificaSearchResultTipiDocumentoController"></property>
+
+	</bean>
+	
+	<bean id="newDocumentoCommand" class="it.eurotn.panjea.anagrafica.rich.commands.documento.NewDocumentoCommand">
+	</bean>
+	
+	<bean id="searchTipiDocumentoCommand" class="it.eurotn.panjea.anagrafica.rich.commands.documento.SearchTipiDocumentoCommand">
+	</bean>	
+    <bean id="openValutaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+    	<property name="idCommand" value="openValutaCommand"></property>
+    	<property name="openClassName" value="it.eurotn.panjea.anagrafica.domain.ValutaAzienda"></property>
+    </bean>
+    
+     <bean id="scriptServerCommand" class="it.eurotn.panjea.rich.commands.ScriptServerCommand">
+        <property name="securityControllerId" value="aggiornamentoController"></property>        
+    </bean>
+    
+    <bean id="mantisCommand" class="it.eurotn.panjea.rich.editors.webbrowser.WebBrowserCommand">
+        <property name="securityControllerId" value="aggiornamentoController"></property>
+        <property name="url">
+            <bean class="it.eurotn.panjea.rich.editors.webbrowser.MantisUrl" />
+        </property>
+    </bean>
+    
+    <bean id="gestioneAuditCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="gestioneAuditCommand"></property>
+		<property name="securityControllerId" value="strumentiController"></property>
+		<property name="openString" value="gestioneAuditEditor"></property>
+	</bean>
+	
+	<bean id="gestioneNoteAutomaticheCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="gestioneNoteAutomaticheCommand"></property>
+		<property name="openString" value="gestioneNoteAutomaticheEditor"></property>
+	</bean>
+</beans>

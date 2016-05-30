@@ -1,0 +1,14 @@
+
+<beans>
+	<bean id="magazzinoMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="magazzinoMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:magazzino:conai</value>
+				<value>openConaiSettingsCommand</value>
+                <value>creaModuloConaiCommand</value>
+                <value>openAnalisiConaiCommand</value>
+			</list>
+		</property>
+	</bean>
+</beans>

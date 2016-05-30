@@ -1,0 +1,29 @@
+
+<beans>
+    <bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+        <property name="settingsManager" ref="settingManagerLocal" />
+        <property name="searchObjectMap">
+            <map>
+                <entry value="protocolloSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.protocolli.domain.Protocollo</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="protocolloSearchObject" class="it.eurotn.panjea.protocolli.rich.search.ProtocolloSearchObject" singleton="false" lazy-init="true">
+        <property name="protocolliBD">
+            <ref bean="protocolliBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+        <property name="dialogPageId" value="protocolloPage"/>
+        <property name="editObject" value="true"/>
+    </bean>
+</beans>

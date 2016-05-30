@@ -1,0 +1,25 @@
+
+<beans>
+	
+	<import resource="panjea-context.xml"/>
+	
+	<bean id="openDatawareHouseCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openDatawareHouseCommand"></property>
+		<property name="securityControllerId" value="visualizzaAnalisiBIController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.bi.domain.analisi.AnalisiBi"></property>
+	</bean>
+    
+    <bean id="openDashBoardEditorCommand" class="it.eurotn.panjea.bi.rich.commands.OpenDashBoardEditorCommand">
+    	<property name="idCommand" value="openDashBoardEditorCommand"></property>
+        <property name="securityControllerId" value="visualizzaAnalisiBIController"></property>
+         <property name="businessIntelligenceBD">
+            <ref bean="businessIntelligenceBD" />
+        </property>
+    </bean>
+    
+    <bean id="newDashBoardEditorCommand" class="it.eurotn.panjea.bi.rich.commands.NewDashBoardEditorCommand">
+    	<property name="idCommand" value="newDashBoardEditorCommand"></property>
+        <property name="securityControllerId" value="visualizzaAnalisiBIController"></property>
+    </bean>
+
+</beans>

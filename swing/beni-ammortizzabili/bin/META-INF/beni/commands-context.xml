@@ -1,0 +1,54 @@
+
+<beans>
+    
+    <bean id="openTabelleBeniCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+    	<property name="idCommand" value="openTabelleBeniCommand"></property>
+    	<property name="openString" value="tabelleBeniEditor"></property>
+    </bean>
+    
+    <bean id="searchBeniAmmortizzabiliCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.SearchBeniAmmortizzabiliCommand">
+    	<property name="idCommand" value="searchBeniAmmortizzabiliCommand"></property>
+        <property name="securityControllerId" value="viewAnagraficaBeniController"></property>
+    </bean>
+    
+    <bean id="newBeneAmmortizzabileCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+        <property name="idCommand" value="newBeneAmmortizzabileCommand" />
+        <property name="securityControllerId" value="editAnagraficaBeniController"></property>
+        <property name="openClassName" value="it.eurotn.panjea.beniammortizzabili2.domain.BeneAmmortizzabile"></property>
+    </bean>
+    
+    <bean id="newSimulazioneCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.NewSimulazioneCommand">
+    </bean>
+    
+    <bean id="reportRubricaBeniCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.ReportRubricaBeniCommand" abstract="false" singleton="true">
+    	<property name="idCommand" value="reportRubricaBeniCommand"></property>
+    </bean>
+    
+    <bean id="reportRegistroBeniCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.ReportRegistroBeniCommand" abstract="false" singleton="true">
+    	<property name="idCommand" value="reportRegistroBeniCommand"></property>
+    </bean>
+    
+    <bean id="reportBeniAcquistatiCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.ReportBeniAcquistatiCommand" abstract="false" singleton="true">
+    	<property name="idCommand" value="reportBeniAcquistatiCommand"></property>
+    </bean>
+    
+    <bean id="reportVenditaBeniCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.ReportVenditaBeniCommand" abstract="false" singleton="true">
+    	<property name="idCommand" value="reportVenditaBeniCommand"></property>
+    </bean>
+    
+    <bean id="reportAmmortamentiCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.ReportAmmortamentiCommand">
+    	<property name="idCommand" value="reportAmmortamentiCommand"></property>
+    </bean>
+    
+    <bean id="reportQuoteAnnulaiCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.StampaQuoteConsolidateAttualiCommand">
+    </bean>
+    
+    <bean id="openSimulazioneCommand" class="it.eurotn.panjea.beniammortizzabili.rich.commands.OpenSimulazioneCommand">
+    	<property name="idCommand" value="openSimulazioneCommand"></property>
+    </bean>
+    
+    <bean id="openBeniSettingsCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+    	<property name="idCommand" value="openBeniSettingsCommand"></property>
+    	<property name="openString" value="preferenzeBeniEditor"></property>
+    </bean>
+</beans>

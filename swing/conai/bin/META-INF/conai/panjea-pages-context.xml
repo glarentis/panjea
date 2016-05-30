@@ -1,0 +1,113 @@
+
+<beans>
+    <!-- EditorFactory -->
+    <bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="conaiArticoloEditor">
+                    <key>
+                        <value type="java.lang.String">conaiSettings</value>
+                    </key>
+                </entry>
+                <entry value="analisiConaiEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.conai.util.parametriricerca.ParametriRicercaAnalisi</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="conaiArticoloEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">conaiArticoloEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>conaiArticoliTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">conaiArticoloEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="conaiArticoliTablePage" class="it.eurotn.panjea.conai.rich.editor.conaiarticoli.ConaiArticoliTablePage" singleton="false">
+        <property name="editPageMode" value="DETAIL"></property>
+        <property name="conaiBD" ref="conaiBD"></property>
+        <property name="editPage">
+            <ref bean="conaiArticoloPage" />
+        </property>
+    </bean>
+    <bean id="conaiArticoloPage" class="it.eurotn.panjea.conai.rich.editor.conaiarticoli.ConaiArticoloPage" singleton="false">
+        <property name="conaiBD" ref="conaiBD"></property>
+    </bean>
+    <bean id="articoloPage" class="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoloPage" singleton="false" lazy-init="true">
+        <property name="pagineCollegate">
+            <list>
+                <ref bean="articoloConaiComponentiTablePage" />
+            </list>
+        </property>
+    </bean>
+    <bean id="articoloConaiComponentiTablePage" class="it.eurotn.panjea.conai.rich.editor.articolo.ArticoloConaiComponentiTablePage" singleton="false">
+        <property name="conaiBD">
+            <ref bean="conaiBD" />
+        </property>
+        <property name="editPage">
+            <ref bean="articoloConaiComponentePage" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+    <bean id="articoloConaiComponentePage" class="it.eurotn.panjea.conai.rich.editor.articolo.ArticoloConaiComponentePage" singleton="false">
+         <property name="conaiBD">
+            <ref bean="conaiBD" />
+        </property>
+    </bean>
+    
+    <bean class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.RigaArticoloPage" id="rigaArticoloPage" lazy-init="true" singleton="false">
+    	<property name="righeConaiComponenteForm" value="it.eurotn.panjea.conai.rich.editor.rigaarticolo.RigheConaiComponenteForm">
+    	</property>
+    </bean>
+    
+    <bean id="creaModuloDialogPage" class="it.eurotn.panjea.conai.rich.dialog.CreaModuloDialog" lazy-init="true" singleton="false">
+        <property name="conaiBD" ref="conaiBD"></property>
+    </bean>
+    
+    <bean id="analisiConaiEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">analisiConaiEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaAnalisiConaiPage</value>
+                        <value>risultatiRicercaAnalisiConaiTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">analisiConaiEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="parametriRicercaAnalisiConaiPage" class="it.eurotn.panjea.conai.rich.editor.analisi.ParametriRicercaAnalisiConaiPage" singleton="false">
+    </bean>
+    
+    <bean id="risultatiRicercaAnalisiConaiTablePage" class="it.eurotn.panjea.conai.rich.editor.analisi.RisultatiRicercaAnalisiConaiTablePage" singleton="false">
+    	<property name="conaiBD">
+            <ref bean="conaiBD" />
+        </property>
+    </bean>
+</beans>

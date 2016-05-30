@@ -1,0 +1,27 @@
+ 
+<beans>
+	<import resource="panjea-context.xml"/>
+	
+	<!-- INIZIO DEFINIZIONE SECURITY CONTROLLER -->
+	 
+	
+	<bean class="org.springframework.richclient.security.support.DefaultSecurityControllerManager" id="securityControllerManager">
+    	<property name="securityControllerMap">
+        	<map>
+                <entry key="anagraficaPageAgente.controller"><ref bean="modificaAgentiController"/></entry>
+                <entry key="anagraficaEditorPage.controller"><ref bean="modificaAgentiController"/></entry>
+                <entry key="searchResultAgenti.controller"><ref bean="modificaAgentiController"/></entry>
+        	</map>
+    	</property>
+	</bean>	
+
+
+     <bean id="modificaAgentiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="modificaAgenti"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>      
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean> 
+    
+	<!-- FINE DEFINIZIONE SECURITY CONTROLLER -->
+	
+</beans>

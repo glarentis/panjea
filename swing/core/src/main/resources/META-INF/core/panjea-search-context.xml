@@ -1,0 +1,29 @@
+<beans>
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry"  singleton="true" lazy-init="true">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+				<entry value="utenteSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.sicurezza.domain.Utente</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	
+	<bean id="utenteSearchObject" class="it.eurotn.panjea.sicurezza.rich.search.UtenteSearchObject" singleton="false">
+		<property name="sicurezzaBD">
+			<ref bean="sicurezzaBD"/>
+		</property>
+		<property name="columns">
+			<list>
+				<value>userName</value>
+				<value>nome</value>
+				<value>cognome</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

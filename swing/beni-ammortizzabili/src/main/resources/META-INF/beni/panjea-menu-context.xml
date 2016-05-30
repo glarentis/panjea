@@ -1,0 +1,30 @@
+
+<beans>	
+	<bean id="beniAmmortizzabiliMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="beniAmmortizzabiliMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:beniAmmortizzabili:bene</value>
+				<value>newBeneAmmortizzabileCommand</value>
+				<value>searchBeniAmmortizzabiliCommand</value>
+				
+				<value>group:beniAmmortizzabili:simulazione</value>
+				<value>newSimulazioneCommand</value>
+				<value>openSimulazioneCommand</value>
+				
+				<value>group:beniAmmortizzabili:stampe</value>
+				<value>reportRubricaBeniCommand</value>
+				<value>reportAmmortamentiCommand</value>
+				<value>reportBeniAcquistatiCommand</value>
+				<value>reportVenditaBeniCommand</value>
+				<value>reportQuoteAnnulaiCommand</value>
+				<value>reportRegistroBeniCommand</value>
+				
+				<value>group:beniAmmortizzabili:tabelle</value>
+				<value>openTabelleBeniCommand</value>
+				<value>openBeniSettingsCommand</value>
+			</list>
+		</property>
+	</bean>
+	 
+</beans>

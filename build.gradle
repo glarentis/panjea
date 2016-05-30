@@ -171,3 +171,5 @@ task exportReport () {
 }
 
 project.tasks["sonarqube"].dependsOn preparaClienti
+
+

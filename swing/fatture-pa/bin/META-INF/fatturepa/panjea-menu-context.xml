@@ -1,0 +1,11 @@
+ 
+<beans>
+    <bean id="magazzinoMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="commands">
+			<list>
+				<value>group:magazzino:documento:fatturazione</value>
+				<value>openRicercaFatturePACommand</value>
+			</list>
+		</property>
+	</bean>
+</beans>

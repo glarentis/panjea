@@ -1,0 +1,179 @@
+<beans>
+	<bean id="windowCommandManager"
+		class="org.springframework.richclient.application.support.ApplicationWindowCommandManager">
+		<property name="sharedCommandIds">
+			<list>
+				<value>newCommand</value>
+				<value>lockCommand</value>
+				<value>undoCommand</value>
+				<value>undoModelCommand</value>
+				<value>saveCommand</value>
+				<value>printCommand</value>
+				<value>deleteCommand</value>
+				<value>nextPageCommand</value>
+				<value>prevPageCommand</value>
+                <value>openRicercaEditorCommand</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="windowMenu"
+		class="org.springframework.richclient.command.CommandGroupFactoryBean">
+		<property name="members">
+			<list>
+				<bean class="com.jidesoft.spring.richclient.docking.view.ShowViewMenu" />
+				<value>separator</value>
+				<ref bean="restoreDefaultLayoutCommand" />
+				<value>separator</value>
+				<ref bean="nextEditorCommand" />
+				<ref bean="prevEditorCommand" />
+				<value>nextPageCommand</value>
+				<value>prevPageCommand</value>                
+			</list>
+		</property>
+	</bean>
+
+	<bean id="menuBar"
+		class="org.springframework.richclient.command.CommandGroupFactoryBean">
+		<property name="members">
+			<list>
+				<ref bean="fileMenu" />
+				<ref bean="editMenu" />
+				<ref bean="windowMenu" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="toolBar"
+		class="org.springframework.richclient.command.CommandGroupFactoryBean">
+		<property name="members">
+			<list>
+				<ref bean="compactModeCommand" /> 
+				<ref bean="openJasperServerUrlCommand" />
+				<ref bean="openLogicalDocCommand"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- <bean id="goHomeCommand" class="it.eurotn.panjea.rich.commands.GoHomeCommand" /> -->
+	<bean id="openJasperServerUrlCommand" class="it.eurotn.panjea.rich.commands.OpenJasperServerUrlCommand" />
+	<bean id="openLogicalDocCommand" class="it.eurotn.panjea.rich.commands.OpenLogicalDocUrlCommand" />	
+	<bean id="compactModeCommand" class="it.eurotn.panjea.rich.commands.CompactModeCommand" />
+	<bean id="panjeaWikiCommand" class="it.eurotn.panjea.rich.commands.PanjeaWikiCommand" />
+
+	<bean id="nextEditorCommand" class="it.eurotn.panjea.rich.commands.NextEditorCommand" />
+	<bean id="prevEditorCommand" class="it.eurotn.panjea.rich.commands.PrevEditorCommand" />
+    <bean id ="openRicercaEditorCommand" class="it.eurotn.panjea.rich.commands.OpenRicercaEditorCommand" />
+
+
+	<bean id="newRuoloCommand"
+		class="it.eurotn.panjea.sicurezza.rich.commands.NewRuoloCommand">
+	</bean>
+
+	<bean id="newUtenteCommand"
+		class="it.eurotn.panjea.sicurezza.rich.commands.NewUtenteCommand">
+	</bean>
+
+	<bean id="restoreDefaultLayoutCommand"
+		class="it.eurotn.panjea.rich.commands.RestoreDefaultLayoutCommand" />
+
+	<bean id="loginCommand" class="it.eurotn.panjea.rich.login.PanjeaLoginCommand">
+		<!-- <property name="displaySuccess" value="false" /> -->
+		<!-- <property name="closeOnCancel" value="false"/> -->
+	</bean>
+
+	<bean id="logoutCommand" class="it.eurotn.panjea.rich.commands.PanjeaLogoutCommand">
+		<property name="displaySuccess" value="false" />
+		<!--<property name="closeOnCancel" value="false"/>-->
+	</bean>
+
+	<bean id="flushCacheCommand"
+		class="it.eurotn.panjea.sicurezza.rich.commands.FlushCacheCommand">
+		<property name="sicurezzaBD">
+			<ref bean="sicurezzaBD" />
+		</property>
+		<property name="securityControllerId" value="gestionePermessiController"></property>
+	</bean>
+
+	<bean id="accessGroup"
+		class="org.springframework.richclient.command.CommandGroupFactoryBean">
+		<property name="members">
+			<list>
+				<value>glue</value>
+				<ref bean="logoutCommand" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="editMenu"
+		class="org.springframework.richclient.command.CommandGroupFactoryBean">
+		<property name="members">
+			<list>
+				<value>newCommand</value>
+				<value>lockCommand</value>
+				<value>undoCommand</value>
+				<value>undoModelCommand</value>
+				<value>saveCommand</value>
+				<value>printCommand</value>
+				<value>deleteCommand</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="fileMenu"
+		class="org.springframework.richclient.command.CommandGroupFactoryBean">
+		<property name="members">
+			<list>
+				<!-- <ref bean="goHomeCommand" /> -->
+                <ref bean="openRicercaEditorCommand"/>
+				<value>separator</value>
+				<ref bean="logoutCommand" />
+				<value>separator</value>
+				<ref bean="panjeaExitCommand" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="panjeaExitCommand" class="it.eurotn.panjea.rich.commands.PanjeaExitCommand" />
+
+	<bean id="aboutCommand" class="it.eurotn.panjea.rich.commands.AboutCommand">
+		<property name="pluginManager">
+			<ref bean="pluginManager"/>
+		</property>
+		<property name="imageResourcePath">
+			<value>/it/eurotn/panjea/resources/images/logo.png</value>
+		</property>		
+	</bean>
+
+	<bean id="changeLogCommand" class="it.eurotn.panjea.rich.commands.ChangeLogCommand">
+		<property name="changeLogResourcePath">
+			<value>it/eurotn/panjea/resources/documents/changeLogs.txt</value>
+		</property>
+	</bean>
+	<bean id="duplicaRuoloCommand"
+		class="it.eurotn.panjea.sicurezza.rich.commands.DuplicaRuoloCommand" />
+
+	<bean id="gestioneLockCommand" class="it.eurotn.panjea.rich.commands.GestioneLockCommand">
+		<property name="securityControllerId" value="strumentiController"></property>
+	</bean>
+
+	<bean id="gestioneEmailCommand" class="it.eurotn.panjea.rich.commands.GestioneEmailCommand">
+		<property name="securityControllerId" value="strumentiController"></property>
+	</bean>
+
+	<bean id="searchRuoliCommand"
+		class="it.eurotn.panjea.sicurezza.rich.commands.SearchRuoliCommand">
+		<property name="securityControllerId" value="gestionePermessiController"></property>
+	</bean>
+
+	<bean id="searchUtentiCommand"
+		class="it.eurotn.panjea.sicurezza.rich.commands.SearchUtentiCommand">
+		<property name="securityControllerId" value="gestionePermessiController"></property>
+	</bean>
+
+	<bean id="preferenzeCommand" class="it.eurotn.panjea.preferences.commands.PreferenzeCommand" />
+	<bean id="settingsLooksCommand" class="it.eurotn.panjea.preferences.commands.SettingsLooksCommand" />
+
+</beans>

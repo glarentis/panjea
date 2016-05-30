@@ -1,0 +1,1959 @@
+
+<beans>
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="anagraficaMenu" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="aziendaEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.util.AziendaAnagraficaDTO</value>
+					</key>
+				</entry>
+				<entry value="aziendaEditor">
+					<key>
+						<value type="java.lang.String">aziendaEditor</value>
+					</key>
+				</entry>
+				<entry value="fornitoreEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Fornitore</value>
+					</key>
+				</entry>
+				<entry value="clientePotenzialeEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.ClientePotenziale</value>
+					</key>
+				</entry>
+				<entry value="clienteEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Cliente</value>
+					</key>
+				</entry>
+				<entry value="vettoreEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Vettore</value>
+					</key>
+				</entry>
+				<entry value="tabelleDatiGeograficiEditor">
+					<key>
+						<value type="java.lang.String">tabelleDatiGeograficiEditor</value>
+					</key>
+				</entry>
+				<entry value="tipologieEditor">
+					<key>
+						<value type="java.lang.String">tipologieEditor</value>
+					</key>
+				</entry>
+				<entry value="codiciPagamentoEditor">
+					<key>
+						<value type="java.lang.String">codiciPagamentoEditor</value>
+					</key>
+				</entry>
+				<entry value="codiciIvaEditor">
+					<key>
+						<value type="java.lang.String">codiciIvaEditor</value>
+					</key>
+				</entry>
+				<entry value="datiBancariEditor">
+					<key>
+						<value type="java.lang.String">datiBancariEditor</value>
+					</key>
+				</entry>
+                <entry value="valutaEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.ValutaAzienda</value>
+                    </key>
+                </entry>
+				<entry value="tipoDocumentoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.documenti.domain.TipoDocumento</value>
+					</key>
+				</entry>
+                <entry value="auditEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.utils.AuditObject</value>
+                    </key>
+                </entry>
+                <entry value="rubricaEditor">
+                    <key>
+                        <value type="java.lang.String">rubricaEditor</value>
+                    </key>
+                </entry>
+                <entry value="datiGeograficiEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.DatiGeografici</value>
+                    </key>
+                </entry>
+                <entry value="webBrowserEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.rich.editors.webbrowser.MantisUrl</value>
+                    </key>
+                </entry>
+                 <entry value="webBrowserEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.rich.editors.webbrowser.LogicalDocUrl</value>
+                    </key>
+                </entry>
+                <entry value="noteAnagraficaEditor">
+                    <key>
+                        <value type="java.lang.String">noteAnagraficaEditor</value>
+                    </key>
+                </entry>
+                <entry value="riepilogoSedeEntitaEditor">
+                    <key>
+                        <value type="java.lang.String">riepilogoSedeEntitaEditor</value>
+                    </key>
+                </entry>
+                <entry value="contrattiSpesometroEditor">
+                    <key>
+                        <value type="java.lang.String">contrattiSpesometroEditor</value>
+                    </key>
+                </entry>
+                <entry value="documentoGraphEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.documenti.graph.util.DocumentoGraph</value>
+                    </key>
+                </entry>
+                <entry value="gestioneAuditEditor">
+                    <key>
+                        <value type="java.lang.String">gestioneAuditEditor</value>
+                    </key>
+                </entry>
+                <entry value="gestioneNoteAutomaticheEditor">
+                    <key>
+                        <value type="java.lang.String">gestioneNoteAutomaticheEditor</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- searchFactory -->
+	<bean id="searchFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+		<property name="searchResultMap">
+			<map>
+				<entry value-ref="searchResultFornitori">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.anagrafica.domain.lite.FornitoreLite</value>
+					</key>
+				</entry>
+				<entry value-ref="searchResultClientiPotenziali">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.anagrafica.domain.lite.ClientePotenzialeLite</value>
+					</key>
+				</entry>
+				<entry value-ref="searchResultClienti">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.anagrafica.domain.lite.ClienteLite</value>
+					</key>
+				</entry>
+				<entry value-ref="searchResultVettori">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.anagrafica.domain.lite.VettoreLite</value>
+					</key>
+				</entry>
+				<entry value-ref="searchResultAnagrafica">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.anagrafica.domain.Anagrafica</value>
+					</key>
+				</entry>
+				<entry value-ref="searchResultTipiDocumento">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.anagrafica.documenti.domain.TipoDocumento</value>
+					</key>
+				</entry>
+
+			</map>
+		</property>
+	</bean>
+
+
+
+	<bean id="contrattiSpesometroEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">contrattiSpesometroEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>contrattiSpesometroTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">contrattiSpesometroEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="contrattiSpesometroTablePage"	class="it.eurotn.panjea.anagrafica.rich.editors.contratto.ContrattiSpesometroTablePage" singleton="false">
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="contrattoSpesometroPage" />
+		</property>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+	<bean id="contrattoSpesometroPage" class="it.eurotn.panjea.anagrafica.rich.editors.contratto.ContrattoSpesometroPage" singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+
+	<!-- Editor dati geografici -->
+	<bean id="datiGeograficiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.editors.datigeografici.DatiGeograficiEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">datiGeograficiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>nazioniTablePage</value>
+						<value>livelloAmministrativo1TablePage</value>
+						<value>livelloAmministrativo2TablePage</value>
+						<value>livelloAmministrativo3TablePage</value>
+						<value>livelloAmministrativo4TablePage</value>
+						<value>localitaTablePage</value>
+						<value>capTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">datiGeograficiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="nazioniTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.NazioniTablePage"
+		singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="nazionePage" />
+		</property>
+	</bean>
+	<bean id="nazionePage" class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.NazionePage" singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+	</bean>
+	<bean id="livelloAmministrativo1TablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LivelloAmministrativo1TablePage"
+		singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="livelloAmministrativo1Page" />
+		</property>
+	</bean>
+	<bean id="livelloAmministrativo1Page" class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LivelloAmministrativo1Page" singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+	</bean>
+	<bean id="livelloAmministrativo2TablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LivelloAmministrativo2TablePage"
+		singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="livelloAmministrativo2Page" />
+		</property>
+	</bean>
+	<bean id="livelloAmministrativo2Page" class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LivelloAmministrativo2Page" singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+	</bean>
+	<bean id="livelloAmministrativo3TablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LivelloAmministrativo3TablePage"
+		singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="livelloAmministrativo3Page" />
+		</property>
+	</bean>
+	<bean id="livelloAmministrativo3Page" class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LivelloAmministrativo3Page" singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+	</bean>
+	<bean id="livelloAmministrativo4TablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LivelloAmministrativo4TablePage"
+		singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="livelloAmministrativo4Page" />
+		</property>
+	</bean>
+	<bean id="livelloAmministrativo4Page" class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LivelloAmministrativo4Page" singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+	</bean>
+	<bean id="localitaTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LocalitaTablePage"
+		singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="localitaPage" />
+		</property>
+	</bean>
+	<bean id="localitaPage" class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.LocalitaPage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IDatiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</constructor-arg>
+	</bean>
+	<bean id="capTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.CapTablePage"
+		singleton="false">
+		<property name="datiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="capPage" />
+		</property>
+	</bean>
+	<bean id="capPage" class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.CapPage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IDatiGeograficiBD">
+			<ref bean="datiGeograficiBD" />
+		</constructor-arg>
+	</bean>
+
+	<!-- Editor Azienda -->
+	<bean id="aziendaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.editors.azienda.AziendaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">aziendaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:AnagraficaAzienda</value>
+						<value>datiAziendaPage</value>
+						<value>group:DatiAmministrativi</value>
+						<value>rapportiAziendaTablePage</value>
+						<value>group:DatiAziendali</value>
+						<value>sediAziendaTablePage</value>
+						<value>depositiSedeAziendaTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">aziendaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.azienda.RapportiAziendaTablePage"
+		id="rapportiAziendaTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="rapportoBancarioAziendaPage" />
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.azienda.RapportoBancarioAziendaPage"
+		id="rapportoBancarioAziendaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="datiAziendaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.azienda.DatiAziendaPage"
+		singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.azienda.SediAziendaTablePage"
+		id="sediAziendaTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="sedeAziendaPage" />
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.azienda.SedeAziendaPage"
+		id="sedeAziendaPage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.domain.Azienda">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Azienda"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.azienda.depositi.DepositiSedeAziendaTablePage"
+		id="depositiSedeAziendaTablePage" singleton="false">
+		<property name="showTitlePane" value="false" />
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="depositoCompositePage">
+			<ref bean="depositoCompositePage" />
+		</property>
+	</bean>
+
+	<bean id="depositoCompositePage" class="it.eurotn.rich.dialog.TabbedCompositeDialogPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="depositoCompositePage" />
+		<property name="idPages">
+			<list>
+				<value>group:areeDeposito</value>
+				<value>depositoSedeAziendaPage</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.azienda.depositi.DepositoSedeAziendaPage"
+		id="depositoSedeAziendaPage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="fornitoreEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.editors.entita.EntitaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">fornitoreEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:AnagraficaFornitore</value>
+						<value>anagraficaPageFornitore</value>
+						<value>altriDatiFornitorePage</value>
+						<value>noteFornitorePage</value>
+						<value>gestioneNoteAutomatichePage</value>
+                         <value>mailTablePage</value>
+						<value>group:VociCorrelateFornitore</value>
+						<value>sediEntitaFornitoreTablePage</value>
+						<value>contattiSedeFornitoreEntitaTablePage</value>
+						<value>gestioneStampeDocumentoPage</value>
+						<value>entitaAllegatiPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">fornitoreEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+ 	<bean id="clienteEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.editors.entita.EntitaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">clienteEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:AnagraficaCliente</value>
+						<value>anagraficaPageCliente</value>
+						<value>altriDatiClientePage</value>
+						<value>noteClientePage</value>
+						<value>gestioneNoteAutomatichePage</value>
+                        <value>mailTablePage</value>
+						<value>group:VociCorrelateFornitore</value>
+						<value>sediEntitaClienteTablePage</value>
+						<value>contattiSedeEntitaClienteTablePage</value>						
+						<value>gestioneStampeDocumentoPage</value>
+						<value>depositiEntitaTablePage</value>
+						<value>entitaAllegatiPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">clienteEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="entitaAllegatiPage" class="it.eurotn.panjea.anagrafica.rich.editors.entita.EntitaAllegatiPage" singleton="false" lazy-init="true">             
+    </bean>
+
+	<bean id="clientePotenzialeEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.editors.entita.EntitaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">clientePotenzialeEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:AnagraficaCliente</value>
+						<value>anagraficaPageClientePotenziale</value>
+						<value>group:VociCorrelateFornitore</value>
+						<value>sediEntitaClientePotenzialeTablePage</value>
+						<value>contattiSedeEntitaClientePotenzialeTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">clientePotenzialeEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="vettoreEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.editors.entita.EntitaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">vettoreEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:AnagraficaVettore</value>
+						<value>anagraficaPageVettore</value>
+						<value>group:VociCorrelateVettore</value>
+						<value>sediEntitaVettoreTablePage</value>
+						<value>contattiSedeVettoreEntitaTablePage</value>
+						<value>vettoreSediEntitaAssociatePage</value>
+						<value>entitaAllegatiPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">vettoreEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="vettoreSediEntitaAssociatePage" class="it.eurotn.panjea.anagrafica.rich.editors.entita.sedicollegate.VettoreSediEntitaAssociatePage" singleton="false">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD" />
+        </property>
+    </bean>
+
+	<bean id="anagraficaPageFornitore"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.anagrafica.AnagraficaPage"
+		singleton="false">
+		<property name="idNewCommand" value="newFornitoreCommand" />
+		<property name="pageSecurityEditorId" value="anagraficaPageFornitore" />
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.domain.Entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Fornitore"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="anagraficaPageCliente"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.anagrafica.AnagraficaPage"
+		singleton="false">
+		<property name="idNewCommand" value="newClienteCommand" />
+		<property name="pageSecurityEditorId" value="anagraficaPageCliente" />
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.domain.Entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Cliente"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="anagraficaPageClientePotenziale"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.ClientePotenzialePage"
+		singleton="false">
+		<property name="idNewCommand" value="newClientePotenzialeCommand" />
+		<property name="pageSecurityEditorId" value="anagraficaPageClientePotenziale" />
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.domain.Entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.ClientePotenziale"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="confermaClientePotenzialeCommandId">
+			<value>confermaClientePotenzialeCommand</value>
+		</property>
+	</bean>
+
+	<bean id="anagraficaPageVettore"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.anagrafica.AnagraficaPage"
+		singleton="false">
+		<property name="idNewCommand" value="newVettoreCommand" />
+		<property name="pageSecurityEditorId" value="anagraficaPageVettore" />
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.domain.Entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Vettore"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SediEntitaTablePage"
+		id="sediEntitaClienteTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="sedeEntitaCompositePage">
+			<ref bean="sediEntitaClienteCompositePage" />
+		</property>
+		<property name="pageSecurityEditorId" value="sediEntitaTablePageCliente" />
+	</bean>
+
+	<bean id="sediEntitaClienteCompositePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaCompositePage"
+		singleton="false">
+		<property name="idPages">
+			<list>
+				<value>group:areeSede</value>
+				<value>sedeEntitaClientePage</value>
+				<value>datiCommercialiClienteSedeEntitaPage</value>
+				<value>rapportiBancariClienteSedeEntitaTablePage</value>
+				<value>noteSedeClienteEntitaPage</value>
+				<value>gestioneNoteAutomatichePage</value>
+			</list>
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SediEntitaTablePage"
+		id="sediEntitaClientePotenzialeTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="sedeEntitaCompositePage">
+			<ref bean="sediEntitaClientePotenzialeCompositePage" />
+		</property>
+		<property name="pageSecurityEditorId" value="sediEntitaClientePotenzialeCompositePage" />
+	</bean>
+
+	<bean id="sediEntitaClientePotenzialeCompositePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaCompositePage"
+		singleton="false">
+		<property name="idPages">
+			<list>
+				<value>group:areeSede</value>
+				<value>sedeEntitaClientePotenzialePage</value>
+				<value>datiCommercialiClientePotenzialeSedeEntitaPage</value>
+				<value>rapportiBancariClientePotenzialeSedeEntitaTablePage</value>
+				<value>noteSedeClientePotenzialeEntitaPage</value>
+			</list>
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SediEntitaTablePage"
+		id="sediEntitaFornitoreTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="sedeEntitaCompositePage">
+			<ref bean="sediEntitaFornitoreCompositePage" />
+		</property>
+		<property name="pageSecurityEditorId" value="sediEntitaFornitoreCompositePage" />
+	</bean>
+	<bean id="sediEntitaFornitoreCompositePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaCompositePage"
+		singleton="false">
+		<property name="idPages">
+			<list>
+				<value>group:areeSede</value>
+				<value>sedeEntitaFornitorePage</value>
+				<value>datiCommercialiFornitoreSedeEntitaPage</value>
+				<value>rapportiBancariFornitoreSedeEntitaTablePage</value>
+				<value>noteSedeFornitoreEntitaPage</value>
+				<value>gestioneNoteAutomatichePage</value>
+			</list>
+		</property>
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SediEntitaTablePage"
+		id="sediEntitaVettoreTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="sedeEntitaCompositePage">
+			<ref bean="sediEntitaVettoreCompositePage" />
+		</property>
+		<property name="pageSecurityEditorId" value="sediEntitaVettoreTablePage" />
+	</bean>
+
+	<bean id="sediEntitaVettoreCompositePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaCompositePage"
+		singleton="false">
+		<property name="idPages">
+			<list>
+				<value>group:areeSede</value>
+				<value>sedeEntitaVettorePage</value>
+				<value>datiCommercialiVettoreSedeEntitaPage</value>
+				<value>rapportiBancariVettoreSedeEntitaTablePage</value>
+				<value>noteSedeVettoreEntitaPage</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaPage"
+		id="sedeEntitaClientePage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="sedeEntitaClientePage" />
+		<property name="tipoEntita" value="CLIENTE"/>
+	</bean>
+
+    <bean class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaPage"
+		id="sedeEntitaClientePotenzialePage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="sedeEntitaClientePotenzialePage" />
+		<property name="tipoEntita" value="CLIENTE_POTENZIALE"/>
+	</bean>
+	
+	<bean class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaPage"
+		id="sedeEntitaFornitorePage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="sedeEntitaFornitorePage" />
+		<property name="tipoEntita" value="FORNITORE"/>
+	</bean>
+	
+	<bean class="it.eurotn.panjea.anagrafica.rich.editors.entita.SedeEntitaPage"
+		id="sedeEntitaVettorePage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="sedeEntitaVettorePage" />
+		<property name="tipoEntita" value="VETTORE"/>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.NoteSedeEntitaPage"
+		id="noteSedeClienteEntitaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="noteSedeClienteEntitaPage" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.NoteSedeEntitaPage"
+		id="noteSedeClientePotenzialeEntitaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="noteSedeClientePotenzialeEntitaPage" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.NoteSedeEntitaPage"
+		id="noteSedeFornitoreEntitaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="noteSedeFornitoreEntitaPage" />
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.NoteSedeEntitaPage"
+		id="noteSedeVettoreEntitaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="noteSedeVettoreEntitaPage" />
+	</bean>
+
+	<bean id="datiCommercialiClienteSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+			</list>
+		</property>
+		<property name="pageSecurityEditorId" value="datiCommercialiClienteSedeEntitaPage" />
+		<property name="securityControllerId" value="visualizzaDatiCommercialiClienteController"></property>
+	</bean>
+	<bean id="datiCommercialiClientePotenzialeSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+			</list>
+		</property>
+		<property name="pageSecurityEditorId"
+			value="datiCommercialiClientePotenzialeSedeEntitaPage" />
+		<property name="securityControllerId"
+			value="visualizzaDatiCommercialiClientePotenzialeController"></property>
+	</bean>
+	<bean id="datiCommercialiFornitoreSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+			</list>
+		</property>
+		<property name="pageSecurityEditorId" value="datiCommercialiFornitoreSedeEntitaPage" />
+		<property name="securityControllerId" value="visualizzaDatiCommercialiFornitoreController"></property>
+	</bean>
+	<bean id="datiCommercialiVettoreSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage"
+		singleton="false" lazy-init="true">
+		<property name="pagine">
+			<list>
+			</list>
+		</property>
+		<property name="pageSecurityEditorId" value="datiCommercialiVettoreSedeEntitaPage" />
+		<property name="securityControllerId" value="visualizzaDatiCommercialiVettoreController"></property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.rapportobancarioentita.RapportiBancariSedeEntitaTablePage"
+		id="rapportiBancariClienteSedeEntitaTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="rapportoBancarioClienteSedeEntitaPage" />
+		</property>
+		<property name="showTitlePane" value="false" />
+		<property name="pageSecurityEditorId" value="rapportiBancariClienteSedeEntitaTablePage" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.rapportobancarioentita.RapportiBancariSedeEntitaTablePage"
+		id="rapportiBancariClientePotenzialeSedeEntitaTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="rapportoBancarioClientePotenzialeSedeEntitaPage" />
+		</property>
+		<property name="showTitlePane" value="false" />
+		<property name="pageSecurityEditorId"
+			value="rapportiBancariClientePotenzialeSedeEntitaTablePage" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.rapportobancarioentita.RapportiBancariSedeEntitaTablePage"
+		id="rapportiBancariFornitoreSedeEntitaTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="rapportoBancarioFornitoreSedeEntitaPage" />
+		</property>
+		<property name="showTitlePane" value="false" />
+		<property name="pageSecurityEditorId" value="rapportiBancariFornitoreSedeEntitaTablePage" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.rapportobancarioentita.RapportiBancariSedeEntitaTablePage"
+		id="rapportiBancariVettoreSedeEntitaTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="rapportoBancarioVettoreSedeEntitaPage" />
+		</property>
+		<property name="showTitlePane" value="false" />
+		<property name="pageSecurityEditorId" value="rapportiBancariVettoreSedeEntitaTablePage" />
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.rapportobancarioentita.RapportoBancarioSedeEntitaPage"
+		id="rapportoBancarioVettoreSedeEntitaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="rapportoBancarioVettoreSedeEntitaPage" />
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.rapportobancarioentita.RapportoBancarioSedeEntitaPage"
+		id="rapportoBancarioFornitoreSedeEntitaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="rapportoBancarioFornitoreSedeEntitaPage" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.rapportobancarioentita.RapportoBancarioSedeEntitaPage"
+		id="rapportoBancarioClientePotenzialeSedeEntitaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId"
+			value="rapportoBancarioClientePotenzialeSedeEntitaPage" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.rapportobancarioentita.RapportoBancarioSedeEntitaPage"
+		id="rapportoBancarioClienteSedeEntitaPage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="rapportoBancarioClienteSedeEntitaPage" />
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.ContattiSedeEntitaTablePage"
+		id="contattiSedeEntitaClienteTablePage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="contattoSedeEntitaPage" />
+		</property>
+		<property name="showTitlePane" value="false" />
+		<property name="pageSecurityEditorId" value="contattiSedeEntitaClienteTablePage" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.ContattiSedeEntitaTablePage"
+		id="contattiSedeEntitaClientePotenzialeTablePage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="contattoSedeEntitaPage" />
+		</property>
+		<property name="pageSecurityEditorId" value="contattiSedeEntitaClientePotenzialeTablePage" />
+		<property name="showTitlePane" value="false" />
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.ContattiSedeEntitaTablePage"
+		id="contattiSedeFornitoreEntitaTablePage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="contattoSedeEntitaPage" />
+		</property>
+		<property name="pageSecurityEditorId" value="contattiSedeFornitoreEntitaTablePage" />
+		<property name="showTitlePane" value="false" />
+	</bean>
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.ContattiSedeEntitaTablePage"
+		id="contattiSedeVettoreEntitaTablePage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="contattoSedeEntitaPage" />
+		</property>
+		<property name="showTitlePane" value="false" />
+		<property name="pageSecurityEditorId" value="contattiSedeVettoreEntitaTablePage" />
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.ContattoSedeEntitaPage"
+		id="contattoSedeEntitaPage" singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+	</bean>
+
+	<!-- Tipo Documento editor INIZIO -->
+
+	<bean id="tipoDocumentoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.editors.documento.TipoDocumentoEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tipoDocumentoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:TipoDocumento</value>
+						<value>tipoDocumentoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">tipoDocumentoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="tipoDocumentoPage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.TipoDocumentoPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.documenti.domain.TipoDocumento">
+			<bean class="it.eurotn.panjea.anagrafica.documenti.domain.TipoDocumento"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD">
+			<ref bean="anagraficaBD" />
+		</constructor-arg>
+		<property name="documentiBD">
+			<ref bean="documentiBD" />
+		</property>
+		<property name="newTipoDocumentoCommand" value="newTipoDocumentoCommand">
+		</property>
+	</bean>
+
+	<!-- Tipo Documento editor FINE -->
+
+	<!-- Tabelle editor e pages INIZIO -->
+	<bean id="codiciIvaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">codiciIvaPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Contabilita</value>
+						<value>codiciIvaTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">codiciIvaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="codiciPagamentoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">codiciPagamentoPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">codiciPagamentoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="tipologieEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tipologiePage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:DatiTipologie</value>
+						<value>mansioniTablePage</value>
+						<value>caricheTablePage</value>
+						<value>tipiSedeEntitaTablePage</value>
+						<value>tipiDepositiTablePage</value>
+						<value>formeGiuridicheTablePage</value>
+						<value>lingueTablePage</value>
+						<value>unitaMisuraTablePage</value>
+						<value>conversioniUnitaMisuraTablePage</value>
+						<value>categoriaEntitaTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">tipologieEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="tabelleDatiGeograficiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tabelleDatiGeograficiPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:DatiGeografici</value>
+						<value>zoneGeograficheTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">tabelleDatiGeograficiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="datiBancariEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">datiBancariPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:DatiBanche</value>
+						<value>bancheTablePage</value>
+						<value>filialiTablePage</value>
+						<value>riepilogoDatiBancariTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">datiBancariEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+    <bean id="valutaEditor"
+        class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">valutaEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>valuteTablePage</value>
+                        <value>cambioValuteTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">valutaEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+	<bean class="it.eurotn.panjea.anagrafica.rich.tabelle.LingueTablePage"
+		id="lingueTablePage" singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="linguaPage" />
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.anagrafica.rich.tabelle.LinguaPage"
+		id="linguaPage" singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+
+	<bean id="codiciIvaTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.CodiciIvaTablePage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="codiceIvaPage" />
+		</property>
+	</bean>
+
+	<bean id="codiceIvaPage" class="it.eurotn.panjea.anagrafica.rich.tabelle.CodiceIvaPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="codiceIvaPage" />
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</constructor-arg>
+	</bean>
+
+
+	<bean id="categoriaEntitaTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.tabelle.CategoriaEntitaTablePage"
+		singleton="false" lazy-init="true">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="categoriaEntitaPage" />
+		</property>
+	</bean>
+
+
+	<bean id="categoriaEntitaPage" class="it.eurotn.panjea.anagrafica.rich.tabelle.CategoriaEntitaPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="categoriaEntitaPage">
+		</constructor-arg>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="unitaMisuraTablePage" class="it.eurotn.panjea.anagrafica.rich.tabelle.UnitaMisuraTablePage" singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="unitaMisuraPage" />
+		</property>
+	</bean>
+	<bean id="unitaMisuraPage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.UnitaMisuraPage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+	<bean id="conversioniUnitaMisuraTablePage" class="it.eurotn.panjea.anagrafica.rich.tabelle.ConversioniUnitaMisuraTablePage" singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="conversioneUnitaMisuraPage" />
+		</property>
+	</bean>
+	<bean id="conversioneUnitaMisuraPage" class="it.eurotn.panjea.anagrafica.rich.tabelle.ConversioneUnitaMisuraPage" singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+	<bean id="valuteTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.cambiovalute.ValuteTablePage"
+		singleton="false">
+       <property name="valutaBD">
+            <ref bean="valutaBD" />
+        </property>
+		<property name="editPage">
+			<ref bean="valutaPage" />
+		</property>
+	</bean>
+
+    <bean id="cambioValuteTablePage"
+        class="it.eurotn.panjea.anagrafica.rich.tabelle.cambiovalute.CambioValuteTablePage"
+        singleton="false">
+       <property name="valutaBD">
+            <ref bean="valutaBD" />
+        </property>
+        <property name="editPage">
+            <ref bean="cambioValutaPage" />
+        </property>
+    </bean>
+
+    <bean id="cambioValutaPage"
+        class="it.eurotn.panjea.anagrafica.rich.tabelle.cambiovalute.CambioValutaPage"
+        singleton="false">
+        <property name="valutaBD">
+            <ref bean="valutaBD" />
+        </property>
+    </bean>
+
+
+	<bean id="valutaPage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.cambiovalute.ValutaPage"
+		singleton="false">
+		<property name="valutaBD">
+            <ref bean="valutaBD" />
+        </property>
+	</bean>
+
+	<bean id="bancheTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.tabelle.BancheTablePage"
+		singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="bancaPage" />
+		</property>
+	</bean>
+
+	<bean id="bancaPage" class="it.eurotn.panjea.anagrafica.rich.tabelle.BancaPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="bancaPage" />
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="filialiTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.tabelle.FilialiTablePage"
+		singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="filialePage" />
+		</property>
+	</bean>
+
+	<bean id="filialePage" class="it.eurotn.panjea.anagrafica.rich.tabelle.FilialePage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="filialePage">
+		</constructor-arg>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="caricheTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.CaricheTablePage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="caricaPage" />
+		</property>
+	</bean>
+
+	<bean id="caricaPage" class="it.eurotn.panjea.anagrafica.rich.tabelle.CaricaPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="caricaPage" />
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+	<bean id="formeGiuridicheTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.FormeGiuridicheTablePage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="formaGiuridicaPage" />
+		</property>
+	</bean>
+
+	<bean id="formaGiuridicaPage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.FormaGiuridicaPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="formaGiuridicaPage">
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+	<bean id="mansioniTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.MansioniTablePage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="mansionePage" />
+		</property>
+	</bean>
+	<bean id="mansionePage" class="it.eurotn.panjea.anagrafica.rich.tabelle.MansionePage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="mansionePage">
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+	<bean id="tipiDepositiTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.TipiDepositiTablePage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="tipoDepositoPage" />
+		</property>
+	</bean>
+	<bean id="tipoDepositoPage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.TipoDepositoPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="tipoDepositoPage">
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+
+	<bean id="tipiSedeEntitaTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.TipiSedeEntitaTablePage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="tipoSedeEntitaPage" />
+		</property>
+	</bean>
+
+	<bean id="tipoSedeEntitaPage"
+		class="it.eurotn.panjea.anagrafica.rich.tabelle.TipoSedeEntitaPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="tipoSedeEntitaPage">
+		</constructor-arg>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+	<!-- End editors -->
+
+	<bean id="searchResultClienti"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.search.SearchResultEntita</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="anagraficaBD">
+					<ref bean="anagraficaBD" />
+				</entry>
+				<entry key="id">
+					<value>searchResultClienti</value>
+				</entry>
+				<entry key="entita">
+					<bean class="it.eurotn.panjea.anagrafica.domain.lite.ClienteLite" />
+				</entry>
+				<entry key="idNewEntitaCommand" value="newClienteCommand" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="searchResultClientiPotenziali"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.search.SearchResultEntita</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="anagraficaBD">
+					<ref bean="anagraficaBD" />
+				</entry>
+				<entry key="id">
+					<value>searchResultClientiPotenziali</value>
+				</entry>
+				<entry key="entita">
+					<bean
+						class="it.eurotn.panjea.anagrafica.domain.lite.ClientePotenzialeLite" />
+				</entry>
+				<entry key="idNewEntitaCommand" value="newClientePotenzialeCommand" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="searchResultFornitori"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.search.SearchResultEntita</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="anagraficaBD">
+					<ref bean="anagraficaBD" />
+				</entry>
+				<entry key="id">
+					<value>searchResultFornitori</value>
+				</entry>
+				<entry key="entita">
+					<bean class="it.eurotn.panjea.anagrafica.domain.lite.FornitoreLite" />
+				</entry>
+				<entry key="idNewEntitaCommand" value="newFornitoreCommand" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="searchResultVettori"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.search.SearchResultEntita</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="anagraficaBD">
+					<ref bean="anagraficaBD" />
+				</entry>
+				<entry key="id">
+					<value>searchResultVettori</value>
+				</entry>
+				<entry key="entita">
+					<bean class="it.eurotn.panjea.anagrafica.domain.lite.VettoreLite" />
+				</entry>
+				<entry key="idNewEntitaCommand" value="newVettoreCommand" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="searchResultAnagrafica"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.search.SearchResultAnagrafica</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="anagraficaBD">
+					<ref bean="anagraficaBD" />
+				</entry>
+				<entry key="commandIdMap">
+					<map>
+						<entry key="it.eurotn.panjea.anagrafica.domain.lite.ClienteLite"
+							value="newClienteAnagraficaCommand" />
+						<entry key="it.eurotn.panjea.anagrafica.domain.lite.FornitoreLite"
+							value="newFornitoreAnagraficaCommand" />
+						<entry key="it.eurotn.panjea.anagrafica.domain.lite.VettoreLite"
+							value="newVettoreAnagraficaCommand" />
+					</map>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="searchResultTipiDocumento"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.anagrafica.rich.search.documenti.SearchResultTipiDocumento</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="documentiBD">
+					<ref bean="documentiBD"></ref>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="altriDatiFornitorePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.AltriDatiEntitaPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.plugin.PluginManager">
+			<ref bean="pluginManager" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.domain.Entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Fornitore"></bean>
+		</constructor-arg>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pagine">
+			<list>
+			</list>
+		</property>
+		<property name="pageSecurityEditorId" value="altriDatiFornitorePage" />
+	</bean>
+
+	<bean id="altriDatiClientePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.AltriDatiEntitaPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.plugin.PluginManager">
+			<ref bean="pluginManager" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.domain.Entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Cliente"></bean>
+		</constructor-arg>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pagine">
+			<list>
+			</list>
+		</property>
+		<property name="pageSecurityEditorId" value="altriDatiClientePage" />
+	</bean>
+
+	<bean id="depositiEntitaTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.depositi.DepositiEntitaTablePage"
+		singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="depositoCompositePage">
+			<ref bean="depositoCompositePage" />
+		</property>
+	</bean>
+
+	<bean id="noteClientePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.NoteEntitaPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.domain.Entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Cliente"></bean>
+		</constructor-arg>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="noteClientePage" />
+	</bean>
+	<bean id="noteFornitorePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.NoteEntitaPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.domain.Entita">
+			<bean class="it.eurotn.panjea.anagrafica.domain.Fornitore"></bean>
+		</constructor-arg>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="pageSecurityEditorId" value="noteFornitorePage" />
+	</bean>
+
+	<bean id="zoneGeograficheTablePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.zonageografica.ZoneGeograficheTablePage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="zonaGeograficaPage" />
+		</property>
+	</bean>
+
+	<bean id="zonaGeograficaPage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.zonageografica.ZonaGeograficaPage"
+		singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+    <bean id="rubricaEditor"
+        class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.anagrafica.rich.editors.rubrica.RubricaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="anagraficaBD">
+                    <ref bean="anagraficaBD"></ref>
+                </entry>
+            </map>
+        </property>
+   </bean>
+
+   <bean id="documentoGraphEditor"
+        class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.documentograph.DocumentoGraphEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="documentiBD">
+                    <ref bean="documentiBD"></ref>
+                </entry>
+            </map>
+        </property>
+   </bean>
+
+      <bean id="auditEditor"
+        class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.anagrafica.rich.editors.audit.AuditEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="auditBD">
+                    <ref bean="auditBD"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="noteAnagraficaEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">noteAnagraficaEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>noteAnagraficaTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">noteAnagraficaEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="noteAnagraficaTablePage" class="it.eurotn.panjea.anagrafica.rich.editors.tabelle.noteanagrafica.NoteAnagraficaTablePage" singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="notaAnagraficaPage" />
+		</property>
+	</bean>
+
+	<bean id="notaAnagraficaPage" class="it.eurotn.panjea.anagrafica.rich.editors.tabelle.noteanagrafica.NotaAnagraficaPage" singleton="false">
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+	<bean id="riepilogoSedeEntitaEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">riepilogoSedeEntitaEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>riepilogoSedeEntitaTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">riepilogoSedeEntitaEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+	<bean id="riepilogoSedeEntitaTablePage" class="it.eurotn.panjea.anagrafica.rich.editors.riepilogo.RiepilogoSedeEntitaTablePage" singleton="false">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="gestioneAuditEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">gestioneAuditEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>gestioneAuditTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">gestioneAuditEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="gestioneAuditTablePage" class="it.eurotn.panjea.anagrafica.rich.editors.audit.gestione.GestioneAuditTablePage" singleton="false">
+		<property name="auditBD">
+			<ref bean="auditBD" />
+		</property>
+	</bean>
+
+	<bean id="gestioneNoteAutomaticheEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">gestioneNoteAutomaticheEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>gestioneNoteAutomatichePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">gestioneNoteAutomaticheEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="gestioneNoteAutomatichePage" class="it.eurotn.panjea.anagrafica.rich.editors.noteautomatiche.GestioneNoteAutomatichePage" singleton="false">
+    	<property name="editPageMode" value="DETAIL"></property>
+    	<property name="editPage">
+			<ref bean="notaAutomaticaTipoDocPage" />
+		</property>
+        <property name="noteAutomaticheBD">
+            <ref bean="noteAutomaticheBD" />
+        </property>
+    </bean>
+
+    <bean id="notaAutomaticaTipoDocPage" class="it.eurotn.panjea.anagrafica.rich.editors.noteautomatiche.NotaAutomaticaTipoDocPage" singleton="false">
+    	<property name="noteAutomaticheBD">
+            <ref bean="noteAutomaticheBD" />
+        </property>
+	</bean>
+	
+    <bean id="logoAziendaDAO" class="it.eurotn.panjea.anagrafica.rich.editors.azienda.dao.LogoAziendaDAO">
+		<property name="reportManager">
+			<ref bean="reportManager" />
+		</property>
+	</bean>
+
+    <bean id="riepilogoDatiBancariTablePage" class="it.eurotn.panjea.anagrafica.rich.editors.tabelle.riepilogodatibancari.RiepilogoDatiBancariTablePage" singleton="false">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD" />
+        </property>
+    </bean>
+</beans>

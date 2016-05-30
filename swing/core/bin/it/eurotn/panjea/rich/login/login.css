@@ -1,0 +1,79 @@
+    #root {
+            -fx-background-image:  url("background-login.jpg");
+            -fx-border-color: black;
+    }
+     
+    #bp {
+            -fx-background-color:  lightgray;
+    }
+    
+    #textField {
+		-fx-background-radius: 9 9 9 9, 8 8 8 8, 8 8 8 8;
+		-fx-padding: 4;
+}
+    
+    #btnLogin {
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #000000;
+    }
+    
+	#btnLogin:focused {
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #000000;
+    -fx-border-radius: 6,5;
+	-fx-border-width:2;
+    -fx-border-color: black;
+    }
+    
+    #btnLogin:hover {
+    -fx-background-color:
+        linear-gradient(#f0ff35, #a9ff00),
+        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #000000;
+    -fx-border-radius: 6,5;
+	-fx-border-width:2;
+    -fx-border-color: black;
+    }
+    
+    #btnCancel {
+    -fx-background-color:
+        linear-gradient(#950018, #950018),
+        radial-gradient(center 50% -40%, radius 200%, #cd3951 45%, #bc0825 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #000000;
+    }
+    
+    #btnCancel:focused {
+    -fx-background-color:
+        linear-gradient(#950018, #950018),
+        radial-gradient(center 50% -40%, radius 200%, #cd3951 45%, #bc0825 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #000000;
+     -fx-border-radius: 6,5;
+	-fx-border-width:2;
+    -fx-border-color: black;
+    }
+    
+    #btnCancel:hover {
+    -fx-background-color:
+        linear-gradient(#950018, #950018),
+        radial-gradient(center 50% -40%, radius 200%, #cd3951 45%, #bc0825 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: #000000;
+     -fx-border-radius: 6,5;
+	-fx-border-width:2;
+    -fx-border-color: black;
+    }

@@ -1,0 +1,15 @@
+
+<beans>	
+	
+	<bean id="vegaMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="vegaMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:vega:gestionevega</value>
+				<value>importFattureVegaCommand</value>											
+				<value>importMovimentazioneVegaCommand</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

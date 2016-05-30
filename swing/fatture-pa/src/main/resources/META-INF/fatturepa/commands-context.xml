@@ -1,0 +1,13 @@
+ 
+<beans>
+    <bean id="openRicercaFatturePACommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRicercaFatturePACommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.fatturepa.util.ParametriRicercaFatturePA"></property>
+	</bean>
+	
+    <bean id="openAreaFatturaElettronicaTypeCommand" class="it.eurotn.panjea.fatturepa.rich.commands.OpenAreaFatturaElettronicaTypeCommand">
+    </bean>
+    
+    <bean id="openIdAreeFatturaPARicercaCommand" class="it.eurotn.panjea.fatturepa.rich.commands.OpenIdAreeFatturaPARicercaCommand">
+    </bean>
+</beans>

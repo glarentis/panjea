@@ -1,0 +1,138 @@
+ 
+<beans>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="basenames">
+            <list>
+                <value>classpath:it/eurotn/panjea/messages/lotti/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/lotti/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/lotti/messages-editors-pages</value>
+                <value>classpath:it/eurotn/panjea/messages/lotti/messages-exceptions</value>
+                <value>classpath:it/eurotn/panjea/messages/lotti/messages-methods</value>
+                <value>classpath:it/eurotn/panjea/messages/lotti/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/lotti/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/lotti/messages-constraint</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+        <property name="locations">
+            <list>
+                <!-- File di configurazione di images messaggi di template -->
+                <value>classpath:it/eurotn/panjea/messages/lotti/images.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jideTableFactory" class="it.eurotn.rich.control.table.JideTableFactory">
+        <property name="renderers">
+            <list>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.lotti.domain.Lotto"></property>
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.lotti.domain.LottoInterno"></property>
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.lotti.util.StatisticaLotto"></property>
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.NumericContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.lotti.domain.Lotto$RimanenzaFormattata"></property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    <bean id="panjeaConversionService" class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+        <property name="converters">
+            <list>
+                <bean name="LottoConverter" class="it.eurotn.panjea.lotti.rich.converter.LottoConverter"></bean>
+                 <bean name="RimanenzaFormattataConverter" class="it.eurotn.panjea.lotti.rich.converter.RimanenzaFormattataConverter"></bean>
+            </list>
+        </property>
+    </bean>
+    <!-- inizio configurazione business delegate -->
+    <bean id="lottiService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="lookupOnStartup" value="true" />
+        <property name="jndiName" value="Panjea.LottiService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean id="lottiBDImpl" class="it.eurotn.panjea.lotti.rich.bd.LottiBD" singleton="true" lazy-init="true">
+        <property name="lottiService" ref="lottiService" />
+    </bean>
+    <bean id="lottiBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.lotti.rich.bd.ILottiBD</value>
+        </property>
+        <property name="target">
+            <ref local="lottiBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <!-- fine configurazione business delegate -->
+    <bean id="exceptionHandler" class="org.springframework.richclient.exceptionhandling.delegation.DelegatingExceptionHandler">
+        <property name="delegateList">
+            <list>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.lotti.exception.RimanenzaLottiNonValidaException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.lotti.exceptionhandler.RimanenzaLottiNonValidaExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.lotti.exception.RimanenzeLottiNonValideException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.lotti.exceptionhandler.RimanenzeLottiNonValideExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.lotti.exception.LottiException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.lotti.exceptionhandler.LottiExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaLotti"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaLotti">
+	    <property name="versione" value=""/>
+	    <property name="nome" value="panjeaLotti"/>
+	    <property name="descrizione" value="Modulo plugin per la gestione di lotti e scadenze"/>
+	    <property name="rulesSource" value="it.eurotn.panjea.lotti.rich.rules.LottiPluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+
+</beans>

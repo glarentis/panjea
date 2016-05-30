@@ -1,0 +1,48 @@
+
+<beans>
+<bean id="searchObjectFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+				 <entry value="tipoAreaPreventivoSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.preventivi.domain.documento.TipoAreaPreventivo</value>
+                	</key>
+                </entry>
+                <entry value="areaPreventivoRicercaSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.preventivi.util.AreaPreventivoRicerca</value>
+                	</key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="tipoAreaPreventivoSearchObject" class="it.eurotn.panjea.preventivi.rich.search.TipoAreaPreventivoSearchObject" singleton="false" lazy-init="true">
+    	<property name="preventiviBD">
+    		<ref bean="preventiviBD"/>
+    	</property>
+    	<property name="editObject" value="true"/>
+    	<property name="columns">
+    		<list>
+    			<value>tipoDocumento.codice</value>
+    			<value>tipoDocumento.descrizione</value>
+    		</list>
+    	</property>
+    </bean>
+    
+    <bean id="areaPreventivoRicercaSearchObject" class="it.eurotn.panjea.preventivi.rich.search.AreaPreventivoSearchObject" singleton="false" lazy-init="true">
+    	<property name="preventiviBD">
+    		<ref bean="preventiviBD"/>
+    	</property>
+    	<property name="editObject" value="true"/>
+    	<property name="columns">
+    		<list>
+    			<value>documento.codice</value>
+    			<value>documento.tipoDocumento.codice</value>
+    			<value>documento.dataDocumento</value>
+    		</list>
+    	</property>
+    </bean>
+</beans>

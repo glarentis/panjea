@@ -1,0 +1,34 @@
+
+<beans>
+
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="searchObjectMap">
+			<map>
+                <entry value="servizioSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.intra.domain.Servizio</value>
+                    </key>
+                </entry>
+                <entry value="servizioSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.intra.domain.Nomenclatura</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="servizioSearchObject" class="it.eurotn.panjea.intra.rich.search.ServizioSearchObject" singleton="false" lazy-init="true">
+		<property name="intraBD">
+			<ref bean="intraBD"/>
+		</property>
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="false"/>
+	</bean>
+
+</beans>

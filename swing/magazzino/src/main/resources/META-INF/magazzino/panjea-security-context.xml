@@ -1,0 +1,247 @@
+
+<beans>
+	<import resource="panjea-context.xml"/>
+	
+	<!-- INIZIO DEFINIZIONE SECURITY CONTROLLER -->
+	 
+	<bean class="org.springframework.richclient.security.support.DefaultSecurityControllerManager" id="securityControllerManager">
+    	<property name="securityControllerMap">
+        	<map>
+	        	<entry key="tipoAreaMagazzinoPage.controller"><ref bean="modificaTipoAreaMagazzinoController"/></entry>
+	        	<entry key="listinoTipoMezzoZonaGeograficaPage.controller"><ref bean="modificaListinoTipoMezzoZonaGeograficaController"/></entry>
+	        	
+	        	<!-- search result contratti -->
+	        	<entry key="searchResultContratti.controller"><ref bean="modificaSearchResultContrattiController"/></entry>
+	        	<entry key="contrattoPage.controller"><ref bean="modificaSearchResultContrattiController"/></entry>
+	        	<entry key="righeContrattoTablePage.controller"><ref bean="modificaSearchResultContrattiController"/></entry>
+	        	<entry key="rigaContrattoPage.controller"><ref bean="modificaSearchResultContrattiController"/></entry>
+	        	<entry key="contrattoSediPage.controller"><ref bean="modificaSearchResultContrattiController"/></entry>
+	        	
+	        	<!-- search result listini -->
+	        	<entry key="listinoPage.controller"><ref bean="modificaListinoTipoMezzoZonaGeograficaController"/></entry>
+	        	<entry key="rigaListinPage.controller"><ref bean="modificaListinoTipoMezzoZonaGeograficaController"/></entry>
+	        	<entry key="righeListinoTablePage.controller"><ref bean="modificaListinoTipoMezzoZonaGeograficaController"/></entry>
+	        	<entry key="versioniListinoTablePage.controller"><ref bean="modificaListinoTipoMezzoZonaGeograficaController"/></entry>
+	        	
+	        	<!-- tabelle -->
+	        	<!-- categorie articolo -->
+	        	<entry key="categoriaPage.controller"><ref bean="modificaCategorieArticoloController"/></entry>
+	        	<entry key="articoloPage.controller"><ref bean="modificaCategorieArticoloController"/></entry>
+	        	<entry key="articoliTablePage.controller"><ref bean="modificaCategorieArticoloController"/></entry>
+	        	<entry key="codiceArticoloEntitaPage.controller"><ref bean="modificaCategorieArticoloController"/></entry>
+	        	<entry key="categorieTreeTablePage.controller"><ref bean="modificaCategorieArticoloController"/></entry>
+	        	<!-- tabelle generali -->
+	        	<entry key="tipiAttributoTablePage.controller"><ref bean="modificaTipiAttributoTablePageController"/></entry>
+	        	<entry key="scontoPage.controller"><ref bean="modificaScontoPageController"/></entry>
+	        	<entry key="formulaTrasformazionePage.controller"><ref bean="modificaFormulaTrasformazionePageController"/></entry>
+	        	<entry key="tipoMezzoTrasportoPage.controller"><ref bean="modificaTipoMezzoTrasportoPageController"/></entry>
+	        	<entry key="trasportoCuraPage.controller"><ref bean="modificaTrasportiCuraTablePageController"/></entry>
+	        	<entry key="tipoPortoPage.controller"><ref bean="modificaTipiPortoTablePageController"/></entry>
+	        	<entry key="causaleTrasportoPage.controller"><ref bean="modificaCausaliTrasportoTablePageController"/></entry>
+	        	<entry key="aspettoEsteriorePage.controller"><ref bean="modificaAspettiEsterioriTablePageController"/></entry>
+	        	<entry key="categoriaSedeMagazzinoPage.controller"><ref bean="modificaCategoriaSedeMagazzinoTablePageController"/></entry>
+	        	<!-- tabelle contabili -->
+	        	<entry key="categoriaContabileDepositoPage.controller"><ref bean="modificaCategoriaContabileDepositoTablePageController"/></entry>
+	        	<entry key="categoriaContabileArticoloPage.controller"><ref bean="modificaCategoriaContabileArticoloTablePageController"/></entry>
+	        	<entry key="categoriaContabileSedeMagazzinoPage.controller"><ref bean="modificaCategoriaContabileSedeMagazzinoTablePageController"/></entry>
+	        	<entry key="sottoContoContabilizzazioneCostiTablePage.controller"><ref bean="modificaSottoContoContabilizzazioneCostiTablePageController"/></entry>
+	        	<entry key="sottoContoContabilizzazioneRicaviTablePage.controller"><ref bean="modificaSottoContoContabilizzazioneRicaviTablePageController"/></entry>
+	        	<entry key="sottoContoContabilizzazionePagericavo.controller"><ref bean="modificaSottoContoContabilizzazionePagericavoController"/></entry>
+	        	<!-- rifatturazione -->
+	        	<entry key="gestioneRifatturazionePage.controller"><ref bean="modificaGestioneRifatturazionePageController"/></entry>
+	        	<!-- preferenze -->
+	        	<entry key="magazzinoSettingsPage.controller"><ref bean="modificaMagazzinoSettingsPageController"/></entry>
+				<!--ricerca documenti	        	-->
+				<entry key="risultatiRicercaAreaMagazzinoTablePage.controller"><ref bean="gestioneDocMagazzinoController"/></entry>
+				<entry key="righeMagazzinoTablePage.controller"><ref bean="gestioneDocMagazzinoController"/></entry>
+				<entry key="areaMagazzinoPage.controller"><ref bean="gestioneDocMagazzinoController"/></entry>
+				<entry key="rigaMagazzinoPage.controller"><ref bean="gestioneDocMagazzinoController"/></entry>	        	
+        	</map>
+    	</property>
+	</bean>
+	
+	<bean id="visualizzaDocMagazzinoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaDocMagazzino"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="gestioneDocMagazzinoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneDocMagazzino"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaSottoContoContabilizzazionePagericavoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSottoContoContabilizzazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaGestioneRifatturazionePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneFatturazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaMagazzinoSettingsPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaMagazzinoSettings"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaSottoContoContabilizzazioneRicaviTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSottoContoContabilizzazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaSottoContoContabilizzazioneCostiTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSottoContoContabilizzazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaCategoriaContabileSedeMagazzinoTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCategoriaContabileSedeMagazzino"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaCategoriaContabileArticoloTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCategoriaContabileArticolo"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaCategoriaContabileDepositoTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCategoriaContabileDeposito"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaCategoriaSedeMagazzinoTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCategoriaSedeMagazzino"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaAspettiEsterioriTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaAspettiEsteriori"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaCausaliTrasportoTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCausaliTrasporto"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaTipiPortoTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipiPorto"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaTrasportiCuraTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTrasportiCura"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaTipoMezzoTrasportoPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipoMezzoTrasporto"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaFormulaTrasformazionePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaFormulaTrasformazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="modificaScontoPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSconto"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>		
+	<bean id="modificaTipiAttributoTablePageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipiAttributo"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>		
+	<bean id="modificaCategorieArticoloController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaCategorieArticolo"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="visualizzaSincronizzazioneBIController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaSincronizzazioneBI"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="visualizzaValorizzazioneController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaValorizzazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	
+	<bean id="visualizzaAnalisiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaAnalisi"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="visualizzaMovimentazioneController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaMovimentazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	
+	<bean id="visualizzaSearchResultContrattiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaSearchResultContratti"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="modificaSearchResultContrattiController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaSearchResultContratti"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="visualizzaListinoTipoMezzoZonaGeograficaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaListinoTipoMezzoZonaGeografica"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="modificaListinoTipoMezzoZonaGeograficaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaListinoTipoMezzoZonaGeografica"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	
+	
+	
+	<bean id="visualizzaStampaEtichetteController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaStampaEtichette"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="visualizzaVerificaPrezzoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaVerificaPrezzo"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	
+	
+	 <bean id="modificaTipoAreaMagazzinoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipoAreaMagazzino"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	 <bean id="gestioneFatturazioneDiferitaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneFatturazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="gestioneFatturazioneController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneFatturazione"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	
+	<bean class="org.springframework.richclient.security.support.UserRoleSecurityController" id="gestioneSchedeArticoloController">
+		<property name="authorizingRoles" value="gestioneSchedeArticolo"/>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"/>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"/>
+	</bean>
+	
+
+	<!-- FINE DEFINIZIONE SECURITY CONTROLLER -->
+	
+
+	
+</beans>

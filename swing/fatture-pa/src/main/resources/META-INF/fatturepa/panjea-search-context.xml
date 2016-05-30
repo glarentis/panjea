@@ -1,0 +1,31 @@
+ 
+<beans>
+
+	<bean id="searchObjectFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="searchObjectMap">
+			<map>
+				<entry value="tipoRegimeFiscaleSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.fatturepa.domain.TipoRegimeFiscale</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="tipoRegimeFiscaleSearchObject"
+		class="it.eurotn.panjea.fatturepa.rich.search.TipoRegimeFiscaleSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="fatturePAAnagraficaBD">
+			<ref bean="fatturePAAnagraficaBD" />
+		</property>
+		<property name="columns">
+			<list>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="false" />
+	</bean>
+
+</beans>

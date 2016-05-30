@@ -1,0 +1,74 @@
+def panjeaPlugins=null
+def aziende=null
+def cliente=System.properties['cliente']
+def customerDir=System.properties['customersDir'] + "/" + cliente + "/"
+def deployDir=System.properties['deployDir'] + "/" + cliente + "/"
+def properties
+
+
+subprojects{	
+	configurations {
+		provided
+		compile.extendsFrom provided
+	}
+}
+
+configurations {
+	installer
+}
+
+dependencies {
+	installer(group: 'it.eurotn.panjea.updater', name: 'panjea-updater', version: '1.0')
+}
+
+task readProperties{
+	properties = new Properties()
+	if (cliente!=null){
+		properties.load(file(customerDir + cliente + '.properties').newDataInputStream())
+		panjeaPlugins = properties.getProperty('plugin.swing').split(';')
+		aziende=properties.getProperty('aziende').split(';')
+	}
+}
+
+task copyToLib(type: Copy) {
+	into file(project.rootProject.buildDir.path +'/tmp/' + cliente + '/swing/lib')
+	from{panjeaPlugins.collect{(project(it).configurations.runtime -  project(it).configurations.provided).collect{it}}}
+}
+
+copyToLib.shouldRunAfter(build)
+
+jar{
+	dependsOn(panjeaPlugins.collect{ it+":compileJava"},'copyToLib','readProperties')
+	outputs.upToDateWhen { false }
+	exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+	from(panjeaPlugins.collect{ project(it).sourceSets.main.output })
+	archiveName='panjeaClient.jar'
+	destinationDir=file(project.rootProject.buildDir.path +'/tmp/' + cliente + '/swing/')
+	manifest {
+		attributes 'Main-Class': 'it.eurotn.panjea.Panjea',
+		'Class-Path': file(project.rootProject.buildDir.path +'/tmp/' + cliente + '/swing/lib/').listFiles().collect{ 'lib/' + it.getName() }.join(' '),
+		'Build-Time-ISO-8601': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+	}
+}
+
+task creaZipUpdate(type:Zip){
+	dependsOn('jar')
+	from (project.rootProject.projectDir.path + '/clientinstaller')
+	from(project.rootProject.buildDir.path +'/tmp/' + cliente + '/swing/')	
+	archiveName='panjea.zip'	
+	destinationDir=file(deployDir + '/jboss/server/default/deploy/panjea.war')
+	exclude 'war'
+}
+
+task copyInstaller(type:Copy){
+	dependsOn('creaZipUpdate')	
+	into deployDir + '/jboss/server/default/deploy/panjea.war'
+	from (project.rootProject.projectDir.path + '/clientinstaller/war')
+	from (project.rootProject.buildDir.path + '/version.properties')
+	from  configurations.installer.resolve()
+	rename ('^panjea-updater-[\\d].[\\d]', 'updater')		
+}
+
+task deployClient{
+	dependsOn('copyInstaller')	
+}

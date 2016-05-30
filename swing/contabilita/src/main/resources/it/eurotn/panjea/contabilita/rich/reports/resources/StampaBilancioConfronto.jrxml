@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StampaBilancioConfronto" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="27ca2372-554a-4890-9b2d-a27599b28c00">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="3.1046066152957765"/>
+	<property name="ireport.x" value="600"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<subDataset name="centricostoDs" uuid="08e4ee41-4bbc-4c30-99b4-836647232605">
+		<field name="centroCostoCodice" class="java.lang.String"/>
+		<field name="saldo2" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[saldo2]]></fieldDescription>
+		</field>
+		<field name="centroCostoDescrizione" class="java.lang.String"/>
+		<field name="saldo" class="java.math.BigDecimal"/>
+		<field name="differenzaSaldi" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[differenzaSaldi]]></fieldDescription>
+		</field>
+		<field name="percentualeSaldi" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[percentualeSaldi]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="REPORT_TITLE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="REPORT_USER" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="REPORT_TIME" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="REPORT_RIFSQ" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="REPORT_NOTE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="REPORT_HEADER" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="REPORT_FOOTER" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="REPORT_HEADERDATA" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="REPORT_FOOTERDATA" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="REPORT_AZIENDA" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="stampaSottoConto" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Boolean(true)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="stampaConto" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Boolean(true)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="htmlParameters" class="java.lang.String" isForPrompting="false"/>
+	<field name="mastroDescrizione" class="java.lang.String">
+		<fieldDescription><![CDATA[mastroDescrizione]]></fieldDescription>
+	</field>
+	<field name="mastroCodice" class="java.lang.String">
+		<fieldDescription><![CDATA[mastroCodice]]></fieldDescription>
+	</field>
+	<field name="contoDescrizione" class="java.lang.String">
+		<fieldDescription><![CDATA[contoDescrizione]]></fieldDescription>
+	</field>
+	<field name="contoCodice" class="java.lang.String">
+		<fieldDescription><![CDATA[contoCodice]]></fieldDescription>
+	</field>
+	<field name="sottoContoDescrizione" class="java.lang.String">
+		<fieldDescription><![CDATA[sottoContoDescrizione]]></fieldDescription>
+	</field>
+	<field name="sottoContoCodice" class="java.lang.String">
+		<fieldDescription><![CDATA[sottoContoCodice]]></fieldDescription>
+	</field>
+	<field name="saldo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[saldo]]></fieldDescription>
+	</field>
+	<field name="saldo2" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[saldo2]]></fieldDescription>
+	</field>
+	<field name="differenzaSaldi" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[differenzaSaldi]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="percentualeSaldi" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[percentualeSaldi]]></fieldDescription>
+	</field>
+	<field name="centriCostoConfronto" class="java.util.List"/>
+	<variable name="mastroGroup" class="java.lang.String"/>
+	<variable name="contoGroup" class="java.lang.String"/>
+	<variable name="totaleSaldo1Mastro" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoMastro" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleSaldo2Mastro" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoMastro" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo2}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleDifferenzaSaldiMastro" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoMastro" calculation="Sum">
+		<variableExpression><![CDATA[$F{differenzaSaldi}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleSaldo1Conto" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoConto" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleSaldo2Conto" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoConto" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo2}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleDifferenzaSaldiConto" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoConto" calculation="Sum">
+		<variableExpression><![CDATA[$F{differenzaSaldi}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleSaldo1Generale" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleSaldo2Generale" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo2}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleDifferenzaPercentualeSaldiMastro" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[( $V{totaleSaldo1Mastro}.compareTo(BigDecimal.ZERO)==0 ? new BigDecimal(100.00) : ($V{totaleDifferenzaSaldiMastro}.divide($V{totaleSaldo1Mastro},4,BigDecimal.ROUND_HALF_UP)).multiply(new BigDecimal(100.00)) )]]></variableExpression>
+	</variable>
+	<variable name="totaleDifferenzaPercentualeSaldiConto" class="java.math.BigDecimal" resetType="None">
+		<variableExpression><![CDATA[( $V{totaleSaldo1Conto}.compareTo(BigDecimal.ZERO)==0 ? new BigDecimal(100.00) : ($V{totaleDifferenzaSaldiConto}.divide($V{totaleSaldo1Conto},4,BigDecimal.ROUND_HALF_UP)).multiply(new BigDecimal(100.00)) )]]></variableExpression>
+	</variable>
+	<variable name="riga" class="java.lang.Integer" resetType="Group" resetGroup="gruppoConto">
+		<variableExpression><![CDATA[$V{riga}.intValue() + 1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="prova">
+		<groupExpression><![CDATA[$F{class}]]></groupExpression>
+		<groupHeader>
+			<band splitType="Stretch"/>
+		</groupHeader>
+		<groupFooter>
+			<band splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<group name="gruppoMastro">
+		<groupExpression><![CDATA[$F{mastroCodice}]]></groupExpression>
+		<groupHeader>
+			<band height="11" splitType="Stretch">
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField-16" mode="Transparent" x="0" y="0" width="228" height="10" uuid="a1bf37b8-b3d8-4367-8ebb-8870056e6ef0"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mastroCodice} + "   " + $F{mastroDescrizione}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement key="textField-26" mode="Transparent" x="229" y="0" width="76" height="10" uuid="90c9b2b1-6bd7-43dd-895a-37bef4814ec5"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleSaldo1Mastro}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement key="textField-28" mode="Transparent" x="383" y="0" width="76" height="10" uuid="0bd5a298-42d2-4a7d-8ccf-63a8435b0ea6"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDifferenzaSaldiMastro}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement key="textField-29" mode="Transparent" x="306" y="0" width="76" height="10" uuid="2e895972-e75b-4adf-b849-b9099ac1eb7f"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleSaldo2Mastro}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line-1" x="1" y="10" width="533" height="1" forecolor="#CCCCFF" uuid="e25d5592-d1f6-494a-869e-f0d14d5eb2c5"/>
+				</line>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement key="textField-49" mode="Transparent" x="460" y="0" width="75" height="10" uuid="8735028d-ac8f-4097-8c15-af1d5f0c7939"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDifferenzaPercentualeSaldiMastro}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="4" splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<group name="gruppoConto">
+		<groupExpression><![CDATA[$F{contoCodice}]]></groupExpression>
+		<groupHeader>
+			<band height="11" splitType="Stretch">
+				<printWhenExpression><![CDATA[$P{stampaConto}]]></printWhenExpression>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField-18" mode="Transparent" x="30" y="0" width="198" height="10" uuid="adc50ea0-cdf2-4dd8-b7e3-481883ac6c43"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{contoCodice} + "   " + $F{contoDescrizione}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement key="textField-27" mode="Transparent" x="229" y="0" width="76" height="10" uuid="a654c96b-7674-4459-a7e4-6b013100a198"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleSaldo1Conto}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement key="textField-30" mode="Transparent" x="306" y="0" width="76" height="10" uuid="550327a5-0771-497c-a110-e23c7301269d"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleSaldo2Conto}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement key="textField-31" mode="Transparent" x="383" y="0" width="76" height="10" uuid="8afcb6f2-fcc6-47ad-8fb4-a8117e627821"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDifferenzaSaldiConto}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line-2" x="31" y="10" width="504" height="1" forecolor="#CCCCFF" uuid="af157715-3447-4490-b35a-bfc5628a8fe1">
+						<printWhenExpression><![CDATA[!$P{stampaSottoConto}.booleanValue()]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement key="textField-50" mode="Transparent" x="460" y="0" width="75" height="10" uuid="99e7ac02-52c9-48cb-9443-4110dc179886"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDifferenzaPercentualeSaldiConto}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-36" x="0" y="1" width="159" height="10" uuid="ba0c6c14-11c6-4123-94be-aec225a0f8c8"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{header.azienda} + ": " + $P{REPORT_AZIENDA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-37" x="159" y="1" width="216" height="17" uuid="99f308e1-3535-42a6-88d0-63be092beb0e"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{header.reportBilancioConfronto.titolo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss" isBlankWhenNull="false">
+				<reportElement key="textField-38" x="415" y="11" width="120" height="10" uuid="e281b74a-0763-4dc2-b888-77e2c473c225"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_TIME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-39" x="0" y="11" width="120" height="10" uuid="c55de4f1-deef-4a57-a9f6-6e787c5b3763"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{header.utente} + ": " + $P{REPORT_USER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-46" x="412" y="0" width="123" height="10" uuid="051ee9e0-7d34-46a3-98d2-d9c78c978350"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.stampato.il}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-32" positionType="FixRelativeToBottom" mode="Opaque" x="383" y="46" width="76" height="20" backcolor="#FFFFFF" uuid="fba3fb8c-6a5e-4054-a450-7c5f9b216b77"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{bilancioConfronto.differenzaSaldi}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-33" positionType="FixRelativeToBottom" mode="Opaque" x="306" y="46" width="76" height="20" backcolor="#FFFFFF" uuid="ef403c63-8663-4cc2-81b7-10196ed97d51"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{bilancioConfronto.totaleSaldo2}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-34" positionType="FixRelativeToBottom" mode="Opaque" x="229" y="46" width="76" height="20" backcolor="#FFFFFF" uuid="8e5643fe-83bc-4dc0-a6f7-5c067763f058"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{bilancioConfronto.totaleSaldo1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-35" positionType="FixRelativeToBottom" mode="Opaque" x="1" y="46" width="227" height="20" backcolor="#FFFFFF" uuid="861d8dc3-6406-47b0-9f23-3804c16d8bc5"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{bilancioConfronto.descrizione}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-47" positionType="FixRelativeToBottom" mode="Opaque" x="460" y="46" width="75" height="20" backcolor="#FFFFFF" uuid="940953ef-0ed9-4bbc-8a9f-9a0c01c460c3"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{bilancioConfronto.differenzaSaldiPercentuale}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement key="textField-51" x="0" y="21" width="534" height="10" isRemoveLineWhenBlank="true" uuid="b78bd49c-8ece-4e8a-bb94-0f4119eebe3e"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" markup="html">
+					<font fontName="Times New Roman" size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{htmlParameters}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{stampaSottoConto} && new Boolean($F{sottoContoCodice}.compareTo("000000")!=0)]]></printWhenExpression>
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="60" y="0" width="475" height="10" isPrintInFirstWholeBand="true" backcolor="#DCDCDC" uuid="c1975439-591e-4dc8-b888-d9b8f704b3c9">
+					<printWhenExpression><![CDATA[$V{riga}.intValue() % 2 == 1]]></printWhenExpression>
+				</reportElement>
+			</frame>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-19" positionType="Float" mode="Transparent" x="60" y="0" width="168" height="10" uuid="b5451359-2818-425a-aee3-fcec10c5f1ec">
+					<printWhenExpression><![CDATA[new Boolean($F{sottoContoCodice}.compareTo("000000")!=0)]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sottoContoCodice} + "   " + $F{sottoContoDescrizione}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField-20" mode="Transparent" x="229" y="0" width="76" height="10" uuid="986db1e1-9f90-412b-b719-45d6f55bddbc">
+					<printWhenExpression><![CDATA[new Boolean($F{sottoContoCodice}.compareTo("000000")!=0)]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField-21" mode="Transparent" x="306" y="0" width="76" height="10" uuid="86a29522-b526-42e5-b888-2f633a08cf60">
+					<printWhenExpression><![CDATA[new Boolean($F{sottoContoCodice}.compareTo("000000")!=0)]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldo2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField-22" mode="Transparent" x="383" y="0" width="76" height="10" uuid="2716bae0-e9dc-45a8-beff-62bf33319a0b">
+					<printWhenExpression><![CDATA[new Boolean($F{sottoContoCodice}.compareTo("000000")!=0)]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{differenzaSaldi}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement key="textField-48" mode="Transparent" x="460" y="0" width="75" height="10" uuid="9aca503e-053c-4e61-b138-4f41a09d26ae">
+					<printWhenExpression><![CDATA[new Boolean($F{sottoContoCodice}.compareTo("000000")!=0)]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percentualeSaldi}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="60" y="10" width="475" height="11" isRemoveLineWhenBlank="true" uuid="5e9dfa69-86fc-4906-bd83-614313dd47d7"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="centricostoDs" uuid="d5490f4f-f77e-4a8d-987a-ff58c0bc1c63">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{centriCostoConfronto})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="11" width="475">
+						<textField pattern="" isBlankWhenNull="false">
+							<reportElement mode="Transparent" x="0" y="0" width="168" height="10" forecolor="#000000" backcolor="#FFFFFF" uuid="19666d8d-1aa5-4230-8cb6-e9dbc8c0bc50"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{centroCostoCodice} + "   " + $F{centroCostoDescrizione}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement key="textField-20" mode="Transparent" x="169" y="0" width="78" height="10" uuid="1a312e58-c2ad-4f5c-accc-c4b8684f2bbd"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle">
+								<font fontName="Arial" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement key="textField-21" mode="Transparent" x="246" y="1" width="76" height="10" uuid="a05590ad-67ac-4b0d-b7aa-11d64ec4a4b8"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle">
+								<font fontName="Arial" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{saldo2}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement key="textField-48" mode="Transparent" x="399" y="0" width="75" height="10" uuid="98ba3793-bf9b-4c03-8add-a707c1a12481"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle">
+								<font fontName="Arial" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{percentualeSaldi}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement key="textField-22" mode="Transparent" x="323" y="0" width="76" height="10" uuid="84e3c52c-a2ba-428a-a235-122107459f29"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle">
+								<font fontName="Arial" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{differenzaSaldi}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="11" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-44" x="404" y="1" width="116" height="10" uuid="21fe6605-77b1-41e4-9987-44e5f7074b39"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.pagina} + " " + $V{PAGE_NUMBER} + "  " + $R{report.pagina.di}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField-45" x="520" y="1" width="14" height="10" uuid="f8b36db9-386e-446b-bea4-c4bec3acd80f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

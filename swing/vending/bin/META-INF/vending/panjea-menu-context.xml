@@ -1,0 +1,34 @@
+
+<beans>
+
+	<bean id="vendingMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="vendingMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:manutenzioni:operatori</value>
+                <value>newOperatoreCommand</value>
+                <value>searchOperatoriCommand</value>
+                <value>group:rifornimenti</value>
+                <value>openAreaRifornimentoCommand</value>
+                <value>openRicercaAreaRifornimentoCommand</value>
+                <value>group:vending:evadts</value>
+                <value>openRicercaRilevazioneEvaDtsEditorCommand</value>
+                <value>openImportazioneEvaDtsCommand</value>
+                <value>group:vending:distributori</value>
+                <value>openDistributoreEditorCommand</value>
+                <value>group:vending:distributori:movimenti</value>                               
+                <value>openAreaInstallazioneCommand</value>
+                <value>openRicercaAreaInstallazioneCommand</value>
+                <value>group:vending:casse</value>
+                <value>openCassaCommand</value>
+                <value>openMovimentoCassaCommand</value>
+                <value>openLettureSelezionatriceEditorCommand</value>
+                <value>group:vending:tabelleVending</value>                
+                <value>openAslCommand</value>
+                <value>openTabelleGeneraliVendingCommand</value>
+                <value>openPreferenzeVendingCommand</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

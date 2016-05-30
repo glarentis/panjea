@@ -1,0 +1,10 @@
+
+<beans>
+	
+	<bean id="visualizzaAnalisiBIController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaAnalisiBI"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	
+</beans>

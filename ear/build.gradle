@@ -1,0 +1,155 @@
+apply plugin: 'ear'
+apply plugin: 'eclipse-wtp'
+
+
+
+dependencies { earlib ('org.beanio:beanio:2.0.2'){transitive=false}
+						 earlib ('net.java.dev.glazedlists:glazedlists_java15:1.9.0'){transitive=false}
+						 earlib ('com.itextpdf:itextpdf:5.2.1'){transitive=false}
+						 earlib ('com.lowagie:itext:2.1.7'){transitive=false}
+						 earlib ('com.logicaldoc:logicaldoc-webservice:7.4.0'){transitive=false}
+						 earlib (group: 'com.logicaldoc', name: 'logicaldoc-core', version: '7.4.0'){transitive=false}
+						 earlib (group: 'com.logicaldoc.panjea', name: 'logicaldoc-panjea-plugin', version: '7.3.0'){transitive=false} 
+						 earlib ('org.beanio:beanio:2.0.2'){transitive=false}						 
+						 earlib (group: 'org.apache.commons.csv', name: 'commons-csv', version: '20070823'){transitive=false}
+						 earlib ('commons-lang:commons-lang:2.6'){transitive=false}		
+						 earlib  (group: 'asm', name: 'asm', version: '3.3.1'){transitive=false}
+						 earlib (group: 'org.apache.cxf', name: 'cxf-bundle', version: '2.7.11'){transitive=false}								 										 
+						 earlib (group: 'org.apache.neethi', name: 'neethi', version: '3.0.3'){transitive=false}
+						 earlib (group: 'org.apache.pdfbox', name: 'pdfbox', version: '1.6.0')
+						 earlib (group: 'org.apache.poi', name: 'poi-ooxml', version: '3.13')
+						 earlib (group: 'org.apache.poi', name: 'poi', version: '3.13')
+						 earlib (group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '3.13')
+						 earlib (group: 'org.projectlombok', name: 'lombok', version: '1.16.8')
+						 }
+
+
+def panjeaPlugins
+def aziende
+def properties
+def cliente=System.properties['cliente']
+def customersDir=System.properties['customersDir'] + "/" + cliente + "/"
+def deployDir=System.properties['developerDir'] == null ? System.properties['deployDir'] + "/" + cliente + "/jboss/server/default/deploy/" : System.properties['developerDir']
+def boolean publishJarsToMaven = System.properties['publishJarsToMaven'] == null ? false : new Boolean(System.properties['publishJarsToMaven'])
+def mvnVersion = "trunk".equals(System.properties['versione']) ? System.properties['versione'] + '-SNAPSHOT' : System.properties['versione'] 
+
+subprojects {
+
+	apply plugin: "maven-publish"
+
+	publishing {
+    publications {
+        "$project.name"(MavenPublication) {
+                groupId 'it.eurotn.panjea.modules'
+                artifactId project.name
+                version mvnVersion == null ? '0' : mvnVersion
+                from components.java
+            }
+    }
+    
+    repositories {
+        maven {
+            credentials {
+              username 'gfattarsi'
+              password 'europasw'
+            }
+            url "http://service.eurotn.it/artifactory/europa"
+        }
+    }
+}
+}
+
+ear{
+	if(publishJarsToMaven) {
+		dependsOn('ejb',subprojects.publish)
+	} else {
+		dependsOn('ejb')
+	}
+	archiveName = '50panjea.ear'
+	destinationDir = file(deployDir)	
+	manifest { attributes 'Vendor': 'Europa Computer'       }
+	from project.rootProject.buildDir.path +'/tmp/' + cliente + '/ejb/panjea-ejb.jar'
+}
+
+task readProperties{	
+	properties = new Properties()
+	if (cliente!=null){		
+		properties.load(file(customersDir + cliente + '.properties').newDataInputStream())
+		panjeaPlugins = properties.getProperty('plugin.ejb').split(';')
+		aziende=properties.getProperty('aziende').split(';')
+	}
+}
+
+
+task ejb(type: Zip) {
+	dependsOn(panjeaPlugins.collect{ it+":compileJava"},'merge','persistence','datasource')
+	from files(panjeaPlugins.collect{ project(it).sourceSets.main.output }){ exclude 'META-INF/ejb-jar.xml' }
+	into('/META-INF'){
+		from project.rootProject.buildDir.path +'/tmp/' + cliente + '/ejb/META-INF/'
+	}
+	archiveName='panjea-ejb.jar'
+	destinationDir=file(project.rootProject.buildDir.path +'/tmp/' + cliente + '/ejb')
+	into("it/eurotn/panjea/settings/"){
+		from customersDir + cliente + '.properties'
+	}
+	rename (cliente + '.properties', 'settings.properties')
+}
+
+task persistence{
+	doLast{
+		def hbm2ddlautoValue = System.properties['developerDir'] != null ? '<property name="hibernate.hbm2ddl.auto" value="update"/>' : ''
+		def showsqlValue = System.properties['developerDir'] != null ? 'true' : 'false'
+		def dirPersistence=file(project.rootProject.buildDir.path +'/tmp/'+ cliente + '/ejb/META-INF/')
+		dirPersistence.mkdirs()
+		def fileMergeWriter = new FileWriter(file(dirPersistence.path + '/persistence.xml'))
+		def persistenceDescriptorTemplate = file('src/main/template/persistence.xml').text
+		def engine = new groovy.text.SimpleTemplateEngine()
+		def persistenceDescriptor =""
+		def printWriter =new PrintWriter(fileMergeWriter)
+		printWriter.println('<?xml version="1.0" encoding="UTF-8"?>')
+		printWriter.println('<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">')
+		aziende.collect{
+			def binding = [azienda: it, hbm2ddlauto: hbm2ddlautoValue, showsql: showsqlValue]
+			def persistenceDescriptorAzienda=engine.createTemplate(persistenceDescriptorTemplate).make(binding)
+			printWriter.println(persistenceDescriptorAzienda)
+		}
+		printWriter.println('</persistence>')
+		printWriter.close()
+	}
+}
+
+task datasource{
+	doLast{
+		def engine = new groovy.text.SimpleTemplateEngine()
+		file(deployDir).mkdirs()
+		aziende.collect{
+			def dataSourceWriter = new FileWriter(deployDir  +  it + '-ds.xml')			
+			def dataSourceTemplate = file('src/main/template/datasource.xml').text
+			def binding = [azienda: it,
+				dbconnection: properties.getProperty(it + '.database.url'),
+				dbusername: properties.getProperty(it + '.database.username'),
+				dbpassword: properties.getProperty(it + '.database.password')
+			]
+			def dataSource=engine.createTemplate(dataSourceTemplate).make(binding)
+			def printWriter =new PrintWriter(dataSourceWriter)
+			printWriter.println(dataSource)			
+			printWriter.close()
+		}
+	}
+}
+
+task merge{
+	doLast{
+		def dirMerge=file(project.rootProject.buildDir.path +'/tmp/'+ cliente + '/ejb/META-INF/')
+		dirMerge.mkdirs()
+		def fileMergeWriter = new FileWriter(file(dirMerge.path + '/ejb-jar.xml'))
+		def ejbJarDescriptor = new XmlSlurper(false,false).parse(file('src/main/template/ejb-jar.xml'))
+		files(panjeaPlugins.collect{ project(it).sourceSets.main.resources }).each{
+			if ( 'ejb-jar.xml'.equals(it.name)) {
+				def ejbJarPluginDescriptor=new XmlSlurper(false,false).parse(it)
+				ejbJarPluginDescriptor.'assembly-descriptor'[0].'interceptor-binding'.each{interceptor->ejbJarDescriptor.'assembly-descriptor'[0].appendNode(interceptor)}
+			}
+		}
+		groovy.xml.XmlUtil.serialize( ejbJarDescriptor,fileMergeWriter)
+	}
+}

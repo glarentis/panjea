@@ -1,0 +1,347 @@
+
+<beans>
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="preventiviMenu" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- begin editors -->
+    <bean id="tipoDocumentoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>tipoAreaPreventivoPage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="areaPreventivoEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.preventivi.domain.documento.AreaPreventivo</value>
+                    </key>
+                </entry>
+                <entry value="areaPreventivoEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.preventivi.util.AreaPreventivoFullDTO</value>
+                    </key>
+                </entry>
+                <entry value="ricercaAreaPreventivoEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.preventivi.util.parametriricerca.ParametriRicercaAreaPreventivo</value>
+                    </key>
+                </entry>
+                <entry value="movimentazioneMagazzinoPreventivoEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.preventivi.util.parametriricerca.ParametriRicercaMovimentazione</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="areaPreventivoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.preventivi.rich.editors.areapreventivo.AreaPreventivoEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">areaPreventivoEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>areaPreventivoPage</value>
+                        <value>righePreventivoTablePage</value>
+                        <value>areaPreventivoAllegatiPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">areaPreventivoEditor</value>
+                </entry>
+                <entry key="preventiviBD">
+                    <ref bean="preventiviBD" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="areaPreventivoAllegatiPage" class="it.eurotn.panjea.preventivi.rich.editors.areapreventivo.AreaPreventivoAllegatiPage" singleton="false" lazy-init="true">             
+    </bean>
+
+ 
+ 	<bean id="tipoAreaPreventivoPage" class="it.eurotn.panjea.preventivi.rich.editors.tipoareapreventivo.TipoAreaPreventivoPage" singleton="false" lazy-init="true">
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+    </bean>
+    
+    <bean id="areaPreventivoPage" class="it.eurotn.panjea.preventivi.rich.editors.areapreventivo.AreaPreventivoPage" singleton="false" lazy-init="true">
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente" />
+        </property>
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+        <property name="defaultController">
+            <ref bean="areaPreventivoController" />
+        </property>
+    </bean>
+    
+    <bean id="areaPreventivoController" class="it.eurotn.rich.editors.controllers.DefaultController" singleton="false" lazy-init="true">
+        <property name="propertiesChange">
+            <map>
+                <entry key="areaPreventivo.tipoAreaPreventivo">
+                    <list>
+                        <ref bean="areaPreventivo.tipoAreaPreventivoPropertyChange"></ref>
+                    </list>
+                </entry>
+                <entry key="areaPreventivo.dataRegistrazione">
+                    <list>
+                        <ref bean="areaPreventivo.dataRegistrazionePropertyChange" />
+                    </list>
+                </entry>
+                <entry key="areaPreventivo.tipoAreaPreventivo.tipoDocumento">
+                    <list>
+                        <ref bean="areaPreventivo.tipoDocumentoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="areaPreventivo.documento">
+                    <list>
+                        <ref bean="areaPreventivo.documentoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="areaPreventivo.documento.entita">
+                    <list>
+                        <ref bean="areaPreventivo.entitaPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="areaPreventivo.documento.sedeEntita">
+                    <list>
+                        <ref bean="areaPreventivo.sedeEntitaPropertyChange" />
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="areaPreventivo.tipoAreaPreventivoPropertyChange" class="it.eurotn.panjea.preventivi.rich.forms.areapreventivo.TipoAreaPreventivoPropertyChange" singleton="false" lazy-init="true">
+    </bean>
+    <bean id="areaPreventivo.dataRegistrazionePropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.DataRegistrazionePropertyChange" singleton="false" lazy-init="true">
+        <property name="areaDocumentoPropertyPath" value="areaPreventivo"></property>
+        <property name="dataDocLikeDataRegPropertyPath" value="areaPreventivo.tipoAreaPreventivo.dataDocLikeDataReg"></property>
+    </bean>
+    <bean id="areaPreventivo.tipoDocumentoPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.TipoDocumentoPropertyChange" singleton="false" lazy-init="true">
+        <property name="magazzinoDocumentoBD">
+            <ref bean="magazzinoDocumentoBD"></ref>
+        </property>
+        <property name="tipoDocumentoPropertyPath" value="areaPreventivo.tipoAreaPreventivo.tipoDocumento"></property>
+    </bean>
+    <bean id="areaPreventivo.documentoPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.DocumentoPropertyChange" singleton="false" lazy-init="true">
+        <property name="areaDocumentoPropertyPath" value="areaPreventivo"></property>
+        <property name="tipoAreaDocumentoPropertyPath" value="areaPreventivo.tipoAreaPreventivo"></property>
+    </bean>
+    <bean id="areaPreventivo.entitaPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.EntitaPropertyChange" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD" />
+        </property>
+        <property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD" />
+        </property>
+        <property name="areaDocumentoPropertyPath" value="areaPreventivo"></property>
+    </bean>
+    <bean id="areaPreventivo.sedeEntitaPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.SedeEntitaPropertyChange" singleton="false" lazy-init="true">
+        <property name="magazzinoDocumentoBD">
+            <ref bean="magazzinoDocumentoBD"></ref>
+        </property>
+        <property name="areaDocumentoPropertyPath" value="areaPreventivo"></property>
+    </bean>
+    
+    <bean id="righePreventivoTablePage" class="it.eurotn.panjea.preventivi.rich.editors.righepreventivo.RighePreventivoTablePage" singleton="false" lazy-init="true">
+        <property name="editPageMode" value="DETAIL"></property>
+        <property name="editPages">
+            <map>
+                <entry key="it.eurotn.panjea.preventivi.util.RigaArticoloDTO">
+                    <ref bean="rigaArticoloPreventivoPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.preventivi.util.RigaNotaDTO">
+                    <ref bean="rigaNotaPreventivoPage" />
+                </entry>
+                <entry key="it.eurotn.panjea.preventivi.util.RigaTestataDTO">
+                    <ref bean="rigaTestataPreventivoPage" />
+                </entry>
+            </map>
+        </property>
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+    
+    <bean id="rigaArticoloPreventivoPage" class="it.eurotn.panjea.preventivi.rich.editors.righepreventivo.RigaArticoloPage" singleton="false" lazy-init="true">
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente" />
+        </property>
+        <property name="defaultController">
+            <ref bean="rigaArticoloPreventivoController" />
+        </property>
+    </bean>
+    
+    <bean id="rigaArticoloPreventivoController" class="it.eurotn.rich.editors.controllers.DefaultController" singleton="false" lazy-init="true">
+        <property name="propertiesChange">
+            <map>
+                <entry key="prezzoUnitario">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="qta">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                        <ref bean="rigaArticoloPreventivoQtaPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="variazione1">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="variazione2">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="variazione3">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="variazione4">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="tipoOmaggio">
+                    <list>
+                        <ref bean="rigaArticoloOmaggioPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="sconto1Bloccato">
+                    <list>
+                        <ref bean="rigaArticoloSconto1BloccatoPropertyChange" />
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="rigaArticoloPreventivoQtaPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.RigaArticoloQtaPropertyChange" singleton="false" lazy-init="true">
+    	<property name="prezzoUnitarioProperty">
+            <value>prezzoUnitario</value>
+        </property>
+    </bean>
+    
+    <bean id="rigaNotaPreventivoPage" class="it.eurotn.panjea.preventivi.rich.editors.righepreventivo.RigaNotaPage" singleton="false" lazy-init="true">
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+    </bean>
+    <bean id="rigaTestataPreventivoPage" class="it.eurotn.panjea.preventivi.rich.editors.righepreventivo.RigaTestataPage" singleton="false" lazy-init="true">
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+    </bean>
+
+    <bean id="ricercaAreaPreventivoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">ricercaAreaPreventivoEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaAreaPreventivoPage</value>
+                        <value>risultatiRicercaAreaPreventivoTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">ricercaAreaPreventivoEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="parametriRicercaAreaPreventivoPage" class="it.eurotn.panjea.preventivi.rich.editors.areapreventivo.ParametriRicercaAreaPreventivoPage" singleton="false" lazy-init="true">
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente" />
+        </property>
+    </bean>
+    <bean id="risultatiRicercaAreaPreventivoTablePage" class="it.eurotn.panjea.preventivi.rich.editors.areapreventivo.RisultatiRicercaAreaPreventivoTablePage" singleton="false" lazy-init="true">
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+    
+    <bean id="movimentazioneMagazzinoPreventivoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">movimentazioneMagazzinoPreventivoEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaMovimentazionePreventivoPage</value>
+                        <value>risultatiRicercaMovimentazionePreventivoTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">movimentazioneMagazzinoPreventivoEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="parametriRicercaMovimentazionePreventivoPage" class="it.eurotn.panjea.preventivi.rich.editors.statistiche.movimentazione.ParametriRicercaMovimentazionePreventivoPage" singleton="false" lazy-init="true">
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+    </bean>
+    <bean id="risultatiRicercaMovimentazionePreventivoTablePage" class="it.eurotn.panjea.preventivi.rich.editors.statistiche.movimentazione.RisultatiRicercaMovimentazionePreventivoTablePage" singleton="false" lazy-init="true">
+        <property name="preventiviBD">
+            <ref bean="preventiviBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+</beans>

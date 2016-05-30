@@ -1,0 +1,39 @@
+
+<beans>
+
+    <bean id="amministrazioneMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="amministrazioneMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:aggiornamento</value>
+				<value>updateCommand</value>
+				<value>backupDatabaseCommand</value>
+				<value>assistenzaRemotaCommand</value>
+				<value>teamviewerCommand</value>
+				<value>scriptServerCommand</value>
+				<value>mantisCommand</value>
+				<value>panjeaRssCommand</value>
+
+				<value>group:amministrazione</value>
+				<value>gestioneLockCommand</value>
+				<value>gestioneEmailCommand</value>
+				<value>flushCacheCommand</value>
+				<value>clearEditorCacheCommand</value>
+
+				<value>group:utenti</value>
+				<value>searchRuoliCommand</value>
+				<value>searchUtentiCommand</value>
+
+				<value>group:preferenze</value>
+				<value>preferenzeCommand</value>
+				<value>settingsLooksCommand</value>
+				<value>preferencesCommand</value>
+				<value>openGestioneStampeEditorCommand</value>
+				<value>openDMSPreferenceCommand</value>
+				<value>queryBuilderCommand</value>
+
+			</list>
+		</property>
+	</bean>
+
+</beans>

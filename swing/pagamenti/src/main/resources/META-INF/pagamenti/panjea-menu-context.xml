@@ -1,0 +1,26 @@
+
+<beans>
+	<bean id="pagamentiMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="pagamentiMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:pagamenti:tesoreria</value>
+				<value>ricercaRateCommand</value>
+				<value>ricercaAreeTesoreriaCommand</value>
+				<value>ricercaEffettiCommand</value>
+				<value>gestioneAssegniCommand</value>
+				<value>openSituazioneSollecitiCommand</value>
+				<value>openSituazioneAnticipiFatturaCommand</value>
+				<value>openAccontiCommand</value>
+				<value>group:pagamenti:tesoreria:calendariRate</value>
+				<value>newCalendarioRateCommand</value>
+				<value>searchCalendariRateCommand</value>
+
+				<value>group:pagamenti:gestione</value>
+				<value>openTabellePartiteCommand</value>
+				<value>openTenplateSollecitiCommand</value>
+				<value>openTesoreriaPreferenzeCommand</value>
+			</list>
+		</property>
+	</bean>
+</beans>

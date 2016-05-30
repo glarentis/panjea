@@ -1,0 +1,104 @@
+
+<beans>
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">	
+		<property name="searchObjectMap">
+			<map>
+				<entry value="codiceIvaContabilitaSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.CodiceIva</value>
+					</key>
+				</entry>
+				<entry value="sottoContoSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.domain.SottoConto</value>
+					</key>
+				</entry>
+				<entry value="contoSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.domain.Conto</value>
+					</key>
+				</entry>
+				<entry value="tipoAreaContabileSeachObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.domain.TipoAreaContabile</value>
+					</key>
+				</entry>
+				<entry value="registroIvaSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.domain.RegistroIva</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="codiceIvaContabilitaSearchObject" class="it.eurotn.panjea.contabilita.rich.search.CodiceIvaContabilitaSearchObject" singleton="false" lazy-init="true">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD"/>
+		</property>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD"/>
+		</property>
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizioneInterna</value>
+			</list>
+		</property>
+		<property name="dialogPageId" value="codiceIvaPage"/>
+		<property name="editObject" value="true"/>
+	</bean>
+	
+	<bean id="sottoContoSearchObject" class="it.eurotn.panjea.contabilita.rich.search.SottoContoSearchObject" singleton="false" lazy-init="true">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD"/>
+		</property>
+		<property name="columns">
+			<list>
+				<value>sottoContoCodice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="contoSearchObject" class="it.eurotn.panjea.contabilita.rich.search.ContoSearchObject" singleton="false" lazy-init="true">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD"/>
+		</property>
+		<property name="columns">
+			<list>
+				<value>contoCodice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+				
+	</bean>
+	
+	<bean id="tipoAreaContabileSeachObject" class="it.eurotn.panjea.contabilita.rich.search.TipoAreaContabileSearchObject" singleton="false" lazy-init="true">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD"/>
+		</property>
+		<property name="editObject" value="true"/>
+		<property name="columns">
+			<list>
+				<value>tipoDocumento.codice</value>
+				<value>tipoDocumento.descrizione</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="registroIvaSearchObject" class="it.eurotn.panjea.contabilita.rich.search.RegistroIvaSearchObject" singleton="false" lazy-init="true">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD"/>
+		</property>
+		<property name="columns">
+			<list>
+				<value>numero</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<!-- <property name="dialogPageId" value="registroIvaPage"/>
+		<property name="editObject" value="true"/> -->
+	</bean>
+	
+</beans>

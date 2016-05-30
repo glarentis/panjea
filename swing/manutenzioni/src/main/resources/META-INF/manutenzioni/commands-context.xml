@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans>
+
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="newOperatoreCommand">
+		<property name="idCommand" value="newOperatoreCommand" />
+		<property name="openClassName" value="it.eurotn.panjea.manutenzioni.domain.Operatore" />
+	</bean>
+
+
+	<bean class="it.eurotn.rich.command.OpenSearchCommand" id="searchOperatoriCommand">
+		<property name="idCommand" value="searchOperatoriCommand" />
+		<property name="openString" value="searchResultOperatori" />
+	</bean>
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openAreaInstallazioneCommand">
+		<property name="idCommand" value="openAreaInstallazioneCommand" />
+		<property name="openClassName"
+			value="it.eurotn.panjea.manutenzioni.domain.documento.AreaInstallazione" />
+	</bean>
+	<bean class="it.eurotn.rich.command.OpenEditorCommand" id="openRicercaAreaInstallazioneCommand">
+		<property name="idCommand" value="openRicercaAreaInstallazioneCommand" />
+		<property name="openClassName"
+			value="it.eurotn.panjea.manutenzioni.manager.areeinstallazioni.ParametriRicercaAreeInstallazione" />
+	</bean>
+	<bean id="openTabelleGeneraliManutenzioneCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTabelleGeneraliManutenzioneCommand"></property>
+		<property name="openString" value="tabelleGeneraliManutenzioneEditor"></property>
+	</bean>
+	
+	<bean id="openPreferenzeManutenzioniCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+        <property name="idCommand" value="openPreferenzeManutenzioniCommand"></property>
+        <property name="openString" value="preferenzeManutenzioniEditor"></property>
+    </bean>
+</beans>

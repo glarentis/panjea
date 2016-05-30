@@ -1,0 +1,18 @@
+
+<beans>
+	<import resource="panjea-context.xml"/>
+	<import resource="panjea-menu-context.xml" />
+
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="atonMenu"/>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>

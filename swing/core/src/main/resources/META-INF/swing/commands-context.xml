@@ -1,0 +1,41 @@
+
+<beans>
+
+    <bean id="updateCommand" class="it.eurotn.panjea.rich.commands.UpdateCommand">
+        <property name="securityControllerId" value="aggiornamentoController"></property>
+    </bean>
+
+	<bean id="assistenzaRemotaCommand" class="it.eurotn.panjea.rich.commands.AssistenzaRemotaCommand"/>
+	<bean id="teamviewerCommand" class="it.eurotn.panjea.rich.commands.TeamviewerCommand"/>
+
+	<bean id="backupDatabaseCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="backupDatabaseCommand"></property>
+		<property name="openString" value="backupEditor"></property>
+	    <property name="securityControllerId" value="aggiornamentoController"></property>
+    </bean>
+    
+    <bean id="panjeaRssCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="panjeaRssCommand"></property>
+		<property name="openString" value="panjeaRssEditor"></property>
+    </bean>
+
+    <bean id="preferencesCommand" class="it.eurotn.panjea.rich.commands.PreferencesCommand">
+        <property name="securityControllerId" value="strumentiController"></property>
+    </bean>
+
+    <bean id="openGestioneStampeEditorCommand" class="it.eurotn.panjea.rich.commands.OpenGestioneStampeEditorCommand" />
+
+    <bean id="clearEditorCacheCommand" class="it.eurotn.panjea.rich.commands.ClearEditorCacheCommand" />
+    
+    <bean id="openDMSPreferenceCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openDMSPreferenceCommand"></property>
+		<property name="openString" value="preferenceDMSEditor"></property>
+    </bean>
+    
+    <bean id="queryBuilderCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="queryBuilderCommand"></property>
+		<property name="openClassName" value="it.eurotn.querybuilder.domain.EntitaQuerableMetaData"></property>
+    </bean>
+    
+    
+</beans>

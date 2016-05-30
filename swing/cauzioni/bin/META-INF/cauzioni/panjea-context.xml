@@ -1,0 +1,65 @@
+
+<beans>
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/cauzioni/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/cauzioni/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/cauzioni/messages-methods</value>
+                <value>classpath:it/eurotn/panjea/messages/cauzioni/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/cauzioni/messages-exceptions</value>
+                <value>classpath:it/eurotn/panjea/messages/cauzioni/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/cauzioni/messages-editors-pages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images  messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/cauzioni/images.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="cauzioniService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.CauzioniService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+	<bean id="cauzioniBDImpl" class="it.eurotn.panjea.cauzioni.rich.bd.CauzioniBD" singleton="true" lazy-init="true">
+        <property name="cauzioniService" ref="cauzioniService"></property>
+    </bean>
+    <bean id="cauzioniBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.cauzioni.rich.bd.ICauzioniBD</value>
+        </property>
+        <property name="target">
+            <ref local="cauzioniBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaCauzioni"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaCauzioni">
+	    <property name="versione" value=""/>
+	    <property name="nome" value="panjeaCauzioni"/>
+	    <property name="descrizione" value="Modulo panjea gestione cauzioni"/>
+	    <property name="rulesSource" value="it.eurotn.panjea.cauzioni.rich.rules.CauzioniPluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+
+</beans>

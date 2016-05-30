@@ -1,0 +1,103 @@
+
+<beans>
+
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+				<entry value="categoriaRateSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.partite.domain.CategoriaRata</value>
+					</key>
+				</entry>
+				<entry value="codicePagamentoSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.pagamenti.domain.CodicePagamento</value>
+					</key>
+				</entry>
+				<entry value="tipoAreaPartitaSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.partite.domain.TipoAreaPartita</value>
+					</key>
+				</entry>
+				<entry value="areaAccontoSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.tesoreria.domain.AreaAcconto</value>
+					</key>
+				</entry>
+				<entry value="calendarioRateSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.rate.domain.CalendarioRate</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id = "categoriaRateSearchObject" class="it.eurotn.panjea.partite.rich.search.CategoriaRateSearchObject" singleton="false" lazy-init="true">
+		<property name="partiteBD">
+			<ref bean = "partiteBD"/>
+		</property>
+		<property name="columns" >
+			<list>
+				<value>descrizione</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id = "calendarioRateSearchObject" class="it.eurotn.panjea.rate.rich.search.CalendarioRateSearchObject" singleton="false" lazy-init="true">
+		<property name="calendariRateBD">
+			<ref bean = "calendariRateBD"/>
+		</property>
+		<property name="columns" >
+			<list>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject">
+			<value>true</value>
+		</property>
+	</bean>
+	
+	<bean id = "tipoAreaPartitaSearchObject" class="it.eurotn.panjea.partite.rich.search.TipoAreaPartitaSearchObject" singleton="false" lazy-init="true">
+		<property name="partiteBD">
+			<ref bean = "partiteBD"/>
+		</property>
+		<property name="columns">
+			<list>
+				<value>tipoDocumento.codice</value>
+				<value>tipoDocumento.descrizione</value>
+			</list>
+		</property>
+		<property name="editObject">
+			<value>true</value>
+		</property>
+	</bean>
+
+	<bean id="codicePagamentoSearchObject" class="it.eurotn.panjea.pagamenti.rich.search.CodicePagamentoSearchObject" singleton="false" lazy-init="true">
+		<property name="anagraficaPagamentiBD">
+			<ref bean="anagraficaPagamentiBD"/>
+		</property>
+		<property name="columns">
+			<list>
+				<value>codicePagamento</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="dialogPageId" value="codicePagamentoPage"/>
+		<property name="editObject">
+			<value>true</value>
+		</property>
+	</bean>	
+	
+	<bean id = "areaAccontoSearchObject" class="it.eurotn.panjea.tesoreria.rich.search.AreaAccontoSearchObject" singleton="false" lazy-init="true">
+		<property name="tesoreriaBD">
+			<ref bean = "tesoreriaBD"/>
+		</property>
+		<property name="columns" >
+			<list>
+				<value>documento.dataDocumento</value>
+				<value>documento.totale</value>
+			</list>
+		</property>
+	</bean>
+</beans>

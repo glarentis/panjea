@@ -1,0 +1,114 @@
+
+<beans>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/vending/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/vending/messages-commands
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vending/messages-classes
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vending/messages-editors-pages
+				</value>
+				<value>classpath:it/eurotn/panjea/messages/vending/messages-forms-model
+				</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="imageResourcesFactory"
+		class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/vending/images.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="panjeaConversionService"
+		class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+		<property name="converters">
+			<list>
+				<bean name="tipoComunicazioneConverter"
+					class="it.eurotn.panjea.vending.rich.converter.TipoComunicazioneConverter"></bean>
+				<bean name="tipoModelloConverter"
+					class="it.eurotn.panjea.vending.rich.converter.TipoModelloConverter"></bean>
+				<bean name="modelloConverter"
+					class="it.eurotn.panjea.vending.rich.converter.ModelloConverter"></bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="vendingAnagraficaBDImpl" class="it.eurotn.panjea.vending.rich.bd.VendingAnagraficaBD"
+		singleton="true" lazy-init="true">
+		<property name="vendingAnagraficaService" ref="vendingAnagraficaService" />
+	</bean>
+	<bean id="vendingAnagraficaBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.vending.rich.bd.IVendingAnagraficaBD</value>
+		</property>
+		<property name="target">
+			<ref local="vendingAnagraficaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="vendingAnagraficaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.VendingAnagraficaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+
+
+	<bean id="vendingDocumentoBDImpl" class="it.eurotn.panjea.vending.rich.bd.VendingDocumentoBD"
+		singleton="true" lazy-init="true">
+		<property name="vendingDocumentoService" ref="vendingDocumentoService" />
+		<property name="magazzinoDocumentoService" ref="magazzinoDocumentoService" />
+		<property name="ordiniDocumentoService" ref="ordiniDocumentoService" />
+	</bean>
+	<bean id="vendingDocumentoBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.vending.rich.bd.IVendingDocumentoBD</value>
+		</property>
+		<property name="target">
+			<ref local="vendingDocumentoBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="vendingDocumentoService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.VendingDocumentoService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+	<!-- inizio plugins rules source -->
+	<bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager"
+		lazy-init="true" singleton="true">
+		<property name="plugins">
+			<list>
+				<ref bean="panjeaVending" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaVending">
+		<property name="versione" value="" />
+		<property name="nome" value="panjeaVending" />
+		<property name="descrizione" value="Modulo panjea gestione del vending" />
+		<property name="rulesSource"
+			value="it.eurotn.panjea.vending.rich.rules.VendingPluginRulesSource" />
+	</bean>
+	<!-- fine plugins rules source -->
+</beans>

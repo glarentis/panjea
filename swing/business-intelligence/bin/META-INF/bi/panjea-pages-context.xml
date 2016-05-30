@@ -1,0 +1,167 @@
+
+<beans>
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="biMenu"/>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="dashBoardEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.bi.domain.dashboard.DashBoard</value>
+                    </key>
+                </entry>
+                <entry value="analisiBiEditor">
+                    <key>
+                        <value type="java.lang.String">analisiBiEditor</value>
+                    </key>
+                </entry>
+                <entry value="analisiBiEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.bi.domain.analisi.AnalisiBi</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- PAGINE DA AGGIUNGERE AD EDITOR DI ALTI PLUGIN -->
+    
+    <bean id="articoloPage" class="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoloPage" singleton="false" lazy-init="true">
+        <property name="pagineCollegate">
+            <list>
+                <ref bean="dashboardArticoloPage"/>                
+            </list>
+        </property>
+    </bean>
+	
+	<bean id="dashboardArticoloPage" class="it.eurotn.panjea.bi.rich.editors.dashboard.articolo.DashBoardArticoloPage" singleton="false">         
+    </bean>
+    
+    <bean id="clienteEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>dashboardClientePage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="dashboardClientePage" class=" it.eurotn.panjea.bi.rich.editors.dashboard.entita.DashBoardClientePage" singleton="false">
+    </bean>
+    
+    <bean id="fornitoreEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>dashboardFornitorePage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="dashboardFornitorePage" class=" it.eurotn.panjea.bi.rich.editors.dashboard.entita.DashBoardFornitorePage" singleton="false">
+    </bean>
+    
+    <bean id="vettoreEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>dashboardVettorePage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="dashboardVettorePage" class=" it.eurotn.panjea.bi.rich.editors.dashboard.entita.DashBoardVettorePage" singleton="false">
+    </bean>
+    
+    <bean id="agenteEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>dashboardAgentePage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="dashboardAgentePage" class=" it.eurotn.panjea.bi.rich.editors.dashboard.entita.DashBoardAgentePage" singleton="false">
+    </bean>
+    
+    <!-- EDITORS E PAGES -->
+    
+    <bean id="dashBoardEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.bi.rich.editors.dashboard.DashBoardEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>                          
+                <entry key="enableCache">
+                    <value type="java.lang.Boolean">0</value>
+                </entry>                
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">dashBoardCompositeEditorPage</value>
+                </entry>                
+                <entry key="id">
+                    <value type="java.lang.String">dashBoardEditor</value>
+                </entry>
+                <entry key="businessIntelligenceBD">
+					<ref bean="businessIntelligenceBD" />
+				</entry>
+            </map>
+        </property>
+    </bean>
+
+    
+    <bean id="analisiBiEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.bi.rich.editors.AnalisiBiEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">analisiEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>analisiPivotTablePage</value>
+                        <value>analisiChartPage</value>
+                        <value>analisiBiDetailTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">analisiEditor</value>
+                </entry>
+                <entry key="businessIntelligenceBD">
+                    <ref bean="businessIntelligenceBD" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="analisiPivotTablePage" class="it.eurotn.panjea.bi.rich.editors.analisi.AnalisiBiPivotTablePage" singleton="false"/>
+    
+    <bean id="analisiChartPage" class="it.eurotn.panjea.bi.rich.editors.chart.AnalisiBiChartPage" singleton="false"/>    
+    
+    <bean id="analisiBiDetailTablePage" class="it.eurotn.panjea.bi.rich.editors.analisi.detail.AnalisiBiDetailTablePage" singleton="false">
+        <property name="businessIntelligenceBD">
+            <ref bean="businessIntelligenceBD" />
+        </property>
+    </bean>
+    
+</beans>

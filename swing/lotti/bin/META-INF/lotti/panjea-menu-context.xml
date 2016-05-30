@@ -1,0 +1,15 @@
+
+<beans>
+	<bean id="magazzinoMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="magazzinoMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:lotti:verifiche</value>
+				<value>openVerificheGiacenzaLottiCommand</value>
+				<value>openRiepilogoLottoCommand</value>
+				<value>openLottiInScadenzaEditorCommand</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

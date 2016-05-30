@@ -1,0 +1,8 @@
+ 
+<beans>
+
+	<bean id="elencoRiscontiEditorCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="elencoRiscontiEditorCommand"></property>
+		<property name="openString" value="elencoRiscontiEditor"></property>
+	</bean>
+</beans>

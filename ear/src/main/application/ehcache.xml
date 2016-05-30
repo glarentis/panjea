@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false">
+
+	<diskStore path="java.io.tmpdir" />
+
+	<cacheManagerEventListenerFactory
+		class="" properties="" />
+
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+		diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="panjea.datiGeografici" maxElementsInMemory="1000"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.preference" maxElementsInMemory="100"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+
+
+	<cache name="panjea.azienda" maxElementsInMemory="3" eternal="true"
+		overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.codiceIva" maxElementsInMemory="50" eternal="true"
+		overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.cap" maxElementsInMemory="1500" eternal="true"
+		overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.localita" maxElementsInMemory="1500" eternal="true"
+		overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.depositi" maxElementsInMemory="50" eternal="true"
+		overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.tipoDocumento" maxElementsInMemory="300"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.valutaAzienda" maxElementsInMemory="100"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.contabilizzazione" maxElementsInMemory="200"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.contabilitaSettings" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.tipoAreaContabile" maxElementsInMemory="100"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.registroIva" maxElementsInMemory="15"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.contiBase" maxElementsInMemory="30" eternal="true"
+		overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.centroCosto" maxElementsInMemory="120"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.pianoDeiConti" maxElementsInMemory="2500"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="panjea.generazioneCodice" maxElementsInMemory="100"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.categoria" maxElementsInMemory="500" eternal="true"
+		overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.datiCommerciali" maxElementsInMemory="500"
+		eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.tipoAttributo" maxElementsInMemory="600"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+	<cache name="panjea.formulaTrasformazione" maxElementsInMemory="20"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.tipoAreaMagazzino" maxElementsInMemory="600"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.sottoContiContabilizzazione"
+		maxElementsInMemory="50" eternal="true" overflowToDisk="false"
+		memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.tipiDocumentoContabiliBase"
+		maxElementsInMemory="40" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="10" />
+
+	<cache name="panjea.moduloprezzo" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.tipoAreaOrdine" maxElementsInMemory="30"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.tipoAreaPartita" maxElementsInMemory="100"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.conaiArticolo" maxElementsInMemory="15"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.unitaMisura" maxElementsInMemory="50"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.trasportoCura" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.utente" maxElementsInMemory="40" eternal="true"
+		overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.tesoreriaSettings" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.magazzinoSettings" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+	<cache name="panjea.ordiniSettings" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+	
+	<cache name="panjea.dmsSettings" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="true" memoryStoreEvictionPolicy="FIFO" />
+
+</ehcache>

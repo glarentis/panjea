@@ -1,0 +1,193 @@
+
+
+<beans>
+
+    <bean class="org.springframework.richclient.form.binding.swing.SwingBinderSelectionStrategy" id="binderSelectionStrategy">
+        <property name="bindersForPropertyTypes">
+            <map>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.SottoSpecie</value>
+                    </key>
+                    <bean class="it.eurotn.rich.binding.searchtext.SearchTextBinder">
+                        <property name="renderProperties" value="sottoSpecieCodice"></property>
+                        <property name="searchTextClass" value="it.eurotn.panjea.beniammortizzabili.rich.search.SottoSpecieSearchTextField"></property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+	<bean id="panjeaConversionService" class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+    	<property name="converters">
+            <list>
+            	<bean name="BeneAmmortizzabileConverter" class="it.eurotn.panjea.beniammortizzabili.rich.converter.BeneAmmortizzabileConverter"></bean>
+            	<bean name="BeneAmmortizzabileLiteConverter" class="it.eurotn.panjea.beniammortizzabili.rich.converter.BeneAmmortizzabileLiteConverter"></bean>
+            	<bean name="GruppoConverter" class="it.eurotn.panjea.beniammortizzabili.rich.converter.GruppoConverter"></bean>
+            	<bean name="SpecieConverter" class="it.eurotn.panjea.beniammortizzabili.rich.converter.SpecieConverter"></bean>
+            	<bean name="SottoSpecieConverter" class="it.eurotn.panjea.beniammortizzabili.rich.converter.SottoSpecieConverter"></bean>
+            </list>
+        </property>
+    </bean>
+
+     <bean id="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.PercApplicataCellRenderer.PERC_ORDINARIO_APPLICATA_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+     <bean id="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.PercApplicataCellRenderer.PERC_ANTICIPATO_APPLICATA_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+
+    <bean id="jideTableFactory" class="it.eurotn.rich.control.table.JideTableFactory">
+        <property name="renderers">
+            <list>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.beniammortizzabili2.domain.SottoSpecie" />
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.beniammortizzabili2.domain.Specie" />
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.beniammortizzabili2.domain.Gruppo"></property>
+                </bean>
+                <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.beniammortizzabili2.domain.BeneAmmortizzabileLite"></property>
+                </bean>
+                <bean id="PercOrdinarioApplicataCellRenderer" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.PercApplicataCellRenderer">
+                    <property name="type" value="java.lang.Double"></property>
+                    <property name="editorContext" ref="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.PercApplicataCellRenderer.PERC_ORDINARIO_APPLICATA_CONTEXT" />
+                </bean>
+                <bean id="PercAnticipatoApplicataCellRenderer" class="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.PercApplicataCellRenderer">
+                    <property name="type" value="java.lang.Double"></property>
+                    <property name="editorContext" ref="it.eurotn.panjea.beniammortizzabili.rich.editors.beni.bene.PercApplicataCellRenderer.PERC_ANTICIPATO_APPLICATA_CONTEXT" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    	<property name="defaultEncoding" value="UTF-8" />
+    	<property name="basenames">
+    		<list>
+    			<!-- File di configurazione dei messaggi per i beni ammortizzabili -->
+    			<value>classpath:it/eurotn/panjea/messages/bamm/messages</value>
+    			<value>classpath:it/eurotn/panjea/messages/bamm/messages-commands</value>
+    			<value>classpath:it/eurotn/panjea/messages/bamm/messages-editors-pages</value>
+    			<value>classpath:it/eurotn/panjea/messages/bamm/messages-methods</value>
+    			<value>classpath:it/eurotn/panjea/messages/bamm/messages-exceptions</value>
+    			<value>classpath:it/eurotn/panjea/messages/bamm/messages-classes</value>
+    			<value>classpath:it/eurotn/panjea/messages/bamm/messages-forms-model</value>
+    		</list>
+    	</property>
+    </bean>
+
+    <bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+        <property name="locations">
+            <list>
+                <!-- File di configurazione delle immagini per i beni ammortizzabili -->
+                <value>classpath:it/eurotn/panjea/messages/bamm/images.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="beniAmmortizzabiliService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.BeniAmmortizzabiliService" />
+        <property name="jndiTemplate" ref="jndiTemplate"/>
+    </bean>
+
+    <bean id="beniAmmortizzabiliBDimpl" class="it.eurotn.panjea.beniammortizzabili.rich.bd.BeniAmmortizzabiliBD" singleton="true" lazy-init="true">
+        <property name="beniAmmortizzabiliService" ref="beniAmmortizzabiliService" />
+    </bean>
+
+    <bean id="reportBeniAmmortizzabiliBDImpl" class="it.eurotn.panjea.beniammortizzabili.rich.bd.ReportBeniAmmortizzabiliBD" singleton="true" lazy-init="true">
+        <property name="beniAmmortizzabiliService" ref="beniAmmortizzabiliService"></property>
+    </bean>
+
+    <bean id="beniAmmortizzabiliBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.beniammortizzabili.rich.bd.IBeniAmmortizzabiliBD</value>
+        </property>
+        <property name="target">
+            <ref local="beniAmmortizzabiliBDimpl"/>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+                <value>AsyncAsyncBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="reportBeniAmmortizzabiliBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.beniammortizzabili.rich.bd.IReportBeniAmmortizzabiliBD</value>
+        </property>
+        <property name="target">
+            <ref local="reportBeniAmmortizzabiliBDImpl"/>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+                <value>AsyncAsyncBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="beniAmmortizzabiliContabilitaService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.BeniAmmortizzabiliContabilitaService" />
+        <property name="jndiTemplate" ref="jndiTemplate"/>
+    </bean>
+
+    <bean id="beniAmmortizzabiliContabilitaBDimpl" class="it.eurotn.panjea.beniammortizzabili.rich.bd.BeniAmmortizzabiliContabilitaBD" singleton="true" lazy-init="true">
+        <property name="beniAmmortizzabiliContabilitaService" ref="beniAmmortizzabiliContabilitaService" />
+    </bean>
+
+    <bean id="beniAmmortizzabiliContabilitaBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.beniammortizzabili.rich.bd.IBeniAmmortizzabiliContabilitaBD</value>
+        </property>
+        <property name="target">
+            <ref local="beniAmmortizzabiliContabilitaBDimpl"/>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+                <value>AsyncAsyncBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Inizio gestione delle eccezioni -->
+
+    <!-- Handler che si occupa della gestione delle eccezioni. Contiene una lista che si comporta come un try cacth. Attenzione all'ordine
+     in cui i delegate vengono inseriti nella lista -->
+    <bean id="exceptionHandler"	class="org.springframework.richclient.exceptionhandling.delegation.DelegatingExceptionHandler">
+        <property name="delegateList">
+            <list>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClass">
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili.exception.AreeContabiliDaSimulazionePresentiException</value>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.beniammortizzabili.rich.exceptionhandler.AreeContabiliDaSimulazionePresentiExceptionExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaBeniAmmortizzabili"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaBeniAmmortizzabili">
+    	<property name="versione" value=""/>
+    	<property name="nome" value="panjeaBeniAmmortizzabili"/>
+    	<property name="descrizione" value="Modulo panjea beni ammortizzabili"/>
+    	<property name="rulesSource" value="it.eurotn.panjea.beniammortizzabili.rich.rules.BeniAmmortizzabiliPluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+
+</beans>

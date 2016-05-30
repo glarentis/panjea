@@ -1,0 +1,13 @@
+
+<beans>	
+	<bean id="openSchedeGiroClientiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openSchedeGiroClientiCommand"></property>
+		<property name="openString" value="schedeGiroClientiEditor"></property>
+	</bean>
+	
+	<bean id="stampaSchedeGiroClientiCommand" class="it.eurotn.panjea.giroclienti.rich.commands.StampaSchedeGiroClientiCommand">
+    </bean>
+    
+    <bean id="stampaRiepilogoSchedeCommand" class="it.eurotn.panjea.giroclienti.rich.commands.StampaRiepilogoSchedeCommand">
+    </bean>
+</beans>

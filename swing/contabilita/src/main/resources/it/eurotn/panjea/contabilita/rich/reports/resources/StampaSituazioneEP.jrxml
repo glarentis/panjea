@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StampaSituazioneEP" pageWidth="595" pageHeight="842" columnWidth="537" leftMargin="29" rightMargin="29" topMargin="14" bottomMargin="14" uuid="73e4dbf9-1ebd-440b-81c0-6ff0efb44823">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="2.1204880918624256"/>
+	<property name="ireport.x" value="273"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<subDataset name="dataset1" uuid="3f7d9319-65be-470f-9e08-2d86d4a40b0d">
+		<field name="centroCostoCodice" class="java.lang.String"/>
+		<field name="importoAvere" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[importoAvere]]></fieldDescription>
+		</field>
+		<field name="importoDare" class="java.math.BigDecimal">
+			<fieldDescription><![CDATA[importoDare]]></fieldDescription>
+		</field>
+		<field name="centroCostoDescrizione" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="REPORT_TITLE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="REPORT_USER" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="REPORT_TIME" class="java.util.Date" isForPrompting="false"/>
+	<parameter name="REPORT_RIFSQ" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="REPORT_NOTE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="REPORT_HEADER" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="REPORT_FOOTER" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="REPORT_HEADERDATA" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="REPORT_FOOTERDATA" class="java.lang.Object" isForPrompting="false"/>
+	<parameter name="REPORT_AZIENDA" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="stampaSottoConto" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Boolean(true)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="stampaConto" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Boolean(true)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="stampaSaldoZero" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Boolean(false)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PAGE_ID" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ID_PAGE_SP" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["situazionePatrimonialePage"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID_PAGE_PP" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["profittiPerditePage"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ID_PAGE_CO" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["contiOrdinePage"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="titoloTabella1" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="titoloTabella2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="footerTotaliLeft" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="footerTotaliRight" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="htmlParameters" class="java.lang.String" isForPrompting="false"/>
+	<field name="mastroDescrizione" class="java.lang.String">
+		<fieldDescription><![CDATA[mastroDescrizione]]></fieldDescription>
+	</field>
+	<field name="mastroCodice" class="java.lang.String">
+		<fieldDescription><![CDATA[mastroCodice]]></fieldDescription>
+	</field>
+	<field name="contoDescrizione" class="java.lang.String">
+		<fieldDescription><![CDATA[contoDescrizione]]></fieldDescription>
+	</field>
+	<field name="contoCodice" class="java.lang.String">
+		<fieldDescription><![CDATA[contoCodice]]></fieldDescription>
+	</field>
+	<field name="sottoContoDescrizione" class="java.lang.String">
+		<fieldDescription><![CDATA[sottoContoDescrizione]]></fieldDescription>
+	</field>
+	<field name="sottoContoCodice" class="java.lang.String">
+		<fieldDescription><![CDATA[sottoContoCodice]]></fieldDescription>
+	</field>
+	<field name="importoDare" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[importoDare]]></fieldDescription>
+	</field>
+	<field name="importoAvere" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[importoAvere]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="saldo" class="java.math.BigDecimal"/>
+	<field name="centriCosto" class="java.util.List"/>
+	<variable name="mastroGroup" class="java.lang.String"/>
+	<variable name="contoGroup" class="java.lang.String"/>
+	<variable name="totaleDareMastro" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoMastro" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoDare}.abs()]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleAvereMastro" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoMastro" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoAvere}.abs()]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleDifferenzaMastri" class="java.math.BigDecimal" resetType="None" calculation="Sum">
+		<variableExpression><![CDATA[$V{totaleDareMastri}.abs().subtract($V{totaleAvereMastri}.abs())]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleDareConto" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoConto" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoDare}.abs()]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleAvereConto" class="java.math.BigDecimal" resetType="Group" resetGroup="gruppoConto" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoAvere}.abs()]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="totaleDareMastri" class="java.math.BigDecimal" resetType="Group" resetGroup="totali" incrementType="Group" incrementGroup="gruppoMastro" calculation="Sum">
+		<variableExpression><![CDATA[$V{totaleDareMastro}.subtract($V{totaleAvereMastro}).signum()==1
+
+? $V{totaleDareMastro}.subtract($V{totaleAvereMastro}).abs()
+: BigDecimal.ZERO]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="totaleAvereMastri" class="java.math.BigDecimal" resetType="Group" resetGroup="totali" incrementType="Group" incrementGroup="gruppoMastro" calculation="Sum">
+		<variableExpression><![CDATA[$V{totaleDareMastro}.subtract($V{totaleAvereMastro}).signum()==-1
+
+? $V{totaleDareMastro}.subtract($V{totaleAvereMastro}).abs()
+: BigDecimal.ZERO]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="totConfrontoSommaAvere" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[( $F{importoAvere}!=null ? $F{importoAvere} : new BigDecimal(0) )]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="importoDare_1" class="java.math.BigDecimal" resetType="Group" resetGroup="totali" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoDare}]]></variableExpression>
+	</variable>
+	<variable name="riga" class="java.lang.Integer" resetType="Group" resetGroup="gruppoConto">
+		<variableExpression><![CDATA[$V{riga}.intValue() + 1]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="totali">
+		<groupExpression><![CDATA[$F{class}]]></groupExpression>
+		<groupHeader>
+			<band splitType="Stretch"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="27" splitType="Stretch">
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="3802c743-763a-4112-a51e-1c0638245b78" key="textField-28" mode="Transparent" x="208" y="15" width="59" height="11">
+						<printWhenExpression><![CDATA[new Boolean($V{totaleDareMastri}.subtract($V{totaleAvereMastri}).signum() < 0)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastri}.subtract($V{totaleAvereMastri}).abs()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="341e81be-6006-4299-953b-b57869a74167" key="textField-49" x="51" y="15" width="155" height="11">
+						<printWhenExpression><![CDATA[new Boolean($V{totaleDareMastri}.subtract($V{totaleAvereMastri}).signum() < 0)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{footerTotaliLeft}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="3844989e-2ac7-4831-bc32-e2fcb67306a2" key="textField-50" x="321" y="15" width="155" height="11">
+						<printWhenExpression><![CDATA[new Boolean($V{totaleDareMastri}.subtract($V{totaleAvereMastri}).signum() > 0)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{footerTotaliRight}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="2b9c9695-59df-4eeb-83c4-cde6e54e42c0" key="textField-51" x="478" y="15" width="59" height="11">
+						<printWhenExpression><![CDATA[new Boolean($V{totaleDareMastri}.subtract($V{totaleAvereMastri}).signum() > 0)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastri}.subtract($V{totaleAvereMastri}).abs()]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="876972d9-5cd5-4b91-b32e-4d773f2e2c79" key="line-1" x="0" y="1" width="537" height="1"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="3164df7f-dc40-4041-95e2-f4a2b1421013" key="textField-60" mode="Transparent" x="208" y="1" width="59" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastri}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="985c87e0-edcd-4227-bf93-3fb8c78221cb" key="textField-61" mode="Transparent" x="478" y="1" width="59" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleAvereMastri}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="98fc444c-1767-4d87-bb24-06810e6073ab" key="textField-62" x="321" y="1" width="155" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{situazioneEP.totale}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="95b72e82-0a30-4e05-9697-05fe939d1704" key="textField-63" x="51" y="1" width="155" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{situazioneEP.totale}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="gruppoMastro">
+		<groupExpression><![CDATA[$F{mastroCodice}]]></groupExpression>
+		<groupHeader>
+			<band height="11" splitType="Stretch">
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" isBlankWhenNull="true">
+					<reportElement uuid="53e18e68-b623-4b06-9eae-1e5bf0a2232e" key="textField-16" mode="Transparent" x="0" y="0" width="49" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastro}.subtract($V{totaleAvereMastro}).signum()==1
+
+? $F{mastroCodice}
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="6caea05c-bb02-4d69-a4ae-e4769f214121" key="textField-26" mode="Transparent" x="208" y="0" width="59" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastro}.subtract($V{totaleAvereMastro}).signum()==1
+
+? $V{totaleDareMastro}.subtract($V{totaleAvereMastro}).abs()
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="1be1fdc8-ab98-49b9-a893-62b848263f71" key="textField-29" mode="Transparent" x="478" y="0" width="59" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastro}.subtract($V{totaleAvereMastro}).signum()==-1
+
+? $V{totaleDareMastro}.subtract($V{totaleAvereMastro}).abs()
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" isBlankWhenNull="true">
+					<reportElement uuid="93b6a7c6-d15e-40ac-b19a-592dbf59c915" key="textField-38" x="51" y="0" width="155" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastro}.subtract($V{totaleAvereMastro}).signum()==1
+
+? $F{mastroDescrizione}
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" isBlankWhenNull="true">
+					<reportElement uuid="01549cd7-8992-474e-9f9c-23849a06da3b" key="textField-43" x="270" y="0" width="49" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastro}.subtract($V{totaleAvereMastro}).signum()==-1
+
+? $F{mastroCodice}
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoMastro" isBlankWhenNull="true">
+					<reportElement uuid="6ae0cd76-420d-4107-8dd2-097dd35fb4ef" key="textField-46" x="321" y="0" width="155" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareMastro}.subtract($V{totaleAvereMastro}).signum()==-1
+
+? $F{mastroDescrizione}
+: null]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="7b8e8138-de56-444d-8830-63aa1ea24419" key="line-2" x="0" y="10" width="537" height="1" forecolor="#CCCCFF" backcolor="#CCCCFF"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<group name="gruppoConto">
+		<groupExpression><![CDATA[$F{contoCodice}]]></groupExpression>
+		<groupHeader>
+			<band height="10" splitType="Stretch">
+				<printWhenExpression><![CDATA[$P{stampaConto}]]></printWhenExpression>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" isBlankWhenNull="true">
+					<reportElement uuid="28624e6e-299a-4697-8c82-50ba2e60091e" key="textField-18" mode="Transparent" x="6" y="0" width="43" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareConto}.subtract($V{totaleAvereConto}).signum()==1
+
+? $F{contoCodice}
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="49ab4d94-7ffc-4016-b6dd-fc2c08b056ee" key="textField-27" mode="Transparent" x="208" y="0" width="59" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareConto}.subtract($V{totaleAvereConto}).signum()==1
+
+? $V{totaleDareConto}.subtract($V{totaleAvereConto}).abs()
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement uuid="1908d67e-3fc2-4aba-963d-b042e2562c45" key="textField-30" mode="Transparent" x="478" y="0" width="59" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareConto}.subtract($V{totaleAvereConto}).signum()==-1
+
+? $V{totaleDareConto}.subtract($V{totaleAvereConto}).abs()
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" isBlankWhenNull="true">
+					<reportElement uuid="03750df5-ae34-4ca6-b218-8a87e4fbb741" key="textField-39" x="51" y="0" width="155" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareConto}.subtract($V{totaleAvereConto}).signum()==1
+
+? $F{contoDescrizione}
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" isBlankWhenNull="true">
+					<reportElement uuid="17a3048c-1cfb-4084-afea-4928efc30a90" key="textField-44" x="276" y="0" width="43" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareConto}.subtract($V{totaleAvereConto}).signum()==-1
+
+? $F{contoCodice}
+: null]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="gruppoConto" isBlankWhenNull="true">
+					<reportElement uuid="48867c5f-54cb-4371-b767-e6e727fab3be" key="textField-47" x="321" y="0" width="155" height="10"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDareConto}.subtract($V{totaleAvereConto}).signum()==-1
+
+? $F{contoDescrizione}
+: null]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="6fc6c2cc-5dda-4a9d-8ac8-ce9f85246ea6" key="line-2" x="6" y="9" width="531" height="1" forecolor="#CCCCFF" backcolor="#CCCCFF">
+						<printWhenExpression><![CDATA[!$P{stampaSottoConto}.booleanValue()]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<group name="spazioConto">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band splitType="Stretch"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="5" splitType="Stretch"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="75" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="9ec999e7-a1a5-4b93-89b6-2e233808fa40" key="textField-52" mode="Opaque" x="154" y="0" width="256" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PAGE_ID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="0298a921-315d-4053-8971-f981dd44e66f" key="textField-53" x="0" y="0" width="159" height="10"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{header.azienda} + ": " + $P{REPORT_AZIENDA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="477aeda2-b2a4-4d96-b297-48ea2b7a9838" key="textField-54" x="0" y="10" width="120" height="10"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{header.utente} + ": " + $P{REPORT_USER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss" isBlankWhenNull="false">
+				<reportElement uuid="ec6fe806-0d2e-4479-a28a-38be227ca077" key="textField-56" x="417" y="10" width="120" height="10"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_TIME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="12fe3280-e657-4430-8ede-dbff8d0cc770" key="textField-57" x="414" y="0" width="123" height="10"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.stampato.il}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="" isBlankWhenNull="false">
+				<reportElement uuid="80224226-347b-4c35-8b69-33deb33e5293" key="textField-32" positionType="FixRelativeToBottom" mode="Opaque" x="478" y="63" width="59" height="11" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{situazioneEP.saldo}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Group" evaluationGroup="gruppoMastro" pattern="" isBlankWhenNull="false">
+				<reportElement uuid="66fe70e7-7aa4-4ae0-aed7-736db5023a21" key="textField-33" positionType="FixRelativeToBottom" mode="Opaque" x="270" y="63" width="206" height="11" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{situazioneEP.descrizione}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="68904e70-f155-4215-b601-007eecbeacfd" key="textField-36" positionType="FixRelativeToBottom" mode="Opaque" x="0" y="63" width="206" height="11" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{situazioneEP.descrizione}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="31b46160-91f7-426e-a8e4-c6e48c395275" key="textField-37" positionType="FixRelativeToBottom" mode="Opaque" x="208" y="63" width="59" height="11" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{situazioneEP.saldo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="a903a9ca-40c0-4b5c-9254-f00e68ca5c13" key="textField-41" positionType="FixRelativeToBottom" x="0" y="49" width="267" height="13"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titoloTabella1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="9d03e6d2-8b5d-496a-a698-ea3b278ee6e9" key="textField-42" positionType="FixRelativeToBottom" x="270" y="49" width="267" height="13"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titoloTabella2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="4d6d824d-31b4-4ac4-8cc3-44521297972a" key="textField-64" x="0" y="20" width="537" height="10" isRemoveLineWhenBlank="true"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" markup="html">
+					<font fontName="Times New Roman" size="8" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{htmlParameters}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{stampaSottoConto}]]></printWhenExpression>
+			<frame>
+				<reportElement uuid="c1125937-1785-4a56-a703-6240728983c3" stretchType="RelativeToBandHeight" mode="Opaque" x="12" y="0" width="525" height="10" isPrintInFirstWholeBand="true" backcolor="#DCDCDC">
+					<printWhenExpression><![CDATA[$V{riga}.intValue() % 2 == 1]]></printWhenExpression>
+				</reportElement>
+			</frame>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="11eabb15-eeb0-4ff6-adbe-dea15f9c4d12" key="textField-19" positionType="Float" mode="Transparent" x="12" y="0" width="37" height="10">
+					<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==1)&&($F{sottoContoCodice}.compareTo("000000")!=0) )]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sottoContoCodice}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="d841290c-6d26-4f74-b372-0fb2d6042775" key="textField-20" mode="Transparent" x="208" y="0" width="59" height="10">
+					<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==1)&&($F{sottoContoCodice}.compareTo("000000")!=0) )]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importoDare}.subtract($F{importoAvere}).abs()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="fc8b6bbf-5e42-4d80-83e3-6f840f9aa089" key="textField-21" mode="Transparent" x="478" y="0" width="59" height="10">
+					<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==-1)&&($F{sottoContoCodice}.compareTo("000000")!=0) )]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importoDare}.subtract($F{importoAvere}).abs()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="905e5eb1-3de7-4799-8cd2-be31a9697a15" key="textField-40" x="51" y="0" width="155" height="10">
+					<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==1)&&($F{sottoContoCodice}.compareTo("000000")!=0) )]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sottoContoDescrizione}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="f1559126-7900-49df-8dc5-4a90a52c1077" key="textField-45" x="282" y="0" width="37" height="10">
+					<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==-1)&&($F{sottoContoCodice}.compareTo("000000")!=0) )]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sottoContoCodice}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="083eaa60-6f96-468b-bde8-8e8587f35966" key="textField-48" x="321" y="0" width="155" height="10">
+					<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==-1)&&($F{sottoContoCodice}.compareTo("000000")!=0) )]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sottoContoDescrizione}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="07942f91-ce5b-4aed-8e4b-0eb115d7512e" x="14" y="10" width="523" height="10" isRemoveLineWhenBlank="true"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset1" uuid="c576fa19-94c1-4991-a81c-5ae6f587b966">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{centriCosto})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="10" width="523">
+						<textField pattern="" isBlankWhenNull="false">
+							<reportElement uuid="acd4e636-a145-4ccd-ab95-a26be71edc0c" mode="Transparent" x="37" y="0" width="38" height="10" forecolor="#000000" backcolor="#FFFFFF">
+								<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==1))]]></printWhenExpression>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{centroCostoCodice}]]></textFieldExpression>
+						</textField>
+						<textField pattern="" isBlankWhenNull="false">
+							<reportElement uuid="08a7ed0c-eacb-424d-9094-f2e8b365c550" mode="Transparent" x="75" y="0" width="117" height="10" forecolor="#000000" backcolor="#FFFFFF">
+								<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==1))]]></printWhenExpression>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{centroCostoDescrizione}]]></textFieldExpression>
+						</textField>
+						<textField pattern="" isBlankWhenNull="false">
+							<reportElement uuid="2eeaa334-0262-44e6-8c21-167aac98ba88" mode="Transparent" x="307" y="0" width="38" height="10" forecolor="#000000" backcolor="#FFFFFF">
+								<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==-1))]]></printWhenExpression>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{centroCostoCodice}]]></textFieldExpression>
+						</textField>
+						<textField pattern="" isBlankWhenNull="false">
+							<reportElement uuid="4e8d7878-89de-4b46-8bd2-c2d39e823155" mode="Transparent" x="345" y="0" width="117" height="10" forecolor="#000000" backcolor="#FFFFFF">
+								<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==-1))]]></printWhenExpression>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="Arial" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{centroCostoDescrizione}]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement uuid="8dd270cd-fcc0-46ac-be44-03388849c818" key="textField-20" mode="Transparent" x="194" y="0" width="59" height="10">
+								<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==1))]]></printWhenExpression>
+							</reportElement>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle">
+								<font fontName="Arial" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{importoDare}.subtract($F{importoAvere}).abs()]]></textFieldExpression>
+						</textField>
+						<textField pattern="#,##0.00" isBlankWhenNull="false">
+							<reportElement uuid="bdc64705-2eb1-4330-800c-dd4ecf8666a6" key="textField-21" mode="Transparent" x="464" y="0" width="59" height="10">
+								<printWhenExpression><![CDATA[new Boolean( ($F{importoDare}.subtract($F{importoAvere}).signum()==-1))]]></printWhenExpression>
+							</reportElement>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle">
+								<font fontName="Arial" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{importoDare}.subtract($F{importoAvere}).abs()]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="11" splitType="Stretch">
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement uuid="6a7322d9-32e6-4a49-b5be-0fec4af71a3b" key="textField-58" x="523" y="1" width="14" height="10"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="8f0693c6-aae4-404b-99d4-8c860157611b" key="textField-59" x="407" y="1" width="116" height="10"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{report.pagina} + " " + $V{PAGE_NUMBER} + "  " + $R{report.pagina.di}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

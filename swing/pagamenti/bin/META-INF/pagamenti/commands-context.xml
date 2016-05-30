@@ -1,0 +1,74 @@
+
+<beans>
+	<bean id="generaRigheStrutturaCommand" class="it.eurotn.panjea.partite.rich.commands.GeneraRigheStrutturaCommand">
+		<property name="partiteBDId">
+			<value>partiteBD</value>
+		</property>
+	</bean>
+
+	<bean id="ricercaRateCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="ricercaRateCommand"></property>
+		<property name="securityControllerId" value="visualuizaAreaTesoreriaController"/>
+		<property name="openClassName" value="it.eurotn.panjea.partite.util.ParametriRicercaRate"></property>
+	</bean>
+
+	<bean id="ricercaAreeTesoreriaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="ricercaAreeTesoreriaCommand"></property>
+		<property name="securityControllerId" value="visualuizaAreaTesoreriaController"/>
+		<property name="openClassName" value="it.eurotn.panjea.tesoreria.util.ParametriRicercaAreeTesoreria"></property>
+	</bean>
+
+	<bean id="ricercaEffettiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="ricercaEffettiCommand"></property>
+		<property name="securityControllerId" value="visualuizaAreaTesoreriaController"/>
+		<property name="openClassName" value="it.eurotn.panjea.tesoreria.util.ParametriRicercaEffetti"></property>
+	</bean>
+
+	<bean id="openTabellePartiteCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTabellePartiteCommand"></property>
+		<property name="openString" value="tabellePartiteEditor"></property>
+	</bean>
+
+	<bean id="searchCalendariRateCommand" class="it.eurotn.panjea.rate.rich.commands.SearchCalendariRateCommand">
+		<property name="idCommand" value="searchCalendariRateCommand"></property>
+	</bean>
+
+	<bean id="newCalendarioRateCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="newCalendarioRateCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.rate.domain.CalendarioRate"></property>
+	</bean>
+
+	<bean id="openAccontiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openAccontiCommand"></property>
+		<property name="securityControllerId" value="visualuizaAreaTesoreriaController"/>
+		<property name="openClassName" value="it.eurotn.panjea.tesoreria.rich.editors.acconto.AreaAccontoWrapper"></property>
+	</bean>
+
+	<bean id="openTenplateSollecitiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTenplateSollecitiCommand"></property>
+		<property name="securityControllerId" value="visualuizaAreaTesoreriaController"/>
+		<property name="openString" value="templateSollecitiEditor"></property>
+	</bean>
+
+	<bean id="openTesoreriaPreferenzeCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTesoreriaPreferenzeCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.tesoreria.domain.TesoreriaSettings"></property>
+	</bean>
+
+	<bean id="gestioneAssegniCommand" class="it.eurotn.panjea.tesoreria.rich.commands.GestioneAssegniCommand">
+		<property name="securityControllerId" value="visualuizaAreaTesoreriaController"/>
+	</bean>
+
+	<bean id="openSituazioneSollecitiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openSituazioneSollecitiCommand"></property>
+		<property name="securityControllerId" value="visualuizaAreaTesoreriaController"/>
+		<property name="openString" value="situazioneSollecitiEditor"></property>
+	</bean>
+
+	<bean id="openSituazioneAnticipiFatturaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openSituazioneAnticipiFatturaCommand"></property>
+		<property name="securityControllerId" value="visualuizaAreaTesoreriaController"/>
+		<property name="openString" value="situazioneAnticipiFatturaEditor"></property>
+	</bean>
+
+</beans>

@@ -1,0 +1,173 @@
+
+<beans>
+
+	<bean id="searchObjectFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="searchObjectMap">
+			<map>
+				<entry value="tipoComunicazioneSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.domain.TipoComunicazione</value>
+					</key>
+				</entry>
+				<entry value="tipoModelloSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.domain.TipoModello</value>
+					</key>
+				</entry>
+				<entry value="modelloSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.domain.Modello</value>
+					</key>
+				</entry>		
+				<entry value="sistemiElettronicoSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.vending.domain.SistemaElettronico</value>
+					</key>
+				</entry>
+				<entry value="distributoreSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.vending.domain.Distributore</value>
+                    </key>
+                </entry>
+                <entry value="gettoniSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.vending.domain.Gettone</value>
+                    </key>
+                </entry>
+                <entry value="cassaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.vending.domain.Cassa</value>
+                    </key>
+                </entry>
+                <entry value="anagraficaAslSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.vending.domain.AnagraficaAsl</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="sistemiElettronicoSearchObject"
+		class="it.eurotn.panjea.vending.rich.search.SistemiElettronicoSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="true" />
+		<property name="dialogPageId" value="sistemaElettronicoPage"></property>
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="tipoComunicazioneSearchObject"
+		class="it.eurotn.panjea.vending.rich.search.TipoComunicazioneSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="false" />
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="tipoModelloSearchObject"
+		class="it.eurotn.panjea.vending.rich.search.TipoModelloSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="false" />
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="modelloSearchObject"
+		class="it.eurotn.panjea.vending.rich.search.ModelloSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="false" />
+		<property name="vendingAnagraficaBD">
+			<ref bean="vendingAnagraficaBD" />
+		</property>
+	</bean>
+	
+	<bean id="articoloSearchObject" class="it.eurotn.panjea.magazzino.rich.search.ArticoloSearchObject" singleton="false" lazy-init="true">
+        <property name="ricercaArticoloInstallazioneBD">
+            <ref bean="vendingAnagraficaBD"/>
+        </property>
+    </bean>
+    
+    <bean id="distributoreSearchObject" class="it.eurotn.panjea.vending.rich.search.DistributoreSearchObject"
+        singleton="false" lazy-init="true">
+        <property name="vendingAnagraficaBD">
+            <ref bean="vendingAnagraficaBD" />
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+                <value>datiVending.modello</value>
+            </list>
+        </property>
+        <property name="editObject" value="true" />
+        <property name="dialogPageId" value="distributorePage"/>      
+    </bean>
+    
+    <bean id="gettoniSearchObject" class="it.eurotn.panjea.vending.rich.search.GettoneSearchObject" singleton="false" lazy-init="true">
+        <property name="vendingAnagraficaBD">
+            <ref bean="vendingAnagraficaBD" />
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>      
+    </bean>
+    
+    <bean id="cassaSearchObject" class="it.eurotn.panjea.vending.rich.search.CassaSearchObject" singleton="false" lazy-init="true">
+        <property name="vendingAnagraficaBD">
+            <ref bean="vendingAnagraficaBD" />
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+                <value>tipologia</value>
+            </list>
+        </property>      
+    </bean>
+    
+    <bean id="anagraficaAslSearchObject" class="it.eurotn.panjea.vending.rich.search.AnagraficaAslSearchObject" singleton="false" lazy-init="true">
+        <property name="vendingAnagraficaBD">
+            <ref bean="vendingAnagraficaBD" />
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+                <value>indirizzo</value>
+            </list>
+        </property>      
+    </bean>
+
+</beans>

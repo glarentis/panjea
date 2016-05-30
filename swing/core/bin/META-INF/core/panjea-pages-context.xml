@@ -1,0 +1,559 @@
+<beans>
+	<import resource="panjea-context.xml" />
+	<!-- Start Views section -->
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="initMode">
+			<ref bean="com.jidesoft.docking.DockContext.STATE_FRAMEDOCKED" />
+		</property>
+		<property name="initSide">
+			<ref bean="com.jidesoft.docking.DockContext.DOCK_SIDE_WEST" />
+		</property>
+		<property name="initIndex">
+			<value>1</value>
+		</property>
+		<property name="viewClass">
+			<value>it.eurotn.panjea.rich.views.MenuView</value>
+		</property>
+	</bean>
+
+	<!-- Start application layout -->
+	<bean id="setupWizard"
+		class="org.springframework.richclient.application.setup.SetupWizard"
+		singleton="true" lazy-init="true">
+		<property name="licenseTextLocation">
+			<value>classpath:/it/eurotn/panjea/resources/documents/license.html</value>
+		</property>
+	</bean>
+
+	<bean id="initialPageLayout"
+		class="org.springframework.richclient.application.mdi.DesktopPageDescriptor">
+		<property name="id">
+			<value>initialPageLayout</value>
+		</property>
+		<property name="viewDescriptors">
+			<list>
+				<value>workspaceView</value>
+				<value>menuView</value>
+				<value>searchView</value>
+				<!--<value>helpView</value> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean name="mainPage"
+		class="it.eurotn.panjea.rich.pages.PanjeaDockingPageDescriptor">
+		<property name="viewDescriptors">
+			<list>
+				<value>workspaceView</value>
+				<value>menuView</value>
+				<value>searchView</value>
+				<!--<value>helpView</value> -->
+			</list>
+		</property>
+		<property name="editorFactory">
+			<ref bean="editorFactory" />
+		</property>
+		<property name="searchFactory">
+			<ref bean="searchFactory" />
+		</property>
+
+	</bean>
+	<!-- End application layout -->
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<!-- Stampe -->
+				<entry value="reportEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.rich.report.JecReport</value>
+					</key>
+				</entry>
+				<!-- Fine stampe -->
+				<entry value="settingsLooksEditor">
+					<key>
+						<value type="java.lang.String">settingsLooksEditor</value>
+					</key>
+				</entry>
+				<entry value="preferenzeEditor">
+					<key>
+						<value type="java.lang.String">preferenzeEditor</value>
+					</key>
+				</entry>
+				<entry value="ruoloEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.sicurezza.domain.Ruolo</value>
+					</key>
+				</entry>
+				<entry value="utenteEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.sicurezza.domain.Utente</value>
+					</key>
+				</entry>
+				<entry value="gestioneLockEditor">
+					<key>
+						<value type="java.lang.String">gestioneLockEditor</value>
+					</key>
+				</entry>
+				<entry value="gestioneEmailEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.util.parametriricerca.ParametriRicercaMail</value>
+					</key>
+				</entry>
+				<entry value="updatePanjeaEditor">
+					<key>
+						<value type="java.lang.String">updatePanjea</value>
+					</key>
+				</entry>
+				<entry value="taskPanjeaEditor">
+					<key>
+						<value type="java.lang.String">taskPanjea</value>
+					</key>
+				</entry>
+				<entry value="webBrowserEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.rich.editors.webbrowser.PanjeaUrl</value>
+					</key>
+				</entry>
+				<entry value="gestioneStampeEditor">
+					<key>
+						<value type="java.lang.String">gestioneStampeEditor</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- searchFactory -->
+	<bean id="searchFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+		<property name="searchResultMap">
+			<map>
+				<!-- Da aggiungere le classi viste di ricerca -->
+				<entry value-ref="searchResultRuoli">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.sicurezza.domain.Ruolo</value>
+					</key>
+				</entry>
+				<entry value-ref="searchResultUtenti">
+					<key>
+						<value type="java.lang.String">it.eurotn.panjea.sicurezza.domain.Utente</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Start editors -->
+	<bean id="reportEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor"
+		singleton="true" lazy-init="true">
+		<property name="editorClass">
+			<value>it.eurotn.rich.report.editor.JecReportEditor</value>
+		</property>
+	</bean>
+
+
+	<bean id="settingsLooksEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">settingsLooksEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:preference</value>
+						<value>aspettoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">settingsLooksEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="preferenzeEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">preferenzeEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:preference</value>
+						<value>generalSettingsPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">preferenzeEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="aspettoPage" class="it.eurotn.panjea.preferences.AspettoPage"
+		singleton="false" lazy-init="true">
+		<property name="lookAndFeelConfigurer">
+			<ref bean="lookAndFeelConfigurer" />
+		</property>
+	</bean>
+
+	<bean id="generalSettingsPage" class="it.eurotn.panjea.preferences.GeneralSettingsPage"
+		singleton="true" lazy-init="true">
+	</bean>
+
+	<bean id="updatePanjeaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor"
+		lazy-init="true">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.update.UpdateEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="panjeaServer">
+					<ref bean="panjeaServer" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="panjeaServer" class="it.eurotn.panjea.rich.editors.update.PanjeaServer"
+		lazy-init="true" singleton="true">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="panjeaMessageService" ref="panjeaMessageService" />
+		<property name="sicurezzaBD" ref="sicurezzaBD" />
+	</bean>
+
+	<bean id="checkPanjeaUpdate"
+		class="it.eurotn.panjea.rich.editors.update.CheckPanjeaUpdateTimerTask">
+		<property name="panjeaServer">
+			<ref bean="panjeaServer" />
+		</property>
+	</bean>
+
+	<bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<!-- wait 3 min before starting eated execution -->
+		<property name="delay" value="180000" />
+		<!-- run every 2 h -->
+		<property name="period" value="7200000" />
+		<property name="timerTask" ref="checkPanjeaUpdate" />
+	</bean>
+
+	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<!-- see the example above -->
+				<ref bean="scheduledTask" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="webBrowserEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor"
+		lazy-init="true">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.webbrowser.WebBrowserEditor</value>
+		</property>
+	</bean>
+
+
+	<bean id="gestioneLockEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">lockTableEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>lockTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">gestioneLockEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="lockTablePage" class="it.eurotn.panjea.rich.editors.lock.LockTablePage"
+		singleton="false">
+	</bean>
+
+	<bean id="gestioneEmailEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">mailTableEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>mailTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">gestioneEmailEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="mailTablePage" class="it.eurotn.panjea.rich.editors.email.MailTablePage"
+		singleton="false">
+		<property name="mailBD">
+			<ref bean="mailBD" />
+		</property>
+	</bean>
+
+	<!-- INIZIO RUOLO EDITOR CONTIENE RUOLOPAGE -->
+	<bean id="ruoloEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ruoloEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>ruoloPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ruoloEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- RUOLO PAGE CONTIENE RUOLO FORM sul costruttore come primo parametro
+		ho il ruoloForm -->
+	<bean id="ruoloPage" class="it.eurotn.panjea.sicurezza.rich.editors.RuoloPage"
+		singleton="false">
+		<property name="idNewCommand" value="newRuoloCommand" />
+		<constructor-arg index="0">
+			<ref bean="ruoloForm" />
+		</constructor-arg>
+		<property name="sicurezzaBD">
+			<ref bean="sicurezzaBD" />
+		</property>
+	</bean>
+	<!-- RUOLO FORM a cui passo nel costruttore ruolo -->
+	<bean id="ruoloForm" class="it.eurotn.panjea.sicurezza.rich.editors.RuoloForm"
+		singleton="false">
+	</bean>
+	<!-- FINE RUOLO EDITOR -->
+
+	<!-- INIZIO UTENTE EDITOR CONTIENE UTENTEPAGE -->
+	<bean id="utenteEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">utenteEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+					    <value>group:utente</value>
+						<value>utentePage</value>
+						<value>utenteDatiMailTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">utenteEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- UTENTEPAGE CONTIENE UTENTEFORM -->
+	<bean id="utentePage" class="it.eurotn.panjea.sicurezza.rich.editors.UtentePage" singleton="false">
+		<property name="idNewCommand" value="newUtenteCommand" />
+		<constructor-arg index="0">
+			<ref bean="utenteForm" />
+		</constructor-arg>
+		<property name="sicurezzaBD">
+			<ref bean="sicurezzaBD" />
+		</property>
+	</bean>
+
+	<!-- UTENTE FORM -->
+	<bean id="utenteForm" class="it.eurotn.panjea.sicurezza.rich.editors.UtenteForm" singleton="false">
+		<property name="sicurezzaBD">
+			<ref bean="sicurezzaBD" />
+		</property>
+	</bean>
+	
+	<bean id="utenteDatiMailTablePage" class="it.eurotn.panjea.sicurezza.rich.editors.UtenteDatiMailTablePage" singleton="false">
+		<property name="sicurezzaBD">
+			<ref bean="sicurezzaBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="utenteDatiMailPage" />
+		</property>
+	</bean>
+	
+	<bean id="utenteDatiMailPage" class="it.eurotn.panjea.sicurezza.rich.editors.UtenteDatiMailPage" singleton="false">
+	    <property name="sicurezzaBD">
+			<ref bean="sicurezzaBD" />
+		</property>
+	</bean>
+	<!-- FINE UTENTE EDITOR -->
+
+	<bean id="gestioneStampeEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">gestioneStampeEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:gestionStampe</value>
+						<value>gestioneStampePage</value>
+						<value>gestioneStampeDocumentoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">gestioneStampeEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="gestioneStampePage" class="it.eurotn.panjea.rich.editors.stampe.GestioneStampePage" singleton="false">
+		<property name="layoutStampeManager">
+			<ref bean="layoutStampeManager" />
+		</property>
+	</bean>
+
+	<bean id="gestioneStampeDocumentoPage" class="it.eurotn.panjea.rich.editors.stampe.GestioneStampeDocumentoPage" singleton="false">
+		<property name="layoutStampeManager">
+			<ref bean="layoutStampeManager" />
+		</property>
+	</bean>
+
+
+	<!-- End editors -->
+
+	<!-- Start searchResults -->
+	<bean id="searchResultRuoli"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.sicurezza.rich.search.SearchResultRuoli</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="sicurezzaBD">
+					<ref bean="sicurezzaBD"></ref>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="searchResultUtenti"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.sicurezza.rich.search.SearchResultUtenti</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="sicurezzaBD">
+					<ref bean="sicurezzaBD"></ref>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- End searchResults -->
+
+	<!-- Start workspaces -->
+	<bean id="workspaceView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="isWorkspace">
+			<value>true</value>
+		</property>
+		<property name="viewClass">
+			<value>com.jidesoft.spring.richclient.docking.editor.WorkspaceView</value>
+		</property>
+		<property name="initIndex">
+			<value>1</value>
+		</property>
+		<property name="viewProperties">
+			<map>
+				<entry key="heavyweightComponentEnabled">
+					<value>true</value>
+				</entry>
+				<entry key="settingsManager" value-ref="settingManagerLocal" />
+			</map>
+
+		</property>
+	</bean>
+
+	<bean id="searchView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="isWorkspace">
+			<value>false</value>
+		</property>
+		<property name="viewClass">
+			<value>com.jidesoft.spring.richclient.docking.editor.WorkspaceView</value>
+		</property>
+		<property name="initIndex">
+			<value>1</value>
+		</property>
+		<property name="viewProperties">
+			<map>
+				<entry key="heavyweightComponentEnabled">
+					<value>true</value>
+				</entry>
+				<entry key="settingsManager" value-ref="settingManagerLocal" />
+			</map>
+		</property>
+	</bean>
+	<!-- End workspaces -->
+
+	<bean id="com.jidesoft.docking.DockingManager.DOUBLE_CLICK_NONE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockingManager.DOUBLE_CLICK_TO_FLOAT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockingManager.DOUBLE_CLICK_TO_MAXIMIZE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockContext.STATE_FRAMEDOCKED"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockContext.STATE_AUTOHIDE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockContext.STATE_HIDDEN"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockContext.STATE_FLOATING"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockContext.DOCK_SIDE_NORTH"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockContext.DOCK_SIDE_SOUTH"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockContext.DOCK_SIDE_EAST"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.docking.DockContext.DOCK_SIDE_WEST"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+
+</beans>

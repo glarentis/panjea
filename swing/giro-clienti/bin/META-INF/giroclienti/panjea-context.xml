@@ -1,0 +1,88 @@
+
+<beans>
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/giroclienti/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/giroclienti/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/giroclienti/messages-methods</value>
+                <value>classpath:it/eurotn/panjea/messages/giroclienti/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/giroclienti/messages-exceptions</value>
+                <value>classpath:it/eurotn/panjea/messages/giroclienti/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/giroclienti/messages-editors-pages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images  messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/giroclienti/images.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="giroClientiAnagraficaBDImpl" class="it.eurotn.panjea.giroclienti.rich.bd.GiroClientiAnagraficaBD" singleton="true" lazy-init="true">
+		<property name="giroClientiAnagraficaService" ref="giroClientiAnagraficaService" />
+	</bean>
+	<bean id="giroClientiAnagraficaBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.giroclienti.rich.bd.IGiroClientiAnagraficaBD</value>
+		</property>
+		<property name="target">
+			<ref local="giroClientiAnagraficaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="giroClientiAnagraficaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.GiroClientiAnagraficaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	
+	<bean id="schedeGiroClientiBDImpl" class="it.eurotn.panjea.giroclienti.rich.bd.SchedeGiroClientiBD" singleton="true" lazy-init="true">
+		<property name="schedeGiroClientiService" ref="schedeGiroClientiService" />
+	</bean>
+	<bean id="schedeGiroClientiBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.giroclienti.rich.bd.ISchedeGiroClientiBD</value>
+		</property>
+		<property name="target">
+			<ref local="schedeGiroClientiBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="schedeGiroClientiService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.SchedeGiroClientiService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+	<!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaGiroClienti"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaGiroClienti">
+	    <property name="versione" value=""/>
+	    <property name="nome" value="panjeaGiroClienti"/>
+	    <property name="descrizione" value="Modulo panjea gestione del giro clienti"/>
+	    <property name="rulesSource" value="it.eurotn.panjea.giroclienti.rich.rules.GiroClientiPluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+
+</beans>

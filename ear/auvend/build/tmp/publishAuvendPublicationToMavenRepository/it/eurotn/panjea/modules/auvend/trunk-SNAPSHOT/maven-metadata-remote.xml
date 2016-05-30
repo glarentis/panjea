@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>it.eurotn.panjea.modules</groupId>
+  <artifactId>auvend</artifactId>
+  <version>trunk-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20160520.161326</timestamp>
+      <buildNumber>4</buildNumber>
+    </snapshot>
+    <lastUpdated>20160520161326</lastUpdated>
+  </versioning>
+</metadata>

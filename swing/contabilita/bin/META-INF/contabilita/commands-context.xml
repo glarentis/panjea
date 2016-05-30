@@ -1,0 +1,173 @@
+ 
+<beans>
+
+	<bean id="openPreferenzeContabilitaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openPreferenzeContabilitaCommand"></property>
+		<property name="openString" value="preferenzeContabilitaEditor"></property>
+	</bean>
+
+	<bean id="openTabelleContabilitaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTabelleContabilitaCommand"></property>
+		<property name="openString" value="tabelleContabilitaEditor"></property>
+	</bean>
+
+	<bean id="controlloMovimentoContabilitaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="controlloMovimentoContabilitaCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.contabilita.util.ParametriRicercaMovimentiContabili"></property>
+	</bean>
+
+	<bean id="bilancioCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="securityControllerId" value="visualizaBilancioController"></property>
+		<property name="idCommand" value="bilancioCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.contabilita.util.ParametriRicercaBilancio"></property>
+	</bean>
+
+	<bean id="bilancioConfrontoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="securityControllerId" value="visualizaBilancioConfrontoController"></property>
+		<property name="idCommand" value="bilancioConfrontoCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.contabilita.util.ParametriRicercaBilancioConfronto"></property>
+	</bean>
+
+	<bean id="situazioneEconomicaPatrimonialeCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="securityControllerId"
+			value="visualizaSituazioneEconomicaPatrimonialeController"></property>
+		<property name="idCommand" value="situazioneEconomicaPatrimonialeCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.contabilita.util.ParametriRicercaSituazioneEP"></property>
+	</bean>
+
+	<bean id="liquidazioneIvaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="securityControllerId" value="gestioneLiquidazioneIvaController"></property>
+		<property name="idCommand" value="liquidazioneIvaCommand"></property>
+		<property name="openString" value="liquidazioneIva"></property>
+	</bean>
+
+	<bean id="estrattoContoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="securityControllerId" value="visualizaEstrattoContoCommandController"></property>
+		<property name="idCommand" value="estrattoContoCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.contabilita.util.ParametriRicercaEstrattoConto"></property>
+	</bean>
+
+	<bean id="newAreaContabileCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.NewAreaContabileCommand">
+	</bean>
+
+	<bean id="stampaLibroGiornaleCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.StampaLibroGiornaleCommand">
+		<property name="securityControllerId" value="gestionePeriodicaController"></property>
+	</bean>
+
+	<bean id="stampaRegistriIvaCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.StampaRegistriIvaCommand">
+		<property name="securityControllerId" value="gestionePeriodicaController"></property>
+	</bean>
+
+	<bean id="stampaEstrattoContoCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.StampaEstrattoContoCommand">
+	</bean>
+
+	<bean id="chiusuraContiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="securityControllerId" value="gestioneAnnualeController"></property>
+		<property name="idCommand" value="chiusuraContiCommand"></property>
+		<property name="openString" value="chiusuraContabile"></property>
+	</bean>
+
+	<bean id="aperturaContiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="securityControllerId" value="gestioneAnnualeController"></property>
+		<property name="idCommand" value="aperturaContiCommand"></property>
+		<property name="openString" value="aperturaContabile"></property>
+	</bean>
+
+	<bean id="openVerificheContabiliCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.OpenVerificheContabiliCommand" />
+
+	<bean id="openVerificheSaldiClientiCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.OpenVerificheSaldiCommand">
+		<property name="sottotipoConto" value="CLIENTE" />
+		<property name="idCommand" value="openVerificheSaldiClientiCommand" />
+	</bean>
+	<bean id="openVerificheSaldiFornitoriCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.OpenVerificheSaldiCommand">
+		<property name="sottotipoConto" value="FORNITORE" />
+		<property name="idCommand" value="openVerificheSaldiFornitoriCommand" />
+	</bean>
+
+	<bean id="reportLiquidazioneCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.ReportLiquidazioneCommand">
+		<constructor-arg index="0">
+			<value>reportLiquidazioneCommand</value>
+		</constructor-arg>
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="definitivo">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="reportLiquidazioneDefinitivaCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.ReportLiquidazioneCommand">
+		<constructor-arg index="0">
+			<value>reportLiquidazioneDefinitivaCommand</value>
+		</constructor-arg>
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="definitivo">
+			<value>true</value>
+		</property>
+	</bean>
+
+	<bean id="generaDocumentoLiquidazioneCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.GeneraDocumentoLiquidazioneCommand">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="fatturatoContabilitaCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.FatturatoContabilitaCommand">
+	</bean>
+
+	<bean id="reportRiepilogoDocumentiBlacklistCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.ReportRiepilogoDocumentiBlacklistCommand">
+		<property name="idCommand" value="reportRiepilogoDocumentiBlacklistCommand"></property>
+	</bean>
+	
+	<bean id="reportCertificazioniRitenuteCommand"
+		class="it.eurotn.panjea.contabilita.rich.commands.ReportCertificazioniRitenuteCommand">
+	</bean>
+	
+	<bean id="openSituazioneRitenuteCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openSituazioneRitenuteCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.contabilita.util.ParametriSituazioneRitenuteAcconto"></property>
+	</bean>
+	
+	<bean id="ricercaAreeIvaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="ricercaAreeIvaCommand"></property>
+		<property name="openClassName"
+			value="it.eurotn.panjea.iva.util.parametriricerca.ParametriRicercaRigheIva"></property>
+	</bean>
+</beans>

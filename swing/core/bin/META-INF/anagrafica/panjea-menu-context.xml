@@ -1,0 +1,56 @@
+
+<beans>
+
+	<bean id="anagraficaMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="anagraficaMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:anagrafica:cliente</value>                
+				<value>newClienteCommand</value>
+				<value>searchClientiCommand</value>
+				
+				<value>group:anagrafica:clientePotenziale</value>
+				<value>newClientePotenzialeCommand</value>
+				<value>searchClientiPotenzialiCommand</value>
+				
+				<value>group:anagrafica:fornitore</value>
+				<value>newFornitoreCommand</value>
+				<value>searchFornitoriCommand</value>
+				
+				<value>group:anagrafica:vettore</value>
+				<value>newVettoreCommand</value>
+				<value>searchVettoriCommand</value>
+                
+                <value>group:anagrafica:riepilogo</value>
+                <value>openRubricaCommand</value>
+                <value>openRiepilogoSedeEntitaEditorCommand</value>
+				
+				<value>group:anagrafica:tipoDocumento</value>
+				<value>newTipoDocumentoCommand</value>
+				<value>searchTipiDocumentoCommand</value>
+				
+				<value>group:anagrafica:tabelle</value>
+				<value>openDatiGeograficiCommand</value>
+				<value>openTabelleDatiGeograficiCommand</value>
+				<value>openDatiBancariCommand</value>
+                <value>openValutaCommand</value>
+				<value>openTipologieCommand</value>
+				<value>openCodiciPagamentoCommand</value>
+				<value>openCodiciIvaCommand</value>
+				<value>openNoteAnagraficheEditorCommand</value>
+				<value>gestioneNoteAutomaticheCommand</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="amministrazioneMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="amministrazioneMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:amministrazione</value>
+				<value>gestioneAuditCommand</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

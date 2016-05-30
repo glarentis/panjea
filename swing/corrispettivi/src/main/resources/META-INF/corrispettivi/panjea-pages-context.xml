@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beans>
+
+	<bean class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry" id="editorFactory">
+		<property name="editorMap">
+			<map>
+				<entry value="calendarioCorrispettiviEditor">
+					<key>
+						<value type="java.lang.String">CalendarioCorrispettivo</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor" id="calendarioCorrispettiviEditor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">calendarioCorrispettiviEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>calendarioCorrispettivoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">calendarioCorrispettiviEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean class="it.eurotn.panjea.corrispettivi.rich.editors.calendario.CalendarioCorrispettivoPage" id="calendarioCorrispettivoPage" singleton="false">
+        <property name="corrispettiviBD">
+            <ref bean="corrispettiviBD"/>
+        </property>
+    </bean>
+
+    <bean
+	class="it.eurotn.panjea.corrispettivi.rich.editors.corrispettivilinktipodocumento.CorrispettivoLinkTipoDocumentoPage"
+	id="corrispettivoLinkTipoDocumentoPage" lazy-init="true" singleton="false">
+	<property name="corrispettiviBD">
+		<ref bean="corrispettiviBD" />
+	</property>
+    </bean>
+
+	<bean
+		class="it.eurotn.panjea.corrispettivi.rich.editors.corrispettivilinktipodocumento.CorrispettiviLinkTipoDocumentoTablePage"
+		id="corrispettiviLinkTipoDocumentoTablePage" lazy-init="true"
+		singleton="false">
+		<property name="corrispettiviBD">
+			<ref bean="corrispettiviBD" />
+		</property>
+		<property name="editPage">
+			<ref bean="corrispettivoLinkTipoDocumentoPage" />
+		</property>
+	</bean>
+    
+    <bean id="tipologieEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>group:DatiTipologie</value>
+                        <value>corrispettiviLinkTipoDocumentoTablePage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+</beans>

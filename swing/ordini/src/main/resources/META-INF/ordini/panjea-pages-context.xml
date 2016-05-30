@@ -1,0 +1,602 @@
+
+ <!DOCTYPE beans SYSTEM "spring-beans.dtd">
+<beans>
+    <import resource="panjea-context.xml" />
+    <import resource="panjea-menu-context.xml" />
+    <bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+        <property name="viewProperties">
+            <map>
+                <entry key="tabPanel">
+                    <list>
+                        <ref bean="ordiniMenu" />
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="rigaArticoloOrdineQtaPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.rigamagazzino.RigaArticoloQtaPropertyChange" singleton="false" lazy-init="true">
+    	<property name="prezzoUnitarioProperty">
+            <value>prezzoUnitarioReale</value>
+        </property>
+    </bean>
+    
+    <bean id="areaOrdineFullDTOPropertyAccessStrategy" class="it.eurotn.panjea.ordini.rich.forms.areaordine.AreaOrdineFullDTOPropertyAccessStrategy" singleton="false" lazy-init="true"/>	   	
+
+    <!-- searchFactory -->
+    <bean id="searchFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+        <property name="searchResultMap">
+        </property>
+    </bean>
+    <!-- EditorFactory -->
+    <bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="areaOrdineEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.ordini.util.AreaOrdineFullDTO</value>
+                    </key>
+                </entry>
+                <entry value="areaOrdineEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.ordini.domain.documento.AreaOrdine</value>
+                    </key>
+                </entry>
+                <entry value="ricercaAreaOrdineEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.ordini.util.parametriricerca.ParametriRicercaAreaOrdine</value>
+                    </key>
+                </entry>
+                <entry value="movimentazioneMagazzinoOrdineEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.ordini.util.parametriricerca.ParametriRicercaMovimentazione</value>
+                    </key>
+                </entry>
+                <entry value="evasioneOrdiniEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.ordini.util.parametriricerca.ParametriRicercaEvasione</value>
+                    </key>
+                </entry>
+                <entry value="distintaCaricoEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.ordini.domain.documento.evasione.DistintaCarico</value>
+                    </key>
+                </entry>
+                <entry value="importazioneOrdiniEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.ordini.util.parametriricerca.ParametriRicercaOrdiniImportati</value>
+                    </key>
+                </entry>
+                <entry value="ricercaOrdiniProduzioneEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.ordini.util.ParametriRicercaProduzione</value>
+                    </key>
+                </entry>
+				<entry value="preferenzeOrdiniEditor">
+					<key>
+						<value type="java.lang.String">preferenzeOrdiniEditor</value>
+					</key>
+				</entry>
+            </map>
+        </property>
+    </bean>
+    <!-- begin editors -->
+    <bean id="tipoDocumentoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorProperties">
+            <map>
+                <entry key="idPages">
+                    <list>
+                        <value>tipoAreaOrdinePage</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="tipoAreaOrdinePage" class="it.eurotn.panjea.ordini.rich.editors.tipoareaordine.TipoAreaOrdinePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+    </bean>
+    <bean id="areaOrdineEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.ordini.rich.editors.areaordine.AreaOrdineEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">areaOrdineEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>areaOrdinePage</value>
+                        <value>righeOrdineTablePage</value>
+                        <value>righeInserimentoPage</value>
+                        <value>areaOrdineAllegatiPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">areaOrdineEditor</value>
+                </entry>
+                <entry key="ordiniDocumentoBD">
+                    <ref bean="ordiniDocumentoBD" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="areaOrdineAllegatiPage" class="it.eurotn.panjea.ordini.rich.editors.areaordine.AreaOrdineAllegatiPage" singleton="false" lazy-init="true">             
+    </bean>
+    
+    <bean id="righeInserimentoPage" class="it.eurotn.panjea.ordini.rich.editors.righeinserimento.RigheInserimentoPage" singleton="false" lazy-init="true">
+    </bean>
+    
+    <bean id="righeOrdineTablePage" class="it.eurotn.panjea.ordini.rich.editors.righeordine.RigheOrdineTablePage" singleton="false" lazy-init="true">
+        <property name="editPageMode" value="DETAIL"></property>
+        <property name="editPages">
+            <map>
+                <entry key="it.eurotn.panjea.ordini.util.RigaArticoloDTO">
+                    <ref bean="rigaArticoloOrdinePage" />
+                </entry>
+                <entry key="it.eurotn.panjea.ordini.util.RigaNotaDTO">
+                    <ref bean="rigaNotaOrdinePage" />
+                </entry>
+                <entry key="it.eurotn.panjea.ordini.util.RigaTestataDTO">
+                    <ref bean="rigaTestataOrdinePage" />
+                </entry>
+            </map>
+        </property>
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>    
+    <bean id="rigaArticoloOrdinePage" class="it.eurotn.panjea.ordini.rich.editors.righeordine.RigaArticoloPage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="moduloPrezzoBD">
+            <ref bean="moduloPrezzoBD" />
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente" />
+        </property>
+        <property name="pluginManager">
+            <ref bean="pluginManager" />
+        </property>
+        <property name="defaultController">
+            <ref bean="rigaArticoloOrdineController" />
+        </property>
+    </bean>
+    <bean id="rigaArticoloOrdineController" class="it.eurotn.rich.editors.controllers.DefaultController" singleton="false" lazy-init="true">
+        <property name="propertiesChange">
+            <map>
+                <entry key="prezzoUnitarioReale">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="qta">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                        <ref bean="rigaArticoloOrdineQtaPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="variazione1">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="variazione2">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="variazione3">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="variazione4">
+                    <list>
+                        <ref bean="rigaArticoloAggiornaPrezzoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="tipoOmaggio">
+                    <list>
+                        <ref bean="rigaArticoloOmaggioPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="sconto1Bloccato">
+                    <list>
+                        <ref bean="rigaArticoloSconto1BloccatoPropertyChange" />
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="rigaNotaOrdinePage" class="it.eurotn.panjea.ordini.rich.editors.righeordine.RigaNotaPage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+    </bean>
+    <bean id="rigaTestataOrdinePage" class="it.eurotn.panjea.ordini.rich.editors.righeordine.RigaTestataPage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+    </bean>
+    <bean id="areaOrdinePage" class="it.eurotn.panjea.ordini.rich.editors.areaordine.AreaOrdinePage" singleton="false" lazy-init="true">
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente" />
+        </property>
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD" />
+        </property>
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="defaultController">
+            <ref bean="areaOrdineController" />
+        </property>
+    </bean>
+    <bean id="areaOrdineController" class="it.eurotn.rich.editors.controllers.DefaultController" singleton="false" lazy-init="true">
+        <property name="propertiesChange">
+            <map>
+                <entry key="areaOrdine.tipoAreaOrdine">
+                    <list>
+                        <ref bean="areaOrdine.tipoAreaOrdinePropertyChange"></ref>
+                    </list>
+                </entry>
+                <entry key="areaOrdine.dataRegistrazione">
+                    <list>
+                        <ref bean="areaOrdine.dataRegistrazionePropertyChange" />
+                    </list>
+                </entry>
+                <entry key="areaOrdine.tipoAreaOrdine.tipoDocumento">
+                    <list>
+                        <ref bean="areaOrdine.tipoDocumentoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="areaOrdine.documento">
+                    <list>
+                        <ref bean="areaOrdine.documentoPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="areaOrdine.documento.entita">
+                    <list>
+                        <ref bean="areaOrdine.entitaPropertyChange" />
+                    </list>
+                </entry>
+                <entry key="areaOrdine.documento.sedeEntita">
+                    <list>
+                        <ref bean="areaOrdine.sedeEntitaPropertyChange" />
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="areaOrdine.tipoAreaOrdinePropertyChange" class="it.eurotn.panjea.ordini.rich.forms.areaordine.TipoAreaOrdinePropertyChange" singleton="false" lazy-init="true">
+    </bean>
+    <bean id="areaOrdine.dataRegistrazionePropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.DataRegistrazionePropertyChange" singleton="false" lazy-init="true">
+        <property name="areaDocumentoPropertyPath" value="areaOrdine"></property>
+        <property name="dataDocLikeDataRegPropertyPath" value="areaOrdine.tipoAreaOrdine.dataDocLikeDataReg"></property>
+    </bean>
+    <bean id="areaOrdine.tipoDocumentoPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.TipoDocumentoPropertyChange" singleton="false" lazy-init="true">
+        <property name="magazzinoDocumentoBD">
+            <ref bean="magazzinoDocumentoBD"></ref>
+        </property>
+        <property name="tipoDocumentoPropertyPath" value="areaOrdine.tipoAreaOrdine.tipoDocumento"></property>
+    </bean>
+    <bean id="areaOrdine.documentoPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.DocumentoPropertyChange" singleton="false" lazy-init="true">
+        <property name="areaDocumentoPropertyPath" value="areaOrdine"></property>
+        <property name="tipoAreaDocumentoPropertyPath" value="areaOrdine.tipoAreaOrdine"></property>
+    </bean>
+    <bean id="areaOrdine.entitaPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.EntitaPropertyChange" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD" />
+        </property>
+        <property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD" />
+        </property>
+        <property name="areaDocumentoPropertyPath" value="areaOrdine"></property>
+    </bean>
+    <bean id="areaOrdine.sedeEntitaPropertyChange" class="it.eurotn.panjea.magazzino.rich.forms.areamagazzino.SedeEntitaPropertyChange" singleton="false" lazy-init="true">
+        <property name="magazzinoDocumentoBD">
+            <ref bean="magazzinoDocumentoBD"></ref>
+        </property>
+        <property name="areaDocumentoPropertyPath" value="areaOrdine"></property>
+    </bean>
+
+
+    <bean id="ricercaAreaOrdineEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">ricercaAreaOrdineEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaAreaOrdinePage</value>
+                        <value>risultatiRicercaAreaOrdineTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">ricercaAreaOrdineEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="parametriRicercaAreaOrdinePage" class="it.eurotn.panjea.ordini.rich.editors.areaordine.ParametriRicercaAreaOrdinePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente" />
+        </property>
+    </bean>
+    <bean id="risultatiRicercaAreaOrdineTablePage" class="it.eurotn.panjea.ordini.rich.editors.areaordine.RisultatiRicercaAreaOrdineTablePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+
+	<bean id="ricercaOrdiniProduzioneEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">ricercaOrdiniProduzioneEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaProduzionePage</value>
+                        <value>risultatiRicercaProduzioneTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">ricercaOrdiniProduzioneEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="parametriRicercaProduzionePage" class="it.eurotn.panjea.ordini.rich.editors.produzione.ParametriRicercaProduzionePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente" />
+        </property>
+    </bean>
+    <bean id="risultatiRicercaProduzioneTablePage" class="it.eurotn.panjea.ordini.rich.editors.produzione.RisultatiRicercaProduzioneTablePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+
+    <bean id="movimentazioneMagazzinoOrdineEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">movimentazioneMagazzinoOrdineEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaMovimentazioneOrdinePage</value>
+                        <value>risultatiRicercaMovimentazioneOrdineTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">movimentazioneMagazzinoOrdineEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="parametriRicercaMovimentazioneOrdinePage" class="it.eurotn.panjea.ordini.rich.editors.statistiche.movimentazione.ParametriRicercaMovimentazioneOrdinePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+    </bean>
+    <bean id="risultatiRicercaMovimentazioneOrdineTablePage" class="it.eurotn.panjea.ordini.rich.editors.statistiche.movimentazione.RisultatiRicercaMovimentazioneOrdineTablePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+    <bean id="evasioneOrdiniEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.ordini.rich.editors.evasione.EvasioneOridiniEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">evasioneOrdiniEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaEvasionePage</value>
+                        <value>risultatiRicercaEvasioneTablePage</value>
+                        <value>carrelloEvasioneOrdiniTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">evasioneOrdiniEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="parametriRicercaEvasionePage" class="it.eurotn.panjea.ordini.rich.editors.evasione.ParametriRicercaEvasionePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+    </bean>
+    <bean id="risultatiRicercaEvasioneTablePage" class="it.eurotn.panjea.ordini.rich.editors.evasione.RisultatiRicercaEvasioneTablePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+    <bean id="carrelloEvasioneOrdiniTablePage" class="it.eurotn.panjea.ordini.rich.editors.evasione.carrello.CarrelloEvasioneOrdiniTablePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+         <property name="anagraficaOrdiniBD">
+            <ref bean="anagraficaOrdiniBD" />
+        </property>
+        <property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>
+    <!-- Editor distinta di carico -->
+    <bean id="distintaCaricoEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">distintaCaricoEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>distinteCaricoTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">distintaCaricoEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="distinteCaricoTablePage" class="it.eurotn.panjea.ordini.rich.editors.evasione.distintacarico.DistinteCaricoTablePage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="anagraficaOrdiniBD">
+            <ref bean="anagraficaOrdiniBD" />
+        </property>
+    </bean>
+    <!-- Fine editor distinta di carico -->
+    <bean id="sedeOrdinePage" class="it.eurotn.panjea.ordini.rich.editors.SedeOrdinePage" singleton="false" lazy-init="true">
+        <property name="anagraficaOrdiniBD">
+            <ref bean="anagraficaOrdiniBD" />
+        </property>
+    </bean>
+    <bean id="datiCommercialiClienteSedeEntitaPage" class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage" singleton="false" lazy-init="true">
+        <property name="pagine">
+            <list>
+                <ref bean="sedeOrdinePage" />
+            </list>
+        </property>
+    </bean>
+    <bean id="datiCommercialiFornitoreSedeEntitaPage" class="it.eurotn.panjea.anagrafica.rich.editors.daticommercialisedeentita.DatiCommercialiSedeEntitaPage" singleton="false" lazy-init="true">
+        <property name="pagine">
+            <list>
+                <ref bean="sedeOrdinePage" />
+            </list>
+        </property>
+    </bean>
+    <bean id="importazioneOrdiniEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">importazioneOrdiniEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>importazioneOrdiniPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">importazioneOrdiniEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="importazioneOrdiniPage" class="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.ImportazioneOrdiniPage" singleton="false">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="editPage">
+            <ref bean="rigaOrdineImportataPage" />
+        </property>
+    </bean>
+    <bean id="rigaOrdineImportataPage" class="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.RigaOrdineImportataPage" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+    </bean>
+    <bean id="righeMagazzinoTablePage" class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.RigheMagazzinoTablePage" singleton="false" lazy-init="true">
+        <property name="importaRigheOrdineCommand">
+            <ref bean="importaRigheOrdineCommand" />
+        </property>
+    </bean>
+    <bean id="importaRigheOrdineCommand" class="it.eurotn.panjea.magazzino.rich.editors.righemagazzino.importarigheordini.ImportaRigheOrdineCommand" singleton="false" lazy-init="true">
+        <property name="ordiniDocumentoBD">
+            <ref bean="ordiniDocumentoBD" />
+        </property>
+        <property name="magazzinoDocumentoBD">
+            <ref bean="magazzinoDocumentoBD" />
+        </property>
+        <property name="settingsManager">
+            <ref bean="settingManagerLocal" />
+        </property>
+    </bean>
+    <bean class="it.eurotn.panjea.ordini.rich.forms.righeordine.componenti.RigheArticoliComponentiDistintaTablePage" id="righeArticoliOrdiniComponentiDistintaTablePage" lazy-init="true" singleton="false">
+    	<property name="showTitlePane">
+            <value>false</value>
+        </property>
+    </bean>    
+    <bean class="it.eurotn.panjea.ordini.rich.forms.righeordine.componenti.RigheArticoliComponentiDistintaTreeTablePage" id="righeArticoliComponentiDistintaTreeTablePage" lazy-init="true" singleton="false">    
+    </bean>
+
+<bean id="preferenzeOrdiniEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">preferenzeOrdiniEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:preferenze</value>
+						<value>ordiniSettingsPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">preferenzeOrdiniEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="ordiniSettingsPage" class="it.eurotn.panjea.ordini.rich.editors.settings.OrdiniSettingsPage" singleton="false" lazy-init="true">
+        <property name="anagraficaOrdiniBD">
+            <ref bean="anagraficaOrdiniBD" />
+        </property>
+    </bean>
+</beans>

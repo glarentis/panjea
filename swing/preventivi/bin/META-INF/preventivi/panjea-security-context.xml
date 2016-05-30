@@ -1,0 +1,32 @@
+ 
+<beans>
+    <import resource="panjea-context.xml" />
+    <!-- INIZIO DEFINIZIONE SECURITY CONTROLLER -->
+    <bean class="org.springframework.richclient.security.support.DefaultSecurityControllerManager" id="securityControllerManager">
+        <property name="securityControllerMap">
+            <map>
+                <entry key="tipoAreaPreventivoPage.controller">
+                    <ref bean="tipoAreaPreventivoPageController" />
+                </entry>     
+            </map>
+        </property>
+    </bean>
+    <bean id="tipoAreaPreventivoPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="modificaTipoAreaPreventivo"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+
+    <bean id="visualizzaDocPreventivoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="visualizzaDocPreventivo"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+    <bean id="gestioneDocPreventivoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="gestioneDocPreventivo"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+   
+    <!-- FINE DEFINIZIONE SECURITY CONTROLLER -->
+</beans>

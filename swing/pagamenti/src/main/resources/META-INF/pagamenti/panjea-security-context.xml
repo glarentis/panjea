@@ -1,0 +1,58 @@
+ 
+<beans>
+	<import resource="panjea-context.xml"/>
+	
+	<!-- INIZIO DEFINIZIONE SECURITY CONTROLLER -->
+	 
+	
+	<bean class="org.springframework.richclient.security.support.DefaultSecurityControllerManager" id="securityControllerManager">
+    	<property name="securityControllerMap">
+        	<map>
+        	<entry key="tipoAreaPartitaPage.controller"><ref bean="tipoAreaPartitaPageController"/></entry>
+        	<entry key="tipoDocumentoBasePartitaPage.controller"><ref bean="tipoDocumentoBasePartitaController"/></entry>
+        	<entry key="risultatiRicercaRatePage.controller"><ref bean="risultatiRicercaRateController"/></entry>
+        	<entry key="areaTesoreriaPage.controller"><ref bean="modificaAreaTesoreriaController"/></entry>
+        	<entry key="areaAccontoPage.controller"><ref bean="gestioneAreaAccontoController"/></entry>
+        	<entry key="rateTablePage.controller"><ref bean="gestioneRigheRateController"/></entry>
+        	
+        	</map>
+    	</property>
+	</bean>	
+	<bean id="gestioneRigheRateController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneRigheRate"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="gestioneAreaAccontoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneAreaAcconto"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="modificaAreaTesoreriaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaAreaTesoreria"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="risultatiRicercaRateController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestionePagamenti"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="tipoDocumentoBasePartitaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipoBasePartita"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="tipoAreaPartitaPageController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipoAreaPartita"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="visualuizaAreaTesoreriaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaRate"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<!-- FINE DEFINIZIONE SECURITY CONTROLLER -->
+	
+</beans>

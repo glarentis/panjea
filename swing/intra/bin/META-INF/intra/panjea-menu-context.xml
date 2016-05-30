@@ -1,0 +1,22 @@
+
+<beans>
+
+	<bean id="intraMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="intraMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:intra:gestioneIntra</value>
+                <value>nuovaDichiarazioneCommand</value>
+                <value>searchDichiarazioniCommand</value>
+                <value>openDichiarazioniDaPresentareCommand</value>
+                <value>openFileDichiarazioneCommand</value>
+                <value>group:intra:areaIntra</value>
+                <value>searchAreaIntraCommand</value>
+				<value>group:intra:tabelleIntra</value>
+				<value>openTabelleIntraCommand</value>
+				<value>openPreferenzeIntraCommand</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

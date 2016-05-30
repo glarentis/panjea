@@ -1,0 +1,4 @@
+dependencies {
+    compile (project(':ear:ejb'))
+    compile (project(':ear:manutenzioni'))
+}

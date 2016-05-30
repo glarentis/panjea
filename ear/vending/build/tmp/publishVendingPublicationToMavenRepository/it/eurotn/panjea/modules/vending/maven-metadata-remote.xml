@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>it.eurotn.panjea.modules</groupId>
+  <artifactId>vending</artifactId>
+  <versioning>
+    <latest>trunk-SNAPSHOT</latest>
+    <versions>
+      <version>trunk-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20160520161333</lastUpdated>
+  </versioning>
+</metadata>

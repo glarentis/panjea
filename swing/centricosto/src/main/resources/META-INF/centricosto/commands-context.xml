@@ -1,0 +1,11 @@
+ 
+<beans>
+
+	<import resource="panjea-context.xml"/> 
+	
+	<bean id="verificaCentriDiCostoCommand" class="it.eurotn.panjea.centricosto.rich.commands.OpenVerificaCentriDiCostoCommand">
+		<property name="securityControllerId" value="verificaCentriDiCosto"></property>
+		<property name="idCommand" value="verificaCentriDiCostoCommand"></property>
+		<property name="openString" value="verificaCentriDiCosto"></property>
+	</bean>	
+</beans>

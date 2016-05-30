@@ -1,0 +1,129 @@
+<beans>
+
+	<bean id="anagraficaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.AnagraficaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+
+	<bean id="anagraficaBDImpl" class="it.eurotn.panjea.anagrafica.rich.bd.AnagraficaBD"
+		singleton="true" lazy-init="true">
+		<property name="anagraficaService" ref="anagraficaService" />
+	</bean>
+	<bean id="anagraficaBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD</value>
+		</property>
+		<property name="target">
+			<ref local="anagraficaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dmsService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.LogicalDocDMSService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+	<bean id="dmsBDImpl" class="it.eurotn.panjea.rich.bd.DmsBD"
+		singleton="true" lazy-init="true">
+		<property name="dmsService" ref="dmsService" />
+	</bean>
+
+	<bean id="dmsBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.IDmsBD</value>
+		</property>
+		<property name="target">
+			<ref local="dmsBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="queryBuilderService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.QueryBuilderService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+	<bean id="queryBuilderBDImpl" class="it.eurotn.panjea.rich.bd.QueryBuilderBD"
+		singleton="true" lazy-init="true">
+		<property name="queryBuilderService" ref="queryBuilderService" />
+	</bean>
+
+	<bean id="queryBuilderBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.IQueryBuilderBD</value>
+		</property>
+		<property name="target">
+			<ref local="queryBuilderBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<bean
+		class="it.eurotn.panjea.rich.editors.email.ImportazioneMailMessageDelegate"
+		id="importazioneMailMessageDelegate" lazy-init="true" singleton="true">
+	</bean>
+
+	<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter"
+		id="importazioneMailMessageListener">
+		<property name="delegate" ref="importazioneMailMessageDelegate" />
+		<property name="messageConverter">
+			<null />
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+		id="importazioneMailContainer">
+		<property name="connectionFactory" ref="topicConnectionFactory" />
+		<property name="destination" ref="panjeaDestination" />
+		<property name="messageListener" ref="importazioneMailMessageListener" />
+		<property name="messageSelector" value="messageSelector='importaMailMessageSelector'" />
+		<property name="autoStartup" value="true" />
+	</bean>
+
+
+
+
+
+	<!-- inizio plugins rules source -->
+	<bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager"
+		lazy-init="true" singleton="true">
+		<property name="plugins">
+			<list>
+				<ref bean="panjea-core" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjea-core">
+		<property name="versione" value="" />
+		<property name="nome" value="panjea-core" />
+		<property name="descrizione" value="Modulo panjea core" />
+		<property name="rulesSource" value="" />
+	</bean>
+		
+	<!-- fine plugins rules source -->
+
+</beans>

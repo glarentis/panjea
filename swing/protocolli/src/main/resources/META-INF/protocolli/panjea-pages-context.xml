@@ -1,0 +1,93 @@
+
+<beans>
+	<import resource="panjea-context.xml" />
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<!-- Editor contabilita -->
+				<entry value="protocolliEditor">
+					<key>
+						<value type="java.lang.String">protocolliEditor</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- begin editors -->
+
+	<bean id="protocolliEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tabelleProtocolliEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>protocolliValoreTablePage</value>
+						<value>protocolliAnnoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">protocolliEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="protocolliValoreTablePage" class="it.eurotn.panjea.protocolli.rich.editor.tabelle.ProtocolliValoreTablePage" singleton="false">
+		<property name="protocolliBD">
+			<ref bean="protocolliBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="protocolloValorePage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="protocolliAnnoTablePage" class="it.eurotn.panjea.protocolli.rich.editor.tabelle.ProtocolliAnnoTablePage" singleton="false">
+		<property name="protocolliBD">
+			<ref bean="protocolliBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+         <property name="editPage">
+        	<ref bean="protocolloAnnoPage"/>
+        </property>
+	</bean>
+
+	<bean id="protocolloAnnoPage" class="it.eurotn.panjea.protocolli.rich.editor.tabelle.ProtocolloAnnoPage" singleton="false">
+		<constructor-arg index="0" type="java.lang.String" value="protocolloAnnoPage"></constructor-arg>
+		<property name="protocolliBD">
+			<ref bean="protocolliBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="protocolloValorePage" class="it.eurotn.panjea.protocolli.rich.editor.tabelle.ProtocolloValorePage" singleton="false">
+		<constructor-arg index="0" type="java.lang.String" value="protocolloValorePage"></constructor-arg>
+		<property name="protocolliBD">
+			<ref bean="protocolliBD" />
+		</property>
+	</bean>
+
+	<bean id="protocolloPage" class="it.eurotn.panjea.protocolli.rich.editor.tabelle.ProtocolloPage" singleton="false">
+		<constructor-arg index="0" type="java.lang.String" value="protocolloPage"></constructor-arg>
+	</bean>
+
+
+	<!-- end editors -->
+
+</beans>

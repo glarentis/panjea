@@ -1,0 +1,225 @@
+
+ <!DOCTYPE beans SYSTEM "spring-beans.dtd">
+<beans>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="basenames">
+            <list>
+                <value>classpath:it/eurotn/panjea/messages/ordi/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/ordi/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/ordi/messages-editors-pages</value>
+                <value>classpath:it/eurotn/panjea/messages/ordi/messages-exceptions</value>
+                <value>classpath:it/eurotn/panjea/messages/ordi/messages-methods</value>
+                <value>classpath:it/eurotn/panjea/messages/ordi/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/ordi/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/ordi/messages-constraints</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="panjeaConversionService" class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+        <property name="converters">
+        	<list>
+        		<bean name="TipoAreaOrdineConverter" class="it.eurotn.panjea.ordini.rich.converter.TipoAreaOrdineConverter"></bean>
+        		<bean name="AreaOrdineFullDTOConverter" class="it.eurotn.panjea.ordini.rich.converter.AreaOrdineFullDTOConverter"></bean>
+        		<bean name="AreaOrdineRicercaConverter" class="it.eurotn.panjea.ordini.rich.converter.AreaOrdineRicercaConverter"></bean>
+        		<bean name="AreaOrdineConverter" class="it.eurotn.panjea.anagrafica.rich.converter.IAreaDocumentoConverter"></bean>
+        	</list>
+        </property>
+    </bean>
+    <bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+        <property name="locations">
+            <list>
+                <!-- File di configurazione di images messaggi di template -->
+                <value>classpath:it/eurotn/panjea/messages/ordi/images.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="it.eurotn.panjea.rich.factory.navigationloader.PanjeaNavigationLoaderFactory" id="panjeaNavigationLoaderFactory">
+    	<property name="loaderCommands">
+			<list>
+				<ref bean="ordiniEntitaLoaderActionCommand"/>
+				<ref bean="ordiniArticoloAnalisiLoaderCommand"/>
+				<ref bean="ordiniArticoloRicercaAnalisiLoaderCommand"/>
+				<bean id="areaOrdineLoaderActionCommand" class="it.eurotn.panjea.ordini.rich.commands.navigationloaders.AreaOrdineLoaderActionCommand" singleton="true" lazy-init="true"/>
+            </list>
+		</property>
+    </bean>
+
+     <!-- loader action commands -->
+    <bean id="ordiniEntitaLoaderActionCommand" class="it.eurotn.panjea.ordini.rich.commands.navigationloaders.OrdiniEntitaLoaderActionCommand" singleton="true" lazy-init="true">
+    </bean>
+
+    <bean id="ordiniArticoloAnalisiLoaderCommand" class="it.eurotn.panjea.ordini.rich.commands.navigationloaders.ArticoloAnalisiLoaderCommand" singleton="true" lazy-init="true">
+    </bean>
+    
+    <bean id="ordiniArticoloRicercaAnalisiLoaderCommand" class="it.eurotn.panjea.ordini.rich.commands.navigationloaders.ArticoloRicercaAnalisiLoaderCommand" singleton="true" lazy-init="true">
+	    <property name="navigationLoaderContext" ref="it.eurotn.panjea.magazzino.rich.editors.articolo.ArticoliRicercaTableModel.ARTICOLO_RICERCA_NAVIGATION_CONTEXT"/>
+    </bean>
+
+    <bean id="ordiniDocumentoBDImpl" class="it.eurotn.panjea.ordini.rich.bd.OrdiniDocumentoBD" singleton="true" lazy-init="true">
+        <property name="ordiniDocumentoService" ref="ordiniDocumentoService"></property>
+    </bean>
+    <bean id="ordiniDocumentoBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.ordini.rich.bd.IOrdiniDocumentoBD</value>
+        </property>
+        <property name="target">
+            <ref local="ordiniDocumentoBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="ordiniDocumentoService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.OrdiniDocumentoService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean id="anagraficaOrdiniBDImpl" class="it.eurotn.panjea.ordini.rich.bd.AnagraficaOrdiniBD" singleton="true" lazy-init="true">
+        <property name="anagraficaOrdiniService" ref="anagraficaOrdiniService"></property>
+    </bean>
+    <bean id="anagraficaOrdiniBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.ordini.rich.bd.IAnagraficaOrdiniBD</value>
+        </property>
+        <property name="target">
+            <ref local="anagraficaOrdiniBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="anagraficaOrdiniService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.AnagraficaOrdiniService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer" id="evasioneContainer">
+        <property name="connectionFactory" ref="topicConnectionFactory" />
+        <property name="destination" ref="panjeaDestination" />
+        <property name="messageListener" ref="evasioneMessageListener" />
+        <property name="messageSelector" value="messageSelector='evasioneMessageSelector'" />
+        <property name="autoStartup" value="true" />
+    </bean>
+    <bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter" id="evasioneMessageListener">
+        <property name="delegate" ref="evasioneOrdiniMessageDelegate" />
+        <!-- we don't want automatic message context extraction -->
+        <property name="messageConverter">
+            <null />
+        </property>
+    </bean>
+    <bean class="it.eurotn.panjea.ordini.rich.editors.evasione.distintacarico.evasione.EvasioneOrdiniMessageDelegate" id="evasioneOrdiniMessageDelegate" lazy-init="true" singleton="true" />
+    <!--Campi statici utilizzati nel factory della tabella -->
+    <bean id="it.eurotn.panjea.ordini.rich.editors.righeordine.LivelloRigaOrdineCellRenderer.LIVELLO_RIGA_ORDINE_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+    <bean id="it.eurotn.panjea.ordini.rich.editors.evasione.StatoRigaDistintaCaricoCellRenderer.STATO_RIGA_DISTINTA_CARICO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+    <bean id="it.eurotn.panjea.ordini.rich.editors.evasione.carrello.QtaDaEvadereCellRenderer.QTA_DA_EVADERE_CELL_RENDERER_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+    <bean id="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.PrezzoDeterminatoCellRenderer.PREZZO_DETERMINATO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.StatoRigaOrdineImportataGroupCellRenderer.STATO_RIGA_ORDINE_IMPORTATA_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+    <bean id="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.NumeroRigaCellRenderer.NUMERO_RIGA_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+    <!--Render ed editro per le tabelle -->
+    <bean class="it.eurotn.rich.control.table.JideTableFactory" id="jideTableFactory">
+        <property name="renderers">
+            <list>
+            	<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.ordini.domain.documento.AreaOrdine"></property>
+                </bean>
+                <bean class="it.eurotn.panjea.ordini.rich.editors.evasione.carrello.QtaDaEvadereCellRenderer">
+                    <property name="type" value="java.lang.Double"></property>
+                    <property name="editorContext" ref="it.eurotn.panjea.ordini.rich.editors.evasione.carrello.QtaDaEvadereCellRenderer.QTA_DA_EVADERE_CELL_RENDERER_CONTEXT" />
+                </bean>
+                <bean class="it.eurotn.panjea.ordini.rich.editors.evasione.StatoRigaDistintaCaricoCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.ordini.domain.documento.evasione.RigaDistintaCarico$StatoRiga"></property>
+                </bean>
+                <bean class="it.eurotn.panjea.ordini.rich.editors.evasione.StatoRigaDistintaCaricoGroupCellRenderer">
+                    <property name="type" value="com.jidesoft.grid.DefaultGroupRow"></property>
+                    <property name="editorContext" ref="it.eurotn.panjea.ordini.rich.editors.evasione.StatoRigaDistintaCaricoCellRenderer.STATO_RIGA_DISTINTA_CARICO_CONTEXT" />
+                </bean>
+                 <bean class="it.eurotn.panjea.ordini.rich.editors.righeordine.LivelloRigaOrdineCellRenderer">
+                    <property name="type" value="java.lang.String"></property>
+                    <property name="editorContext" ref="it.eurotn.panjea.ordini.rich.editors.righeordine.LivelloRigaOrdineCellRenderer.LIVELLO_RIGA_ORDINE_CONTEXT" />
+                </bean>
+                 <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.ordini.domain.documento.AreaOrdine$StatoAreaOrdine"></property>
+                </bean>
+                <bean class="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.PrezzoDeterminatoCellRenderer">
+                    <property name="type" value="java.math.BigDecimal"></property>
+                    <property name="editorContext" ref="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.PrezzoDeterminatoCellRenderer.PREZZO_DETERMINATO_CONTEXT" />
+                </bean>
+                <bean class="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.StatoRigaOrdineImportataGroupCellRenderer">
+                    <property name="type" value="com.jidesoft.grid.DefaultGroupRow"></property>
+                    <property name="editorContext" ref="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.StatoRigaOrdineImportataGroupCellRenderer.STATO_RIGA_ORDINE_IMPORTATA_CONTEXT" />
+                </bean>
+                <bean class="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.NumeroRigaCellRenderer">
+                     <property name="type" value="java.lang.Integer"/>
+                     <property name="editorContext" ref="it.eurotn.panjea.ordini.rich.editors.ordiniimportati.NumeroRigaCellRenderer.NUMERO_RIGA_CONTEXT" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="exceptionHandler" class="org.springframework.richclient.exceptionhandling.delegation.DelegatingExceptionHandler">
+        <property name="delegateList">
+            <list>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.ordini.exception.AgenteFatturazioneSenzaClienteException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.ordini.exceptionhandler.AgenteFatturazioneSenzaClienteExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.ordini.exception.TipoAreaPartitaDestinazioneRichiestaException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.ordini.exceptionhandler.TipoAreaPartitaDestinazioneRichiestaExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="ordiniProntiStatusBarItem" class="it.eurotn.panjea.ordini.rich.statusBarItem.OrdiniProntiStatusBarItem">
+        <property name="ordiniDocumentoBD"><ref bean="ordiniDocumentoBD"/></property>
+    </bean>
+
+    <bean class="com.jidesoft.spring.richclient.components.JecStatusBar" depends-on="lookAndFeelConfigurer" id="statusBarId">
+        <property name="additionalStatusBarItems">
+        <list>
+            <ref bean="ordiniProntiStatusBarItem"/>
+         </list>
+        </property>
+    </bean>
+
+	<!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaOrdini"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaOrdini">
+		<property name="versione" value="0.4.40"/>
+		<property name="nome" value="panjeaOrdini"/>
+		<property name="descrizione" value="Modulo panjea ordini"/>
+		<property name="rulesSource" value="it.eurotn.panjea.ordini.rich.rules.OrdiniPluginRulesSource"/>
+	</bean>
+	<!-- fine plugins rules source -->
+
+</beans>

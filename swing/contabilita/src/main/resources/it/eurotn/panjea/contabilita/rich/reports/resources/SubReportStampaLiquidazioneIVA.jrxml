@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReportStampaLiquidazioneIVA" pageWidth="535" pageHeight="813" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="40005b84-38aa-4599-8e42-71ceb90486ec">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="5.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="periodoLiquidazione" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="annoLiquidazioneIva" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="periodoPrecedente" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="risultatoLiq" class="java.math.BigDecimal" isForPrompting="false"/>
+	<parameter name="percTrimestraleValore" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="percTrimestraleImporto" class="java.math.BigDecimal">
+		<parameterDescription><![CDATA[null]]></parameterDescription>
+	</parameter>
+	<parameter name="accontoDicembre" class="java.math.BigDecimal" isForPrompting="false"/>
+	<field name="registroIva.descrizione" class="java.lang.String">
+		<fieldDescription><![CDATA[registroIva.descrizione]]></fieldDescription>
+	</field>
+	<field name="importoADebito" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[importoADebito]]></fieldDescription>
+	</field>
+	<field name="importoACredito" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[importoACredito]]></fieldDescription>
+	</field>
+	<variable name="totaleDebito" class="java.math.BigDecimal" resetType="Group" resetGroup="totaliGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoADebito}]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<variable name="totaleCredito" class="java.math.BigDecimal" resetType="Group" resetGroup="totaliGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{importoACredito}]]></variableExpression>
+		<initialValueExpression><![CDATA[BigDecimal.ZERO]]></initialValueExpression>
+	</variable>
+	<group name="totaliGroup">
+		<groupExpression><![CDATA[$P{periodoLiquidazione}]]></groupExpression>
+		<groupHeader>
+			<band height="12" splitType="Stretch">
+				<line>
+					<reportElement uuid="7183185d-3ebf-48d6-8563-3f7f05ae2922" key="line-1" x="1" y="11" width="232" height="1"/>
+				</line>
+				<line>
+					<reportElement uuid="1180be75-e4c6-43df-9dbd-d7ceff89fcbb" key="line-1" x="234" y="11" width="80" height="1"/>
+				</line>
+				<line>
+					<reportElement uuid="f0cf96c1-819e-4dcc-97af-5a8a08ab2521" key="line-1" x="315" y="11" width="81" height="1"/>
+				</line>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="e81661b3-0b19-44e5-a3e7-d48445b7548c" key="textField-5" x="234" y="0" width="80" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{subReportStampaLiquidazioneIVA.aDebito}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="2db5e07c-b60a-4fa4-953e-171fed62ae0b" key="textField-6" x="315" y="0" width="80" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{subReportStampaLiquidazioneIVA.aCredito}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="92" splitType="Stretch">
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="d166b0e7-b9ed-4e28-84b5-307174eff117" key="textField-7" x="234" y="1" width="80" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleDebito}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="7c3c4467-739e-4bde-87e3-f0089a30aa83" key="textField-8" x="315" y="1" width="80" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totaleCredito}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="b2db67ce-71f9-4867-967e-e387e06bd46d" key="line-1" x="1" y="1" width="395" height="1"/>
+				</line>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="1b73d4fe-68ee-42a7-920a-0c6a0f575cd5" key="textField-9" x="2" y="1" width="231" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{subReportStampaLiquidazioneIVA.totali}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="677041ca-a97a-400d-95d5-3c2f1ca9b8de" key="textField-10" x="234" y="22" width="80" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{totaleDebito}.subtract($V{totaleCredito}).compareTo(BigDecimal.ZERO)>=0) ? $V{totaleDebito}.subtract($V{totaleCredito}).abs() : BigDecimal.ZERO]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="81c7be9a-6899-41b5-8049-b76bd057fa63" key="textField-11" x="315" y="22" width="80" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($V{totaleDebito}.subtract($V{totaleCredito}).compareTo(BigDecimal.ZERO)<0) ? $V{totaleDebito}.subtract($V{totaleCredito}).abs() : BigDecimal.ZERO]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="2a3d4bac-e130-4459-a2f8-207aca173234" key="textField-12" x="2" y="22" width="231" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{subReportStampaLiquidazioneIVA.risultatoDelPeriodo}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="79263721-fd32-4391-89c9-9cc9ae6cf647" key="textField-13" x="2" y="33" width="231" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{subReportStampaLiquidazioneIVA.periodoPrecedente}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="65323ef1-b0ae-4b36-a421-f5f7b92d5927" key="textField-14" x="2" y="56" width="231" height="11"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{subReportStampaLiquidazioneIVA.risultatoLiquidazione}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="ea4a29ed-564f-48fc-acdb-d0b8ee7fe47a" key="line-2" x="1" y="55" width="395" height="1"/>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="9bb85b49-84cc-4afc-a332-ed7c595bc385" key="textField-19" x="234" y="33" width="80" height="11">
+						<printWhenExpression><![CDATA[($P{periodoPrecedente}.compareTo( java.math.BigDecimal.ZERO ) > 0)?new Boolean(true):new Boolean(false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{periodoPrecedente}.abs()]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="5cb37ef1-55da-4f93-aeaf-a47bcebf6bad" key="textField-20" x="315" y="33" width="80" height="11">
+						<printWhenExpression><![CDATA[($P{periodoPrecedente}.compareTo( java.math.BigDecimal.ZERO ) < 0)?new Boolean(true):new Boolean(false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{periodoPrecedente}.abs()]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="a86e16e8-c382-4d46-954d-b0352ab18781" key="textField-21" x="234" y="56" width="80" height="11">
+						<printWhenExpression><![CDATA[($P{risultatoLiq}.compareTo( java.math.BigDecimal.ZERO ) > 0)?new Boolean(true):new Boolean(false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[( new Boolean($P{percTrimestraleImporto} != null)
+    ? $P{risultatoLiq}.abs().subtract($P{percTrimestraleImporto})
+    : $P{risultatoLiq}.abs() )]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="03c3bd47-2fe5-4183-a4da-4f7e03e0f312" key="textField-22" x="315" y="56" width="80" height="11">
+						<printWhenExpression><![CDATA[($P{risultatoLiq}.compareTo( java.math.BigDecimal.ZERO ) < 0)?new Boolean(true):new Boolean(false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{risultatoLiq}.abs()]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement uuid="fe228fe5-b411-4f70-9707-0ebc55bac8ff" key="textField-14" x="2" y="67" width="231" height="11" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new Boolean($P{percTrimestraleImporto} != null)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Maggiorazione per interessi del " + $P{percTrimestraleValore}.toString() + "%"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="d10979c8-cdd0-4a44-a2b7-ff5e715f20d2" key="textField-21" x="234" y="67" width="80" height="11">
+						<printWhenExpression><![CDATA[new Boolean($P{percTrimestraleImporto} != null)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{percTrimestraleImporto}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="84d134ce-0e4b-451d-a546-6b61f8a5e11f" key="line-2" x="1" y="78" width="395" height="1">
+						<printWhenExpression><![CDATA[new Boolean($P{percTrimestraleImporto} != null)]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="cb3a929b-b537-434f-adcb-c0341437bc88" key="textField-21" x="234" y="79" width="80" height="11">
+						<printWhenExpression><![CDATA[($P{risultatoLiq}.compareTo( java.math.BigDecimal.ZERO ) > 0)?new Boolean(true):new Boolean(false) && new Boolean($P{percTrimestraleImporto} != null)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{risultatoLiq}.abs()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="661617a9-d71f-46a9-b79a-5097fc93352d" key="textField-14" x="2" y="79" width="231" height="11">
+						<printWhenExpression><![CDATA[new Boolean($P{percTrimestraleImporto} != null)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Totale"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="4cf824bf-f331-4abc-b0d3-ee25fcf23001" key="textField-13" x="2" y="44" width="231" height="11" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new Boolean($P{accontoDicembre} != null)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{subReportStampaLiquidazioneIVA.accontoDicembre}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="1e50bae2-908a-4a18-849f-7fd993094cb5" key="textField-20" x="315" y="44" width="80" height="11" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[(new Boolean($P{accontoDicembre} != null)) && (($P{accontoDicembre}.compareTo( java.math.BigDecimal.ZERO ) > 0)?new Boolean(true):new Boolean(false))]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{accontoDicembre}.abs()]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="820b7e95-c14d-4ff1-b786-f83e6bbf76e6" key="textField-19" x="234" y="44" width="80" height="11" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[(new Boolean($P{accontoDicembre} != null)) && (($P{accontoDicembre}.compareTo( java.math.BigDecimal.ZERO ) < 0)?new Boolean(true):new Boolean(false))]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{accontoDicembre}.abs()]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement uuid="2e07b5fd-b289-4cf4-afe2-4e1238264bf8" key="textField-21" x="315" y="79" width="80" height="11">
+						<printWhenExpression><![CDATA[($P{risultatoLiq}.compareTo( java.math.BigDecimal.ZERO ) < 0)?new Boolean(true):new Boolean(false) && new Boolean($P{percTrimestraleImporto} != null)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{risultatoLiq}.abs()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="18" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="b4951be1-39e8-453e-a23b-7bb78bb9916b" key="textField-4" x="0" y="6" width="234" height="11"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{subReportStampaLiquidazioneIVA.titolo} + " " + $P{periodoLiquidazione} + " " + $P{annoLiquidazioneIva}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="fdd7fcd0-035b-4bc6-a9fb-7e867a1cd987" key="textField-1" x="2" y="1" width="231" height="11"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{registroIva.descrizione}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="f6039523-94b8-4c39-ae2b-2340735a2ac7" key="textField-2" x="315" y="1" width="80" height="11"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importoACredito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement uuid="9afd7043-5dc4-4474-989a-b4bdacdef7f7" key="textField-3" x="234" y="1" width="80" height="11"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importoADebito}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

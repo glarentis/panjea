@@ -1,0 +1,123 @@
+
+<beans>
+    <bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+        <property name="settingsManager" ref="settingManagerLocal" />
+        <property name="searchObjectMap">
+            <map>
+                <entry value="sottoSpecieSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.SottoSpecie</value>
+                    </key>
+                </entry>
+                <entry value="ubicazioneSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.Ubicazione</value>
+                    </key>
+                </entry>
+                <entry value="tipologiaEliminazioneSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.TipologiaEliminazione</value>
+                    </key>
+                </entry>
+                <entry value="beneAmmortizzabileSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.BeneAmmortizzabile</value>
+                    </key>
+                </entry>
+                <entry value="beneAmmortizzabileSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.BeneAmmortizzabileLite</value>
+                    </key>
+                </entry>
+                <entry value="specieSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.Specie</value>
+                    </key>
+                </entry>
+                <entry value="gruppoBeniSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.beniammortizzabili2.domain.Gruppo</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="ubicazioneSearchObject" class="it.eurotn.panjea.beniammortizzabili.rich.search.UbicazioneSearchObject" singleton="false" lazy-init="true">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="dialogPageId" value="ubicazionePage"/>
+        <property name="editObject" value="true"/>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="tipologiaEliminazioneSearchObject" class="it.eurotn.panjea.beniammortizzabili.rich.search.TipologiaEliminazioneSearchObject" singleton="false" lazy-init="true">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+        <property name="dialogPageId" value="tipologiaEliminazionePage"/>
+        <property name="editObject" value="true"/>
+    </bean>
+    
+    <bean id="gruppoBeniSearchObject" class="it.eurotn.panjea.beniammortizzabili.rich.search.GruppoSearchObject" singleton="false" lazy-init="true">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="specieSearchObject" class="it.eurotn.panjea.beniammortizzabili.rich.search.SpecieSearchObject" singleton="false" lazy-init="true">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+                <value>gruppo</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="sottoSpecieSearchObject" class="it.eurotn.panjea.beniammortizzabili.rich.search.SottoSpecieSearchObject" singleton="false" lazy-init="true">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>sottoSpecieCodice</value>
+                <value>descrizione</value>
+                <value>specie</value>
+            </list>
+        </property>
+    </bean>			
+    
+    <bean id="beneAmmortizzabileSearchObject" class="it.eurotn.panjea.beniammortizzabili.rich.search.BeneAmmortizzabileSearchObject" singleton="false" lazy-init="true">
+        <property name="beniAmmortizzabiliBD">
+            <ref bean="beniAmmortizzabiliBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>	
+</beans>

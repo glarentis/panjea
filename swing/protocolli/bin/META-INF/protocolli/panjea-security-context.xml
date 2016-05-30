@@ -1,0 +1,24 @@
+ 
+<beans>
+	<import resource="panjea-context.xml"/>
+	
+	<!-- INIZIO DEFINIZIONE SECURITY CONTROLLER -->
+	 
+	
+	<bean class="org.springframework.richclient.security.support.DefaultSecurityControllerManager" id="securityControllerManager">
+    	<property name="securityControllerMap">
+        	<map>
+        	<entry key="protocolloValorePage.controller"><ref bean="gestioneProtocolliController"/></entry>
+        	<entry key="protocolloAnnoPage.controller"><ref bean="gestioneProtocolliController"/></entry>
+        	</map>
+    	</property>
+	</bean>	
+	
+ <bean id="gestioneProtocolliController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneProtocolli"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<!-- FINE DEFINIZIONE SECURITY CONTROLLER -->
+	
+</beans>

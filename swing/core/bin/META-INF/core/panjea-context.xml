@@ -1,0 +1,1057 @@
+<beans>
+	<!-- Start Application -->
+	<bean id="application" class="it.eurotn.panjea.rich.PanjeaApplication">
+		<constructor-arg index="0" ref="panjeaApplicationDescriptor" />
+		<constructor-arg index="1" ref="panjeaLifecycleAdvisor" />
+	</bean>
+	<!-- riferimento per identificare l'applicazione nel messages properties per title, caption, description -->
+	<bean id="panjeaApplicationDescriptor" class="org.springframework.richclient.application.support.DefaultApplicationDescriptor">
+		<property name="version" value="0.4.48" />
+		<property name="buildId" value="20100930090909" />
+	</bean>
+	<bean id="applicationPageFactory" class="it.eurotn.panjea.rich.pages.PanjeaPageFactory" />
+	<bean id="applicationWindowFactory" class="com.jidesoft.spring.richclient.docking.JideApplicationWindowFactory" />
+	<!-- controllo sul ciclo di vita dell' applicazione aggiunta del login, del wizard, controllo su close e open dell'applicazione -->
+	<bean id="panjeaLifecycleAdvisor" class="it.eurotn.panjea.rich.PanjeaLifecycleAdvisor">
+		<property name="windowCommandBarDefinitions" value="file:./commands-context.xml" />
+		<property name="windowCommandManagerBeanName" value="windowCommandManager" />
+		<property name="menubarBeanName" value="menuBar" />
+		<property name="toolbarBeanName" value="toolBar" />
+		<property name="startingPageId" value="mainPage" />
+		<property name="statusBar" ref="statusBarId" />
+		<!-- <property name="repaintManager" ref="checkingRepaintManager"></property> -->
+		<property name="registerableExceptionHandler" ref="exceptionHandler" />
+	</bean>
+	<bean id="checkingRepaintManager" class="com.jidesoft.spring.richclient.docking.CheckingRepaintManager" />
+	<!-- accesso ai service registrati dell'applicazione -->
+	<bean id="serviceLocator" class="org.springframework.richclient.application.ApplicationServicesLocator">
+		<property name="applicationServices" ref="applicationServices" />
+	</bean>
+	<!-- This configures the application services available to the platform. There are specific setter methods for all the standard 
+		services, see the javadoc on teh DefaultApplicationServices class for more details. NOTE: The use of applicationObjectConfigurerBeanId 
+		instead of a direct bean reference is required in order to break a circular dependency with the ApplicationObjectConfigurer 
+		(which is a BeanPostProcessor). -->
+	<bean id="applicationServices" class="org.springframework.richclient.application.support.DefaultApplicationServices">
+		<property name="imageSource" ref="imageSource" />
+		<property name="rulesSource" ref="rulesSource" />
+		<property name="formComponentInterceptorFactory" ref="formComponentInterceptorFactory" />
+		<property name="applicationObjectConfigurerId" value="applicationObjectConfigurer"></property>
+		<property name="componentFactory" ref="componentFactory" />
+		<property name="buttonFactory" ref="buttonfactory" />
+		<property name="commandServices" ref="panjeaCommandServices"></property>
+		<property name="conversionService" ref="panjeaConversionService"></property>
+		<property name="bindingFactoryProvider" ref="bindingFactoryProvider" />
+		<property name="applicationWindowFactory" ref="applicationWindowFactory" />
+		<property name="applicationPageFactory" ref="applicationPageFactory" />
+		<property name="registryEntries">
+			<map>
+				<entry value-ref="lockingBD">
+					<key>
+						<value>it.eurotn.panjea.rich.bd.ILockingBD</value>
+					</key>
+				</entry>
+				<entry value-ref="settingManagerLocal">
+					<key>
+						<value>org.springframework.richclient.settings.SettingsManager</value>
+					</key>
+				</entry>
+				<entry value-ref="tableLayoutCache">
+					<key>
+						<value>it.eurotn.rich.services.TableLayoutCache</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+		<property name="binderSelectionStrategy" ref="binderSelectionStrategy"></property>
+		<property name="securityControllerManager" ref="securityControllerManager"></property>
+		<property name="valueChangeDetector" ref="panjeaValueChangeDetector"></property>
+	</bean>
+	<bean id="panjeaValueChangeDetector" class="it.eurotn.rich.binding.value.support.PanjeaValueChangeDetector"></bean>
+	<!-- Configuro il command services con la toolbarCommandConfigurer modificata -->
+	<bean name="panjeaCommandServices" class="org.springframework.richclient.command.support.DefaultCommandServices">
+		<property name="toolBarButtonConfigurer" ref="panjeaToolbarButtonConfigurer" />
+		<property name="defaultButtonConfigurer" ref="panjaButtonConfigurer" />
+	</bean>
+	<!-- Configuro il command services con la toolbarCommandConfigurer modificata -->
+	<bean class="it.eurotn.rich.command.config.PanjeaCommandButtonConfigurer" name="panjaButtonConfigurer" />
+	<bean id="panjeaConversionService" class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+		<property name="converters">
+			<list>
+				<bean name="BooleanConverter" class="it.eurotn.panjea.rich.converter.BooleanConverter" />
+				<bean name="EnumConverter" class="it.eurotn.panjea.rich.converter.EnumConverter"></bean>
+				<bean name="ColorConverter" class="it.eurotn.panjea.rich.converter.ColorConverter"></bean>
+				<bean name="doubleConverter" class="it.eurotn.panjea.rich.converter.DoubleConverter"></bean>
+				<bean name="doubleWithContextConverter" class="it.eurotn.panjea.rich.converter.DoubleConverter">
+					<property name="converterContext" ref="numberWithDecimalConverterContext"></property>
+				</bean>
+				<bean name="dateConverter" class="it.eurotn.panjea.rich.converter.DateConverter"></bean>
+				<bean name="integerConverter" class="it.eurotn.panjea.rich.converter.IntegerConverter"></bean>
+				<bean name="meseConverter" class="it.eurotn.panjea.rich.converter.MeseConverter">
+					<property name="converterContext" ref="it.eurotn.panjea.rich.converter.MeseConverter.CONTEXT"></property>
+				</bean>
+				<bean name="bigDecimalConverter" class="it.eurotn.panjea.rich.converter.BigDecimalConverter"></bean>
+				<bean name="bigDecimalWithContextConverter" class="it.eurotn.panjea.rich.converter.BigDecimalConverter">
+					<property name="converterContext" ref="numberWithDecimalConverterContext"></property>
+				</bean>
+				<bean name="StringConverter" class="it.eurotn.panjea.rich.converter.StringConverter" />
+				<bean name="UtenteConverter" class="it.eurotn.panjea.rich.converter.UtenteConverter" />
+				<bean name="DatiMailConverter" class="it.eurotn.panjea.rich.converter.DatiMailConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean id="it.eurotn.panjea.rich.converter.MeseConverter.CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean name="numberWithDecimalConverterContext" class="it.eurotn.panjea.rich.converter.NumberWithDecimalConverterContext"></bean>
+	<bean name="panjeaToolbarButtonConfigurer" class="it.eurotn.rich.command.config.PanjeaToolBarCommandButtonConfigurer">
+		<property name="enableShadow" value="false" />
+		<property name="textBelowIcon" value="false" />
+		<property name="showText" value="true" />
+	</bean>
+	<!-- This defines the object responsible for dispatching application events to all interested components. Unless you really 
+		know what you're doing, you should just include this as is. -->
+	<bean id="applicationEventMulticaster" class="org.springframework.context.event.SimpleApplicationEventMulticaster">
+		<property name="collectionClass" value="java.util.concurrent.CopyOnWriteArraySet" />
+	</bean>
+	<!-- End Application -->
+	<!-- Bean: applicationObjectConfigurer Usage: platform required (because it is a bean post processor) Description: This 
+		defines the object responsible for configuring other objects constructed via the platform. This is a critical part of the 
+		I18N support. -->
+	<bean id="applicationObjectConfigurer" depends-on="serviceLocator"
+		class="org.springframework.richclient.application.config.DefaultApplicationObjectConfigurer" />
+	<bean id="componentFactory" class="it.eurotn.panjea.rich.factory.PanjeaComponentFactory">
+		<property name="buttonFactory">
+			<ref bean="buttonfactory" />
+		</property>
+		<property name="tableFactory">
+			<ref bean="jXTableFactory" />
+		</property>
+	</bean>
+	<bean id="it.eurotn.rich.control.table.editor.PrinterContextSensitiveEditorFactory.CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.rich.control.table.editor.CodeEditorContextSensiviteEditorFactory.CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.panjea.rich.editors.stampe.ReportNameHyperlinkCellRenderer.CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.rich.control.table.editor.SearchContextSensitiveEditorFactory.CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="it.eurotn.rich.control.table.renderer.DateContextSensitiveCellRenderer.ORA_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="jideTableFactory" class="it.eurotn.rich.control.table.JideTableFactory">
+		<property name="editors">
+			<list>
+				<bean class="it.eurotn.rich.control.table.editor.BigDecimalContextSensitiveEditorFactory">
+					<property name="type" value="java.math.BigDecimal" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.BigDecimalContextSensitiveEditorFactory">
+					<property name="type" value="java.lang.Integer" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.DoubleContextSensitiveEditorFactory">
+					<property name="type" value="java.lang.Double" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.BooleanContextSensitiveEditorFactory">
+					<property name="type" value="java.lang.Boolean" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.ImportoContextSensitiveEditorFactory">
+					<property name="type" value="it.eurotn.panjea.anagrafica.domain.Importo" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.DateContextSensitiveEditorFactory">
+					<property name="type" value="java.util.Date" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.EnumContextSensitiveEditorFactory">
+					<property name="type" value="java.lang.Enum" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.PrinterContextSensitiveEditorFactory">
+					<property name="type" value="java.lang.String" />
+					<property name="editorContext" ref="it.eurotn.rich.control.table.editor.PrinterContextSensitiveEditorFactory.CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.CodeEditorContextSensiviteEditorFactory">
+					<property name="type" value="java.lang.String" />
+					<property name="editorContext" ref="it.eurotn.rich.control.table.editor.CodeEditorContextSensiviteEditorFactory.CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.editor.SearchContextSensitiveEditorFactory">
+					<property name="type" value="java.lang.Object" />
+					<property name="editorContext" ref="it.eurotn.rich.control.table.editor.SearchContextSensitiveEditorFactory.CONTEXT" />
+				</bean>
+			</list>
+		</property>
+		<property name="renderers">
+			<list>
+			<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.entity.EntityBase" />
+				</bean>
+					<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="java.lang.Enum" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.NumericContextSensitiveCellRenderer">
+					<property name="type" value="java.lang.Double" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.NumericContextSensitiveCellRenderer">
+					<property name="type" value="java.lang.Float" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.NumericContextSensitiveCellRenderer">
+					<property name="type" value="java.math.BigDecimal" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.DateContextSensitiveCellRenderer">
+					<property name="type" value="java.util.Date" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.DateContextSensitiveCellRenderer">
+					<property name="type" value="java.sql.Date" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.DateContextSensitiveCellRenderer">
+					<property name="type" value="java.util.Date" />
+					<property name="editorContext" ref="it.eurotn.rich.control.table.renderer.DateContextSensitiveCellRenderer.ORA_CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.NumericContextSensitiveCellRenderer">
+					<property name="type" value="java.lang.Integer" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.BooleanContextSensitiveCellRenderer">
+					<property name="type" value="java.lang.Boolean" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.DefaultRowGroupContextSensitiveCellRenderer">
+					<property name="type" value="com.jidesoft.grid.DefaultGroupRow" />
+				</bean>
+				<bean class="com.jidesoft.grid.IconRenderer">
+					<property name="horizontalAlignment">
+						<value>2</value>
+					</property>
+					<property name="type" value="javax.swing.Icon" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="java.lang.String" />
+				</bean>
+				<bean class="it.eurotn.panjea.rich.editors.stampe.ReportNameHyperlinkCellRenderer">
+					<property name="type" value="java.lang.String" />
+					<property name="editorContext" ref="it.eurotn.panjea.rich.editors.stampe.ReportNameHyperlinkCellRenderer.CONTEXT" />
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.sicurezza.domain.Utente"></property>
+				</bean>
+				<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.sicurezza.domain.DatiMail"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.rich.factory.table.JXTableFactory" id="jXTableFactory">
+		<property name="cellRenderers">
+			<map>
+				<entry>
+					<key>
+						<value type="java.lang.Class">java.util.Date</value>
+					</key>
+					<bean class="it.eurotn.panjea.rich.factory.table.CustomTableDateCellRenderer">
+						<constructor-arg index="0" value="dd/MM/yyyy" />
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">java.lang.Integer</value>
+					</key>
+					<bean class="it.eurotn.panjea.rich.factory.table.CustomTableCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">java.math.BigDecimal</value>
+					</key>
+					<bean class="it.eurotn.panjea.rich.factory.table.CustomBigDecimalCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">java.lang.Boolean</value>
+					</key>
+					<bean class="it.eurotn.panjea.rich.factory.table.CustomBooleanCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">org.jdesktop.swingx.treetable.TreeTableModel</value>
+					</key>
+					<bean class="it.eurotn.panjea.rich.factory.table.CustomBooleanCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">java.lang.Enum</value>
+					</key>
+					<bean class="it.eurotn.panjea.rich.factory.table.CustomEnumCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">java.lang.Double</value>
+					</key>
+					<bean class="it.eurotn.panjea.rich.factory.table.CustomDoubleCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.sicurezza.domain.Utente</value>
+					</key>
+					<bean class="it.eurotn.panjea.rich.factory.table.CustomUtenteCellRenderer"></bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="buttonfactory" class="it.eurotn.panjea.rich.factory.PanjeaButtonFactory"></bean>
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds" value="3600" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/messages-commands</value>
+				<value>classpath:it/eurotn/panjea/messages/messages-application</value>
+				<value>classpath:it/eurotn/panjea/messages/messages-methods</value>
+				<value>classpath:it/eurotn/panjea/messages/messages-classes</value>
+				<value>classpath:it/eurotn/panjea/messages/messages-exceptions</value>
+				<value>classpath:it/eurotn/panjea/messages/messages-constraints</value>
+				<value>classpath:it/eurotn/panjea/messages/messages-forms-model</value>
+				<value>classpath:it/eurotn/panjea/messages/messages-editors-pages</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/images.properties</value>
+			</list>
+		</property>
+		<property name="resourceBasePath" value="classpath:it/eurotn/panjea/resources/images/" />
+	</bean>
+	<bean id="imageSource" class="org.springframework.richclient.image.DefaultImageSource">
+		<constructor-arg index="0" ref="imageResourcesFactory" />
+		<property name="brokenImageIndicator" value="classpath:it/eurotn/panjea/resources/images/icon22/delete2.png" />
+	</bean>
+	<!-- End Resources (image, messages, icons) -->
+	<!-- Configurazione bean per JasperServer -->
+	<bean id="jasperServer" name="jasperServer" class="it.eurotn.rich.report.jasperserver.JServer" singleton="true"
+		lazy-init="true">
+		<property name="name" value="panjea" />
+		<property name="username" value="jasperadmin" />
+		<property name="password" value="jasperadmin" />
+		<property name="url" value="http://${java_naming_provider_url}:8080/jasperserver/services/repository" />
+	</bean>
+	<bean id="reportManager" class="it.eurotn.rich.report.ReportManager">
+		<property name="server" ref="jasperServer" />
+	</bean>
+	<!-- Fine configurazione bean per JasperServer -->
+	<!-- Start Status Bar -->
+	<bean id="statusBarId" class="com.jidesoft.spring.richclient.components.JecStatusBar" depends-on="lookAndFeelConfigurer">
+		<property name="additionalStatusBarItems">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="panjeaRssStatusBarItem" class="it.eurotn.panjea.rich.statusBarItem.PanjeaRssStatusBarItem">
+	</bean>
+	<!-- Start Look and feel configurator that allows the specification of different look and feels for different platforms. -->
+	<bean id="com.jidesoft.plaf.LookAndFeelFactory.OFFICE2003_STYLE" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.plaf.LookAndFeelFactory.XERTO_STYLE" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.plaf.LookAndFeelFactory.WINDOWS_LNF" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.plaf.LookAndFeelFactory.PLASTIC3D_LNF" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="com.jidesoft.plaf.LookAndFeelFactory.PLASTIC3D_LNF_1_3" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="lookAndFeelConfigurer" class="com.jidesoft.spring.richclient.components.JideLookAndFeelConfigurer">
+		<property name="settingsManager" ref="settingManagerLocal"></property>
+		<property name="windowsStyle" ref="com.jidesoft.plaf.LookAndFeelFactory.XERTO_STYLE" />
+		<property name="windowsXPStyle" ref="com.jidesoft.plaf.LookAndFeelFactory.XERTO_STYLE" />
+		<property name="linuxStyle" ref="com.jidesoft.plaf.LookAndFeelFactory.XERTO_STYLE" />
+	</bean>
+	<!-- End Look&Feel -->
+	<!-- Start Form -->
+	<bean id="formComponentInterceptorFactory" class="org.springframework.richclient.form.builder.support.ChainedInterceptorFactory">
+		<property name="interceptorFactories">
+			<list>
+				<!-- <bean class="it.eurotn.rich.form.builder.support.ColorValidationInterceptorFactory"> <property name="errorColor" 
+					value="255,245,245" /> </bean> -->
+				<bean class="org.springframework.richclient.form.builder.support.OverlayValidationInterceptorFactory" />
+				<bean class="org.springframework.richclient.list.ComboBoxAutoCompletionInterceptorFactory" />
+				<bean class="org.springframework.richclient.text.TextComponentPopupInterceptorFactory" />
+			</list>
+		</property>
+	</bean>
+	<!-- End Form -->
+
+	<bean class="it.eurotn.panjea.rich.factory.navigationloader.PanjeaNavigationLoaderFactory" id="panjeaNavigationLoaderFactory"
+		singleton="true">
+		<property name="loaderCommands">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- INIZIO CONFIGURAZIONE EJB E BUSINESS DELEGATE -->
+	<bean id="sicurezzaService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.SicurezzaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="connessioneUtenteService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="false"
+		lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.ConnessioneUtenteService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="jpaUtils" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.JpaUtilsService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="lockingService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.LockingService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="preferenceService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.PreferenceService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="layoutService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.LayoutService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="mailService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.MailService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="parametriRicercaService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true"
+		lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.ParametriRicercaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="panjeaMessageService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.PanjeaMessageService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">org.jnp.interfaces.NamingContextFactory</prop>
+				<prop key="java.naming.provider.url">jnp://${java_naming_provider_url}:1099</prop>
+				<prop key="java.naming.factory.url.pkgs">org.jboss.naming\:org.jnp.interfaces</prop>
+			</props>
+		</property>
+	</bean>
+	<!--inicio mail service -->
+	<bean id="mailLocalServiceImpl" class="it.eurotn.rich.services.MailLocalService" singleton="true" lazy-init="true">
+		<property name="sicurezzaService" ref="sicurezzaService" />
+	</bean>
+	<bean id="mailLocalService" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.rich.services.IMailService</value>
+		</property>
+		<property name="target">
+			<ref local="mailLocalServiceImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<!-- fine mail service -->
+	<bean id="sicurezzaBDImpl" class="it.eurotn.panjea.rich.bd.SicurezzaBD" singleton="true" lazy-init="true">
+		<property name="connessioneUtente" ref="connessioneUtente" />
+		<property name="sicurezzaService" ref="sicurezzaService" />
+		<property name="jpaUtils" ref="jpaUtils" />
+	</bean>
+	<bean id="sicurezzaBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.ISicurezzaBD</value>
+		</property>
+		<property name="target">
+			<ref local="sicurezzaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="AsyncBDInterceptorAdvice" class="it.eurotn.panjea.rich.bd.AsynInterceptorBD" />
+	<bean id="SwingBDInterceptor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref local="AsyncBDInterceptorAdvice" />
+		</property>
+		<property name="pattern">
+			<value>.*(\.*).*</value>
+		</property>
+	</bean>
+	<bean id="AsyncAsyncBDInterceptor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref local="AsyncBDInterceptorAdvice" />
+		</property>
+		<property name="pattern">
+			<value>.*(\.async).*</value>
+		</property>
+	</bean>
+
+	<bean id="lockingBDImpl" class="it.eurotn.panjea.rich.bd.LockingBD" singleton="true" lazy-init="true">
+		<property name="lockingService" ref="lockingService" />
+	</bean>
+	<bean id="lockingBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.ILockingBD</value>
+		</property>
+		<property name="target">
+			<ref local="lockingBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="preferenceBD" class="it.eurotn.panjea.rich.bd.PreferenceBD" singleton="true" lazy-init="true">
+		<property name="preferenceService" ref="preferenceService" />
+	</bean>
+	<bean id="layoutBD" class="it.eurotn.panjea.rich.bd.LayoutBD" singleton="true" lazy-init="true">
+		<property name="layoutService" ref="layoutService" />
+	</bean>
+
+	<bean id="parametriRicercaBDImpl" class="it.eurotn.panjea.rich.bd.ParametriRicercaBD" singleton="true" lazy-init="true">
+		<property name="parametriRicercaService" ref="parametriRicercaService" />
+	</bean>
+	<bean id="parametriRicercaBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true"
+		lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.IParametriRicercaBD</value>
+		</property>
+		<property name="target">
+			<ref local="parametriRicercaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="mailBDImpl" class="it.eurotn.panjea.rich.bd.MailBD" singleton="true" lazy-init="true">
+		<property name="mailService" ref="mailService" />
+	</bean>
+	<bean id="mailBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.IMailBD</value>
+		</property>
+		<property name="target">
+			<ref local="mailBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="valutaBDImpl" class="it.eurotn.panjea.rich.bd.ValutaBD" singleton="true" lazy-init="true">
+		<property name="anagraficaService" ref="anagraficaService" />
+	</bean>
+	<bean id="valutaBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.IValutaBD</value>
+		</property>
+		<property name="target">
+			<ref local="valutaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="valutaCache" class="it.eurotn.panjea.rich.bd.ValutaAziendaCache" singleton="true" lazy-init="true">
+		<property name="anagraficaService">
+			<ref bean="anagraficaService" />
+		</property>
+	</bean>
+
+	<bean id="layoutStampeService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.LayoutStampeService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="layoutStampeBDImpl" class="it.eurotn.panjea.rich.bd.LayoutStampeBD" singleton="true" lazy-init="true">
+		<property name="layoutStampeService" ref="layoutStampeService" />
+	</bean>
+	<bean id="layoutStampeBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.ILayoutStampeBD</value>
+		</property>
+		<property name="target">
+			<ref local="layoutStampeBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.rich.stampe.LayoutStampeManager" id="layoutStampeManager" lazy-init="true"
+		singleton="true">
+		<property name="layoutStampeBD" ref="layoutStampeBD" />
+	</bean>
+
+	<bean id="codiceBDImpl" class="it.eurotn.panjea.rich.bd.CodiceBD" singleton="true" lazy-init="true">
+		<property name="anagraficaService" ref="anagraficaService" />
+	</bean>
+	<bean id="codiceBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rich.bd.ICodiceBD</value>
+		</property>
+		<property name="target">
+			<ref local="codiceBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<!-- End JNDI Environment Template -->
+	<!-- rulesSources -->
+	<bean id="rulesSource" class="it.eurotn.panjea.rich.rules.ValidationRulesSource">
+		<property name="pluginManager">
+			<ref bean="pluginManager" />
+		</property>
+	</bean>
+	<!-- end rulesSources -->
+	<bean id="workspaceListener" class="com.jidesoft.spring.richclient.docking.editor.WorkspaceListener" singleton="true"
+		lazy-init="true"></bean>
+	<bean id="bindingFactoryProvider" class="it.eurotn.panjea.rich.factory.PanjeaSwingBindingFactoryProvider"
+		singleton="true" lazy-init="true"></bean>
+	<bean id="binderSelectionStrategy" class="it.eurotn.rich.form.binding.swing.PanjeaSwingBinderSelectionStrategy">
+		<property name="bindersForPropertyTypes">
+			<map>
+				<entry>
+					<key>
+						<value type="java.lang.Class">java.util.Date</value>
+					</key>
+					<bean class="it.eurotn.rich.binding.JCalendarBinder">
+						<property name="dateFormat" value="dd/MM/yy"></property>
+						<property name="maskFormat" value="##/##/##"></property>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">javax.xml.datatype.XMLGregorianCalendar</value>
+					</key>
+					<bean class="it.eurotn.rich.binding.JXMLGregorianCalendarBinder">
+						<property name="dateFormat" value="dd/MM/yy"></property>
+						<property name="maskFormat" value="##/##/##"></property>
+					</bean>
+				</entry>
+				<!-- <entry> <key> <value type="java.lang.Class">java.lang.Enum</value> </key> <bean class="org.springframework.richclient.form.binding.swing.TigerEnumComboBoxBinder"></bean> 
+					</entry> -->
+				<entry>
+					<key>
+						<value type="java.lang.Class">java.math.BigDecimal</value>
+					</key>
+					<ref bean="numberBinder"></ref>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.parametriricerca.domain.Periodo</value>
+					</key>
+					<bean class="it.eurotn.rich.binding.PeriodoBinder" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.DatiGeografici</value>
+					</key>
+					<bean class="it.eurotn.rich.binding.DatiGeograficiBinder" />
+				</entry>
+			</map>
+		</property>
+		<property name="bindersForControlTypes">
+			<map>
+				<entry>
+					<key>
+						<value type="java.lang.Class">org.springframework.richclient.components.ShuttleList</value>
+					</key>
+					<bean class="org.springframework.richclient.form.binding.swing.ShuttleListBinder">
+						<property name="showEditButton" value="false" />
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">com.jidesoft.list.DualList</value>
+					</key>
+					<bean class="it.eurotn.rich.binding.DualListBinder" />
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">javax.swing.JPanel</value>
+					</key>
+					<ref bean="codiceBinder" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- INIZIO GESTIONE PREFERENZE -->
+	<bean id="tableLayoutCache" class="it.eurotn.rich.services.TableLayoutCache" singleton="true" lazy-init="true">
+		<property name="layoutBD" ref="layoutBD"></property>
+	</bean>
+	<bean id="settingManagerLocal" class="org.springframework.richclient.settings.SettingsManager" singleton="true"
+		lazy-init="true">
+		<property name="settingsFactory" ref="propertiesSettingsFactory"></property>
+	</bean>
+	<bean id="settingManager" class="org.springframework.richclient.settings.SettingsManager" singleton="true"
+		lazy-init="true">
+		<property name="settingsFactory" ref="panjeaBdSettingsFactory"></property>
+	</bean>
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>file:${user.home}/.panjeaDev/server.properties</value>
+				<value>file:./server.properties</value>				
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+	</bean>
+	<bean id="panjeaBdSettingsFactory" class="it.eurotn.rich.settings.PanjeaBdSettingsFactory">
+		<property name="preferenceBD">
+			<ref bean="preferenceBD" />
+		</property>
+	</bean>
+	<bean class="it.eurotn.rich.settings.PropertiesSettingsFactory" id="propertiesSettingsFactory">
+		<property name="locations">
+			<list>				
+				<value>file:${user.home}/.panjeaDev/panjeauser.properties</value>
+				<value>file:./panjeauser.properties</value>
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+	</bean>
+	<!-- FINE GESTIONE PREFERENZE -->
+	<!-- Inizio gestione delle eccezioni -->
+	<!-- Handler che si occupa della gestione delle eccezioni. Contiene una lista che si comporta come un try cacth. Attenzione 
+		all'ordine in cui i delegate vengono inseriti nella lista -->
+	<bean id="exceptionHandler" class="it.eurotn.panjea.exceptions.PanjeaDelegatingExceptionHandler">
+		<property name="exceptionPurger">
+			<bean class="org.springframework.richclient.exceptionhandling.delegation.DefaultExceptionPurger">
+				<property name="excludeThrowableClassList">
+					<list>
+						<value type="java.lang.Class">javax.ejb.EJBException</value>
+						<value type="java.lang.Class">java.lang.RuntimeException</value>
+						<value type="java.lang.Class">it.eurotn.panjea.exceptions.PanjeaRuntimeException</value>
+						<value type="java.lang.Class">javax.ejb.EJBTransactionRolledbackException</value>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.service.exception.AnagraficaServiceException</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="delegateList">
+			<list>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.dao.exception.CodiceAlreadyExistsException</value>
+							<value type="java.lang.Class">org.springframework.security.BadCredentialsException</value>
+							<value type="java.lang.Class">it.eurotn.locking.exception.LockNotFoundException</value>
+							<value type="java.lang.Class">it.eurotn.dao.exception.StaleObjectStateException</value>
+							<value type="java.lang.Class">it.eurotn.dao.exception.LockAcquisitionException</value>
+							<value type="java.lang.Class">org.hibernate.StaleObjectStateException</value>
+							<value type="java.lang.Class">it.eurotn.locking.exception.LockStaleObjectException</value>
+							<value type="java.lang.Class">it.eurotn.dao.exception.ObjectNotFoundException</value>
+							<value type="java.lang.Class">it.eurotn.panjea.protocolli.service.exception.ProtocolliException</value>
+							<value type="java.lang.Class">it.eurotn.panjea.parametriricerca.exception.PeriodoException</value>
+							<value type="java.lang.Class">it.eurotn.rich.report.editor.StampanteNonAssociataException</value>
+							<value type="java.lang.Class">java.lang.OutOfMemoryError</value>
+							<value type="java.lang.Class">java.net.ConnectException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.JecMessageDialogExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.rich.report.exception.JecReportErrorsException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.JecReportErrorsExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">java.lang.NumberFormatException</value>
+							<value type="java.lang.Class">java.text.ParseException</value>
+							<value type="java.lang.Class">javax.ejb.EJBAccessException</value>
+							<value type="java.lang.Class">javax.persistence.EntityNotFoundException</value>
+							<value type="java.lang.Class">it.eurotn.panjea.exception.GenericException</value>
+							<value type="java.lang.Class">java.lang.SecurityException</value>
+							<value type="java.lang.Class">it.eurotn.rich.report.exception.JecMaxPagesGovernatorException</value>
+							<value type="java.lang.Class">it.eurotn.rich.report.exception.JecReportException</value>
+							<value type="java.lang.Class">it.eurotn.rich.report.exception.ReportNonTrovatoException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.JecMessageDialogExceptionHandler">
+							<property name="logLevel" value="ERROR" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">java.util.ConcurrentModificationException</value>
+							<value type="java.lang.Class">java.lang.ArrayIndexOutOfBoundsException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="org.springframework.richclient.exceptionhandling.SilentExceptionHandler">
+							<property name="logLevel" value="ERROR" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.locking.exception.LockFoundException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.LockFoundUncaughtExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">com.jidesoft.grid.EditingNotStoppedException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.TableValidationExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.dao.exception.DuplicateKeyObjectException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.DuplicateKeyDialogExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.exception.FileSemaforoPresente</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.FileSemaforoPresenteDialogExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.dao.exception.VincoloException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.VincoloExceptionHandlerDelegate">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.dao.exception.DataTooLongException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.DataTooLongExceptionHandlerDelegate">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean id="errorException" class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClass" value="java.lang.Error" />
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.JecMessageDialogExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.exporter.exception.ImportException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.panjea.exceptions.ImportExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">java.lang.IllegalArgumentException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.IllegalArgumentAssenteExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.sicurezza.license.exception.NumeroInserimentiSuperatiException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.NumeroInserimentiSuperatiExceptionHandlerDelegate">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<!-- The order is important: if Throwable would be first then the others would be ignored -->
+				<bean id="throwableException" class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClass" value="java.lang.Throwable" />
+					<property name="exceptionHandler">
+						<bean class="it.eurotn.rich.exception.handler.JecMessageDialogExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- Fine gestione delle eccezioni -->
+	<bean id="preferenceManager" class="it.eurotn.panjea.preferences.PanjeaPreferencesManager" singleton="true"
+		lazy-init="true">
+		<property name="settingsManagerLocal">
+			<ref bean="settingManagerLocal" />
+		</property>
+		<property name="settingsManager">
+			<ref bean="settingManager" />
+		</property>
+		<property name="preferencePages">
+			<list>
+				<ref bean="generalSettingsPage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="preferenceServerManager" class="it.eurotn.panjea.preferences.PanjeaPreferencesServerManager" singleton="true"
+		lazy-init="true">
+		<property name="settingsManager">
+			<ref bean="settingManager" />
+		</property>
+		<property name="preferencePages">
+			<list>
+				<ref bean="preferenceServerDirectoryImportazionePage" />
+			</list>
+		</property>
+	</bean>
+	<bean id="codiceBinder" class="it.eurotn.rich.binding.codice.CodiceBinder">
+	</bean>
+	<bean id="numberBinder" class="org.springframework.richclient.form.binding.swing.NumberBinder">
+		<property name="nrOfDecimals" value="2"></property>
+		<property name="nrOfNonDecimals" value="12"></property>
+		<property name="format" value="###,###,###,##0.00"></property>
+		<property name="unformat" value="#0.##"></property>
+		<property name="negativeSign" value="true"></property>
+	</bean>
+	<bean id="percentageNumberBinder" class="it.eurotn.rich.binding.PercentageNumberBinder">
+		<property name="rightDecoration" value="%"></property>
+		<property name="nrOfDecimals" value="2"></property>
+		<property name="nrOfNonDecimals" value="3"></property>
+		<property name="format" value="###,###,###,##0.00"></property>
+		<property name="negativeSign" value="true"></property>
+	</bean>
+	<bean id="pluginManager" class="it.eurotn.panjea.plugin.PluginManager" singleton="true" lazy-init="true">
+		<property name="plugins">
+			<list></list>
+		</property>
+	</bean>
+	<!-- Inserisco un bean singolo per il MessageAlert. Il bean Alert Group deve essere uguale per tutti gli oggetti MessageAlert 
+		quindi imposto un bean come singleton -->
+	<bean id="alertGroup" class="com.jidesoft.alert.AlertGroup" singleton="true"></bean>
+	<!-- DEFINIZIONE BEAN PER REGISTRAZIONE MESSAGE TOPIC e QUEUE -->
+	<bean id="topicConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true"
+		lazy-init="false">
+		<property name="jndiTemplate" ref="jndiTemplate" />
+		<property name="jndiName" value="/ConnectionFactory"></property>
+	</bean>
+	<bean id="panjeaDestination" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+		<property name="jndiName" value="topic/Panjea.PanjeaTopic" />
+	</bean>
+	<!-- FINE DEFIZIONE BEAN PER REGISTRAZIONE MESSAGE TOPIC E QUEUE -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer" id="panjeUdateContainer">
+		<property name="connectionFactory" ref="topicConnectionFactory" />
+		<property name="destination" ref="panjeaDestination" />
+		<property name="messageListener" ref="panjeaUpdateMessageListener" />
+		<property name="messageSelector" value="messageSelector='PanjeaUpdateMessageSelector'" />
+		<property name="autoStartup" value="true" />
+	</bean>
+	<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter" id="panjeaUpdateMessageListener">
+		<property name="delegate" ref="panjeaUpdateMessageDelegate" />
+		<!-- we don't want automatic message context extraction -->
+		<property name="messageConverter">
+			<null />
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.anagrafica.rich.statusBarItem.PanjeaUpdateMessageDelegate" id="panjeaUpdateMessageDelegate"
+		lazy-init="true" singleton="true">
+	</bean>
+	<!-- Topic per i messaggi generici -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer" id="panjeMessageGenericContainer">
+		<property name="connectionFactory" ref="topicConnectionFactory" />
+		<property name="destination" ref="panjeaDestination" />
+		<property name="messageListener" ref="panjeaMessageGenericMessageListener" />
+		<property name="messageSelector" value="messageSelector='message_generic_selector'" />
+		<property name="autoStartup" value="true" />
+	</bean>
+	<bean class="org.springframework.jms.listener.adapter.MessageListenerAdapter" id="panjeaMessageGenericMessageListener">
+		<property name="delegate" ref="panjeaMessageGenericMessageDelegate" />
+		<!-- we don't want automatic message context extraction -->
+		<property name="messageConverter">
+			<null />
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.messagedelegate.PanjeaMessageGenericMessageDelegate" id="panjeaMessageGenericMessageDelegate"
+		lazy-init="true" singleton="true">
+	</bean>
+	<!-- Fine topic per i messaggi generici -->
+
+	<bean id="panjeaFeedReader" class="it.eurotn.panjea.rich.statusBarItem.PanjeaFeedReader" />
+	<bean id="connessioneUtente" class="it.eurotn.panjea.rich.login.ConnessioneUtente" singleton="true">
+		<property name="connessioneUtenteService" ref="connessioneUtenteService" />
+	</bean>
+</beans>

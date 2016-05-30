@@ -1,0 +1,10 @@
+ 
+<beans>	
+	<bean id="comPolivalenteCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="comPolivalenteCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.contabilita.util.ParametriCreazioneComPolivalente"></property>
+	</bean>
+	
+	<bean id="aggiungiEntitaCointestateCommand" class="it.eurotn.panjea.compoli.rich.commands.AggiungiEntitaCointestateCommand">
+    </bean>
+</beans>

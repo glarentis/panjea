@@ -1,0 +1,13 @@
+
+<beans>
+	<bean id="ordiniMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="commands">
+			<list>
+				<value>group:ordini:documento</value>
+				<value>openSchedeGiroClientiCommand</value>
+				<value>stampaSchedeGiroClientiCommand</value>
+				<value>stampaRiepilogoSchedeCommand</value>
+			</list>
+		</property>
+	</bean>
+</beans>

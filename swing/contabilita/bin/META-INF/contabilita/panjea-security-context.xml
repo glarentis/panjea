@@ -1,0 +1,87 @@
+
+<beans>
+    <import resource="panjea-context.xml"/>
+    
+    <bean id="securityControllerManager" class="org.springframework.richclient.security.support.DefaultSecurityControllerManager">
+        <property name="securityControllerMap">
+            <map>
+	            <entry key="codicePagamentoPage.controller"><ref bean="modificaCodiciPagamentiController"/></entry>
+	            <entry key="tipoAreaContabilePage.controller"><ref bean="modificaTipoAreaContabileController"/></entry>
+	            <entry key="contabilitaSettingsPage.controller"><ref bean="modificaContabilitaSettingsController"/></entry>
+	            <entry key="tipoDocumentoBasePage.controller"><ref bean="modificaTipoDocumentoBaseController"/></entry>
+	            <entry key="contoBasePage.controller"><ref bean="modificaContoBaseController"/></entry>
+	            <entry key="codiceIvaCorrispettivoPage.controller"><ref bean="gestioneCodiceIvaCorrispettivoController"/></entry>
+	            <entry key="registroIvaPage.controller"><ref bean="modificaRegistoIvaController"/></entry>
+            
+            </map>
+        </property>
+    </bean>	
+    
+    <bean id="gestioneLiquidazioneIvaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneLiquidazioneIva"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+    <bean id="visualizaSituazioneEconomicaPatrimonialeController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaSituazioneEP"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+    <bean id="visualizaBilancioConfrontoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaBilancioConfronto"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+    <bean id="visualizaBilancioController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="visualizzaBilancio"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+    <bean id="visualizaEstrattoContoCommandController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="caricaEstrattoConto"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="gestioneCodiceIvaCorrispettivoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="gestioneCodiceIvaCorrispettivo"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>      
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+    <bean id="modificaContoBaseController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaContoBase"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+    <bean id="modificaRegistoIvaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaRegistroIva"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+    <bean id="modificaTipoDocumentoBaseController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipoDocumentoBase"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+     <bean id="modificaTipoAreaContabileController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaTipoAreaContabile"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+    <bean id="modificaContabilitaSettingsController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="modificaContabilitaSettings"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>	
+	<bean id="gestioneAnnualeController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneAnnuale"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	<bean id="gestionePeriodicaController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestionePeriodica"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>
+	
+	
+</beans>

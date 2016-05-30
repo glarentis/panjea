@@ -1,0 +1,1241 @@
+
+<beans>
+	<import resource="panjea-context.xml" />
+	<import resource="panjea-menu-context.xml" />
+
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="contabilitaMenu" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<!-- Editor contabilita -->
+				<entry value="preferenzeContabilitaEditor">
+					<key>
+						<value type="java.lang.String">preferenzeContabilitaEditor</value>
+					</key>
+				</entry>
+				<entry value="tabelleContabilitaEditor">
+					<key>
+						<value type="java.lang.String">tabelleContabilitaEditor</value>
+					</key>
+				</entry>
+				<entry value="areaContabileEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.util.AreaContabileFullDTO
+						</value>
+					</key>
+				</entry>
+				<entry value="areaContabileEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.domain.AreaContabileLite
+						</value>
+					</key>
+				</entry>
+				<entry value="controlloMovimentoContabilitaEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.util.ParametriRicercaMovimentiContabili
+						</value>
+					</key>
+				</entry>
+				<entry value="bilancioEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.util.ParametriRicercaBilancio
+						</value>
+					</key>
+				</entry>
+				<entry value="bilancioConfrontoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.util.ParametriRicercaBilancioConfronto
+						</value>
+					</key>
+				</entry>
+				<entry value="estrattoContoEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.util.ParametriRicercaEstrattoConto
+						</value>
+					</key>
+				</entry>
+				<entry value="situazioneEPEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.util.ParametriRicercaSituazioneEP
+						</value>
+					</key>
+				</entry>
+				<entry value="aperturaContiEditor">
+					<key>
+						<value type="java.lang.String">aperturaContabile</value>
+					</key>
+				</entry>
+				<entry value="chiusuraContiEditor">
+					<key>
+						<value type="java.lang.String">chiusuraContabile</value>
+					</key>
+				</entry>
+				<entry value="liquidazioneIvaEditor">
+					<key>
+						<value type="java.lang.String">liquidazioneIva</value>
+					</key>
+				</entry>
+				<entry value="libriGiornaleEditor">
+					<key>
+						<value type="java.lang.String">libriGiornale</value>
+					</key>
+				</entry>
+				<entry value="giornaleIvaEditor">
+					<key>
+						<value type="java.lang.String">giornaleIva</value>
+					</key>
+				</entry>
+				<entry value="verificaCentriDiCostoEditor">
+					<key>
+						<value type="java.lang.String">verificaCentriDiCosto</value>
+					</key>
+				</entry>
+				<entry value="situazioneRitenuteEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.util.ParametriSituazioneRitenuteAcconto
+						</value>
+					</key>
+				</entry>
+				<entry value="ricercaAreeIvaEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.iva.util.parametriricerca.ParametriRicercaRigheIva
+						</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- begin editors contabilita -->
+
+	<bean id="areaContabileEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.contabilita.rich.editors.areacontabile.AreaContabileEditor
+			</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">areaContabileEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>areaContabilePage</value>
+						<value>righeContabiliTablePage</value>
+						<value>righeIvaTablePage</value>
+						<value>allegatiPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">areaContabileEditor</value>
+				</entry>
+				<entry key="contabilitaBD">
+					<ref bean="contabilitaBD" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="controlloMovimentoContabilitaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">controlloMovimentoContabilitaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaControlloMovimentoContabilitaPage</value>
+						<value>risultatiRicercaControlloMovimentoContabilitaPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">controlloMovimentoContabilitaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="preferenzeContabilitaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">preferenzeContabilitaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Preferences</value>
+						<value>contabilitaSettingsPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">preferenzeContabilitaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="tabelleContabilitaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">tabelleContabilitaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>group:Tabelle</value>
+						<value>pianoContiPage</value>
+						<value>tipiDocumentoBaseTablePage</value>
+						<value>registriIvaTablePage</value>
+						<value>contiBaseTablePage</value>
+						<value>codiciIvaCorrispettiviTablePage</value>
+						<value>causaliRitenutaAccontoTablePage</value>
+						<value>prestazioniTablePage</value>
+						<value>contributiPrevidenzialiTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">tabelleContabilitaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaControlloMovimentoContabilitaPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.ParametriRicercaControlloMovimentoContabilitaPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.contabilita.rich.bd.IContabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IDocumentiBD">
+			<ref bean="documentiBD" />
+		</constructor-arg>
+		<constructor-arg index="2"
+			type="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="risultatiRicercaControlloMovimentoContabilitaPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.RisultatiRicercaControlloMovimentoContabilitaPage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="registriIvaTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.RegistriIvaTablePage"
+		singleton="false">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="registroIvaPage" />
+		</property>
+	</bean>
+	<bean id="registroIvaPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.RegistroIvaPage"
+		singleton="false">
+		<constructor-arg index="0" type="java.lang.String"
+			value="registroIvaPage"></constructor-arg>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="contiBaseTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.ContiBaseTablePage"
+		singleton="false">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="contoBasePage" />
+		</property>
+	</bean>
+
+	<bean id="contoBasePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.ContoBasePage"
+		singleton="false">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="pianoContiPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.PianoContiPage"
+		singleton="false" lazy-init="true">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="contabilitaSettingsPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.ContabilitaSettingsPage"
+		singleton="false">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="tipoDocumentoBasePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.TipoDocumentoBasePage"
+		singleton="false">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="tipiDocumentoBaseTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.TipiDocumentoBaseTablePage"
+		singleton="false">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="tipoDocumentoBasePage" />
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.contabilita.rich.editors.righecontabili.RigheContabiliTablePage"
+		id="righeContabiliTablePage" singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="rigaContabilePage" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.contabilita.rich.editors.righecontabili.RigaContabilePage"
+		id="rigaContabilePage" singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="defaultController">
+			<ref bean="righeContabiliContoController" />
+		</property>
+	</bean>
+
+	<bean id="righeContabiliContoController" class="it.eurotn.rich.editors.controllers.DefaultController"
+		singleton="false" lazy-init="true">
+		<property name="propertiesChange">
+			<map>
+				<entry key="contoDare">
+					<list>
+						<ref bean="contoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="contoAvere">
+					<list>
+						<ref bean="contoPropertyChange" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="contoPropertyChange"
+		class="it.eurotn.panjea.contabilita.rich.editors.righecontabili.ContoChangeListener"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="righeIvaTablePage"
+		class="it.eurotn.panjea.iva.rich.editors.righeiva.RigheIvaTablePage"
+		singleton="false" lazy-init="true">
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="rigaIvaPage" />
+		</property>
+		<property name="areaIvaModel">
+			<ref bean="contabilitaAreaIvaModel" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="allegatiPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.areacontabile.AreaContabileAllegatiPage"
+		singleton="false" lazy-init="true">				
+	</bean>
+
+	<bean id="contabilitaAreaIvaModel"
+		class="it.eurotn.panjea.contabilita.rich.editors.righeiva.AreaIvaContabilitaModel"
+		singleton="false" lazy-init="true">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+	</bean>
+
+	<bean id="rigaIvaPage" class="it.eurotn.panjea.iva.rich.editors.righeiva.RigaIvaPage"
+		singleton="false" lazy-init="true">
+	</bean>
+
+
+	<bean id="areaContabilePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.areacontabile.AreaContabilePage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</constructor-arg>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="documentiBD">
+			<ref bean="documentiBD" />
+		</property>
+		<property name="defaultController">
+			<ref bean="areaContabileController" />
+		</property>
+	</bean>
+
+	<bean id="areaContabileController" class="it.eurotn.rich.editors.controllers.DefaultController"
+		singleton="false" lazy-init="true">
+		<property name="propertiesChange">
+			<map>
+				<entry key="areaContabile.documento.entita">
+					<list>
+						<ref bean="areaContabileEntitaPropertyChange" />
+					</list>
+				</entry>
+				<entry key="areaContabile.documento.sedeEntita">
+					<list>
+						<ref bean="areaContabileSedeEntitaPropertyChange" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="areaContabileEntitaPropertyChange"
+		class="it.eurotn.panjea.contabilita.rich.forms.areacontabile.EntitaPropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="anagraficaTabelleBD">
+			<ref bean="anagraficaTabelleBD" />
+		</property>
+	</bean>
+
+	<bean id="areaContabileSedeEntitaPropertyChange"
+		class="it.eurotn.panjea.contabilita.rich.forms.areacontabile.SedeEntitaPropertyChange"
+		singleton="false" lazy-init="true">
+		<property name="anagraficaPagamentiBD">
+			<ref bean="anagraficaPagamentiBD" />
+		</property>
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+	</bean>
+
+
+	<bean id="bilancioEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">bilancioEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaBilancioPage</value>
+						<value>risultatiRicercaBilancioTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">bilancioEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaBilancioPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.ParametriRicercaBilancioPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.contabilita.util.ParametriRicercaBilancio">
+			<bean class="it.eurotn.panjea.contabilita.util.ParametriRicercaBilancio"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="risultatiRicercaBilancioTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.RisultatiRicercaBilancioTablePage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="showTitlePane" value="false" />
+	</bean>
+
+	<bean id="bilancioConfrontoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">bilancioConfrontoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaBilancioConfrontoPage</value>
+						<value>risultatiRicercaBilancioConfrontoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">bilancioConfrontoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaBilancioConfrontoPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.ParametriRicercaBilancioConfrontoPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.contabilita.util.ParametriRicercaBilancioConfronto">
+			<bean
+				class="it.eurotn.panjea.contabilita.util.ParametriRicercaBilancioConfronto"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="risultatiRicercaBilancioConfrontoTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.RisultatiRicercaBilancioConfrontoTablePage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="showTitlePane" value="false" />
+	</bean>
+
+	<bean id="estrattoContoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">estrattoContoEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaEstrattoContoPage</value>
+						<value>risultatiRicercaEstrattoContoTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">estrattoContoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaEstrattoContoPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.ParametriRicercaEstrattoContoPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.contabilita.util.ParametriRicercaEstrattoConto">
+			<bean
+				class="it.eurotn.panjea.contabilita.util.ParametriRicercaEstrattoConto"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</constructor-arg>
+		<constructor-arg index="2"
+			type="it.eurotn.panjea.anagrafica.rich.bd.IDocumentiBD">
+			<ref bean="documentiBD" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="risultatiRicercaEstrattoContoTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.RisultatiRicercaEstrattoContoTablePage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="showTitlePane" value="false" />
+	</bean>
+
+	<bean id="situazioneEPEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">situazioneEPPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaSituazioneEPPage</value>
+						<value>risultatiRicercaSituazioneEPPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">situazioneEPEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaSituazioneEPPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.ParametriRicercaSituazioneEPPage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.contabilita.util.ParametriRicercaSituazioneEP">
+			<bean
+				class="it.eurotn.panjea.contabilita.util.ParametriRicercaSituazioneEP"
+				singleton="false" />
+		</constructor-arg>
+		<constructor-arg index="1"
+			type="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="risultatiRicercaSituazioneEPPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.RisultatiRicercaSituazioneEPPage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="aperturaContiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">aperturaContiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>aperturaContiPage</value>
+						<value>risultatiRicercaAperturaContabilitaPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">aperturaContiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="aperturaContiPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.AperturaContiPage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="risultatiRicercaAperturaContabilitaPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.RisultatiRicercaControlloMovimentoContabilitaPage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+	</bean>
+
+	<bean id="liquidazioneIvaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">liquidazioneIvaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>liquidazioneIvaPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">liquidazioneIvaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="chiusuraContiEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">chiusuraContiEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>chiusuraContiPage</value>
+						<value>risultatiRicercaChiusuraContabilitaPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">chiusuraContiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="liquidazioneIvaPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.LiquidazioneIVAPage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="chiusuraContiPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.ChiusuraContiPage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="risultatiRicercaChiusuraContabilitaPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.RisultatiRicercaControlloMovimentoContabilitaPage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+	</bean>
+
+
+
+	<!-- end editors contabilita -->
+
+	<!-- start editors entita per dati contabili -->
+
+	<bean id="clienteSottoContoPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.EntitaSottoContoPage"
+		singleton="false">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="sottoTipoConto">
+			<value>Cliente</value>
+		</property>
+	</bean>
+
+	<bean id="fornitoreSottoContoPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.EntitaSottoContoPage"
+		singleton="false">
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+		<property name="sottoTipoConto">
+			<value>Fornitore</value>
+		</property>
+	</bean>
+
+	<bean id="libriGiornaleEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">libriGiornaleEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>libriGiornalePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">libriGiornaleEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="libriGiornalePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.LibriGiornalePage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="giornaleIvaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">giornaleIvaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>giornaleIvaPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">giornaleIvaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="giornaleIvaPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.GiornaleIvaPage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	
+	<bean id="codiciIvaCorrispettiviTablePage"
+        class="it.eurotn.panjea.contabilita.rich.editors.tabelle.CodiciIvaCorrispettiviTablePage"
+        singleton="false">
+        <property name="contabilitaAnagraficaBD">
+            <ref bean="contabilitaAnagraficaBD" />
+        </property>
+        <property name="contabilitaBD">
+            <ref bean="contabilitaBD" />
+        </property>
+        <property name="editPageMode" value="POPUP"></property>
+        <property name="editPage">
+            <ref bean="codiceIvaCorrispettivoPage" />
+        </property>
+    </bean>
+    <bean id="codiceIvaCorrispettivoPage"
+        class="it.eurotn.panjea.contabilita.rich.editors.tabelle.CodiceIvaCorrispettivoPage"
+        singleton="false">
+        <property name="contabilitaAnagraficaBD">
+            <ref bean="contabilitaAnagraficaBD" />
+        </property>
+    </bean>
+
+	<!-- end editors entita per dati contabili -->
+
+	<bean id="tipoDocumentoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>tipoAreaContabilePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="tipoAreaContabilePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tipoareacontabile.TipoAreaContabilePage"
+		singleton="false">
+		<constructor-arg index="0"
+			type="it.eurotn.panjea.contabilita.domain.TipoAreaContabile">
+			<bean class="it.eurotn.panjea.contabilita.domain.TipoAreaContabile"
+				singleton="false" />
+		</constructor-arg>
+		<property name="contabilitaAnagraficaBD">
+			<ref bean="contabilitaAnagraficaBD" />
+		</property>
+		<property name="defaultController">
+			<ref bean="tipoAreaContabileController" />
+		</property>
+	</bean>
+
+	<bean id="tipoAreaContabileController" class="it.eurotn.rich.editors.controllers.DefaultController"
+		singleton="false" lazy-init="true">
+		<property name="propertiesChange">
+			<map>
+				<entry key="tipoDocumento.righeIvaEnable">
+					<list>
+						<ref bean="gestioneAreaIvaPropertyChange" />
+					</list>
+				</entry>
+				<entry key="gestioneIva">
+					<list>
+						<ref bean="gestioneIvaPropertyChange" />
+					</list>
+				</entry>
+				<entry key="registroIva">
+					<list>
+						<ref bean="registroIvaPropertyChange" />
+					</list>
+				</entry>
+				<entry key="tipoDocumento.classeTipoDocumentoInstance">
+					<list>
+						<ref bean="classeTipoDocumentoPropertyChange" />
+					</list>
+				</entry>
+				<entry key="protocolloLikeNumDoc">
+					<list>
+						<ref bean="protocolloLikeNumDocPropertyChange" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="gestioneIvaPropertyChange"
+		class="it.eurotn.panjea.contabilita.rich.editors.tipoareacontabile.GestioneIvaPropertyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="gestioneAreaIvaPropertyChange"
+		class="it.eurotn.panjea.contabilita.rich.editors.tipoareacontabile.GestioneAreaIvaPropertyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="registroIvaPropertyChange"
+		class="it.eurotn.panjea.contabilita.rich.editors.tipoareacontabile.RegistroIvaPropertyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="protocolloLikeNumDocPropertyChange"
+		class="it.eurotn.panjea.contabilita.rich.editors.tipoareacontabile.ProtocolloLikeNumDocPropertyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="classeTipoDocumentoPropertyChange"
+		class="it.eurotn.panjea.contabilita.rich.editors.tipoareacontabile.ClasseTipoDocumentoPropertyChange"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="altriDatiFornitorePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.AltriDatiEntitaPage"
+		singleton="false">
+		<property name="pagine">
+			<list>
+				<ref bean="fornitoreSottoContoPage" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="altriDatiClientePage"
+		class="it.eurotn.panjea.anagrafica.rich.editors.entita.AltriDatiEntitaPage"
+		singleton="false">
+		<property name="pagine">
+			<list>
+				<ref bean="clienteSottoContoPage" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="fatturatoContabilitaDialogPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.fatturato.FatturatoContabilitaDialogPage"
+		singleton="false">
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="causaliRitenutaAccontoTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.causaliritenutaacconto.CausaliRitenutaAccontoTablePage"
+		singleton="false">
+		<property name="ritenutaAccontoBD">
+			<ref bean="ritenutaAccontoBD" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="causaleRitenutaAccontoPage" />
+		</property>
+	</bean>
+	<bean id="causaleRitenutaAccontoPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.causaliritenutaacconto.CausaleRitenutaAccontoPage"
+		singleton="false">
+		<property name="ritenutaAccontoBD">
+			<ref bean="ritenutaAccontoBD" />
+		</property>
+	</bean>
+
+	<bean id="prestazioniTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.prestazioni.PrestazioniTablePage"
+		singleton="false">
+		<property name="ritenutaAccontoBD">
+			<ref bean="ritenutaAccontoBD" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPage">
+			<ref bean="prestazionePage" />
+		</property>
+	</bean>
+	<bean id="prestazionePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.prestazioni.PrestazionePage"
+		singleton="false">
+		<property name="ritenutaAccontoBD">
+			<ref bean="ritenutaAccontoBD" />
+		</property>
+	</bean>
+
+	<bean id="contributiPrevidenzialiTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.contributiprevidenziali.ContributiPrevidenzialiTablePage"
+		singleton="false">
+		<property name="ritenutaAccontoBD">
+			<ref bean="ritenutaAccontoBD" />
+		</property>
+		<property name="editPageMode" value="DETAIL"></property>
+		<property name="editPages">
+			<map>
+				<entry key="it.eurotn.panjea.contabilita.domain.ContributoINPS">
+					<ref bean="contributoINPSPage" />
+				</entry>
+				<entry key="it.eurotn.panjea.contabilita.domain.ContributoEnasarco">
+					<ref bean="contributoEnasarcoPage" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="contributoINPSPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.contributiprevidenziali.ContributoINPSPage"
+		singleton="false">
+		<property name="ritenutaAccontoBD">
+			<ref bean="ritenutaAccontoBD" />
+		</property>
+	</bean>
+	<bean id="contributoEnasarcoPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.tabelle.contributiprevidenziali.ContributoEnasarcoPage"
+		singleton="false">
+		<property name="ritenutaAccontoBD">
+			<ref bean="ritenutaAccontoBD" />
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.contabilita.rich.editors.riepilogoblacklist.ReportRiepilogoDocumentiBlacklistDialogPage"
+		id="reportRiepilogoDocumentiBlacklistDialogPage" singleton="false">
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+
+	<bean id="verificaCentriDiCostoEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">verificaCentriDiCostoEditor</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>verificaCentriDiCostoPage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">verificaCentriDiCostoEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.contabilita.rich.editors.righecontabili.verificaCentriCosto.VerificaCentriDiCostoPage"
+		id="verificaCentriDiCostoPage" singleton="false" lazy-init="true">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+	</bean>
+
+	<bean id="situazioneRitenuteEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">situazioneRitenuteEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaSituazioneRitenutePage</value>
+						<value>risultatiRicercaSituazioneRitenuteTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">situazioneRitenuteEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaSituazioneRitenutePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.ritenuteacconto.situazione.ParametriRicercaSituazioneRitenutePage"
+		singleton="false" lazy-init="true">
+	</bean>
+
+	<bean id="risultatiRicercaSituazioneRitenuteTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.ritenuteacconto.situazione.RisultatiRicercaSituazioneRitenuteTablePage"
+		singleton="false" lazy-init="true">
+		<property name="ritenutaAccontoBD">
+			<ref bean="ritenutaAccontoBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<bean id="ricercaAreeIvaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">ricercaAreeIvaEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaAreeIvaPage</value>
+						<value>risultatiRicercaAreaIvaTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">ricercaAreeIvaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="parametriRicercaAreeIvaPage"
+		class="it.eurotn.panjea.contabilita.rich.editors.areeiva.ParametriRicercaAreeIvaPage"
+		singleton="false">
+	</bean>
+
+	<bean id="risultatiRicercaAreaIvaTablePage"
+		class="it.eurotn.panjea.contabilita.rich.editors.areeiva.RisultatiRicercaAreaIvaTablePage"
+		singleton="false">
+		<property name="contabilitaBD">
+			<ref bean="contabilitaBD" />
+		</property>
+	</bean>
+
+</beans>

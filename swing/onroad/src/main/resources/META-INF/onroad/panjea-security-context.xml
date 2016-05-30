@@ -1,0 +1,28 @@
+ 
+<beans>
+	<import resource="panjea-context.xml"/>
+
+	<!-- INIZIO DEFINIZIONE SECURITY CONTROLLER -->
+
+     <bean id="onRoadImportazioneController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="onroadimportazione"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+
+    <bean id="onRoadEsportazioneController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+        <property name="authorizingRoles" value="onroadesportazione"></property>
+        <property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>
+        <property name="accessDecisionManager" ref="accessDecisionManager"></property>
+    </bean>
+
+	<bean class="org.springframework.richclient.security.support.DefaultSecurityControllerManager" id="securityControllerManager">
+    	<property name="securityControllerMap">
+        	<map>
+        	</map>
+    	</property>
+	</bean>
+
+	<!-- FINE DEFINIZIONE SECURITY CONTROLLER -->
+
+</beans>

@@ -1,0 +1,13 @@
+ 
+<beans>
+	<bean id="magazzinoMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="magazzinoMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:magazzino:statistiche</value>
+				<value>openSituazioneCauzioniCommand</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,9 @@
+
+<beans>	
+	
+	<bean id="openSituazioneCauzioniCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openSituazioneCauzioniCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.cauzioni.util.parametriricerca.ParametriRicercaSituazioneCauzioni"></property>
+	</bean>
+	
+</beans>

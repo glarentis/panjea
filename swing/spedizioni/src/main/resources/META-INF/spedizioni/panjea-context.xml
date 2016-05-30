@@ -1,0 +1,89 @@
+
+<beans>
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/spedizioni/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/spedizioni/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/spedizioni/messages-methods</value>
+                <value>classpath:it/eurotn/panjea/messages/spedizioni/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/spedizioni/messages-exceptions</value>
+                <value>classpath:it/eurotn/panjea/messages/spedizioni/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/spedizioni/messages-editors-pages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images  messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/spedizioni/images.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="exceptionHandler" class="org.springframework.richclient.exceptionhandling.delegation.DelegatingExceptionHandler">
+        <property name="delegateList">
+            <list>
+                <bean class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.spedizioni.exception.SpedizioniVettoreException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean class="it.eurotn.panjea.spedizioni.exceptionhandler.SpedizioniVettoreExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="spedizioniService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.SpedizioniService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+
+	<bean id="spedizioniBDImpl" class="it.eurotn.panjea.spedizioni.rich.bd.SpedizioniBD" singleton="true" lazy-init="true">
+		<property name="anagraficaService" ref="anagraficaService"></property>
+		<property name="spedizioniService" ref="spedizioniService"></property>
+	</bean>
+
+	<bean id="spedizioniBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.spedizioni.rich.bd.ISpedizioniBD</value>
+		</property>
+		<property name="target">
+			<ref local="spedizioniBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaSpedizioni"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaSpedizioni">
+		<property name="versione" value=""/>
+		<property name="nome" value="panjeaSpedizioni"/>
+		<property name="descrizione" value="Modulo panjea gestione delle spedizioni corrieri"/>
+		<property name="rulesSource" value="it.eurotn.panjea.spedizioni.rich.rules.SpedizioniPluginRulesSource"/>
+	</bean>
+	<!-- fine plugins rules source -->
+
+</beans>

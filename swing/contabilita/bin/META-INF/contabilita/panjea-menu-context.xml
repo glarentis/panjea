@@ -1,0 +1,51 @@
+
+<beans>
+
+	<bean id="contabilitaMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="contabilitaMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:contabilita:documento</value>
+				<value>newAreaContabileCommand</value>
+				<value>controlloMovimentoContabilitaCommand</value>
+				<value>ricercaAreeIvaCommand</value>
+
+				<value>group:contabilita:gestioneGiornaliera</value>
+				<value>estrattoContoCommand</value>
+				<value>bilancioCommand</value>
+				<value>situazioneEconomicaPatrimonialeCommand</value>
+				<value>bilancioConfrontoCommand</value>
+				
+				<value>group:contabilita:ritenuteAcconto</value>
+				<value>reportCertificazioniRitenuteCommand</value>
+				<value>openSituazioneRitenuteCommand</value>
+
+                <value>group:contabilita:Verifiche</value>
+                <value>openVerificheContabiliCommand</value>
+                <value>openVerificheSaldiClientiCommand</value>
+                <value>openVerificheSaldiFornitoriCommand</value>
+
+				<value>group:contabilita:gestionePeriodica</value>
+				<value>stampaLibroGiornaleCommand</value>
+				<value>stampaRegistriIvaCommand</value>
+				<value>liquidazioneIvaCommand</value>
+				<value>stampaEstrattoContoCommand</value>
+				<value>fatturatoContabilitaCommand</value>
+				<value>reportRiepilogoDocumentiBlacklistCommand</value>
+
+				<value>group:contabilita:gestioneAnnuale</value>
+				<value>aperturaContiCommand</value>
+				<value>chiusuraContiCommand</value>
+
+				<!--
+				<value>elencoClientiFornitoriCommand</value>
+				 -->
+
+				<value>group:contabilita:tabelleContabilita</value>
+				<value>openTabelleContabilitaCommand</value>
+				<value>openPreferenzeContabilitaCommand</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

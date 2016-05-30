@@ -1,0 +1,102 @@
+
+<beans>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/preventivi/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/preventivi/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/preventivi/messages-methods</value>
+                <value>classpath:it/eurotn/panjea/messages/preventivi/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/preventivi/messages-exceptions</value>
+                <value>classpath:it/eurotn/panjea/messages/preventivi/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/preventivi/messages-editors-pages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="panjeaConversionService" class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+        <property name="converters">
+        	<list>
+        		<bean name="AreaPreventivoRicercaConverter" class="it.eurotn.panjea.preventivi.rich.converter.AreaPreventivoRicercaConverter"></bean>
+        		<bean name="TipoAreaPreventivoConverter" class="it.eurotn.panjea.preventivi.rich.converter.TipoAreaPreventivoConverter"></bean>
+        		<bean name="AreaPreventivoFullDTOConverter" class="it.eurotn.panjea.preventivi.rich.converter.AreaPreventivoFullDTOConverter"></bean>
+        		<bean name="AreaPreventivoConverter" class="it.eurotn.panjea.anagrafica.rich.converter.IAreaDocumentoConverter"></bean>
+        	</list>
+        </property>
+    </bean>
+
+	<bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images  messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/preventivi/images.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="preventiviService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.PreventiviDocumentoService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+
+	<bean id="preventiviBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.preventivi.rich.bd.IPreventiviBD</value>
+        </property>
+        <property name="target">
+            <ref local="preventiviBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="preventiviBDImpl" class="it.eurotn.panjea.preventivi.rich.bd.PreventiviBD" singleton="true" lazy-init="true">
+        <property name="preventiviService" ref="preventiviService"></property>
+    </bean>
+
+    <!--Campi statici utilizzati nel factory della tabella -->
+    <bean id="it.eurotn.panjea.preventivi.rich.editors.righepreventivo.LivelloRigaPreventivoCellRenderer.LIVELLO_RIGA_PREVENTIVO_CONTEXT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+
+    <!--Render ed editro per le tabelle -->
+    <bean class="it.eurotn.rich.control.table.JideTableFactory" id="jideTableFactory">
+        <property name="renderers">
+            <list>
+            	<!--
+            	<bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.ordini.domain.documento.AreaOrdine"></property>
+                </bean>
+                 -->
+                 <bean class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+                    <property name="type" value="it.eurotn.panjea.preventivi.domain.documento.AreaPreventivo$StatoAreaPreventivo"></property>
+                </bean>
+                 <bean class="it.eurotn.panjea.preventivi.rich.editors.righepreventivo.LivelloRigaPreventivoCellRenderer">
+                    <property name="type" value="java.lang.String"></property>
+                    <property name="editorContext" ref="it.eurotn.panjea.preventivi.rich.editors.righepreventivo.LivelloRigaPreventivoCellRenderer.LIVELLO_RIGA_PREVENTIVO_CONTEXT" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaPreventivi"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaPreventivi">
+	    <property name="versione" value=""/>
+	    <property name="nome" value="panjeaPreventivi"/>
+	    <property name="descrizione" value="Modulo preventivi"/>
+	    <property name="rulesSource" value="it.eurotn.panjea.preventivi.rich.rules.PreventiviPluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+
+</beans>

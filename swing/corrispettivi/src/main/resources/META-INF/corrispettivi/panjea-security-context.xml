@@ -1,0 +1,19 @@
+
+<beans>
+    <import resource="panjea-context.xml"/>
+    
+    <bean id="securityControllerManager" class="org.springframework.richclient.security.support.DefaultSecurityControllerManager">
+        <property name="securityControllerMap">
+            <map>
+	            <entry key="codiceIvaCorrispettivoPage.controller"><ref bean="gestioneCodiceIvaCorrispettivoController"/></entry>
+            </map>
+        </property>
+    </bean>	
+
+    <bean id="gestioneCodiceIvaCorrispettivoController" class="org.springframework.richclient.security.support.UserRoleSecurityController">
+		<property name="authorizingRoles" value="gestioneCodiceIvaCorrispettivo"></property>
+		<property name="postProcessorActionsToRun" value="visibleTracksAuthorized"></property>		
+		<property name="accessDecisionManager" ref="accessDecisionManager"></property>
+	</bean>		
+	
+</beans>

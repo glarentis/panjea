@@ -1,0 +1,117 @@
+dependencies {    
+    runtime 'xerces:xercesImpl:2.11.0'
+    
+    compile('com.logicaldoc:logicaldoc-webservice:7.3.0'){ transitive=false }
+    compile(group: 'it.eurotn.security', name: 'jec-authentication', version: '1.0'){ transitive = false }
+    compile(group: 'com.jgraphx', name: 'jgraphx', version: '1.0')
+    compile(group: 'org.mantisbt.connect', name: 'mantisconnect-client-api', version: '1.1.1.1')            
+    compile(group: 'org.springframework.richclient', name: 'spring-richclient-sandbox', version: '1.1.0')
+    compile(group: 'org.springframework.richclient', name: 'spring-richclient-resources', version: '1.1.0')
+    compile(group: 'org.springframework.richclient', name: 'spring-richclient-core', version: '1.1.0')
+    compile(group: 'org.springframework.richclient', name: 'spring-richclient-jdk6', version: '1.1.0')
+    compile(group: 'com.jidesoft', name: 'jide-rss', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-properties', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-action', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-common', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-components', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-dashboard', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-dock', version: '1.0')    
+    compile(group: 'com.jidesoft', name: 'jide-editor', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-grids', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-pivot', version: '1.0')
+    compile(group: 'com.jidesoft', name: 'jide-shortcut', version: '1.0')
+    compile(group: 'de.nava.informa', name: 'informa', version: '1.0')
+    compile(group: 'shef', name: 'shef', version: '1.0')
+    compile(group: 'novaworx-syntax', name: 'novaworx-syntax', version: '0.0.7')
+    compile(group: 'org.bushe', name: 'sam', version: '1.0')
+    compile(group: 'org.w3c.tidy', name: 'jtidy', version: '8.0')
+    compile(group: 'org.projectlombok', name: 'lombok', version: '1.16.8')    
+    
+    
+    compile('net.sf.jasperreports:jasperreports:6.0.0'){
+        exclude module :'olap4j'        
+    }
+    compile	('org.jboss.client:jbossall-client:4.2.3.GA',
+            'org.hornetq:hornetq-core:2.2.5.Final',
+            'org.hornetq:hornetq-jms-client:2.2.5.Final',
+            'org.apache.poi:poi:3.12',
+            'com.jgoodies:forms:1.2.1',
+            'org.springframework:spring-binding:1.0',
+            'com.jgoodies:jgoodies-common:1.4.0',
+            'org.swinglabs:swingx:1.6.1',
+            'foxtrot:foxtrot-core:4.0',
+            'commons-net:commons-net:3.3',
+            'com.jgoodies:jgoodies-looks:2.5.3',
+            'org.apache.httpcomponents:httpmime:4.3.1',
+            'org.apache.commons:commons-email:1.3.2',
+            'log4j:log4j:1.2.12',
+            'org.springframework:spring-context:2.0.8',
+            'org.springframework:spring-beans:2.0.8',
+            'org.springframework:spring-core:2.0.8',
+            'org.springframework:spring-jms:2.0.8',            
+            'jdom:jdom:1.1',
+            'jboss:jboss-ejb3x:4.2.2.GA',
+            'commons-httpclient:commons-httpclient:3.1',
+            'org.apache.commons:commons-lang3:3.4',
+            'commons-lang:commons-lang:2.6',            
+            'javax.mail:javax.mail-api:1.4.4-rc1',
+            'org.apache.httpcomponents:httpclient:4.3.1',
+            'org.apache.axis:axis:1.4',
+            'commons-io:commons-io:2.4',
+            'com.itextpdf:itextpdf:5.5.9',
+            'org.jboss.envers:jboss-envers:1.2.2.GA-hibernate-3.3',
+            'org.apache.httpcomponents:httpcore:4.4.4',
+            'commons-beanutils:commons-beanutils:1.9.2',
+            'commons-collections:commons-collections:3.2.2',
+            'net.java.dev.glazedlists:glazedlists_java15:1.9.1',
+            'org.springframework.security:spring-security-core:2.0.4',
+            'commons-logging:commons-logging:1.2',
+            'org.apache.axis:axis-jaxrpc:1.4',
+            'commons-codec:commons-codec:1.10',
+            'aopalliance:aopalliance:1.0',
+            'org.reflections:reflections:0.9.10',
+            'org.swinglabs:jxlayer:3.0.4',
+            'org.hsqldb:hsqldb:2.3.3',                           
+            'org.apache.xmlgraphics:batik-util:1.8',
+            'org.apache.xmlgraphics:batik-anim:1.8',
+            'org.apache.xmlgraphics:batik-awt-util:1.8',
+            'org.apache.xmlgraphics:batik-bridge:1.8',
+            'org.apache.xmlgraphics:batik-css:1.8',
+            'org.apache.xmlgraphics:batik-dom:1.8',
+            'org.apache.xmlgraphics:batik-ext:1.8',
+            'org.apache.xmlgraphics:batik-extension:1.8',
+            'org.apache.xmlgraphics:batik-gvt:1.8',
+            'org.apache.xmlgraphics:batik-parser:1.8',
+            'org.apache.xmlgraphics:batik-script:1.8',
+            'org.apache.xmlgraphics:batik-svg-dom:1.8',
+            'org.apache.xmlgraphics:batik-svggen:1.8',
+            'org.apache.xmlgraphics:batik-transcoder:1.8',
+            'org.apache.xmlgraphics:batik-util:1.8',
+            'org.apache.xmlgraphics:batik-xml:1.8',
+            'com.itextpdf:itextpdf:5.5.9',
+            'org.hibernate:ejb3-persistence:1.0.1.GA' ,
+            'org.jboss.netty:netty:3.2.3.Final',
+            'org.apache.commons:commons-collections4:4.1',
+            'org.apache.pdfbox:pdfbox:1.6.0',
+            'oro:oro:2.0.8',
+            'org.slf4j:slf4j-api:1.7.21',
+            'org.slf4j:slf4j-log4j12:1.7.21',
+            'org.hibernate:hibernate-core:3.3.2.GA',
+            'commons-discovery:commons-discovery:0.2',
+            'wsdl4j:wsdl4j:1.5.2',
+            'joda-time:joda-time:2.9.3'            
+            )
+            
+	compile(group: 'com.toedter', name: 'j-calendar', version: '1.5')
+
+
+    provided files('lib/jfxrt.jar')
+
+    compile files(                        
+            'lib/jasperserver-common-ws-5.6.1.jar',
+            'lib/jasperserver-ws-server-5.6.1.jar'
+            )
+    compile	(project(':ear:ejb')){ transitive=false}
+}
+
+configurations.all { transitive = true }

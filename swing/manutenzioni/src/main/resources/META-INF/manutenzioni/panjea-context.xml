@@ -1,0 +1,98 @@
+
+<beans>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="basenames">
+            <list>
+                <value>classpath:it/eurotn/panjea/messages/manutenzioni/messages</value>
+                <value>classpath:it/eurotn/panjea/messages/manutenzioni/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/manutenzioni/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/manutenzioni/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/manutenzioni/messages-editors-pages</value>
+                <value>classpath:it/eurotn/panjea/messages/manutenzioni/messages-exceptions</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:it/eurotn/panjea/messages/manutenzioni/images.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="jideTableFactory" class="it.eurotn.rich.control.table.JideTableFactory">
+        <property name="renderers">
+            <list>                
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="panjeaConversionService" class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+        <property name="converters">
+            <list>
+                <bean name="articoloMIConverter" class="it.eurotn.panjea.manutenzioni.rich.converter.ArticoloMIConverter"></bean>
+                <bean name="installazioneConverter" class="it.eurotn.panjea.manutenzioni.rich.converter.InstallazioneConverter"></bean>
+                <bean name="causaleInstallazioneConverter" class="it.eurotn.panjea.manutenzioni.rich.converter.CausaleInstallazioneConverter"></bean>
+                <bean name="ubicazioneIstallazioniConverter" class="it.eurotn.panjea.manutenzioni.rich.converter.UbicazioneInstallazioneConverter"></bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="manutenzioniBDImpl" class="it.eurotn.panjea.manutenzioni.rich.bd.ManutenzioniBD" singleton="true" lazy-init="true">
+        <property name="operatoriService" ref="operatoriService" />
+        <property name="installazioniService" ref="installazioniService" />
+        <property name="manutenzioneAnagraficaService" ref="manutenzioneAnagraficaService"/>
+        <property name="prodottiCollegatiService" ref="prodottiCollegatiService" />
+    </bean>
+    <bean id="manutenzioniBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.manutenzioni.rich.bd.IManutenzioniBD</value>
+        </property>
+        <property name="target">
+            <ref local="manutenzioniBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="operatoriService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.OperatoriService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    
+    
+     <bean id="prodottiCollegatiService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.ProdottiCollegatiService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    
+     <bean id="manutenzioneAnagraficaService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.ManutenzioneAnagraficaService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    
+        <bean id="installazioniService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.InstallazioniService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+
+    <!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaManutenzioni"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaManutenzioni">
+	    <property name="versione" value=""/>
+	    <property name="nome" value="panjeaManutenzioni"/>
+	    <property name="descrizione" value="Modulo panjea gestione manutenzioni"/>
+	    <property name="rulesSource" value="it.eurotn.panjea.manutenzioni.rich.rules.ManutenzioniPluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+</beans>

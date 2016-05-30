@@ -1,0 +1,44 @@
+
+<beans>
+    
+    <!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="elencoRiscontiEditor">
+					<key>
+						<value type="java.lang.String">elencoRiscontiEditor</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+    
+    <bean id="elencoRiscontiEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">elencoRiscontiEditor</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>elencoRiscontiTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">elencoRiscontiEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="elencoRiscontiTablePage" class="it.eurotn.panjea.rateirisconti.rich.editors.elenco.ElencoRiscontiTablePage"	singleton="false">
+	    <property name="rateiRiscontiBD">
+	        <ref bean="rateiRiscontiBD"/>
+	    </property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,66 @@
+
+<beans>
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="basenames">
+            <list>
+                <!-- File di configurazione dei messaggi di contabilita -->
+                <value>classpath:it/eurotn/panjea/messages/corrispettivi/messages-commands</value>
+                <value>classpath:it/eurotn/panjea/messages/corrispettivi/messages-editors-pages</value>
+                <value>classpath:it/eurotn/panjea/messages/corrispettivi/messages-forms-model</value>
+                <value>classpath:it/eurotn/panjea/messages/corrispettivi/messages</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+        <property name="locations">
+            <list>
+                <!-- File di configurazione delle immagini per la contabilita -->
+                <value>classpath:it/eurotn/panjea/messages/corrispettivi/images.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="corrispettiviBDImpl" class="it.eurotn.panjea.corrispettivi.rich.bd.CorrispettiviBD"
+        singleton="true" lazy-init="true">
+        <property name="corrispettiviService" ref="corrispettiviService" />
+    </bean>
+    <bean id="corrispettiviBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+        singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.corrispettivi.rich.bd.ICorrispettiviBD</value>
+        </property>
+        <property name="target">
+            <ref local="corrispettiviBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="corrispettiviService" class="org.springframework.jndi.JndiObjectFactoryBean"
+        singleton="true" lazy-init="true">
+        <property name="jndiName" value="Panjea.CorrispettiviService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+
+	<!-- inizio plugins rules source -->
+	<bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager"
+		lazy-init="true" singleton="true">
+		<property name="plugins">
+			<list>
+				<ref bean="panjeaCorrispettivi" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaCorrispettivi">
+		<property name="versione" value="" />
+		<property name="nome" value="panjeaCorrispettivi" />
+		<property name="descrizione" value="Modulo panjea per la gestione dei corrispettivi" />
+		<property name="rulesSource"
+			value="it.eurotn.panjea.corrispettivi.rich.rules.CorrispettiviPluginRulesSource" />
+	</bean>
+	<!-- fine plugins rules source -->
+</beans>

@@ -1,0 +1,28 @@
+ 
+<beans>
+
+	<import resource="panjea-context.xml"/>
+
+	<bean id="openTabelleAuVendCommand" class="it.eurotn.panjea.auvend.rich.commands.OpenTabelleAuVendCommand">
+	</bean>
+
+	<bean id="openRecuperoCarichiRifornimentiAuVendCommand" class="it.eurotn.panjea.auvend.rich.commands.OpenRecuperoCarichiRifornimentiAuVendCommand">
+	</bean>
+	
+	<bean id="openRecuperoMovimentiAuVendCommand" class="it.eurotn.panjea.auvend.rich.commands.OpenRecuperoMovimentiAuVendCommand">
+		<property name="auVendBDBeanName" value="auVendBD"/>
+	</bean>
+
+	<bean id="openRecuperoFattureAuVendCommand" class="it.eurotn.panjea.auvend.rich.commands.OpenRecuperoFattureAuVendCommand">
+		<property name="auVendBDBeanName" value="auVendBD"/>
+	</bean>
+	
+	<bean id="openRecuperoFatturazioneRifornimentiAuVendCommand" class="it.eurotn.panjea.auvend.rich.commands.OpenRecuperoFatturazioneRifornimentiAuVendCommand">
+		<property name="auVendBDBeanName" value="auVendBD"/>
+	</bean>
+	
+	<bean id="openRecuperoRiparazioniContoTerziAuVendCommand" class="it.eurotn.panjea.auvend.rich.commands.OpenRecuperoRiparazioniContoTerziAuVendCommand">
+		<property name="auVendBDBeanName" value="auVendBD"/>
+	</bean>
+		
+</beans>

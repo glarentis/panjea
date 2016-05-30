@@ -1,0 +1,218 @@
+package it.eurotn.panjea.contabilita.rich.editors;
+
+import org.apache.log4j.Logger;
+import org.springframework.richclient.application.ApplicationServicesLocator;
+import org.springframework.richclient.command.AbstractCommand;
+import org.springframework.richclient.command.ActionCommand;
+import org.springframework.richclient.command.config.CommandConfigurer;
+import org.springframework.richclient.core.Guarded;
+
+import it.eurotn.panjea.anagrafica.rich.bd.IDocumentiBD;
+import it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente;
+import it.eurotn.panjea.contabilita.rich.forms.ParametriRicercaEstrattoContoForm;
+import it.eurotn.panjea.contabilita.util.ParametriRicercaEstrattoConto;
+import it.eurotn.panjea.rich.forms.PanjeaFormGuard;
+import it.eurotn.rich.editors.FormBackedDialogPageEditor;
+import it.eurotn.rich.editors.IPageLifecycleAdvisor;
+import it.eurotn.rich.form.PanjeaAbstractForm;
+
+public class ParametriRicercaEstrattoContoPage extends FormBackedDialogPageEditor {
+
+    private class CaricaEstrattoContoCommand extends ActionCommand implements Guarded {
+
+        /**
+         * Costruttore.
+         */
+        public CaricaEstrattoContoCommand() {
+            super("searchCommand");
+            CommandConfigurer c = (CommandConfigurer) ApplicationServicesLocator.services()
+                    .getService(CommandConfigurer.class);
+            this.setSecurityControllerId(getPageEditorId() + CARICA_ESTRATTOCONTO_COMMAND);
+            c.configure(this);
+        }
+
+        @Override
+        protected void doExecuteCommand() {
+            getBackingFormPage().commit();
+            ParametriRicercaEstrattoConto parametriRicercaEstrattoConto = (ParametriRicercaEstrattoConto) getBackingFormPage()
+                    .getFormObject();
+            parametriRicercaEstrattoConto.setEffettuaRicerca(true);
+            logger.debug("--> Carica estratto conto command " + parametriRicercaEstrattoConto);
+            logger.debug("--> stati scelti " + parametriRicercaEstrattoConto.getStatiAreaContabile().size());
+            logger.debug("--> tipi scelti " + parametriRicercaEstrattoConto.getTipiDocumento().size());
+            ParametriRicercaEstrattoContoPage.this.firePropertyChange(IPageLifecycleAdvisor.OBJECT_CHANGED, null,
+                    parametriRicercaEstrattoConto);
+            resetRicercaCommand.setEnabled(true);
+        }
+    }
+
+    private class ResetParametriRicercaCommand extends ActionCommand {
+
+        /**
+         * Costruttore.
+         */
+        public ResetParametriRicercaCommand() {
+            super("resetParametriRicercaCommand");
+            CommandConfigurer c = (CommandConfigurer) ApplicationServicesLocator.services()
+                    .getService(CommandConfigurer.class);
+            this.setSecurityControllerId(getPageEditorId() + RESET_PARAMETRI_RICERCA_COMMAND);
+            c.configure(this);
+        }
+
+        @Override
+        protected void doExecuteCommand() {
+            logger.debug("--> Reset command per estratto conto");
+            ParametriRicercaEstrattoContoPage.logger.debug("--> Reset command");
+            ParametriRicercaEstrattoContoPage.this.toolbarPageEditor.getNewCommand().execute();
+            ParametriRicercaEstrattoContoPage.this.firePropertyChange(IPageLifecycleAdvisor.OBJECT_CHANGED, null, null);
+        }
+    }
+
+    private static Logger logger = Logger.getLogger(ParametriRicercaEstrattoContoPage.class);
+    public static final String PAGE_ID = "parametriRicercaEstrattoContoPage";
+    private static final String RESET_PARAMETRI_RICERCA_COMMAND = ".resetParametriRicercaCommand";
+    private static final String CARICA_ESTRATTOCONTO_COMMAND = ".caricaEstrattoContoCommand";
+
+    private AbstractCommand resetRicercaCommand;
+    private AbstractCommand caricaEstrattoContoCommand;
+
+    /**
+     * Costruttore.
+     *
+     * @param parametriRicercaEstrattoConto
+     *            parametriRicercaEstrattoConto
+     * @param aziendaCorrente
+     *            aziendaCorrente
+     * @param documentiBD
+     *            documentiBD
+     */
+    public ParametriRicercaEstrattoContoPage(final ParametriRicercaEstrattoConto parametriRicercaEstrattoConto,
+            final AziendaCorrente aziendaCorrente, final IDocumentiBD documentiBD) {
+        super(PAGE_ID,
+                new ParametriRicercaEstrattoContoForm(parametriRicercaEstrattoConto, aziendaCorrente, documentiBD));
+        new PanjeaFormGuard(getBackingFormPage().getFormModel(), getCaricaEstrattoContoCommand());
+    }
+
+    /**
+     * Passa i parametriRicercaEstrattoConto all'editor lanciando il firePropertyChange sulla
+     * proprieta' IPageLifecycleAdvisor.OBJECT_CHANGED Nota che in questo command viene solo
+     * lanciato il property change, la ricerca effettiva viene eseguita nella page
+     * RisultatiRicercaBilancioPage, dove viene presentata la lista in una jTable.
+     *
+     * @return il command per la ricerca righe contabili
+     */
+    public AbstractCommand getCaricaEstrattoContoCommand() {
+        if (caricaEstrattoContoCommand == null) {
+            caricaEstrattoContoCommand = new CaricaEstrattoContoCommand();
+        }
+        return caricaEstrattoContoCommand;
+    }
+
+    @Override
+    protected AbstractCommand[] getCommand() {
+        AbstractCommand[] abstractCommands = new AbstractCommand[] { getResetParametriRicercaCommand(),
+                getCaricaEstrattoContoCommand() };
+        return abstractCommands;
+    }
+
+    @Override
+    public AbstractCommand getEditorNewCommand() {
+        return getResetParametriRicercaCommand();
+    }
+
+    @Override
+    public AbstractCommand getEditorSaveCommand() {
+        return getCaricaEstrattoContoCommand();
+    }
+
+    /**
+     * vedi bug 440 Sovrascrivo il metodo ritornando null per evitare il normale comportamento di
+     * this (FormBackedDialogPageEditor). Questo metodo e' usato nel metodo onNew() e se ritorna il
+     * valore di default (getBackingFormPage().getFormObject()) viene lanciata una propertychange e
+     * quindi la page RisultatiRicercaControlloMovimentoContabilitaPage esegue una ricerca e solo
+     * dopo viene lanciato il propertychange con oggetto a null per azzerare le righe visualizzate
+     * (vedi doExecuteCommand di this.resetRicercaCommand)
+     *
+     * @return null
+     */
+    @Override
+    protected Object getNewEditorObject() {
+        return null;
+    }
+
+    /**
+     * Esegue il reset dei parametri ricerca, assegnando i valori di default per ogni campo
+     * visualizzato.
+     *
+     * @return ResetParametriRicercaCommand
+     */
+    public AbstractCommand getResetParametriRicercaCommand() {
+        if (resetRicercaCommand == null) {
+            resetRicercaCommand = new ResetParametriRicercaCommand();
+        }
+        return resetRicercaCommand;
+    }
+
+    /**
+     * Sovrascritto per dare il focus alla data invece che al primo campo disponibile come avviene
+     * di default sulla formbackeddialogpageeditor.
+     */
+    @Override
+    public void grabFocus() {
+        ((ParametriRicercaEstrattoContoForm) getBackingFormPage()).requestFocusForConto();
+    }
+
+    @Override
+    protected boolean insertControlInScrollPane() {
+        return false;
+    }
+
+    @Override
+    public boolean isDirty() {
+        return false;
+    }
+
+    @Override
+    public void loadData() {
+        if (!((ParametriRicercaEstrattoConto) getBackingFormPage().getFormObject()).isEffettuaRicerca()) {
+            getResetParametriRicercaCommand().execute();
+        }
+    }
+
+    @Override
+    public void onPostPageOpen() {
+    }
+
+    @Override
+    public boolean onPrePageOpen() {
+        ((PanjeaAbstractForm) getBackingFormPage()).getFormModel().setReadOnly(false);
+        return true;
+    }
+
+    /**
+     * Sovrascrivo questo metodo per non eseguire nulla ed evitare il salvataggio premendo la
+     * combinazione ctrl + S che e' abilitata di default nella form backed dialog page.
+     *
+     * @return true
+     */
+    @Override
+    public boolean onSave() {
+        return true;
+    }
+
+    /**
+     * Sovrascrivo questo metodo per non eseguire l'undo command premendo ctrl + Z che e' abilitato
+     * di default nella form backed dialog page.
+     *
+     * @return true
+     */
+    @Override
+    public boolean onUndo() {
+        return true;
+    }
+
+    @Override
+    public void refreshData() {
+        loadData();
+    }
+}

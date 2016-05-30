@@ -1,0 +1,18 @@
+
+<beans>
+
+	<bean id="manutenzioniMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="manutenzioniMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:manutenzioni:operatori</value>
+				<value>newOperatoreCommand</value>
+                <value>searchOperatoriCommand</value>
+                <value>group:manutenzioni:tabelleManutenzioni</value>                
+                <value>openTabelleGeneraliManutenzioneCommand</value>
+                <value>openPreferenzeManutenzioniCommand</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

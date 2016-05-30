@@ -1,0 +1,22 @@
+
+<beans>
+
+	<import resource="panjea-context.xml"/>
+
+	<bean id="searchAgentiCommand" class="it.eurotn.panjea.anagrafica.rich.commands.SearchEntitaCommand">
+		<property name="idCommand" value="searchAgentiCommand"></property>
+		<property name="entita" value="Agenti" />
+		<property name="searchViewClass" value="it.eurotn.panjea.agenti.domain.lite.AgenteLite" />
+	</bean>
+    
+    <bean id="newAgenteCommand" class="it.eurotn.panjea.anagrafica.rich.commands.NewEntitaCommand">
+        <property name="entita">
+            <bean class="it.eurotn.panjea.agenti.domain.Agente" />
+        </property>
+        <property name="idCommand" value="newAgenteCommand" />
+        <property name="anagraficaBDId" value="anagraficaBD"></property>
+        <property name="aziendaCorrenteId" value="aziendaCorrente"></property>
+        <property name="securityControllerId" value="modificaAgenteController"></property>
+    </bean>
+		
+</beans>

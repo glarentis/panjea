@@ -1,0 +1,16 @@
+
+<beans>
+    <bean id="preventiviMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="preventiviMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:preventivo:documento</value>
+				<value>newAreaPreventivoCommand</value>
+				<value>openRicercaAreaPreventivoCommand</value>
+				
+				<value>group:preventivo:statistiche</value>
+				<value>openMovimentazioneMagazzinoPreventiviCommand</value>
+			</list>
+		</property>
+	</bean>
+</beans>

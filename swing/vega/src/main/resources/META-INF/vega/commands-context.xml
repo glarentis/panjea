@@ -1,0 +1,16 @@
+
+<beans>
+
+	<import resource="panjea-context.xml"/>
+
+	<bean id="importFattureVegaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="importFattureVegaCommand"></property>
+		<property name="openString" value="importazioneFattureVegaEditor"></property>
+	</bean>
+	
+	<bean id="importMovimentazioneVegaCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+        <property name="idCommand" value="importMovimentazioneVegaCommand"></property>
+        <property name="openString" value="importazioneMovimentazioneVegaEditor"></property>
+    </bean>
+		
+</beans>

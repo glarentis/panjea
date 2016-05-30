@@ -1,0 +1,622 @@
+
+<beans>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/anag/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/messages-commands</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/messages-methods</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/messages-classes</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/messages-exceptions</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/messages-constraints</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/messages-forms-model</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/messages-editors-pages</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/messages-commands</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/messages-methods</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/messages-classes</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/messages-exceptions</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/messages-constraints</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/messages-forms-model</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/messages-editors-pages</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="imageResourcesFactory"
+		class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/anag/images.properties</value>
+				<value>classpath:it/eurotn/panjea/messages/anag/doc/images.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean
+		id="it.eurotn.panjea.anagrafica.rich.table.renderer.NoteCellRenderer.NOTE_CONTEXT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean
+		id="it.eurotn.panjea.anagrafica.rich.table.renderer.RubricaDenominazioneCellRenderer.RUBRICA_CONTEXT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean
+		id="it.eurotn.panjea.anagrafica.rich.table.renderer.SedeEntitaConIndirizzoCellRenderer.SEDE_ENTITA_CON_INDIRIZZO_CONTEXT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+	<bean id="jideTableFactory" class="it.eurotn.rich.control.table.JideTableFactory">
+		<property name="renderers">
+			<list>
+				<bean
+					class="it.eurotn.panjea.anagrafica.rich.table.renderer.NazioneContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.datigeografici.Nazione"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type" value="it.eurotn.panjea.anagrafica.domain.Banca"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.ZonaGeografica"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.lite.DepositoLite"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.Deposito"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.documenti.domain.TipoDocumento"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.lite.EntitaLite"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.EntitaContextSensitiveCellRender">
+					<property name="type" value="it.eurotn.panjea.anagrafica.domain.Entita"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.EntitaLiteContextSensitiveCellRender">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.lite.EntitaLite"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.ImportoContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.Importo" />
+					<property name="valutaAziendaCache">
+						<ref bean="valutaCache" />
+					</property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.RapportoBancarioAzienda"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.documenti.domain.Documento"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.SedeEntita"></property>
+				</bean>
+				<bean
+					class="it.eurotn.panjea.anagrafica.rich.table.renderer.SedeAnagraficaConIndirizzoCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.SedeAnagrafica"></property>
+				</bean>
+				<bean
+					class="it.eurotn.panjea.anagrafica.rich.table.renderer.SedeEntitaConIndirizzoCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.SedeEntita"></property>
+					<property name="editorContext"
+						ref="it.eurotn.panjea.anagrafica.rich.table.renderer.SedeEntitaConIndirizzoCellRenderer.SEDE_ENTITA_CON_INDIRIZZO_CONTEXT"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.EntitaDocumentoContextSensitiveCellRender">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.util.EntitaDocumento"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.SedeAzienda"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.CodiceIva"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.Contatto"></property>
+				</bean>
+				<bean
+					class="it.eurotn.panjea.anagrafica.rich.table.renderer.NoteCellRenderer">
+					<property name="type" value="java.lang.String"></property>
+					<property name="editorContext"
+						ref="it.eurotn.panjea.anagrafica.rich.table.renderer.NoteCellRenderer.NOTE_CONTEXT" />
+				</bean>
+				<bean
+					class="it.eurotn.panjea.anagrafica.rich.table.renderer.RubricaDenominazioneCellRenderer">
+					<property name="type" value="java.lang.String"></property>
+					<property name="editorContext"
+						ref="it.eurotn.panjea.anagrafica.rich.table.renderer.RubricaDenominazioneCellRenderer.RUBRICA_CONTEXT" />
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.domain.UnitaMisura"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="horizontalAlignment" value="4"></property>
+					<property name="type"
+						value="it.eurotn.panjea.anagrafica.documenti.domain.CodiceDocumento"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="panjeaConversionService"
+		class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+		<property name="converters">
+			<list>
+				<bean name="AnagraficaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.AnagraficaConverter"></bean>
+				<bean name="LocalitaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.datigeografici.LocalitaConverter"></bean>			
+				<bean name="BancaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.BancaConverter"></bean>
+				<bean name="DepositoLiteConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.DepositoLiteConverter"></bean>
+				<bean name="DepositoConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.DepositoConverter"></bean>
+				<bean name="TipoDocumentoConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.TipoDocumentoConverter"></bean>
+				<bean name="EntitaLiteConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.EntitaLiteConverter"></bean>
+				<bean name="ImportoConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.ImportoConverter">
+					<property name="valutaCache">
+						<ref bean="valutaCache" />
+					</property>
+				</bean>
+				<bean name="AziendaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.AziendaConverter"></bean>
+				<bean name="RapportoBancarioAziendaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.RapportoBancarioAziendaConverter"></bean>
+				<bean name="DocumentoConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.DocumentoConverter"></bean>
+				<bean name="SedeEntitaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.SedeEntitaConverter"></bean>
+				<bean name="EntitaDocumentoConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.EntitaDocumentoConverter"></bean>
+				<bean name="ZonaGeograficaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.ZonaGeograficaConverter"></bean>
+				<bean name="SedeAziendaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.SedeAziendaConverter" />
+				<bean name="CodiceIvaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.CodiceIvaConverter" />
+				<bean name="ContattoConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.ContattoConverter" />
+				<bean name="TipoSedeEntitaConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.TipoSedeEntitaConverter" />
+				<bean name="DatiGeograficiConverter"
+					class="it.eurotn.panjea.anagrafica.rich.editors.datigeografici.DatiGeograficiConverter" />
+				<bean name="LivelloAmministrativoConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.datigeografici.LivelloAmministrativoConverter"></bean>
+				<bean name="UnitaMisuraConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.UnitaMisuraConverter"></bean>
+				<bean name="SedeFornitoreLitePMConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.SedeFornitoreLitePMConverter"></bean>
+				<bean name="CodiceDocumentoConverter"
+					class="it.eurotn.panjea.anagrafica.rich.converter.CodiceDocumentoConverter"></bean>
+			</list>
+		</property>
+	</bean>
+	<!-- fine definzione ApplicationServices -->
+
+	<bean
+		class="it.eurotn.panjea.rich.factory.navigationloader.PanjeaNavigationLoaderFactory"
+		id="panjeaNavigationLoaderFactory">
+		<property name="loaderCommands">
+			<list>
+				<ref bean="entitaLoaderActionCommand" />
+				<ref bean="tipoDocumentoLoaderActionCommand" />
+				<ref bean="documentoLoaderActionCommand"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Loader action commands -->
+	<bean id="entitaLoaderActionCommand"
+		class="it.eurotn.panjea.anagrafica.rich.commands.navigationloaders.EntitaLoaderActionCommand">
+	</bean>
+
+	<bean id="tipoDocumentoLoaderActionCommand"
+		class="it.eurotn.panjea.anagrafica.rich.commands.navigationloaders.TipoDocumentoLoaderActionCommand">
+		<property name="documentiBD">
+			<ref bean="documentiBD" />
+		</property>
+	</bean>
+	
+	<bean id="documentoLoaderActionCommand" class="it.eurotn.panjea.anagrafica.rich.commands.navigationloaders.DocumentoLoaderActionCommand"></bean>
+
+	<bean id="noteAutomaticheService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.NoteAutomaticheService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="noteAutomaticheBDImpl" class="it.eurotn.panjea.anagrafica.rich.bd.NoteAutomaticheBD"
+		singleton="true" lazy-init="true">
+		<property name="noteAutomaticheService" ref="noteAutomaticheService" />
+	</bean>
+	<bean id="noteAutomaticheBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.anagrafica.rich.bd.INoteAutomaticheBD</value>
+		</property>
+		<property name="target">
+			<ref local="noteAutomaticheBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="anagraficaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.AnagraficaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="anagraficaBDImpl" class="it.eurotn.panjea.anagrafica.rich.bd.AnagraficaBD"
+		singleton="true" lazy-init="true">
+		<property name="anagraficaService" ref="anagraficaService" />
+	</bean>
+	<bean id="anagraficaBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaBD</value>
+		</property>
+		<property name="target">
+			<ref local="anagraficaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="anagraficaTabelleService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.AnagraficaTabelleService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="anagraficaTabelleBDImpl" class="it.eurotn.panjea.anagrafica.rich.bd.AnagraficaTabelleBD"
+		singleton="true" lazy-init="true">
+		<property name="anagraficaTabelleService" ref="anagraficaTabelleService" />
+	</bean>
+	<bean id="anagraficaTabelleBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.anagrafica.rich.bd.IAnagraficaTabelleBD</value>
+		</property>
+		<property name="target">
+			<ref local="anagraficaTabelleBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="auditService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.AuditService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="auditBDImpl" class="it.eurotn.panjea.anagrafica.rich.bd.AuditBD"
+		singleton="true" lazy-init="true">
+		<property name="auditService" ref="auditService" />
+	</bean>
+	<bean id="auditBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.anagrafica.rich.bd.IAuditBD</value>
+		</property>
+		<property name="target">
+			<ref local="auditBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="documentiService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.DocumentiService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="documentiGraphService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.DocumentiGraphService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="documentiBDimpl" class="it.eurotn.panjea.anagrafica.rich.bd.DocumentiBD"
+		singleton="true" lazy-init="true">
+		<property name="documentiService" ref="documentiService" />
+		<property name="documentiGraphService" ref="documentiGraphService" />
+	</bean>
+	<bean id="documentiBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.anagrafica.rich.bd.IDocumentiBD</value>
+		</property>
+		<property name="target">
+			<ref local="documentiBDimpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="datiGeograficiService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.DatiGeograficiService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="datiGeograficiBDImpl" class="it.eurotn.panjea.anagrafica.rich.bd.DatiGeograficiBD"
+		singleton="true" lazy-init="true">
+		<property name="datiGeograficiService" ref="datiGeograficiService" />
+	</bean>
+	<bean id="datiGeograficiBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.anagrafica.rich.bd.IDatiGeograficiBD</value>
+		</property>
+		<property name="target">
+			<ref local="datiGeograficiBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="aziendaCorrente" class="it.eurotn.panjea.anagrafica.rich.pm.AziendaCorrente"
+		singleton="true" lazy-init="true">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+	<bean id="panjeaMailClient" class="it.eurotn.panjea.anagrafica.mail.PanjeaMailClient"
+		singleton="true" lazy-init="true">
+	</bean>
+	<!-- Inizio gestione delle eccezioni -->
+	<!-- Handler che si occupa della gestione delle eccezioni. Contiene una
+		lista che si comporta come un try cacth. Attenzione all'ordine in cui i delegate
+		vengono inseriti nella lista -->
+	<bean id="exceptionHandler"
+		class="org.springframework.richclient.exceptionhandling.delegation.DelegatingExceptionHandler">
+		<property name="delegateList">
+			<list>
+				<bean
+					class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.anagrafica.service.exception.TipoDocumentoBaseException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean
+							class="it.eurotn.panjea.anagrafica.exceptionhandler.TipiDocumentoBaseExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean
+                    class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+                    <property name="throwableClassList">
+                        <list>
+                            <value type="java.lang.Class">it.eurotn.panjea.anagrafica.documenti.exception.DataProtocolloNonValidaException</value>
+                        </list>
+                    </property>
+                    <property name="exceptionHandler">
+                        <bean
+                            class="it.eurotn.panjea.anagrafica.exceptionhandler.DataProtocolloNonValidaExceptionHandler">
+                            <property name="logLevel" value="WARN" />
+                            <property name="shutdownPolicy" value="NONE" />
+                        </bean>
+                    </property>
+                </bean>
+				<bean
+					class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.anagrafica.service.exception.PreferenceNotFoundException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean
+							class="it.eurotn.panjea.anagrafica.exceptionhandler.PreferenceNotFoundExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.magazzino.service.exception.ConversioneUnitaMisuraAssenteException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean
+							class="it.eurotn.panjea.anagrafica.exceptionhandler.ConversioneUnitaMisuraAssenteExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- Configurazione bean per JasperServer -->
+	<bean id="reportManager" class="it.eurotn.rich.report.ReportManager">
+		<property name="aziendaCorrente" ref="aziendaCorrente"></property>
+	</bean>
+	<!-- Fine configurazione bean per JasperServer -->
+	<bean id="loginListener" class="it.eurotn.panjea.anagrafica.rich.listener.LoginListener">
+		<property name="connessioneUtente">
+			<ref bean="connessioneUtente" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+		<property name="aziendaStatusBarItem">
+			<ref bean="aziendaStatusBarItem" />
+		</property>
+		<property name="userStatusBarItem">
+			<ref bean="userStatusBarItem" />
+		</property>
+	</bean>
+	<bean
+		class="com.jidesoft.spring.richclient.components.JideLookAndFeelConfigurer"
+		id="lookAndFeelConfigurer"></bean>
+	<bean id="statusBarId" class="com.jidesoft.spring.richclient.components.JecStatusBar"
+		depends-on="lookAndFeelConfigurer" name="statusBar">
+		<property name="settingsManager">
+			<ref bean="settingManagerLocal" />
+		</property>
+	</bean>
+	<bean id="aziendaStatusBarItem"
+		class="it.eurotn.panjea.anagrafica.rich.statusBarItem.AziendaStatusBarItem">
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+	<bean id="userStatusBarItem"
+		class="it.eurotn.panjea.anagrafica.rich.statusBarItem.UserStatusBarItem"></bean>
+	<bean id="aziendaStampaStatusBarItem"
+		class="it.eurotn.panjea.anagrafica.rich.statusBarItem.AziendaStampaStatusBarItem">
+		<property name="reportManager">
+			<ref bean="reportManager" />
+		</property>
+	</bean>
+	<!-- Dialog per selezionare una e-mail. Configurato tramite xml per poterlo
+		usare in moduli che non sono legati ad AnagraficaSwing -->
+	<bean id="chooseEmailDialog"
+		class="it.eurotn.panjea.anagrafica.rich.editors.rubrica.ChooseEmailDialog"
+		singleton="false" lazy-init="true">
+		<property name="rubricaEditorDescriptor">
+			<ref bean="rubricaEditor" />
+		</property>
+	</bean>
+	<bean class="it.eurotn.panjea.rich.factory.table.JXTableFactory"
+		id="jXTableFactory">
+		<property name="cellRenderers">
+			<map>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Importo</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.anagrafica.rich.factory.table.CustomImportoCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Entita</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.anagrafica.rich.factory.table.CustomEntitaCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.EntitaLite</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.anagrafica.rich.factory.table.CustomEntitaCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.documenti.domain.TipoDocumento</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.anagrafica.rich.factory.table.CustomTipoDocumentoCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.SedeEntita</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.anagrafica.rich.factory.table.CustomSedeEntitaCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.SedeEntitaLite</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.anagrafica.rich.factory.table.CustomSedeEntitaCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Deposito</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.anagrafica.rich.factory.table.CustomDepositoCellRenderer"></bean>
+				</entry>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.DepositoLite</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.anagrafica.rich.factory.table.CustomDepositoCellRenderer"></bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaAnagrafica2"/>
+           	</list>
+        </property>
+    </bean>
+
+    <bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaAnagrafica2">
+		<property name="versione" value=""/>
+		<property name="nome" value="panjeaAnagrafica2"/>
+		<property name="descrizione" value="Modulo panjea anagrafica2"/>
+		<property name="rulesSource" value="it.eurotn.panjea.anagrafica.rich.rules.Anagrafica2PluginRulesSource"/>
+	</bean>
+	<!-- fine plugins rules source -->
+
+</beans>

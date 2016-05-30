@@ -1,0 +1,7 @@
+ 
+<beans>
+	<bean id="calendarioCorrispettiviCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="calendarioCorrispettiviCommand"></property>
+		<property name="openString" value="CalendarioCorrispettivo"></property>
+	</bean>
+</beans>

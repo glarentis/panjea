@@ -1,0 +1,12 @@
+
+<beans>
+
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+			</map>
+		</property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,308 @@
+	
+<beans>
+	<import resource="panjea-context.xml"/>
+	<import resource="panjea-menu-context.xml" />
+	
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="auVendMenu"/>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<!-- Editor AuVend -->
+				<entry value="tabelleAuVendEditor">
+					<key>
+						<value type="java.lang.String">tabelleAuVendEditor</value>
+					</key>
+				</entry>
+				<entry value="recuperoCarichiRifornimentiAuVendEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.auvend.util.ParametriRecuperoCarichiRifornimenti</value>
+					</key>
+				</entry>
+				<entry value="recuperoFattureAuVendEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.auvend.util.ParametriRecuperoFatture</value>
+					</key>
+				</entry>
+                <entry value="recuperoMovimentiAuVendEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.auvend.util.ParametriRecuperoMovimenti</value>
+                    </key>
+                </entry>
+                <entry value="importazioneFatturazioneRifornimentiAuVendEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.auvend.util.ParametriRecuperoFatturazioneRifornimenti</value>
+                    </key>
+                </entry>
+                <entry value="importazioneRiparazioniContoTerziAuVendEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.auvend.util.ParametriRecuperoRiparazioniContoTerzi</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>	
+	
+	<!-- begin editors -->
+    <bean id="tabelleAuVendEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">tabelleAuVendEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>group:Tabelle</value>
+                        <value>tipiDocumentoBaseAuVendTablePage</value>
+                        <value>lettureFlussoAuVendTablePage</value>
+                        <value>codiciIvaAuVendTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">tabelleAuVendEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+	<!-- begin editors -->
+    <bean id="recuperoCarichiRifornimentiAuVendEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">recuperoCarichiRifornimentiEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>recuperoCarichiRifornimentiPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">recuperoCarichiRifornimentiAuVendEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>    
+
+    <bean id="recuperoFattureAuVendEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">recuperoFattureAuVendEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>importazioneFattureTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">parametriRecuperoFatturePage</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+        <!-- begin editors -->
+    <bean id="recuperoMovimentiAuVendEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">recuperoMovimentiAuVendEditor</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>recuperoMovimentiPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">recuperoMovimentiAuvendEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>   
+    
+    <bean id="recuperoMovimentiPage" class="it.eurotn.panjea.auvend.rich.editors.importazioni.movimenti.ImportazioneMovimentiPage" singleton="false" lazy-init="true">
+        <property name="auVendBD">
+            <ref bean="auVendBD"/>
+        </property>        
+    </bean> 
+    
+
+	<bean id="tipoDocumentoBaseAuVendPage" class="it.eurotn.panjea.auvend.rich.editors.TipoDocumentoBaseAuVendPage" singleton="false" lazy-init="true">
+		<property name="auVendBD">
+			<ref bean="auVendBD"/>
+		</property>
+        <property name="defaultController">
+            <ref bean="tipoDocumentoBaseAuVendPageController" />
+        </property>
+    </bean>
+    <bean id="tipoDocumentoBaseAuVendPageController" class="it.eurotn.rich.editors.controllers.DefaultController" singleton="false" lazy-init="true">
+        <property name="propertiesChange">
+            <map>
+                <entry key="tipoOperazione">
+                    <list>
+                        <ref bean="tipoOperazionePropertyChange" />
+                    </list>
+                </entry>                
+            </map>
+        </property>
+    </bean>	    
+    <bean id="tipoOperazionePropertyChange" class="it.eurotn.panjea.auvend.rich.forms.TipoOperazionePropertyChange" singleton="false" lazy-init="true" />
+	
+	<bean id="tipiDocumentoBaseAuVendTablePage" class="it.eurotn.panjea.auvend.rich.editors.TipiDocumentoBaseAuVendTablePage" singleton="false" lazy-init="true">
+	<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="tipoDocumentoBaseAuVendPage" />
+		</property>
+		<property name="auVendBD">
+			<ref bean="auVendBD"/>
+		</property>
+	</bean>	
+	
+	<bean id="lettureFlussoAuVendTablePage" class="it.eurotn.panjea.auvend.rich.editors.LettureFlussoAuVendTablePage" singleton="false" lazy-init="true">
+		<property name="auVendBD">
+			<ref bean="auVendBD"/>
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="letturaFlussoAuVendPage" />
+		</property>
+	</bean>
+	
+	<bean id="letturaFlussoAuVendPage" class="it.eurotn.panjea.auvend.rich.editors.LetturaFlussoAuVendPage" singleton="false" lazy-init="true">
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente"/>
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD"/>
+		</property>
+		<property name="auVendBD">
+			<ref bean="auVendBD"/>
+		</property>
+	</bean>
+	
+	<bean id="codiciIvaAuVendTablePage" class="it.eurotn.panjea.auvend.rich.editors.CodiciIvaAuVendTablePage" singleton="false" lazy-init="true">
+		<property name="auVendBD">
+			<ref bean="auVendBD"/>
+		</property>
+		<property name="editPageMode" value="POPUP"></property>
+		<property name="editPage">
+			<ref bean="codiceIvaAuVendPage" />
+		</property>
+	</bean>
+	
+	<bean id="codiceIvaAuVendPage" class="it.eurotn.panjea.auvend.rich.editors.CodiceIvaAuVendPage" singleton="false" lazy-init="true">
+		<property name="auVendBD">
+			<ref bean="auVendBD"/>
+		</property>
+	</bean>
+	
+	<bean id="recuperoCarichiRifornimentiPage" class="it.eurotn.panjea.auvend.rich.editors.importazioni.carichi.RecuperoCarichiRifornimentiPage" singleton="false" lazy-init="true">
+		<property name="auVendBD">
+			<ref bean="auVendBD"/>
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="importazioneFattureTablePage" class="it.eurotn.panjea.auvend.rich.editors.importazioni.fatture.ImportazioneFattureTablePage" singleton="false" lazy-init="true"> 
+		<property name="auVendBD">
+			<ref bean="auVendBD"/>
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD"/>
+		</property>
+        <property name="magazzinoContabilizzazioneBD">
+            <ref bean="magazzinoContabilizzazioneBD"/>
+        </property>        
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+
+
+
+    <bean id="importazioneFatturazioneRifornimentiAuVendEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">importazioneFatturazioneRifornimentiEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>importazioneFatturazioneRifornimentiPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">importazioneFatturazioneRifornimentiEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>   
+    
+    <bean id="importazioneFatturazioneRifornimentiPage" class="it.eurotn.panjea.auvend.rich.editors.importazioni.fatturazionerifornimenti.ImportazioneFatturazioneRifornimentiPage" singleton="false" lazy-init="true">
+        <property name="auVendBD">
+            <ref bean="auVendBD"/>
+        </property>        
+    </bean> 
+
+
+	 <bean id="importazioneRiparazioniContoTerziAuVendEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.DefaultEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">importazioneRiparazioniContoTerziPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>importazioneRiparazioniContoTerziPage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">importazioneRiparazioniContoTerziAuVendEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean> 
+    
+    <bean id="importazioneRiparazioniContoTerziPage" class="it.eurotn.panjea.auvend.rich.editors.importazioni.riparazionecontoterzi.ImportazioneRiparazioniContoTerziPage" singleton="false" lazy-init="true">
+        <property name="auVendBD">
+            <ref bean="auVendBD"/>
+        </property>        
+    </bean> 
+
+
+	<!-- end editors -->
+
+</beans>

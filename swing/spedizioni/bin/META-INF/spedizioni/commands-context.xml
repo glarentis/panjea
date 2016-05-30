@@ -1,0 +1,13 @@
+ 
+<beans>	
+	
+	<bean id="openSelezioneMovimentiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openSelezioneMovimentiCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.spedizioni.util.ParametriRicercaSpedizioni"></property>
+	</bean>
+	
+	<bean id="openRendicontazioneMovimentiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRendicontazioneMovimentiCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.spedizioni.util.ParametriRicercaRendicontazione"></property>
+	</bean>
+</beans>

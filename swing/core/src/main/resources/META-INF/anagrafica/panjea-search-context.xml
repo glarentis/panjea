@@ -1,0 +1,653 @@
+
+<beans>
+    <bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+        <property name="searchObjectMap">
+            <map>
+            	<entry value="zonaGeograficaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.ZonaGeografica</value>
+                    </key>
+                </entry>
+                <entry value="codiceIvaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.CodiceIva</value>
+                    </key>
+                </entry>
+                <entry value="caricaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Carica</value>
+                    </key>
+                </entry>
+                <entry value="tipoSedeEntitaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.TipoSedeEntita</value>
+                    </key>
+                </entry>
+                <entry value="bancaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Banca</value>
+                    </key>
+                </entry>
+                <entry value="filialeSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Filiale</value>
+                    </key>
+                </entry>
+                <entry value="mansioneSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Mansione</value>
+                    </key>
+                </entry>
+                <entry value="formeGiuridicheSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.FormaGiuridica</value>
+                    </key>
+                </entry>
+                <entry value="tipoDocumentoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.documenti.domain.TipoDocumento</value>
+                    </key>
+                </entry>
+                <entry value="clienteLiteSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.ClienteLite</value>
+                    </key>
+                </entry>
+                <entry value="clientePotenzialeLiteSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.ClientePotenzialeLite</value>
+                    </key>
+                </entry>
+                <entry value="fornitoreLiteSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.FornitoreLite</value>
+                    </key>
+                </entry>
+                <entry value="vettoreLiteSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.VettoreLite</value>
+                    </key>
+                </entry>
+                <entry value="entitaByTipoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.EntitaLite</value>
+                    </key>
+                </entry>
+                <entry value="aziendaLiteSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.AziendaLite</value>
+                    </key>
+                </entry>
+                <entry value="rapportoBancarioAziendaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.RapportoBancarioAzienda</value>
+                    </key>
+                </entry>
+                 <entry value="rapportoBancarioSedeEntitaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.RapportoBancarioSedeEntita</value>
+                    </key>
+                </entry>
+				<entry value="unitaMisuraSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.UnitaMisura</value>
+					</key>
+				</entry>
+				<entry value="sedeEntitaSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.SedeEntita</value>
+					</key>
+				</entry>
+				<entry value="contattoSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Contatto</value>
+					</key>
+				</entry>
+
+                <entry value="valutaAziendaSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.ValutaAzienda</value>
+					</key>
+				</entry>
+                <entry value="depositoLiteSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.DepositoLite</value>
+                    </key>
+                </entry>
+                <entry value="depositoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.Deposito</value>
+                    </key>
+                </entry>
+
+				<entry value="nazioneSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.Nazione</value>
+                    </key>
+                </entry>
+                <entry value="livelloAmministrativo1SearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.LivelloAmministrativo1</value>
+                    </key>
+                </entry>
+                <entry value="livelloAmministrativo2SearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.LivelloAmministrativo2</value>
+                    </key>
+                </entry>
+                <entry value="livelloAmministrativo3SearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.LivelloAmministrativo3</value>
+                    </key>
+                </entry>
+                <entry value="livelloAmministrativo4SearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.LivelloAmministrativo4</value>
+                    </key>
+                </entry>
+                <entry value="suddivisioneAmministrativaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.SuddivisioneAmministrativa</value>
+                    </key>
+                </entry>
+                <entry value="localitaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.Localita</value>
+                    </key>
+                </entry>
+                <entry value="capSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.datigeografici.Cap</value>
+                    </key>
+                </entry>
+                <entry value="noteAnagraficaSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.NotaAnagrafica</value>
+                    </key>
+                </entry>
+                <entry value="contrattoSpesometroSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.ContrattoSpesometro</value>
+                    </key>
+                </entry>
+                <entry value="documentoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.documenti.domain.Documento</value>
+                    </key>
+                </entry>
+                <entry value="categoriaEntitaSearchObject">
+                	<key>
+                		<value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.CategoriaEntita</value>
+                	</key>
+                </entry>
+                <entry value="anagraficaLiteSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.anagrafica.domain.lite.AnagraficaLite</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="documentoSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.DocumentoSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>codice</value>
+    			<value>dataDocumento</value>
+    			<value>tipoDocumento</value>
+    			<value>entita</value>
+    			<value>totale</value>
+    		</list>
+    	</property>
+    	<property name="editObject" value="false"/>
+    	<property name="documentiBD">
+            <ref bean="documentiBD"/>
+        </property>
+    </bean>
+
+    <bean id="contrattoSpesometroSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.ContrattoSpesometroSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>codice</value>
+    			<value>dataInizio</value>
+    			<value>dataFine</value>
+    		</list>
+    	</property>
+    	<property name="dialogPageId" value="contrattoSpesometroPage"/>
+    	<property name="editObject" value="true"/>
+    	<property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD"/>
+        </property>
+    </bean>
+
+    <bean id="categoriaEntitaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.CategoriaEntitaSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+           <list>
+               <value>descrizione</value>
+               <value>sezione</value>
+           </list>
+      	</property>
+    </bean>
+
+    <!-- INIZIO DATI GEOGRAFICI -->
+    <bean id="zonaGeograficaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.ZonaGeograficaSearchObject" singleton="false" lazy-init="true">
+    	<property name="columns">
+    		<list>
+    			<value>codice</value>
+    			<value>descrizione</value>
+    		</list>
+    	</property>
+    	<property name="dialogPageId" value="zonaGeograficaPage"/>
+    	<property name="editObject" value="true"/>
+    	<property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD"/>
+        </property>
+    </bean>
+    <!-- FINE DATI GEOGRAFICI -->
+
+	<bean id="valutaAziendaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.ValutaAziendaSearchObject" singleton="false" lazy-init="true">
+		<property name="valutaBD">
+            <ref bean="valutaBD"/>
+        </property>
+        <property name="columns">
+           <list>
+               <value>codiceValuta</value>
+           </list>
+      	</property>
+    </bean>
+
+    <!-- search object -->
+    <bean id="codiceIvaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.CodiceIvaSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizioneInterna</value>
+            </list>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="codiceIvaPage"/>
+    </bean>
+
+    <bean id="caricaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.CaricaSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="caricaPage"/>
+        <property name="columns">
+            <list>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="tipoSedeEntitaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.TipoSedeEntitaSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="tipoSedeEntitaPage"/>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="bancaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.BancaSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+        <property name="dialogPageId" value="bancaPage"/>
+    </bean>
+    <bean id="filialeSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.FilialeSearchObject" singleton="true" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>indirizzo</value>
+            </list>
+        </property>
+        <property name="dialogPageId" value="filialePage"/>
+    </bean>
+
+    <bean id="mansioneSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.MansioneSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="mansionePage"/>
+        <property name="columns">
+            <list>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="formeGiuridicheSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.FormaGiuridicaSearchObject"  singleton="false" lazy-init="true">
+        <property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD"/>
+        </property>
+        <property name="dialogPageId" value="formaGiuridicaPage"/>
+        <property name="editObject" value="true"/>
+        <property name="columns">
+            <list>
+                <value>sigla</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="tipoDocumentoSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.documenti.TipoDocumentoSearchObject" singleton="false" lazy-init="true">
+        <property name="documentiBD">
+            <ref bean="documentiBD"/>
+        </property>
+        <property name="columns">
+            <list>
+            	<value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="entitaByTipoSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.EntitaByTipoSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>anagrafica.denominazione</value>
+                <value>tipo</value>
+                <value>anagrafica.sedeAnagrafica.indirizzo</value>
+                <value>descrizioneDatiGeografici</value>
+                <value>anagrafica.partiteIVA</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="fornitoreLiteSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.EntitaByTipoSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>anagrafica.denominazione</value>
+            </list>
+        </property>
+        <property name="tipoEntita" value="FORNITORE" />
+    </bean>
+
+    <bean id="vettoreLiteSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.EntitaByTipoSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>anagrafica.denominazione</value>
+            </list>
+        </property>
+        <property name="tipoEntita" value="VETTORE" />
+    </bean>
+
+    <bean id="clienteLiteSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.EntitaByTipoSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>anagrafica.denominazione</value>
+            </list>
+        </property>
+        <property name="tipoEntita" value="CLIENTE" />
+    </bean>
+
+    <bean id="aziendaLiteSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.AziendaLiteSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>denominazione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="rapportoBancarioAziendaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.RapportoBancarioAziendaSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>numero</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="rapportoBancarioSedeEntitaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.RapportoBancarioSedeEntitaSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>numero</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="unitaMisuraSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.UnitaMisuraSearchObject" singleton="false" lazy-init="true">
+    	<property name="anagraficaTabelleBD">
+    		<ref bean="anagraficaTabelleBD"/>
+    	</property>
+    	<property name="columns">
+    		<list>
+    			<value>codice</value>
+    			<value>descrizione</value>
+    		</list>
+    	</property>
+    </bean>
+
+    <bean id="sedeEntitaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.SedeEntitaSearchObject" singleton="false" lazy-init="true">
+    	<property name="anagraficaBD">
+    		<ref bean="anagraficaBD"/>
+    	</property>
+    	<property name="editObject" value="true"/>
+    	<property name="columns">
+    		<list>
+                <value>codice</value>
+    			<value>sede.descrizione</value>
+    			<value>sede.datiGeografici.descrizioneLocalita</value>
+    			<value>sede.indirizzo</value>
+                <value>sedeCollegata.sede.descrizione</value>
+    		</list>
+    	</property>
+    </bean>
+
+    <bean id="contattoSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.ContattoSearchObject" singleton="false" lazy-init="true">
+    	<property name="anagraficaBD">
+    		<ref bean="anagraficaBD"/>
+    	</property>
+    	<property name="columns">
+    		<list>
+    			<value>nome</value>
+    			<value>cognome</value>
+    		</list>
+    	</property>
+    </bean>
+
+    <bean id="depositoLiteSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.DepositoSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="aziendaCorrente">
+            <ref bean="aziendaCorrente"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="depositoSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.DepositoAziendaSearchObject" singleton="false" lazy-init="true">
+    	<property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="nazioneSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.datigeografici.NazioneSearchObject" singleton="false" lazy-init="true">
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="nazionePage"/>
+        <property name="datiGeograficiBD">
+            <ref bean="datiGeograficiBD"/>
+        </property>
+    </bean>
+
+
+    <bean id="livelloAmministrativo1SearchObject" class="it.eurotn.panjea.anagrafica.rich.search.datigeografici.SuddivisioneAmministrativaSearchObject" singleton="false" lazy-init="true">
+        <property name="datiGeograficiBD">
+            <ref bean="datiGeograficiBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>nome</value>
+            </list>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="livelloAmministrativo1Page"/>
+        <property name="livelloAmministrativo" value="LVL1" />
+    </bean>
+    <bean id="livelloAmministrativo2SearchObject" class="it.eurotn.panjea.anagrafica.rich.search.datigeografici.SuddivisioneAmministrativaSearchObject" singleton="false" lazy-init="true">
+        <property name="datiGeograficiBD">
+            <ref bean="datiGeograficiBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="livelloAmministrativo2Page"/>
+        <property name="columns">
+            <list>
+                <value>nome</value>
+            </list>
+        </property>
+        <property name="livelloAmministrativo" value="LVL2" />
+    </bean>
+    <bean id="livelloAmministrativo3SearchObject" class="it.eurotn.panjea.anagrafica.rich.search.datigeografici.SuddivisioneAmministrativaSearchObject" singleton="false" lazy-init="true">
+        <property name="datiGeograficiBD">
+            <ref bean="datiGeograficiBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="livelloAmministrativo3Page"/>
+        <property name="columns">
+            <list>
+                <value>nome</value>
+            </list>
+        </property>
+        <property name="livelloAmministrativo" value="LVL3" />
+    </bean>
+    <bean id="livelloAmministrativo4SearchObject" class="it.eurotn.panjea.anagrafica.rich.search.datigeografici.SuddivisioneAmministrativaSearchObject" singleton="false" lazy-init="true">
+        <property name="datiGeograficiBD">
+            <ref bean="datiGeograficiBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="livelloAmministrativo4Page"/>
+        <property name="columns">
+            <list>
+                <value>nome</value>
+            </list>
+        </property>
+        <property name="livelloAmministrativo" value="LVL4" />
+    </bean>
+    <bean id="suddivisioneAmministrativaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.datigeografici.SuddivisioneAmministrativaSearchObject" singleton="false" lazy-init="true">
+        <property name="datiGeograficiBD">
+            <ref bean="datiGeograficiBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>nome</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="capSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.datigeografici.CapSearchObject" singleton="false" lazy-init="true">
+        <property name="datiGeograficiBD">
+            <ref bean="datiGeograficiBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="capPage"/>
+        <property name="columns">
+            <list>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="localitaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.datigeografici.LocalitaSearchObject" singleton="false" lazy-init="true">
+        <property name="datiGeograficiBD">
+            <ref bean="datiGeograficiBD"/>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="dialogPageId" value="localitaPage"/>
+        <property name="columns">
+            <list>
+                <value>descrizione</value>
+                <value>livelloAmministrativo1</value>
+                <value>livelloAmministrativo2</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="noteAnagraficaSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.NoteAnagraficaSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaTabelleBD">
+            <ref bean="anagraficaTabelleBD"/>
+        </property>
+        <property name="columns">
+            <list>
+            	<value>codice</value>
+                <value>descrizione</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="anagraficaLiteSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.AnagraficaLiteSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+            	<value>codice</value>
+                <value>denominazione</value>
+            </list>
+        </property>
+    </bean>
+</beans>

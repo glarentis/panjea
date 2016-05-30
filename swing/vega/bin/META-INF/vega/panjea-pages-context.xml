@@ -1,0 +1,115 @@
+
+<beans>
+	<import resource="panjea-context.xml" />
+	<import resource="panjea-menu-context.xml" />
+
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="vegaMenu" />
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<!-- searchFactory -->
+	<bean id="searchFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchResultRegistry">
+		<property name="searchResultMap">
+			<map>
+				<entry value-ref="searchResultClientiVega">
+					<key>
+						<value type="java.lang.String">clientiVega</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="importazioneFattureVegaEditor">
+					<key>
+						<value type="java.lang.String">importazioneFattureVegaEditor</value>
+					</key>
+				</entry>
+				<entry value="importazioneMovimentazioneVegaEditor">
+					<key>
+						<value type="java.lang.String">importazioneMovimentazioneVegaEditor</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- end editors -->
+
+
+	<bean id="importazioneFattureVegaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.vega.rich.editors.importazione.ImportazioneVegaEditor
+			</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="importaBD">
+					<ref bean="vegaImportFattureBD" />
+				</entry>
+				<entry key="editorId">
+					<value>importazioneFattureVegaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="importazioneMovimentazioneVegaEditor"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.vega.rich.editors.importazione.ImportazioneVegaEditor
+			</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="importaBD">
+					<ref bean="vegaImportMovimentazioneBD" />
+				</entry>
+				<entry key="editorId">
+					<value>importazioneMovimentazioneVegaEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="searchResultClientiVega"
+		class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.vega.rich.searchresult.SearchResultClienteVega
+			</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="anagraficaBD">
+					<ref bean="anagraficaBD" />
+				</entry>
+				<entry key="vegaBD">
+					<ref bean="vegaBD" />
+				</entry>
+				<entry key="id">
+					<value>searchResultClientiVega</value>
+				</entry>
+				<entry key="entita">
+					<bean class="it.eurotn.panjea.anagrafica.domain.lite.FornitoreLite" />
+				</entry>
+				<entry key="idNewEntitaCommand" value="newFornitoreCommand" />
+			</map>
+		</property>
+	</bean>
+
+</beans>

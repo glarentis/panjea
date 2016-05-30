@@ -1,0 +1,39 @@
+
+<beans>
+
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+				<entry value="lottoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.lotti.domain.Lotto</value>
+                    </key>
+                </entry>
+                <entry value="lottoSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.lotti.domain.LottoInterno</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="lottoSearchObject" class="it.eurotn.panjea.lotti.rich.search.LottoSearchObject" singleton="false" lazy-init="true">
+        <property name="lottiBD">
+            <ref bean="lottiBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                 <value>rimanenzaFormattata</value>
+                <value>articolo</value>
+                <value>dataScadenza</value>
+            </list>
+        </property>
+        <property name="editObject">
+            <value>true</value>
+        </property>
+    </bean>
+	
+</beans>

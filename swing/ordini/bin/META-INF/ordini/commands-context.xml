@@ -1,0 +1,49 @@
+
+<beans>
+	<bean id="newAreaOrdiniCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="newAreaOrdiniCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.ordini.util.AreaOrdineFullDTO"></property>
+	</bean>
+
+	<bean id="openRicercaAreaOrdineCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRicercaAreaOrdineCommand"></property>
+		<property name="securityControllerId" value="visualizzaAreaOrdineController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.ordini.util.parametriricerca.ParametriRicercaAreaOrdine"></property>
+	</bean>
+
+	<bean id="openRicercaProduzioneCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRicercaProduzioneCommand"></property>
+		<property name="securityControllerId" value="visualizzaAreaOrdineController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.ordini.util.ParametriRicercaProduzione"></property>
+	</bean>
+
+	<bean id="openMovimentazioneMagazzinoOrdiniCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openMovimentazioneMagazzinoOrdiniCommand"></property>
+		<property name="securityControllerId" value="visualizzaDocOrdineController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.ordini.util.parametriricerca.ParametriRicercaMovimentazione"></property>
+	</bean>
+
+	<bean id="openEvasioneOrdineCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openEvasioneOrdineCommand"></property>
+        <property name="securityControllerId" value="missioniController"></property>
+        <property name="openClassName" value="it.eurotn.panjea.ordini.util.parametriricerca.ParametriRicercaEvasione"></property>
+	</bean>
+
+    <bean id="openDistinteCaricoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+    	<property name="idCommand" value="openDistinteCaricoCommand"></property>
+        <property name="securityControllerId" value="missioniController"></property>
+        <property name="openClassName" value="it.eurotn.panjea.ordini.domain.documento.evasione.DistintaCarico"></property>
+    </bean>
+
+    <bean id="openOrdiniImportatiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+    	<property name="idCommand" value="openOrdiniImportatiCommand"></property>
+        <property name="securityControllerId" value="gestioneBackOrderController"></property>
+        <property name="openClassName" value="it.eurotn.panjea.ordini.util.parametriricerca.ParametriRicercaOrdiniImportati"></property>
+    </bean>
+    
+    <bean id="openPreferenzeOrdiniCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openPreferenzeOrdiniCommand"></property>
+		<property name="openString" value="preferenzeOrdiniEditor"></property>
+	</bean>
+
+</beans>

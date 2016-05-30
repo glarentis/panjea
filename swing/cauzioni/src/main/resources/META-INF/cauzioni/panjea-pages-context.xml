@@ -1,0 +1,94 @@
+
+<beans>
+
+	<!-- EditorFactory -->
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="situazioneCauzioniEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.cauzioni.util.parametriricerca.ParametriRicercaSituazioneCauzioni</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+		<bean id="situazioneCauzioniEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.cauzioni.rich.editors.situazionecauzioni.SituazioneCauzioniEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">situazioneCauzioniEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriRicercaSituazioneCauzioniPage</value>
+						<value>risultatiRicercaSituazioneCauzioniTablePage</value>
+						<value>movimentazioneCauzioniTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">situazioneCauzioniEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="parametriRicercaSituazioneCauzioniPage" class="it.eurotn.panjea.cauzioni.rich.editors.situazionecauzioni.ParametriRicercaSituazioneCauzioniPage" singleton="false" lazy-init="true">
+	</bean>
+	
+	<bean id="risultatiRicercaSituazioneCauzioniTablePage" class="it.eurotn.panjea.cauzioni.rich.editors.situazionecauzioni.RisultatiRicercaSituazioneCauzioniTablePage" singleton="false" lazy-init="true">
+		<property name="cauzioniBD">
+			<ref bean="cauzioniBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="movimentazioneCauzioniTablePage" class="it.eurotn.panjea.cauzioni.rich.editors.situazionecauzioni.MovimentazioneCauzioniTablePage" singleton="false" lazy-init="true">
+		<property name="cauzioniBD">
+			<ref bean="cauzioniBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="clienteEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>situazioneCauzioniEntitaTablePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="fornitoreEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>situazioneCauzioniEntitaTablePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="situazioneCauzioniEntitaTablePage" class="it.eurotn.panjea.cauzioni.rich.editors.entita.situazionecauzioni.SituazioneCauzioniEntitaTablePage" singleton="false" lazy-init="true">
+		<property name="cauzioniBD">
+			<ref bean="cauzioniBD" />
+		</property>
+		<property name="showTitlePane">
+			<value>false</value>
+		</property>
+	</bean>
+	
+</beans>

@@ -1,0 +1,123 @@
+
+<beans>
+	<bean id="menuView" class="it.eurotn.panjea.rich.pages.PanjeaDockingViewDescriptor">
+		<property name="viewProperties">
+			<map>
+				<entry key="tabPanel">
+					<list>
+						<ref bean="spedizioniMenu"/>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+        <property name="editorMap">
+            <map>
+                <entry value="ricercaAreaMagazzinoSpedizioniEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.spedizioni.util.ParametriRicercaSpedizioni</value>
+                    </key>
+                </entry>
+                <entry value="ricercaAreaMagazzinoRendicontazioneEditor">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.spedizioni.util.ParametriRicercaRendicontazione</value>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+	
+	<bean id="vettoreEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorProperties">
+			<map>
+				<entry key="idPages">
+					<list>
+						<value>datiSpedizioneVettorePage</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="datiSpedizioneVettorePage" class="it.eurotn.panjea.spedizioni.rich.editors.vettore.DatiSpedizioneVettorePage" singleton="false">
+		<property name="spedizioniBD">
+			<ref bean="spedizioniBD" />
+		</property>
+	</bean>
+	
+	<bean id="ricercaAreaMagazzinoSpedizioniEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">ricercaAreaMagazzinoSpedizioniEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaSpedizioniPage</value>
+                        <value>risultatiRicercaAreaMagazzinoSpedizioniTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">ricercaAreaMagazzinoSpedizioniEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+	
+	<bean id="parametriRicercaSpedizioniPage" class="it.eurotn.panjea.spedizioni.rich.editors.etichette.ParametriRicercaSpedizioniPage" singleton="false">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente"/>
+		</property>
+	</bean>
+	
+	<bean id="risultatiRicercaAreaMagazzinoSpedizioniTablePage" class="it.eurotn.panjea.spedizioni.rich.editors.etichette.RisultatiRicercaAreaMagazzinoSpedizioniTablePage" singleton="false">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+	
+	<bean id="ricercaAreaMagazzinoRendicontazioneEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+        <property name="editorClass">
+            <value>it.eurotn.panjea.rich.editors.RicercaEditor</value>
+        </property>
+        <property name="editorProperties">
+            <map>
+                <entry key="dialogPageId">
+                    <value type="java.lang.String">ricercaAreaMagazzinoRendicontazioneEditorPage</value>
+                </entry>
+                <entry key="idPages">
+                    <list>
+                        <value>parametriRicercaRendicontazioneVettorePage</value>
+                        <value>risultatiRicercaAreaMagazzinoRendicontazioneVettoreTablePage</value>
+                    </list>
+                </entry>
+                <entry key="id">
+                    <value type="java.lang.String">ricercaAreaMagazzinoRendicontazioneEditor</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+	
+	<bean id="parametriRicercaRendicontazioneVettorePage" class="it.eurotn.panjea.spedizioni.rich.editors.rendicontazione.ParametriRicercaRendicontazionePage" singleton="false">
+	</bean>
+	
+	<bean id="risultatiRicercaAreaMagazzinoRendicontazioneVettoreTablePage" class="it.eurotn.panjea.spedizioni.rich.editors.rendicontazione.RisultatiRicercaAreaMagazzinoRendicontazioneTablePage" singleton="false">
+		<property name="magazzinoDocumentoBD">
+			<ref bean="magazzinoDocumentoBD" />
+		</property>
+		<property name="anagraficaBD">
+			<ref bean="anagraficaBD" />
+		</property>
+	</bean>
+</beans>

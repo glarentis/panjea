@@ -1,0 +1,21 @@
+
+<beans>
+
+	<bean id="newAreaPreventivoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="newAreaPreventivoCommand"></property>
+		<property name="openClassName" value="it.eurotn.panjea.preventivi.util.AreaPreventivoFullDTO"></property>
+	</bean>
+
+	<bean id="openRicercaAreaPreventivoCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openRicercaAreaPreventivoCommand"></property>
+		<property name="securityControllerId" value="visualizzaAreaPreventivoController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.preventivi.util.parametriricerca.ParametriRicercaAreaPreventivo"></property>
+	</bean>
+	
+	<bean id="openMovimentazioneMagazzinoPreventiviCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openMovimentazioneMagazzinoPreventiviCommand"></property>
+		<property name="securityControllerId" value="visualizzaAreaPreventivoController"></property>
+		<property name="openClassName" value="it.eurotn.panjea.preventivi.util.parametriricerca.ParametriRicercaMovimentazione"></property>
+	</bean>
+
+</beans>

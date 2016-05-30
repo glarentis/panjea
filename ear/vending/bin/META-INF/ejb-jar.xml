@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:ejb="http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
+	version="3.0">
+	<assembly-descriptor>
+        <interceptor-binding>
+            <ejb-name>Panjea.DistributoreManager</ejb-name>
+            <interceptor-class>it.eurotn.panjea.magazzino.interceptor.DataWarehouseArticoloCancellaInterceptor</interceptor-class>
+            <method>
+                <method-name>cancella</method-name>
+            </method>
+        </interceptor-binding>
+        
+        <interceptor-binding>
+            <ejb-name>Panjea.DistributoreManager</ejb-name>
+            <interceptor-class>it.eurotn.panjea.magazzino.interceptor.DataWarehouseArticoloAggiornaInterceptor</interceptor-class>
+            <method>
+                <method-name>salva</method-name>
+            </method>
+        </interceptor-binding>
+        
+        <interceptor-binding>
+            <ejb-name>Panjea.AreaMagazzinoManager</ejb-name>
+            <interceptor-class>it.eurotn.panjea.vending.manager.arearifornimento.interceptors.AreaRifornimentoMagazzinoCaricaInterceptor</interceptor-class>
+            <method>
+                <method-name>caricaAreaMagazzinoFullDTO</method-name>
+            </method>
+        </interceptor-binding>
+        
+        <interceptor-binding>
+            <ejb-name>Panjea.AreaMagazzinoCancellaManager</ejb-name>
+            <interceptor-class>it.eurotn.panjea.vending.manager.arearifornimento.interceptors.AreaRifornimentoMagazzinoCancellaInterceptor</interceptor-class>
+            <method>
+                <method-name>cancellaAreaMagazzino</method-name>
+            </method>
+        </interceptor-binding>
+        
+            <interceptor-binding>
+            <ejb-name>Panjea.OrdiniDocumentoService</ejb-name>
+            <interceptor-class>it.eurotn.panjea.vending.manager.arearifornimento.interceptors.AreaRifornimentoOrdineCaricaInterceptor</interceptor-class>
+            <method>
+                <method-name>caricaAreaOrdineFullDTO</method-name>
+            </method>
+        </interceptor-binding>
+        
+        <interceptor-binding>
+            <ejb-name>Panjea.AreaOrdineCancellaManager</ejb-name>
+            <interceptor-class>it.eurotn.panjea.vending.manager.arearifornimento.interceptors.AreaRifornimentoOrdineCancellaInterceptor</interceptor-class>
+            <method>
+                <method-name>cancellaAreaOrdine</method-name>
+            </method>
+        </interceptor-binding>
+        
+        <interceptor-binding>
+            <ejb-name>Panjea.DistintaCaricoManager</ejb-name>
+            <interceptor-class>it.eurotn.panjea.vending.manager.arearifornimento.interceptors.AreaRifornimentoEvasioneOrdineInterceptor</interceptor-class>
+            <method>
+                <method-name>evadiOrdini</method-name>
+                 <method-params>
+                 	<method-param>java.util.List</method-param>
+           			<method-param>java.util.Date</method-param>
+                 </method-params>           
+            </method>            
+        </interceptor-binding>
+	</assembly-descriptor>
+</ejb-jar>

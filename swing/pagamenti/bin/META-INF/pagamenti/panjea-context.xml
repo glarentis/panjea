@@ -1,0 +1,343 @@
+
+<beans>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/paga/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/paga/messages-commands</value>
+				<value>classpath:it/eurotn/panjea/messages/paga/messages-methods</value>
+				<value>classpath:it/eurotn/panjea/messages/paga/messages-classes</value>
+				<value>classpath:it/eurotn/panjea/messages/paga/messages-exceptions</value>
+				<value>classpath:it/eurotn/panjea/messages/paga/messages-forms-model</value>
+				<value>classpath:it/eurotn/panjea/messages/paga/messages-editors-pages</value>
+				<value>classpath:it/eurotn/panjea/messages/paga/messages-constraints</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="imageResourcesFactory"
+		class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/paga/images.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="it.eurotn.panjea.rich.factory.navigationloader.PanjeaNavigationLoaderFactory"
+		id="panjeaNavigationLoaderFactory">
+		<property name="loaderCommands">
+			<list>
+				<ref bean="entitaRateAperteLoaderActionCommand" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="entitaRateAperteLoaderActionCommand"
+		class="it.eurotn.panjea.partite.rich.commands.navigationloaders.EntitaRateAperteLoaderActionCommand"
+		singleton="true" lazy-init="true">
+	</bean>
+
+	<bean
+		id="it.eurotn.panjea.tesoreria.rich.editors.assegno.NumeroAssegnoCellRenderer.NUMERO_ASSEGNO_CONTEXT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+
+	<bean id="jideTableFactory" class="it.eurotn.rich.control.table.JideTableFactory">
+		<property name="renderers">
+			<list>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.pagamenti.domain.CodicePagamento"></property>
+				</bean>
+				<bean
+					class="it.eurotn.panjea.partite.rich.editors.ricercarate.StatoCarrelloCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.tesoreria.util.SituazioneRata$StatoCarrello"></property>
+				</bean>
+
+				<bean
+					class="it.eurotn.panjea.tesoreria.rich.editors.assegno.StatoCarrelloCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.tesoreria.util.AssegnoDTO$StatoCarrello"></property>
+				</bean>
+				<bean
+					class="it.eurotn.panjea.tesoreria.rich.editors.ricercaeffetti.StatoEffettoCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.tesoreria.domain.Effetto$StatoEffetto"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.tesoreria.solleciti.Sollecito"></property>
+				</bean>
+				<bean
+					class="it.eurotn.rich.control.table.renderer.IconContextSensitiveCellRenderer">
+					<property name="type"
+						value="it.eurotn.panjea.rate.domain.Rata$StatoRata"></property>
+				</bean>
+				<bean
+					class="it.eurotn.panjea.tesoreria.rich.editors.assegno.NumeroAssegnoCellRenderer">
+					<property name="type" value="java.lang.String"></property>
+					<property name="editorContext"
+						ref="it.eurotn.panjea.tesoreria.rich.editors.assegno.NumeroAssegnoCellRenderer.NUMERO_ASSEGNO_CONTEXT" />
+				</bean>
+			</list>
+		</property>
+		<property name="editors">
+			<list>
+				<!-- <bean class="it.eurotn.panjea.partite.rich.editors.ricercarate.StatoCarrelloCellEditorFactory"> 
+					<property name="type" value="it.eurotn.panjea.tesoreria.util.SituazioneRata$StatoCarrello"></property> 
+					</bean> -->
+				<bean
+					class="it.eurotn.panjea.tesoreria.rich.editors.assegno.StatoCarrelloCellEditorFactory">
+					<property name="type"
+						value="it.eurotn.panjea.tesoreria.util.AssegnoDTO$StatoCarrello"></property>
+				</bean>
+				<bean
+					class="it.eurotn.panjea.tesoreria.rich.editors.ricercaeffetti.StatoEffettoCellEditorFactory">
+					<property name="type"
+						value="it.eurotn.panjea.tesoreria.domain.Effetto$StatoEffetto"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="panjeaConversionService"
+		class="it.eurotn.rich.binding.convert.support.PanjeaConversionService">
+		<property name="converters">
+			<list>
+				<bean name="CodicePagamentoConverter"
+					class="it.eurotn.panjea.pagamenti.rich.converter.CodicePagamentoConverter"></bean>
+				<bean name="SollecitoConverter"
+					class="it.eurotn.panjea.pagamenti.rich.converter.SollecitoConverter"></bean>
+				<bean name="ClienteLitePMConverter"
+					class="it.eurotn.panjea.rate.rich.converter.ClienteLitePMConverter"></bean>
+				<bean name="RataConverter"
+					class="it.eurotn.panjea.pagamenti.rich.converter.RataConverter"></bean>
+				<bean name="PagamentoConverter"
+					class="it.eurotn.panjea.pagamenti.rich.converter.PagamentoConverter"></bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="anagraficaPagamentiService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.AnagraficaPagamentiService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="tesoreriaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.TesoreriaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="contabilitaAnagraficaService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.ContabilitaAnagraficaService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="anagraficaPagamentiBDImpl"
+		class="it.eurotn.panjea.pagamenti.rich.bd.AnagraficaPagamentiBD"
+		singleton="true" lazy-init="true">
+		<property name="anagraficaPagamentiService" ref="anagraficaPagamentiService" />
+	</bean>
+	<bean id="tesoreriaBDImpl" class="it.eurotn.panjea.tesoreria.rich.bd.TesoreriaBD"
+		singleton="true" lazy-init="true">
+		<property name="tesoreriaService" ref="tesoreriaService" />
+	</bean>
+	<bean id="anagraficaPagamentiBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.pagamenti.rich.bd.IAnagraficaPagamentiBD</value>
+		</property>
+		<property name="target">
+			<ref local="anagraficaPagamentiBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="tesoreriaBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.tesoreria.rich.bd.ITesoreriaBD</value>
+		</property>
+		<property name="target">
+			<ref local="tesoreriaBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="partiteService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.PartiteService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="partiteBDImpl" class="it.eurotn.panjea.partite.rich.bd.PartiteBD"
+		singleton="true" lazy-init="true">
+		<property name="partiteService" ref="partiteService" />
+		<property name="contabilitaAnagraficaService" ref="contabilitaAnagraficaService"></property>
+	</bean>
+	<bean id="partiteBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.partite.rich.bd.IPartiteBD</value>
+		</property>
+		<property name="target">
+			<ref local="partiteBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="rateService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.RateService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean id="rateBDImpl" class="it.eurotn.panjea.rate.rich.bd.RateBD"
+		singleton="true" lazy-init="true">
+		<property name="rateService" ref="rateService" />
+	</bean>
+	<bean id="rateBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rate.rich.bd.IRateBD</value>
+		</property>
+		<property name="target">
+			<ref local="rateBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<!-- Handler che si occupa della gestione delle eccezioni. Contiene una 
+		lista che si comporta come un try cacth. Attenzione all'ordine in cui i delegate 
+		vengono inseriti nella lista -->
+	<bean id="exceptionHandler"
+		class="org.springframework.richclient.exceptionhandling.delegation.DelegatingExceptionHandler">
+		<property name="delegateList">
+			<list>
+				<bean
+					class="org.springframework.richclient.exceptionhandling.delegation.SimpleExceptionHandlerDelegate">
+					<property name="throwableClassList">
+						<list>
+							<value type="java.lang.Class">it.eurotn.panjea.tesoreria.service.exception.RapportoBancarioPerFlussoAssenteException</value>
+						</list>
+					</property>
+					<property name="exceptionHandler">
+						<bean
+							class="it.eurotn.panjea.pagamenti.exceptionhandler.RapportoBancarioPerFlussoAssenteExceptionHandler">
+							<property name="logLevel" value="WARN" />
+							<property name="shutdownPolicy" value="NONE" />
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="flussoCBIDownload" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="false" lazy-init="true">
+		<property name="lookupOnStartup" value="true" />
+		<property name="jndiName" value="Panjea.FlussoCBIDownload" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+	<bean class="it.eurotn.panjea.rich.factory.table.JXTableFactory"
+		id="jXTableFactory">
+		<property name="cellRenderers">
+			<map>
+				<entry>
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.pagamenti.domain.CodicePagamento</value>
+					</key>
+					<bean
+						class="it.eurotn.panjea.pagamenti.rich.factory.table.CustomCodicePagamentoCellRenderer"></bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="calendariRateService" class="org.springframework.jndi.JndiObjectFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.CalendariRateService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+	<bean id="calendariRateBDImpl" class="it.eurotn.panjea.rate.rich.bd.CalendariRateBD"
+		singleton="true" lazy-init="true">
+		<property name="calendariRateService" ref="calendariRateService" />
+	</bean>
+	<bean id="calendariRateBD" class="org.springframework.aop.framework.ProxyFactoryBean"
+		singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.rate.rich.bd.ICalendariRateBD</value>
+		</property>
+		<property name="target">
+			<ref local="calendariRateBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+				<value>AsyncAsyncBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="lettoreAssegniManager"
+		class="it.eurotn.panjea.tesoreria.manager.LettoreAssegniManager"
+		depends-on="settingManagerLocal">
+		<property name="settingsManager">
+			<ref bean="settingManagerLocal" />
+		</property>
+		<property name="partiteBD">
+			<ref bean="partiteBD" />
+		</property>
+	</bean>
+
+	<bean id="lettoreAssegniStatusBarItem"
+		class="it.eurotn.panjea.tesoreria.rich.statusbaritems.LettoreAssegniStatusBarItem">
+	</bean>
+
+	<bean class="com.jidesoft.spring.richclient.components.JecStatusBar"
+		depends-on="lookAndFeelConfigurer" id="statusBarId">
+		<property name="additionalStatusBarItems">
+			<list>
+				<ref bean="lettoreAssegniStatusBarItem" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- inizio plugins rules source -->
+	<bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager"
+		lazy-init="true" singleton="true">
+		<property name="plugins">
+			<list>
+				<ref bean="panjeaPagamenti" />
+			</list>
+		</property>
+	</bean>
+
+	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaPagamenti">
+		<property name="versione" value="" />
+		<property name="nome" value="panjeaPagamenti" />
+		<property name="descrizione" value="Modulo panjea pagamenti" />
+		<property name="rulesSource"
+			value="it.eurotn.panjea.pagamenti.rich.rules.PagamentiPluginRulesSource" />
+	</bean>
+	<!-- fine plugins rules source -->
+
+</beans>

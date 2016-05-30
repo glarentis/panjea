@@ -1,0 +1,143 @@
+
+<beans>
+
+	<bean id="searchObjectFactory"
+		class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+				<entry value="causaleInstallazioneSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.manutenzioni.domain.CausaleInstallazione
+						</value>
+					</key>
+				</entry>
+				<entry value="articoloMISearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.manutenzioni.domain.ArticoloMI
+						</value>
+					</key>
+				</entry>
+				<entry value="operatoreSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.manutenzioni.domain.Operatore
+						</value>
+					</key>
+				</entry>
+				<entry value="tipoAreaInstallazioneSearchObject">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.manutenzioni.domain.documento.TipoAreaInstallazione
+						</value>
+					</key>
+				</entry>
+				<entry value="ubicazioneInstallazioneSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.manutenzioni.domain.UbicazioneInstallazione</value>
+                    </key>
+                </entry>
+                <entry value="installazioneSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.manutenzioni.domain.Installazione</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="causaleInstallazioneSearchObject"
+		class="it.eurotn.panjea.manutenzioni.rich.search.CausaleInstallazioneSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD" />
+		</property>
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="true" />
+		<property name="dialogPageId" value="causaleInstallazionePage"></property>
+	</bean>
+	
+		<bean id="installazioneSearchObject"
+		class="it.eurotn.panjea.manutenzioni.rich.search.InstallazioneSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD" />
+		</property>
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizione</value>
+				<value>articolo</value>
+			</list>
+		</property>
+		<property name="editObject" value="true" />
+		<property name="dialogPageId" value="installazionePage"></property>
+	</bean>
+
+	<bean id="articoloMISearchObject"
+		class="it.eurotn.panjea.manutenzioni.rich.search.ArticoloMISearchObject"
+		singleton="false" lazy-init="true">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD" />
+		</property>
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="true" />
+		<property name="dialogPageId" value="idDinamico"/>		
+	</bean>
+
+	<bean id="tipoAreaInstallazioneSearchObject"
+		class="it.eurotn.panjea.manutenzioni.rich.search.TipoAreaInstallazioneSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD" />
+		</property>
+		<property name="columns">
+			<list>
+				<value>tipoDocumento.codice</value>
+				<value>tipoDocumento.descrizione</value>
+			</list>
+		</property>
+		<property name="editObject" value="true" />
+	</bean>
+
+
+	<bean id="operatoreSearchObject"
+		class="it.eurotn.panjea.manutenzioni.rich.search.OperatoreSearchObject"
+		singleton="false" lazy-init="true">
+		<property name="manutenzioniBD">
+			<ref bean="manutenzioniBD" />
+		</property>
+		<property name="columns">
+			<list>
+				<value>codice</value>
+				<value>nome</value>
+				<value>cognome</value>
+			</list>
+		</property>
+		<property name="editObject" value="true" />
+	</bean>
+	
+	<bean id="ubicazioneInstallazioneSearchObject"
+        class="it.eurotn.panjea.manutenzioni.rich.search.UbicazioneInstallazioneSearchObject"
+        singleton="false" lazy-init="true">
+        <property name="manutenzioniBD">
+            <ref bean="manutenzioniBD" />
+        </property>
+        <property name="columns">
+            <list>
+                <value>descrizione</value>
+            </list>
+        </property>
+        <property name="editObject" value="true" />
+        <property name="dialogPageId" value="ubicazioneInstallazionePage"></property>
+    </bean>
+
+</beans>

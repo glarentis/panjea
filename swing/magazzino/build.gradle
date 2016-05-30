@@ -1,0 +1,6 @@
+dependencies {
+	compile(group: 'com.steema.tchart', name: 'teechart-swing', version: '1.0')
+    provided	(project(':ear:ejb')){ transitive=false}
+    provided	project(':swing:core')
+    provided	project(':swing:iva')
+}

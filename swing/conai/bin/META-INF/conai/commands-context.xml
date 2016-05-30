@@ -1,0 +1,16 @@
+ 
+<beans>	
+	<bean id="openConaiSettingsCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openConaiSettingsCommand"></property>
+		<property name="openString" value="conaiSettings"></property>
+	</bean>
+	
+    <bean id="creaModuloConaiCommand" class="it.eurotn.panjea.conai.rich.commands.CreaModuloConaiCommand">
+    	<property name="idCommand" value="creaModuloConaiCommand"></property>
+    </bean>
+    
+    <bean id="openAnalisiConaiCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+    	<property name="idCommand" value="openAnalisiConaiCommand"></property>
+    	<property name="openClassName" value="it.eurotn.panjea.conai.util.parametriricerca.ParametriRicercaAnalisi"></property>
+    </bean>
+</beans>

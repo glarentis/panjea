@@ -1,0 +1,31 @@
+
+<beans>
+
+	<bean id="searchObjectFactory" class="it.eurotn.panjea.rich.factory.DefaultSearchObjectRegistry">
+		<property name="settingsManager" ref="settingManagerLocal" />
+		<property name="searchObjectMap">
+			<map>
+            <entry value="agenteLiteSearchObject">
+                    <key>
+                        <value type="java.lang.Class">it.eurotn.panjea.agenti.domain.lite.AgenteLite</value>
+                    </key>
+                </entry>
+			</map>
+		</property>
+	</bean>
+    
+    <bean id="agenteLiteSearchObject" class="it.eurotn.panjea.anagrafica.rich.search.EntitaByTipoSearchObject" singleton="false" lazy-init="true">
+        <property name="anagraficaBD">
+            <ref bean="anagraficaBD"/>
+        </property>
+        <property name="columns">
+            <list>
+                <value>codice</value>
+                <value>anagrafica.denominazione</value>
+            </list>
+        </property>
+        <property name="editObject" value="true"/>
+        <property name="tipoEntita" value="AGENTE" />
+    </bean>
+	
+</beans>

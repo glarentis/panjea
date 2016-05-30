@@ -1,0 +1,51 @@
+
+<beans>
+	<bean id="editorFactory" class="it.eurotn.panjea.rich.factory.PanjeaEditorRegistry">
+		<property name="editorMap">
+			<map>
+				<entry value="comPolivalenteEditor">
+					<key>
+						<value type="java.lang.Class">it.eurotn.panjea.contabilita.util.ParametriCreazioneComPolivalente</value>
+					</key>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="comPolivalenteEditor" class="com.jidesoft.spring.richclient.docking.editor.EditorDescriptor">
+		<property name="editorClass">
+			<value>it.eurotn.panjea.rich.editors.DockedEditor</value>
+		</property>
+		<property name="editorProperties">
+			<map>
+				<entry key="dialogPageId">
+					<value type="java.lang.String">comPolivalenteEditorPage</value>
+				</entry>
+				<entry key="idPages">
+					<list>
+						<value>parametriCreazioneComPolivalentePage</value>
+						<value>risultatiRicercaCreazioneComPolivalenteTablePage</value>
+					</list>
+				</entry>
+				<entry key="id">
+					<value type="java.lang.String">comPolivalenteEditor</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="parametriCreazioneComPolivalentePage" class="it.eurotn.panjea.compoli.rich.editors.ParametriCreazioneComPolivalentePage" singleton="false">
+		<property name="comunicazionePolivalenteBD">
+			<ref bean="comunicazionePolivalenteBD" />
+		</property>
+		<property name="aziendaCorrente">
+			<ref bean="aziendaCorrente" />
+		</property>
+	</bean>
+	
+	<bean id="risultatiRicercaCreazioneComPolivalenteTablePage" class="it.eurotn.panjea.compoli.rich.editors.RisultatiRicercaCreazioneComPolivalenteTablePage" singleton="false">
+		<property name="comunicazionePolivalenteBD">
+			<ref bean="comunicazionePolivalenteBD" />
+		</property>
+	</bean>
+</beans>

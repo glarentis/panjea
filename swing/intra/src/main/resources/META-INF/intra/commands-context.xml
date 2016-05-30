@@ -1,0 +1,37 @@
+ 
+<beans>
+	<bean id="openTabelleIntraCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openTabelleIntraCommand"></property>
+		<property name="openString" value="tabelleIntraEditor"></property>
+	</bean>
+
+    <bean id="areaIntraCommand" class="it.eurotn.panjea.intra.rich.commands.AreaIntraCommand"/>
+
+    <bean id="nuovaDichiarazioneCommand" class="it.eurotn.panjea.intra.rich.commands.NuovaDichiarazioneCommand">
+    	<property name="idCommand" value="nuovaDichiarazioneCommand"></property>
+    </bean>
+
+   <bean id="searchDichiarazioniCommand" class="it.eurotn.panjea.intra.rich.commands.SearchDichiarazioniCommand">
+        <property name="idCommand" value="searchDichiarazioniCommand"></property>
+    </bean>
+
+    <bean id="searchAreaIntraCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+        <property name="idCommand" value="searchAreaIntraCommand"></property>
+        <property name="openClassName" value="it.eurotn.panjea.intra.manager.ParametriRicercaAreaIntra"></property>
+    </bean>
+
+    <bean id="openDichiarazioniDaPresentareCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+        <property name="idCommand" value="openDichiarazioniDaPresentareCommand"></property>
+        <property name="openString" value="dichiarazioniDaPresentare"></property>
+    </bean>
+
+    <bean id="openPreferenzeIntraCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+		<property name="idCommand" value="openPreferenzeIntraCommand"></property>
+		<property name="openString" value="preferenzeIntraEditor"></property>
+	</bean>
+    
+    <bean id="openFileDichiarazioneCommand" class="it.eurotn.rich.command.OpenEditorCommand">
+        <property name="idCommand" value="openFileDichiarazioneCommand"></property>
+        <property name="openClassName" value="it.eurotn.panjea.intra.domain.dichiarazione.FileDichiarazione"></property>
+    </bean>
+</beans>

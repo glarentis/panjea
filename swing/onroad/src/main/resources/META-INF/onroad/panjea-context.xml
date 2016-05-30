@@ -1,0 +1,79 @@
+
+<beans>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/onroad/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/onroad/messages-commands</value>
+				<value>classpath:it/eurotn/panjea/messages/onroad/messages-editors-pages</value>
+				<value>classpath:it/eurotn/panjea/messages/onroad/messages-exceptions</value>
+				<value>classpath:it/eurotn/panjea/messages/onroad/messages-methods</value>
+				<value>classpath:it/eurotn/panjea/messages/onroad/messages-forms-model</value>
+				<value>classpath:it/eurotn/panjea/messages/onroad/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/onroad/messages-constraint</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images  messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/onroad/images.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- inizio configurazione business delegate -->
+
+	<bean id="onRoadExporterService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+		<property name="jndiName" value="Panjea.OnRoadExporterService" />
+		<property name="jndiTemplate" ref="jndiTemplate" />
+	</bean>
+
+    <bean id="onRoadImporterService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="lookupOnStartup" value="true"/>
+        <property name="jndiName" value="Panjea.OnRoadImporterService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+
+
+	<bean id="onRoadBDImpl" class="it.eurotn.panjea.onroad.rich.bd.OnRoadBD" singleton="true" lazy-init="true">
+		<property name="exporterService" ref="onRoadExporterService" />
+        <property name="importerService" ref="onRoadImporterService" />
+	</bean>
+	<bean id="onRoadBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>it.eurotn.panjea.onroad.rich.bd.IOnRoadBD</value>
+		</property>
+		<property name="target">
+			<ref local="onRoadBDImpl" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>SwingBDInterceptor</value>
+			</list>
+		</property>
+	</bean>
+    <!-- fine configurazione business delegate -->
+
+	<!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaOnRoad"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaOnRoad">
+		<property name="versione" value=""/>
+		<property name="nome" value="panjeaOnRoad"/>
+		<property name="descrizione" value="Modulo plugin per interfaccia software AtonOnRoad"/>
+		<property name="rulesSource" value="it.eurotn.panjea.onroad.rich.rules.OnRoadPluginRulesSource"/>
+	</bean>
+	<!-- fine plugins rules source -->
+
+</beans>

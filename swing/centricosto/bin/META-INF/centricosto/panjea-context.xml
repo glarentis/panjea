@@ -1,0 +1,70 @@
+
+<beans>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:it/eurotn/panjea/messages/centricosto/messages</value>
+				<value>classpath:it/eurotn/panjea/messages/centricosto/messages-commands</value>
+				<value>classpath:it/eurotn/panjea/messages/centricosto/messages-editors-pages</value>
+				<value>classpath:it/eurotn/panjea/messages/centricosto/messages-methods</value>
+				<value>classpath:it/eurotn/panjea/messages/centricosto/messages-forms-model</value>
+				<value>classpath:it/eurotn/panjea/messages/centricosto/messages-classes</value>
+                <value>classpath:it/eurotn/panjea/messages/centricosto/messages-exceptions</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="imageResourcesFactory" class="org.springframework.context.support.ResourceMapFactoryBean">
+		<property name="locations">
+			<list>
+				<!-- File di configurazione di images  messaggi di template -->
+				<value>classpath:it/eurotn/panjea/messages/centricosto/images.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- inizio configurazione business delegate -->
+
+    <bean id="centriCostoService" class="org.springframework.jndi.JndiObjectFactoryBean" singleton="true" lazy-init="true">
+        <property name="lookupOnStartup" value="true"/>
+        <property name="jndiName" value="Panjea.CentriCostoService" />
+        <property name="jndiTemplate" ref="jndiTemplate" />
+    </bean>
+    <bean id="centriCostoBDImpl" class="it.eurotn.panjea.centricosto.rich.bd.CentriCostoBD" singleton="true" lazy-init="true">
+        <property name="centriCostoService" ref="centriCostoService" />
+    </bean>
+    <bean id="centriCostoBD" class="org.springframework.aop.framework.ProxyFactoryBean" singleton="true" lazy-init="true">
+        <property name="proxyInterfaces">
+            <value>it.eurotn.panjea.centricosto.rich.bd.ICentriCostoBD</value>
+        </property>
+        <property name="target">
+            <ref local="centriCostoBDImpl" />
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>SwingBDInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <!-- fine configurazione business delegate -->
+
+	<!-- inizio plugins rules source -->
+    <bean class="it.eurotn.panjea.plugin.PluginManager" id="pluginManager" lazy-init="true" singleton="true">
+        <property name="plugins">
+            <list>
+	            <ref bean="panjeaCentriCosto"/>
+           	</list>
+        </property>
+    </bean>
+
+   	<bean class="it.eurotn.panjea.plugin.Plugin" id="panjeaCentriCosto">
+	    <property name="versione" value=""/>
+	    <property name="nome" value="panjeaCentriCosto"/>
+	    <property name="descrizione" value="Modulo plugin per la gestione dei centri di costo"/>
+	    <property name="rulesSource" value="it.eurotn.panjea.centricosto.rich.rules.CentriCostoPluginRulesSource"/>
+    </bean>
+	<!-- fine plugins rules source -->
+
+</beans>

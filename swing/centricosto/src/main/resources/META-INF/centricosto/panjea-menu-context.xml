@@ -1,0 +1,14 @@
+
+<beans>		
+    
+    <bean id="contabilitaMenu" class="it.eurotn.panjea.rich.TreeCommandPanelMenu">
+		<property name="id" value="contabilitaMenu"></property>
+		<property name="commands">
+			<list>
+				<value>group:contabilita:Verifiche</value>
+                <value>verificaCentriDiCostoCommand</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>
