@@ -1,0 +1,173 @@
+buildscript {
+
+	repositories {
+		maven{url 'http://service.eurotn.it/artifactory/remote-repos'}		
+	}
+
+	dependencies { classpath "commons-codec:commons-codec:1.8",
+											 "org.apache.commons:commons-configuration2:2.0",
+											 "commons-beanutils:commons-beanutils:1.9.2",
+											 "org.tmatesoft.svnkit:svnkit:1.8.12" }
+}
+
+plugins { id "org.sonarqube" version "2.0.1" }
+
+apply plugin: 'eclipse'
+
+sonarqube {
+}
+
+allprojects{ version = 'trunk' }
+	
+subprojects {	
+	apply plugin: 'eclipse'
+	apply plugin: 'java'	
+	sourceCompatibility = 1.7
+	targetCompatibility = 1.7
+	
+	test {
+	    exclude 'it/eurotn/**'
+}
+	
+	repositories {
+		maven{url 'http://service.eurotn.it/artifactory/europa'}
+		maven{url 'http://service.eurotn.it/artifactory/remote-repos'}
+	}	
+}
+
+import org.apache.commons.codec.digest.DigestUtils
+import org.apache.commons.configuration2.builder.fluent.Parameters
+import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder
+import org.apache.commons.configuration2.*
+import org.tmatesoft.svn.core.wc2.*
+import org.tmatesoft.svn.core.wc.*
+import org.tmatesoft.svn.core.*
+
+def buildId = new Date().format("yyyyMMdd-HH.mm.ss")
+
+task creaVersionProperties <<{	
+	def updateVersion = System.properties['versione']==null ? '0':System.properties['versione'];
+	
+	def prop = new Properties()
+	prop.setProperty('versione',updateVersion)
+	prop.setProperty('buildid',buildId)
+	
+	def propFile = new File("${project.buildDir}/version.properties")
+	propFile.createNewFile();
+    prop.store(propFile.newWriter(), null);
+}
+
+task chmodSh (type : Exec) {
+	workingDir "."
+	commandLine 'chmod', '+x', 'exportReport.sh'
+}
+
+task preparaClienti {
+	dependsOn(creaVersionProperties,chmodSh)
+	if (System.properties['clienti']!=null){
+		System.properties['clienti'].split('#').each { cliente->
+			task "clearDeployDir$cliente"(type: Delete) {
+				def deployClienteDir = System.properties['deployDir'] + "/" + cliente; 
+				delete deployClienteDir, deployClienteDir.replace(System.properties['versione'],System.properties['versione'] + '/checksum')
+			}
+			task "ear$cliente"(type: GradleBuild) {
+				dir='ear'
+				buildFile = 'build.gradle'
+				tasks = ['ear']
+				startParameter.systemPropertiesArgs = ["cliente": cliente]
+			}
+			task "swing$cliente"(type: GradleBuild) {
+				dir='swing'
+				buildFile = 'build.gradle'
+				tasks = ['deployClient']
+				startParameter.systemPropertiesArgs = ["cliente": cliente]
+			}
+			
+			task "aggiornaProperties$cliente"{
+				dependsOn('clearDeployDir' + cliente,'ear' + cliente,'swing' + cliente)
+				doLast{
+					def urlProperties = System.properties['customersDir'] + "/" + cliente + "/" + cliente  + ".properties";
+					def updateVersion = System.properties['versione']==null ? '0':System.properties['versione'];
+					
+					def propClienteFile = new File(urlProperties);
+					if(propClienteFile.exists()) {
+						propClienteFile.delete();
+					}
+					
+					SvnOperationFactory svnOperationFactory = new SvnOperationFactory()
+        			def authentication = SVNWCUtil.createDefaultAuthenticationManager("gfattarsi", "europasw")
+        			svnOperationFactory.setAuthenticationManager(authentication)
+        			
+        			final SvnUpdate update = svnOperationFactory.createUpdate();
+            		update.setSingleTarget(SvnTarget.fromFile(new File(urlProperties)));
+            		update.run();
+										
+					def params = new Parameters();
+        			def builder = new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class).configure(params.properties().setFileName(urlProperties));
+        			def config = builder.getConfiguration();
+        			config.setProperty("updateVersion", updateVersion)
+			        config.setProperty("buildid",buildId)
+			        builder.save();
+			        
+			        def commitMsg = "Aggiornamento properties alla versione " + updateVersion;
+        			try {
+            			SvnCommit commit = svnOperationFactory.createCommit()
+            			commit.setSingleTarget(SvnTarget.fromFile(new File(urlProperties)))
+            			commit.setCommitMessage(commitMsg)
+            			SVNCommitInfo commitInfo = commit.run()
+            			println "Commit info: " + commitInfo
+            			println "Commit message: " + commitMsg
+			        } finally{
+			            svnOperationFactory.dispose()
+			        }
+				}
+			}
+
+			task "generaCheckSums$cliente"{
+				dependsOn('aggiornaProperties' + cliente)
+				def sourceTree = fileTree(dir: System.properties['deployDir'] + "/" + cliente + "/", includes: ["**/*.*"])
+				doLast {
+					sourceTree.each { File file ->
+						String pathCkechsum= file.path.replace(System.properties['versione'],System.properties['versione'] + '/checksum') + ".MD5"
+						File fileMd5 = new File(pathCkechsum)
+						fileMd5.parentFile.mkdirs()
+						String checksum;
+						file.withInputStream { ins ->
+							checksum = DigestUtils.md5Hex(ins)
+						}
+						fileMd5.text = checksum
+					}
+				}
+			}
+			
+			task "esportaReport$cliente" (type : Exec) {
+				dependsOn('generaCheckSums' + cliente)
+				def deployScriptDir = System.properties['deployDir'] + "/" + cliente + "/scripts"
+				
+				workingDir "."
+				commandLine('./exportReport.sh', cliente, deployScriptDir, deployScriptDir.replace(System.properties['versione'],System.properties['versione'] + '/checksum'))
+			}
+			
+			dependsOn('esportaReport' + cliente)
+		}
+	}
+}
+
+task exportReport () {
+	dependsOn(chmodSh)
+	if (System.properties['clienti']!=null){
+		System.properties['clienti'].split('#').each { cliente->
+			task "exportReport$cliente" (type : Exec) {
+			
+				def deployScriptDir = System.properties['deployDir'] + "/" + cliente + "/scripts"
+				
+				workingDir "."
+				commandLine('./exportReport.sh', cliente, deployScriptDir, deployScriptDir.replace(System.properties['versione'],System.properties['versione'] + '/checksum'))
+			}
+			 
+			dependsOn('exportReport' + cliente)
+		}
+	}
+}
+
+project.tasks["sonarqube"].dependsOn preparaClienti
